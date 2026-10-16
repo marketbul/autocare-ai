@@ -187,3 +187,7 @@ class AutomotiveKnowledgeGraph:
                 neighbors.add(self.node_metadata[s]["canonical_name"])
 
         return list(neighbors)[:max_count]
+
+# [2026-08-10] feat(kg): [AUT-110] build Netw
+
+# [2026-08-14] refactor(kg): [AUT-110] optimi

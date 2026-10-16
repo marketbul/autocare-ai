@@ -292,3 +292,5 @@ if __name__ == "__main__":
     repo = Repository(db)
     embedder, _ = create_embedder(s)
     seed_manuals_into_db(repo, embedder)
+
+# [2026-05-18] feat(ingest): [AUT-103] struct

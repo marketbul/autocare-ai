@@ -1,0 +1,31 @@
+Issue Type,Issue Key,Summary,Description,Epic Link,Story Points,Priority,Status,Sprint,Component
+Epic,AUT-EPIC-1,Data Ingestion & Vehicle Scope Definition,Establish the automotive domain foundation: 3-vehicle taxonomy (96 configs) SAE J2012 OBD-II codes and PDF chunking.,,13,High,Done,Sprint 1,Database
+Story,AUT-101,Define 3-Vehicle Taxonomy & Specifications,Build schema and seed data for Toyota Corolla Honda Civic and Suzuki Swift (2015-2025) across 96 trims.,AUT-EPIC-1,5,High,Done,Sprint 1,Database
+Story,AUT-102,SAE J2012 OBD-II Code Ingestion Pipeline,Ingest 18 standard diagnostic trouble codes with symptoms possible causes and severities into SQLite/Postgres.,AUT-EPIC-1,3,Medium,Done,Sprint 1,Database
+Story,AUT-103,Structure-Aware PDF Manual Chunking Engine,Build L1 ingestion pipeline isolating warning boxes headings and maintenance tables from owner manuals.,AUT-EPIC-1,5,High,Done,Sprint 1,Backend
+Epic,AUT-EPIC-2,Hybrid Retrieval-Augmented Generation (RAG),Build hybrid keyword + semantic search pipeline over verified manufacturer documentation with document citations.,,21,High,Done,Sprint 2,Backend
+Story,AUT-104,Implement BM25 Inverted Index & Dense Embeddings,Construct BM25 lexical retriever combined with BGE-M3 dense embeddings and cosine similarity reranking.,AUT-EPIC-2,8,High,Done,Sprint 2,ML
+Story,AUT-105,Urdu and Roman Urdu Automotive Translation Engine,Build bilingual automotive glossary mapping colloquial Pakistani mechanic terms (dhuan garam awaz) to engineering terms.,AUT-EPIC-2,8,High,Done,Sprint 2,ML
+Story,AUT-106,Dashboard Fault Code Scanner Photo OCR Reader,Implement camera image reader extracting DTC codes from diagnostic scanners with alphanumeric regex filtering.,AUT-EPIC-2,5,Medium,Done,Sprint 2,Backend
+Bug,AUT-106B,Handle Blurry & Low-Light Scanner Photos,Fix OCR failure on low-contrast dashboard screens by adding contrast enhancement and grayscale binarization.,AUT-EPIC-2,3,Medium,Done,Sprint 2,Backend
+Epic,AUT-EPIC-3,Supervised Triage ML & Confidence Calibration,Train cost-sensitive fault and urgency triage model with Platt scaling and selective abstention gate.,,21,Critical,Done,Sprint 3,ML
+Story,AUT-107,Train Supervised Triage Classifier (M2),Train multi-label TF-IDF and calibrated classifier using Grouped Cross-Validation across vehicle models.,AUT-EPIC-3,8,Critical,Done,Sprint 3,ML
+Bug,AUT-107B,Mitigate Critical Safety False Negatives,Gradient Boosting baseline exhibited 68.2% Critical FNR. Add cost-sensitive class weights (10x) to drop FNR to 11.4%.,AUT-EPIC-3,5,Critical,Done,Sprint 3,ML
+Story,AUT-108,Platt Scaling & Temperature Calibration (M3),Calibrate unnormalized model logits to true empirical risk and track Expected Calibration Error (ECE).,AUT-EPIC-3,5,High,Done,Sprint 3,ML
+Story,AUT-109,Selective Abstention Gate & Uncertainty Thresholds,Implement abstention layer withholding answers when evidence reranker score is below 0.30 or confidence is below 0.70.,AUT-EPIC-3,3,High,Done,Sprint 3,ML
+Epic,AUT-EPIC-4,Multi-Hop Causal Reasoning & Knowledge Graph,Construct directed causal knowledge graph to trace observable symptoms to physical mechanical root causes.,,21,High,Done,Sprint 4,ML
+Story,AUT-110,Build Directed Causal Knowledge Graph (M6),Implement NetworkX causal graph with 49 nodes and 36 multi-hop edges linking symptoms failure modes and causes.,AUT-EPIC-4,8,High,Done,Sprint 4,ML
+Story,AUT-111,Structured Explanation Trace Engine (M4),Assemble transparent reasoning traces combining extracted symptoms detected DTCs manual citations and graph paths.,AUT-EPIC-4,8,High,Done,Sprint 4,Backend
+Task,AUT-111B,Causal Path Validation Against Expert Diagnostic Guides,Verify causal chains (e.g. overheating -> head gasket failure -> coolant loss) against manufacturer service manuals.,AUT-EPIC-4,5,Medium,Done,Sprint 4,ML
+Epic,AUT-EPIC-5,Workshop Repair Verification & Health Index,Cross-check workshop repair claims against evidence and calculate vehicle subsystem health indices.,,21,High,Done,Sprint 5,Backend
+Story,AUT-112,Repair Recommendation Verifier (M5),Implement natural language entailment verifier classifying estimates as supported partially_supported or unsupported.,AUT-EPIC-5,8,Critical,Done,Sprint 5,Backend
+Story,AUT-112B,Enforce Proposal Section 17 Ethical Guidelines,Ensure repair verifier output is neutral objective and non-accusatory towards workshops while citing manual evidence.,AUT-EPIC-5,3,High,Done,Sprint 5,Backend
+Story,AUT-113,Vehicle Health Index & Service Forecaster (M7),Calculate degradation scores for 6 subsystems (Engine Transmission Brakes Cooling Tyres Electrical) with severe climate penalty.,AUT-EPIC-5,8,High,Done,Sprint 5,Backend
+Story,AUT-114,Similar-Case Memory Bank with Provenance (M8),Implement case-based reasoning retrieving prior resolved cases with resolution outcomes and seeded vs real provenance.,AUT-EPIC-5,5,Medium,Done,Sprint 5,Backend
+Story,AUT-115,ReportLab Automated PDF Service Audit Generator (M9),Build formal PDF diagnostic certificate generator with triage level verified claims evidence citations and checklist.,AUT-EPIC-5,5,Medium,Done,Sprint 5,Backend
+Epic,AUT-EPIC-6,UI Modernization Delivery & Production CI/CD,Build responsive React screens Docker containerization and GitHub Actions continuous integration.,,21,High,Done,Sprint 6,DevOps
+Story,AUT-116,React Frontend Screens (Verify Health Similar Cases),Develop production UI with responsive dark/light mode interactive health gauges and workshop audit screen.,AUT-EPIC-6,8,High,Done,Sprint 6,Frontend
+Story,AUT-117,GitHub Actions Automated CI/CD Pipeline,Configure continuous integration workflow running Ruff linting 115 unit tests and Vite frontend build on every PR.,AUT-EPIC-6,5,High,Done,Sprint 6,DevOps
+Story,AUT-118,Docker Microservices & Scalability Stack,Create multi-stage Dockerfile and Docker Compose orchestration with PostgreSQL 15 Redis 7 and FastAPI.,AUT-EPIC-6,5,High,Done,Sprint 6,DevOps
+Story,AUT-119,Ingest 45 Comprehensive Vehicle Manuals,Generate and ingest 45 OEM manuals across Corolla Civic and Swift (2015-2025) with downloader script.,AUT-EPIC-6,5,Medium,Done,Sprint 6,Backend
+Task,AUT-120,Comprehensive Acceptance Test Suite (115 Tests),Author automated unit and acceptance tests covering Stories 1 through 13 with 100% passing test assertion.,AUT-EPIC-6,5,High,Done,Sprint 6,Backend

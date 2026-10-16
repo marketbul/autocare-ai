@@ -1,0 +1,31 @@
+DOCUMENT: Honda Civic 2020 Owner's Manual & Driver Assistance
+MANUFACTURER: Honda
+MODEL: Civic
+YEAR: 2020
+ENGINE: 1.5L Turbo / 1.8L i-VTEC
+TRANSMISSION: CVT
+OFFICIAL REPOSITORY URL: https://owners.honda.com/vehicle-information/manuals?year=2020&model=Civic-Sedan
+
+SECTION 1: SPECIFICATIONS AND CAPACITIES
+Engine Oil: 0W-20 / 5W-30 API SN/SP. Capacity 3.7 - 4.2L. Change interval: 5,000 km under severe conditions.
+Transmission Fluid: CVT. Inspect at 20,000 km, replace at 40,000 km.
+Coolant: Ethylene Glycol 50/50 Pre-mixed. Long life formula.
+Brake Fluid: DOT 3 or DOT 4. Inspect monthly, flush every 24 months.
+Tyre Pressure: 32 PSI cold.
+
+SECTION 2: CRITICAL SAFETY WARNINGS
+WARNING: If engine temperature enters RED zone, pull over safely immediately. Shift into Park/Neutral. Turn OFF AC. Do NOT open radiator cap while hot. Scalding coolant causes severe burns.
+CAUTION: Oil pressure warning light indicates loss of lubrication pressure. Stop engine immediately to prevent seizure.
+DANGER: Brake pad wear indicators emit high pitched screech when pads reach 1.0 mm thickness. If brake warning light stays lit, do not drive.
+
+SECTION 3: HIGHLIGHTS & PROCEDURES
+- VSA (Vehicle Stability Assist) sensor reset
+- Radiator fan high-speed relay check
+- Engine overheating emergency shutdown protocol
+
+SECTION 4: DIAGNOSTIC TROUBLE CODES
+P0300: Random misfire. Check ignition coils, spark plugs, vacuum leaks.
+P0171: System lean. Check MAF sensor, vacuum leak, fuel pressure.
+P0420: Catalytic converter efficiency. Inspect exhaust leaks and downstream O2 sensor.
+P0117: Coolant temp sensor low. Inspect thermostat and wiring.
+P0700: Transmission fault. Inspect transmission fluid level, condition, and solenoids.

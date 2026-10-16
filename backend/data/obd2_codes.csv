@@ -17,7 +17,3 @@ C0035,Left Front Wheel Speed Sensor Circuit Malfunction,Braking,"damaged wheel s
 C0245,Wheel Speed Sensor Frequency Error,Braking,"missing teeth on magnetic tone ring, incorrect tire size installed, loose sensor mounting","ABS warning light, intermittent traction control engagement on dry roads",Moderate,SAE J2012 Standard,115,Brake Control
 P0562,System Voltage Low,Electrical,"failing alternator, loose drive belt, heavily corroded battery terminals, discharged 12V battery","battery warning light on, dim headlights, radio rebooting, power steering assist failure",High,SAE J2012 Standard,74,Charging System
 P0563,System Voltage High,Electrical,"defective alternator voltage regulator, overcharging condition","burning electrical odor, blown fuses, bulb failures, battery fluid boiling",Critical,SAE J2012 Standard,75,Charging System
-
-# [2026-05-11] feat(dtc): [AUT-102] ingest SA
-
-# [2026-05-11] feat(dtc): [AUT-102] ingest SAE J20 by Talha Ali Bhatti

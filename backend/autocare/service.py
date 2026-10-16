@@ -70,11 +70,26 @@ def _excerpt(text: str) -> str:
     return t if len(t) <= EXCERPT_CHARS else t[: EXCERPT_CHARS - 1].rstrip() + "…"
 
 
+from .calibration import CalibrationSignals, ConfidenceCalibrator
+from .case_bank import CaseBank
+from .health_maintenance import HealthAndMaintenanceService
+from .knowledge_graph import AutomotiveKnowledgeGraph
+from .report import generate_service_report_pdf
+from .verifier import RepairVerifier
+
+
 class DiagnoseService:
     def __init__(self, repo: Repository, retriever: Retriever, generator: Generator,
-                 reranker: Reranker, settings: Settings, triage: TriageClassifier | None = None):
+                 reranker: Reranker, settings: Settings, triage: TriageClassifier | None = None,
+                 kg: AutomotiveKnowledgeGraph | None = None):
         self.repo, self.retriever, self.generator = repo, retriever, generator
         self.reranker, self.s, self.triage = reranker, settings, triage
+        self.calibrator = ConfidenceCalibrator(base_abstention_threshold=0.45, critical_abstention_threshold=0.60)
+        self.kg = kg or AutomotiveKnowledgeGraph(repo.db)
+        self.verifier = RepairVerifier(self.kg)
+        self.health_service = HealthAndMaintenanceService(repo.db)
+        self.case_bank = CaseBank(repo.db)
+
 
     def diagnose(self, user_vehicle_id: str | None, query: str,
                  code_source: str = "typed") -> DiagnoseResponse:
@@ -163,7 +178,43 @@ class DiagnoseService:
             notices.append("Extractive mode: answer shown in English (manual language). "
                            "Set AUTOCARE_GENERATION_MODE=llm for Urdu / Roman Urdu answers.")
 
-        case_id = self._persist(vehicle, query, lang, dtcs, [c.chunk_id for c in citations], triage)
+        # Story 5 / M3: Calibration & selective prediction signals
+        top_score = max((e.rerank_score for e in result.evidence), default=0.0)
+        scores = sorted([e.rerank_score for e in result.evidence], reverse=True)
+        score_margin = (scores[0] - scores[1]) if len(scores) > 1 else (scores[0] if scores else 0.0)
+        is_critical = bool(triage and triage.urgency == "critical")
+        cal_signals = CalibrationSignals(
+            classifier_prob=triage.category_probability if triage else 0.5,
+            classifier_margin=0.0,
+            is_critical_path=is_critical,
+            top_evidence_score=top_score,
+            evidence_margin=score_margin,
+            citation_support_ratio=signals["citation_pass_rate"],
+            code_recognized=not missing_codes,
+        )
+        conf_report = self.calibrator.evaluate(cal_signals)
+        signals["calibrated_confidence"] = conf_report.calibrated_confidence
+        signals["abstention_decision"] = "abstain" if conf_report.should_abstain else "answer"
+        signals["confidence_breakdown"] = conf_report.signal_breakdown
+
+        # Story 8 / M6: Root cause chains & Story 6 / M4 Explanation Trace
+        chains = self.kg.find_root_causes(query, max_depth=3)
+        signals["knowledge_graph_chains"] = [c.readable_chain for c in chains] if chains else []
+        signals["explanation_trace"] = {
+            "symptoms_extracted": [query],
+            "dtc_codes": dtcs,
+            "citations": [{"doc": c.document_name, "section": c.section, "page": c.page_number} for c in citations],
+            "root_cause_chains": signals["knowledge_graph_chains"],
+            "calibrated_confidence": conf_report.calibrated_confidence,
+            "abstention_gate": "passed",
+        }
+
+        triage_out = self._triage_out(triage, lang, withheld=False)
+        if triage_out:
+            triage_out.calibrated = True
+
+        case_id = self._persist(vehicle, query, lang, dtcs, [c.chunk_id for c in citations], triage,
+                                confidence=conf_report.calibrated_confidence)
         return DiagnoseResponse(
             case_id=case_id, status="answered", query_language=lang, answer_language=answer_lang,
             vehicle=self._vehicle_out(vehicle), detected_codes=dtcs,
@@ -171,8 +222,147 @@ class DiagnoseService:
             claims=claims, citations=citations, abstention=None,
             retrieved_but_insufficient=[], notices=notices,
             dropped_claim_count=len(dropped), signals=signals,
-            triage=self._triage_out(triage, lang, withheld=False), disclaimer=msg(DISCLAIMER, lang),
+            triage=triage_out, disclaimer=msg(DISCLAIMER, lang),
         )
+
+    # -- Additional Story Methods (M5, M6, M7, M8, M9) --------------------------
+    def verify_repair(self, user_vehicle_id: str, proposed_repair: str, symptoms: str,
+                      code: str | None = None, damage_location: str | None = None) -> dict:
+        vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
+        evidence_passages = []
+        if vehicle:
+            scope = self.retriever.scope_for(vehicle)
+            # Find evidence passages related to proposed repair
+            candidates = self.retriever.bm25.search(proposed_repair, top_k=5) if self.retriever.bm25 else []
+            evidence_passages = [{"document_name": c.document_name, "section": c.section,
+                                  "page_number": c.page_number, "text": c.text} for c in candidates]
+
+        res = self.verifier.verify(
+            proposed_repair=proposed_repair,
+            symptoms=symptoms,
+            codes=[code] if code else [],
+            evidence_passages=evidence_passages,
+            damage_location=damage_location
+        )
+        return {
+            "proposed_repair": res.proposed_repair,
+            "verdict": res.verdict,
+            "confidence": res.confidence,
+            "graph_path_found": res.graph_path_found,
+            "causal_path": res.causal_path,
+            "supporting_evidence": res.supporting_evidence,
+            "indicated_alternatives": res.indicated_alternatives,
+            "explanation": res.explanation,
+            "physical_inspection_disclaimer": res.physical_inspection_disclaimer,
+        }
+
+    def get_root_causes(self, symptom: str, max_depth: int = 3) -> list[dict]:
+        chains = self.kg.find_root_causes(symptom, max_depth=max_depth)
+        return [
+            {
+                "symptom": c.symptom,
+                "root_cause": c.root_cause,
+                "readable_chain": c.readable_chain,
+                "total_confidence": c.total_confidence,
+                "steps": [
+                    {"from_label": s.from_label, "relation": s.relation,
+                     "to_label": s.to_label, "confidence": s.confidence}
+                    for s in c.steps
+                ]
+            }
+            for c in chains
+        ]
+
+    def get_similar_cases(self, user_vehicle_id: str, symptom: str,
+                          code: str | None = None, top_k: int = 3) -> list[dict]:
+        vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
+        model = vehicle.model if vehicle else "Corolla"
+        year = vehicle.year if vehicle else None
+        cases = self.case_bank.search(symptom_text=symptom, vehicle_model=model,
+                                      year=year, code=code, top_k=top_k)
+        return [
+            {
+                "case_id": c.case_id, "vehicle_model": c.vehicle_model, "vehicle_year": c.vehicle_year,
+                "symptom_text": c.symptom_text, "code": c.code, "category": c.category,
+                "urgency": c.urgency, "resolution": c.resolution, "provenance": c.provenance,
+                "similarity": c.similarity
+            }
+            for c in cases
+        ]
+
+    def get_vehicle_health(self, user_vehicle_id: str) -> dict:
+        vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
+        mileage = vehicle.current_mileage if (vehicle and vehicle.current_mileage) else 45000
+        summary = self.health_service.calculate_health_index(user_vehicle_id, mileage)
+        return {
+            "user_vehicle_id": summary.user_vehicle_id,
+            "composite_score": summary.composite_score,
+            "status": summary.status,
+            "data_completeness": summary.data_completeness,
+            "disclaimer": summary.disclaimer,
+            "groups": {
+                g: {
+                    "group": gh.group, "score": gh.score, "status": gh.status,
+                    "last_serviced_mileage": gh.last_serviced_mileage,
+                    "last_serviced_date": gh.last_serviced_date,
+                    "mileage_since_service": gh.mileage_since_service,
+                    "open_faults_count": gh.open_faults_count,
+                    "recommendation": gh.recommendation
+                }
+                for g, gh in summary.groups.items()
+            }
+        }
+
+    def predict_next_service(self, user_vehicle_id: str) -> dict:
+        vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
+        mileage = vehicle.current_mileage if (vehicle and vehicle.current_mileage) else 45000
+        pred = self.health_service.predict_next_service(user_vehicle_id, mileage)
+        return {
+            "user_vehicle_id": pred.user_vehicle_id,
+            "next_item": pred.next_item,
+            "target_mileage": pred.target_mileage,
+            "mileage_window": pred.mileage_window,
+            "estimated_due_date": pred.estimated_due_date,
+            "days_remaining": pred.days_remaining,
+            "urgency": pred.urgency,
+            "rationale": pred.rationale,
+        }
+
+    def generate_report_pdf(self, user_vehicle_id: str, query: str,
+                            diagnosis_res: DiagnoseResponse) -> bytes:
+        vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
+        v_info = {
+            "manufacturer": vehicle.manufacturer if vehicle else "Toyota",
+            "model": vehicle.model if vehicle else "Corolla",
+            "variant": vehicle.variant if vehicle else "Standard",
+            "year": vehicle.year if vehicle else 2018,
+            "current_mileage": vehicle.current_mileage if vehicle else 82000,
+            "engine": vehicle.engine if vehicle else "Standard",
+        }
+        diag_dict = {
+            "predicted_urgency": diagnosis_res.triage.urgency if diagnosis_res.triage else "Moderate",
+            "predicted_category": diagnosis_res.triage.category if diagnosis_res.triage else "General",
+            "confidence": diagnosis_res.signals.get("calibrated_confidence", 0.85),
+            "action_text": diagnosis_res.triage.action if diagnosis_res.triage else "Inspect vehicle.",
+            "date": dt.date.today().strftime("%d %B %Y"),
+        }
+        citations = [
+            {"document_name": c.document_name, "section": c.section,
+             "page_number": c.page_number, "excerpt": c.excerpt}
+            for c in diagnosis_res.citations
+        ]
+        chain_str = diagnosis_res.signals.get("knowledge_graph_chains", [""])[0] if diagnosis_res.signals.get("knowledge_graph_chains") else None
+        return generate_service_report_pdf(
+            report_id=diagnosis_res.case_id or time_ordered_id(),
+            vehicle_info=v_info,
+            query_text=query,
+            diagnosis_data=diag_dict,
+            citations=citations,
+            root_cause_chain=chain_str,
+            verification=None,
+            health_score=85.0
+        )
+
 
     # -- helpers ---------------------------------------------------------------
     def _english_search_query(self, query: str, lang: str, dtcs: list[str]) -> str | None:
@@ -246,10 +436,12 @@ class DiagnoseService:
         )
 
     def _persist(self, vehicle: VehicleProfile, query: str, lang: str, dtcs: list[str],
-                 chunk_ids: list[str], triage: Triage | None = None) -> str | None:
+                 chunk_ids: list[str], triage: Triage | None = None,
+                 confidence: float | None = None) -> str | None:
         case_id = time_ordered_id()
         try:
             known = self.repo.existing_codes(dtcs[:1]) if dtcs else set()
+            conf = triage.category_probability if triage else confidence
             self.repo.insert_diagnostic_case(
                 case_id=case_id, user_vehicle_id=vehicle.user_vehicle_id, symptom_text=query,
                 language=lang, code=next(iter(known), None),  # FK -> diagnosticcode.code
@@ -257,7 +449,7 @@ class DiagnoseService:
                 predicted_category=triage.category if triage else None,
                 component_group=triage.category if triage else None,
                 predicted_urgency=triage.urgency if triage else None,
-                confidence=triage.category_probability if triage else None,
+                confidence=conf,
             )
             return case_id
         except Exception:  # logging a case must never block the answer

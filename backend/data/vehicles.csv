@@ -1,0 +1,97 @@
+vehicle_id,manufacturer,model,variant,year,engine,transmission,fuel_type
+toyota-corolla-2015-xli,Toyota,Corolla,XLi,2015,1.3L 2NZ-FE,Manual,Petrol
+toyota-corolla-2015-gli,Toyota,Corolla,GLi,2015,1.3L 2NZ-FE,Automatic,Petrol
+toyota-corolla-2015-altis-1-6,Toyota,Corolla,Altis 1.6,2015,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2015-altis-grande,Toyota,Corolla,Altis Grande 1.8,2015,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2016-xli,Toyota,Corolla,XLi,2016,1.3L 2NZ-FE,Manual,Petrol
+toyota-corolla-2016-gli,Toyota,Corolla,GLi,2016,1.3L 2NZ-FE,Automatic,Petrol
+toyota-corolla-2016-altis-1-6,Toyota,Corolla,Altis 1.6,2016,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2016-altis-grande,Toyota,Corolla,Altis Grande 1.8,2016,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2017-xli,Toyota,Corolla,XLi,2017,1.3L 2NZ-FE,Manual,Petrol
+toyota-corolla-2017-gli,Toyota,Corolla,GLi,2017,1.3L 2NZ-FE,Automatic,Petrol
+toyota-corolla-2017-altis-1-6,Toyota,Corolla,Altis 1.6,2017,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2017-altis-grande,Toyota,Corolla,Altis Grande 1.8,2017,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2018-xli,Toyota,Corolla,XLi,2018,1.3L 2NZ-FE,Manual,Petrol
+toyota-corolla-2018-gli,Toyota,Corolla,GLi,2018,1.3L 2NZ-FE,Automatic,Petrol
+toyota-corolla-2018-altis-1-6,Toyota,Corolla,Altis 1.6,2018,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2018-altis-grande,Toyota,Corolla,Altis Grande 1.8,2018,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2019-xli,Toyota,Corolla,XLi,2019,1.3L 2NZ-FE,Manual,Petrol
+toyota-corolla-2019-gli,Toyota,Corolla,GLi,2019,1.3L 2NZ-FE,Automatic,Petrol
+toyota-corolla-2019-altis-1-6,Toyota,Corolla,Altis 1.6,2019,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2019-altis-grande,Toyota,Corolla,Altis Grande 1.8,2019,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2020-xli,Toyota,Corolla,XLi,2020,1.3L 2NZ-FE,Manual,Petrol
+toyota-corolla-2020-gli,Toyota,Corolla,GLi,2020,1.3L 2NZ-FE,Automatic,Petrol
+toyota-corolla-2020-altis-1-6,Toyota,Corolla,Altis 1.6,2020,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2020-altis-grande,Toyota,Corolla,Altis Grande 1.8,2020,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2021-altis-1-6,Toyota,Corolla,Altis 1.6,2021,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2021-altis-grande,Toyota,Corolla,Altis Grande 1.8,2021,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2021-cross-hybrid,Toyota,Corolla,Cross Hybrid 1.8,2021,1.8L 2ZR-FXE Hybrid,e-CVT,Hybrid
+toyota-corolla-2022-altis-1-6,Toyota,Corolla,Altis 1.6,2022,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2022-altis-grande,Toyota,Corolla,Altis Grande 1.8,2022,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2022-cross-hybrid,Toyota,Corolla,Cross Hybrid 1.8,2022,1.8L 2ZR-FXE Hybrid,e-CVT,Hybrid
+toyota-corolla-2023-altis-1-6,Toyota,Corolla,Altis 1.6,2023,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2023-altis-grande,Toyota,Corolla,Altis Grande 1.8,2023,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2023-cross-hybrid,Toyota,Corolla,Cross Hybrid 1.8,2023,1.8L 2ZR-FXE Hybrid,e-CVT,Hybrid
+toyota-corolla-2024-altis-1-6,Toyota,Corolla,Altis 1.6,2024,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2024-altis-grande,Toyota,Corolla,Altis Grande 1.8,2024,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2024-cross-hybrid,Toyota,Corolla,Cross Hybrid 1.8,2024,1.8L 2ZR-FXE Hybrid,e-CVT,Hybrid
+toyota-corolla-2025-altis-1-6,Toyota,Corolla,Altis 1.6,2025,1.6L 1ZR-FE,Automatic,Petrol
+toyota-corolla-2025-altis-grande,Toyota,Corolla,Altis Grande 1.8,2025,1.8L 2ZR-FE,CVT,Petrol
+toyota-corolla-2025-cross-hybrid,Toyota,Corolla,Cross Hybrid 1.8,2025,1.8L 2ZR-FXE Hybrid,e-CVT,Hybrid
+honda-civic-2015-i-vtec,Honda,Civic,1.8 i-VTEC,2015,1.8L R18Z1,Manual,Petrol
+honda-civic-2015-oriel,Honda,Civic,1.8 i-VTEC Oriel,2015,1.8L R18Z1,Automatic Prosmatec,Petrol
+honda-civic-2016-i-vtec,Honda,Civic,1.8 i-VTEC,2016,1.8L R18Z1,Manual,Petrol
+honda-civic-2016-oriel,Honda,Civic,1.8 i-VTEC Oriel,2016,1.8L R18Z1,Automatic Prosmatec,Petrol
+honda-civic-2016-oriel-cvt,Honda,Civic,1.8 i-VTEC Oriel,2016,1.8L R18Z1,CVT,Petrol
+honda-civic-2016-vtec-turbo,Honda,Civic,1.5 VTEC Turbo RS,2016,1.5L L15B7 Turbo,CVT,Petrol
+honda-civic-2017-oriel-cvt,Honda,Civic,1.8 i-VTEC Oriel,2017,1.8L R18Z1,CVT,Petrol
+honda-civic-2017-vtec-turbo,Honda,Civic,1.5 VTEC Turbo RS,2017,1.5L L15B7 Turbo,CVT,Petrol
+honda-civic-2018-oriel-cvt,Honda,Civic,1.8 i-VTEC Oriel,2018,1.8L R18Z1,CVT,Petrol
+honda-civic-2018-vtec-turbo,Honda,Civic,1.5 VTEC Turbo RS,2018,1.5L L15B7 Turbo,CVT,Petrol
+honda-civic-2019-oriel-cvt,Honda,Civic,1.8 i-VTEC Oriel,2019,1.8L R18Z1,CVT,Petrol
+honda-civic-2019-vtec-turbo,Honda,Civic,1.5 VTEC Turbo RS,2019,1.5L L15B7 Turbo,CVT,Petrol
+honda-civic-2020-oriel-cvt,Honda,Civic,1.8 i-VTEC Oriel,2020,1.8L R18Z1,CVT,Petrol
+honda-civic-2020-vtec-turbo,Honda,Civic,1.5 VTEC Turbo RS,2020,1.5L L15B7 Turbo,CVT,Petrol
+honda-civic-2021-oriel-cvt,Honda,Civic,1.8 i-VTEC Oriel,2021,1.8L R18Z1,CVT,Petrol
+honda-civic-2021-vtec-turbo,Honda,Civic,1.5 VTEC Turbo RS,2021,1.5L L15B7 Turbo,CVT,Petrol
+honda-civic-2022-oriel-turbo,Honda,Civic,1.5 VTEC Turbo Oriel,2022,1.5L L15BG Turbo,CVT,Petrol
+honda-civic-2022-rs-turbo,Honda,Civic,1.5 VTEC Turbo RS,2022,1.5L L15BG Turbo,CVT,Petrol
+honda-civic-2023-oriel-turbo,Honda,Civic,1.5 VTEC Turbo Oriel,2023,1.5L L15BG Turbo,CVT,Petrol
+honda-civic-2023-rs-turbo,Honda,Civic,1.5 VTEC Turbo RS,2023,1.5L L15BG Turbo,CVT,Petrol
+honda-civic-2024-oriel-turbo,Honda,Civic,1.5 VTEC Turbo Oriel,2024,1.5L L15BG Turbo,CVT,Petrol
+honda-civic-2024-rs-turbo,Honda,Civic,1.5 VTEC Turbo RS,2024,1.5L L15BG Turbo,CVT,Petrol
+honda-civic-2025-oriel-turbo,Honda,Civic,1.5 VTEC Turbo Oriel,2025,1.5L L15BG Turbo,CVT,Petrol
+honda-civic-2025-rs-turbo,Honda,Civic,1.5 VTEC Turbo RS,2025,1.5L L15BG Turbo,CVT,Petrol
+suzuki-swift-2015-dx,Suzuki,Swift,1.3 DX,2015,1.3L M13A,Manual,Petrol
+suzuki-swift-2015-dlx-mt,Suzuki,Swift,1.3 DLX,2015,1.3L M13A,Manual,Petrol
+suzuki-swift-2015-dlx-at,Suzuki,Swift,1.3 DLX,2015,1.3L M13A,Automatic,Petrol
+suzuki-swift-2016-dx,Suzuki,Swift,1.3 DX,2016,1.3L M13A,Manual,Petrol
+suzuki-swift-2016-dlx-mt,Suzuki,Swift,1.3 DLX,2016,1.3L M13A,Manual,Petrol
+suzuki-swift-2016-dlx-at,Suzuki,Swift,1.3 DLX,2016,1.3L M13A,Automatic,Petrol
+suzuki-swift-2017-dx,Suzuki,Swift,1.3 DX,2017,1.3L M13A,Manual,Petrol
+suzuki-swift-2017-dlx-mt,Suzuki,Swift,1.3 DLX,2017,1.3L M13A,Manual,Petrol
+suzuki-swift-2017-dlx-at,Suzuki,Swift,1.3 DLX,2017,1.3L M13A,Automatic,Petrol
+suzuki-swift-2018-dx,Suzuki,Swift,1.3 DX,2018,1.3L M13A,Manual,Petrol
+suzuki-swift-2018-dlx-mt,Suzuki,Swift,1.3 DLX,2018,1.3L M13A,Manual,Petrol
+suzuki-swift-2018-dlx-at,Suzuki,Swift,1.3 DLX,2018,1.3L M13A,Automatic,Petrol
+suzuki-swift-2019-dx,Suzuki,Swift,1.3 DX,2019,1.3L M13A,Manual,Petrol
+suzuki-swift-2019-dlx-mt,Suzuki,Swift,1.3 DLX,2019,1.3L M13A,Manual,Petrol
+suzuki-swift-2019-dlx-at,Suzuki,Swift,1.3 DLX,2019,1.3L M13A,Automatic,Petrol
+suzuki-swift-2020-dx,Suzuki,Swift,1.3 DX,2020,1.3L M13A,Manual,Petrol
+suzuki-swift-2020-dlx-mt,Suzuki,Swift,1.3 DLX,2020,1.3L M13A,Manual,Petrol
+suzuki-swift-2020-dlx-at,Suzuki,Swift,1.3 DLX,2020,1.3L M13A,Automatic,Petrol
+suzuki-swift-2021-dx,Suzuki,Swift,1.3 DX,2021,1.3L M13A,Manual,Petrol
+suzuki-swift-2021-dlx-mt,Suzuki,Swift,1.3 DLX,2021,1.3L M13A,Manual,Petrol
+suzuki-swift-2021-dlx-at,Suzuki,Swift,1.3 DLX,2021,1.3L M13A,Automatic,Petrol
+suzuki-swift-2022-gl-mt,Suzuki,Swift,1.2 GL,2022,1.2L K12M,Manual,Petrol
+suzuki-swift-2022-gl-cvt,Suzuki,Swift,1.2 GL,2022,1.2L K12M,CVT,Petrol
+suzuki-swift-2022-glx-cvt,Suzuki,Swift,1.2 GLX,2022,1.2L K12M,CVT,Petrol
+suzuki-swift-2023-gl-mt,Suzuki,Swift,1.2 GL,2023,1.2L K12M,Manual,Petrol
+suzuki-swift-2023-gl-cvt,Suzuki,Swift,1.2 GL,2023,1.2L K12M,CVT,Petrol
+suzuki-swift-2023-glx-cvt,Suzuki,Swift,1.2 GLX,2023,1.2L K12M,CVT,Petrol
+suzuki-swift-2024-gl-mt,Suzuki,Swift,1.2 GL,2024,1.2L K12M,Manual,Petrol
+suzuki-swift-2024-gl-cvt,Suzuki,Swift,1.2 GL,2024,1.2L K12M,CVT,Petrol
+suzuki-swift-2024-glx-cvt,Suzuki,Swift,1.2 GLX,2024,1.2L K12M,CVT,Petrol
+suzuki-swift-2025-gl-mt,Suzuki,Swift,1.2 GL,2025,1.2L K12M,Manual,Petrol
+suzuki-swift-2025-gl-cvt,Suzuki,Swift,1.2 GL,2025,1.2L K12M,CVT,Petrol
+suzuki-swift-2025-glx-cvt,Suzuki,Swift,1.2 GLX,2025,1.2L K12M,CVT,Petrol

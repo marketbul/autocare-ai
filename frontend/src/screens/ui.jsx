@@ -58,6 +58,28 @@ export function useLoad(fn, deps = []) {
   return { ...state, reload: load };
 }
 
+export function VehiclePicker({ vehicles = [], activeId, onPick, go }) {
+  if (!vehicles || vehicles.length === 0) {
+    return (
+      <Alert tone="info">
+        No car found. <button type="button" className="link" onClick={() => go && go("#/cars")}>Add a car</button>
+      </Alert>
+    );
+  }
+  return (
+    <label className="inline-select">
+      <span>Active Car: </span>
+      <select value={activeId || ""} onChange={(e) => onPick(e.target.value)}>
+        {!activeId && <option value="">Choose your car…</option>}
+        {vehicles.map((v) => (
+          <option key={v.user_vehicle_id} value={v.user_vehicle_id}>{v.label}</option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+
 export const fmtDate = (ms) =>
   ms ? new Date(ms).toLocaleString(undefined, { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "—";
 

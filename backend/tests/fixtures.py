@@ -90,7 +90,9 @@ class FakeLLM:
 
 TEST_SETTINGS = Settings(database_url="sqlite:///:memory:", ml_backend="lite",
                          generation_mode="extractive", min_evidence_score=0.15,
-                         min_claim_support=0.25, candidate_k=10, final_k=4)
+                         min_claim_support=0.25, candidate_k=10, final_k=4,
+                         supported_vehicles={("toyota", "corolla"): (2014, 2025)})
+
 
 
 _TRIAGE_MODEL = None

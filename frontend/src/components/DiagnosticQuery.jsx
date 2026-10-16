@@ -5,7 +5,7 @@
 // <DiagnosticQuery userVehicleId vehicleLabel onRegisterVehicle />
 //   userVehicleId = null  -> the API answers 428 and we show the "choose your car" prompt (AC0)
 import { useEffect, useRef, useState } from "react";
-import { askDiagnosticQuestion, DiagnoseApiError, readCodeFromPhoto } from "../api/diagnose";
+import { askDiagnosticQuestion, DiagnoseApiError, downloadReportPdf, readCodeFromPhoto } from "../api/diagnose";
 import "./DiagnosticQuery.css";
 
 const LANG_LABEL = { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" };
@@ -289,6 +289,20 @@ function Readout({ result, vehicleLabel }) {
       )}
 
       <Trace result={result} />
+
+      <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+        <button
+          type="button"
+          className="btn btn-outline"
+          onClick={() => downloadReportPdf({
+            userVehicleId: result.vehicle?.user_vehicle_id,
+            query: result.signals?.retrieval_query || "Diagnostic Query",
+            diagnosis: result
+          })}
+        >
+          📄 Download Portable PDF Service Report
+        </button>
+      </div>
 
       <p className="disclaimer" lang={langAttr(result.query_language)} dir={isRtl(result.query_language) ? "rtl" : "ltr"}>
         {result.disclaimer}

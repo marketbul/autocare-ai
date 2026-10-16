@@ -14,6 +14,55 @@ export const readCodeFromPhoto = (image, language = "en") =>
 export const assessDamage = ({ userVehicleId, images, note, language = "en" }) =>
   api("/api/v1/damage/assess", { method: "POST", body: { user_vehicle_id: userVehicleId, images, note, language } });
 
+// Story 7 / M5: Repair recommendation verification
+export const verifyRepair = ({ userVehicleId, proposedRepair, symptoms, code, damageLocation }) =>
+  api("/api/v1/diagnose/verify-repair", {
+    method: "POST",
+    body: { user_vehicle_id: userVehicleId, proposed_repair: proposedRepair, symptoms, code: code || null, damage_location: damageLocation || null }
+  });
+
+// Story 8 / M6: Knowledge graph root-cause chains
+export const fetchRootCauses = (symptom, maxDepth = 3) =>
+  api("/api/v1/diagnose/root-cause", { method: "POST", body: { symptom, max_depth: maxDepth } });
+
+// Story 9 / M8: Similar cases bank
+export const fetchSimilarCases = ({ userVehicleId, symptom, code, topK = 3 }) =>
+  api("/api/v1/diagnose/similar-cases", {
+    method: "POST",
+    body: { user_vehicle_id: userVehicleId, symptom, code: code || null, top_k: topK }
+  });
+
+// Story 10 & 11 / M7: Vehicle Health & Maintenance Prediction
+export const fetchVehicleHealth = (userVehicleId) =>
+  api(`/api/v1/vehicle/${userVehicleId}/health`);
+
+export const fetchMaintenancePrediction = (userVehicleId) =>
+  api(`/api/v1/vehicle/${userVehicleId}/maintenance-prediction`);
+
+// Story 13 / M9: Download PDF Report
+export const downloadReportPdf = async ({ userVehicleId, query, diagnosis }) => {
+  const token = localStorage.getItem("autocare.token");
+  const res = await fetch("/api/v1/diagnose/report/pdf", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {})
+    },
+    body: JSON.stringify({ user_vehicle_id: userVehicleId, query, diagnosis })
+  });
+  if (!res.ok) throw new Error("PDF generation failed");
+  const blob = await res.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `autocare-report-${diagnosis.case_id || "export"}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.URL.revokeObjectURL(url);
+};
+
+
 export const auth = {
   login: (email, password) => api("/api/v1/auth/login", { method: "POST", body: { email, password } }),
   register: (full_name, email, password) => api("/api/v1/auth/register", { method: "POST", body: { full_name, email, password } }),

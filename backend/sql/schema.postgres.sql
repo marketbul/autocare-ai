@@ -113,3 +113,67 @@ CREATE TABLE IF NOT EXISTS damageimage (
     reviewed            BOOLEAN DEFAULT FALSE
 );
 CREATE INDEX IF NOT EXISTS ix_damageimage_case ON damageimage(case_id);
+
+-- MaintenanceRecord (M7, Story 10 & 11)
+CREATE TABLE IF NOT EXISTS maintenancerecord (
+    record_id        TEXT PRIMARY KEY,
+    user_vehicle_id  TEXT NOT NULL REFERENCES uservehicle(user_vehicle_id) ON DELETE CASCADE,
+    service_type     TEXT NOT NULL,
+    service_date     DATE NOT NULL,
+    mileage          INTEGER NOT NULL,
+    cost             DOUBLE PRECISION,
+    notes            TEXT,
+    verified         BOOLEAN DEFAULT FALSE
+);
+CREATE INDEX IF NOT EXISTS ix_maintenancerecord_uv ON maintenancerecord(user_vehicle_id);
+
+-- Knowledge Graph (M6, Story 8)
+CREATE TABLE IF NOT EXISTS graphnode (
+    node_id         TEXT PRIMARY KEY,
+    node_type       TEXT NOT NULL, -- component | symptom | code | fluid | action
+    canonical_name  TEXT NOT NULL,
+    aliases         TEXT,          -- JSON list of aliases/translations
+    vehicle_scope   TEXT           -- JSON list or NULL for universal
+);
+
+CREATE TABLE IF NOT EXISTS graphedge (
+    edge_id           TEXT PRIMARY KEY,
+    source_node       TEXT NOT NULL REFERENCES graphnode(node_id),
+    target_node       TEXT NOT NULL REFERENCES graphnode(node_id),
+    relation_type     TEXT NOT NULL, -- causes | indicates | depends_on | addressed_by | co_occurs_with
+    evidence_chunk_id TEXT REFERENCES documentchunk(chunk_id),
+    confidence        DOUBLE PRECISION DEFAULT 1.0,
+    review_status     TEXT DEFAULT 'reviewed'
+);
+CREATE INDEX IF NOT EXISTS ix_graphedge_source ON graphedge(source_node);
+CREATE INDEX IF NOT EXISTS ix_graphedge_target ON graphedge(target_node);
+
+-- VerificationRecord (M5, Story 7)
+CREATE TABLE IF NOT EXISTS verificationrecord (
+    verification_id     TEXT PRIMARY KEY,
+    case_id             TEXT REFERENCES diagnosticcase(case_id),
+    proposed_repair     TEXT NOT NULL,
+    verdict             TEXT NOT NULL, -- supported | partially_supported | unsupported
+    supporting_evidence TEXT,          -- JSON array of evidence citations / text
+    graph_path_found    BOOLEAN DEFAULT FALSE,
+    model_score         DOUBLE PRECISION,
+    alternatives        TEXT,          -- JSON array of alternative repairs
+    explanation         TEXT,
+    created_at          TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_verification_case ON verificationrecord(case_id);
+
+-- PriceReference (Tier 2, Section 7.9)
+CREATE TABLE IF NOT EXISTS pricereference (
+    price_id          TEXT PRIMARY KEY,
+    vehicle_id        TEXT REFERENCES vehicle(vehicle_id),
+    part_or_service   TEXT NOT NULL,
+    part_type         TEXT, -- oem | aftermarket | labour
+    price_low         DOUBLE PRECISION NOT NULL,
+    price_high        DOUBLE PRECISION NOT NULL,
+    city              TEXT,
+    source            TEXT,
+    collected_on      DATE,
+    observation_count INTEGER DEFAULT 1
+);
+

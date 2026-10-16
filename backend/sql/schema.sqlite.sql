@@ -162,3 +162,5 @@ CREATE TABLE IF NOT EXISTS pricereference (
     observation_count INTEGER DEFAULT 1
 );
 
+
+# [2026-05-13] test(dtc): [AUT-102] add asser

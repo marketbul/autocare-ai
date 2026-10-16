@@ -148,7 +148,3 @@ class ConfidenceCalibrator:
             ece += (len(in_bin) / n) * abs(bin_acc - bin_conf)
 
         return round(ece, 4)
-
-# [2026-06-23] feat(calibration): [AUT-108] i
-
-# [2026-06-27] feat(gate): [AUT-109] add sele

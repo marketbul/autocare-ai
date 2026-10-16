@@ -53,5 +53,3 @@ class Story5(unittest.TestCase):
         ece = ConfidenceCalibrator.compute_ece(probs, labels, num_bins=5)
         self.assertIsInstance(ece, float)
         self.assertTrue(0.0 <= ece <= 1.0)
-
-# [2026-06-11] test(triage): [AUT-107] add ba

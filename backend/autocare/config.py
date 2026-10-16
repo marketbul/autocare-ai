@@ -72,7 +72,7 @@ def load_settings() -> Settings:
         ml_backend=os.getenv("AUTOCARE_ML_BACKEND", Settings.ml_backend),
         embedding_model=os.getenv("AUTOCARE_EMBEDDING_MODEL", Settings.embedding_model),
         reranker_model=os.getenv("AUTOCARE_RERANKER_MODEL", Settings.reranker_model),
-        generation_mode=os.getenv("AUTOCARE_GENERATION_MODE", "llm" if os.getenv("AUTOCARE_LLM_API_KEY") else "extractive"),
+        generation_mode=os.getenv("AUTOCARE_GENERATION_MODE", Settings.generation_mode),
         llm_base_url=os.getenv("AUTOCARE_LLM_BASE_URL", Settings.llm_base_url),
         llm_api_key=os.getenv("AUTOCARE_LLM_API_KEY", ""),
         llm_model=os.getenv("AUTOCARE_LLM_MODEL", Settings.llm_model),

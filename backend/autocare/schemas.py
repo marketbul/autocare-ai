@@ -216,6 +216,3 @@ class NextServiceResponse(BaseModel):
     urgency: str
     rationale: str
 
-
-# [2026-05-31] fix(ocr): [AUT-106B] enhance contrast and binarization for low-light scanner screens
-# [2026-07-08] feat(trace): [AUT-111] assemble transparent multi-hop explanation traces (M4)

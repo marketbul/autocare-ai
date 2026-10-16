@@ -100,8 +100,11 @@ def build_models(settings) -> tuple[Embedder, Reranker]:
     if settings.ml_backend == "lite":
         return HashingEmbedder(), OverlapReranker()
     if settings.ml_backend == "models":
-        return (SentenceTransformerEmbedder(settings.embedding_model),
-                CrossEncoderReranker(settings.reranker_model))
+        try:
+            return (SentenceTransformerEmbedder(settings.embedding_model),
+                    CrossEncoderReranker(settings.reranker_model))
+        except (ImportError, Exception):
+            return HashingEmbedder(), OverlapReranker()
     raise ValueError(f"Unknown AUTOCARE_ML_BACKEND: {settings.ml_backend!r}")
 
 

@@ -226,16 +226,16 @@ class DiagnoseService:
         )
 
     # -- Additional Story Methods (M5, M6, M7, M8, M9) --------------------------
-    def verify_repair(self, user_vehicle_id: str, proposed_repair: str, symptoms: str,
+    def verify_repair(self, user_vehicle_id: str | None, proposed_repair: str, symptoms: str,
                       code: str | None = None, damage_location: str | None = None) -> dict:
-        vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
         evidence_passages = []
-        if vehicle:
-            scope = self.retriever.scope_for(vehicle)
-            # Find evidence passages related to proposed repair
-            candidates = self.retriever.bm25.search(proposed_repair, top_k=5) if self.retriever.bm25 else []
-            evidence_passages = [{"document_name": c.document_name, "section": c.section,
-                                  "page_number": c.page_number, "text": c.text} for c in candidates]
+        if user_vehicle_id:
+            vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
+            if vehicle:
+                # Find evidence passages related to proposed repair
+                candidates = self.retriever.bm25.search(proposed_repair, top_k=5) if self.retriever.bm25 else []
+                evidence_passages = [{"document_name": c.document_name, "section": c.section,
+                                      "page_number": c.page_number, "text": c.text} for c in candidates]
 
         res = self.verifier.verify(
             proposed_repair=proposed_repair,
@@ -273,9 +273,9 @@ class DiagnoseService:
             for c in chains
         ]
 
-    def get_similar_cases(self, user_vehicle_id: str, symptom: str,
+    def get_similar_cases(self, user_vehicle_id: str | None, symptom: str,
                           code: str | None = None, top_k: int = 3) -> list[dict]:
-        vehicle = self.repo.get_vehicle_profile(user_vehicle_id)
+        vehicle = self.repo.get_vehicle_profile(user_vehicle_id) if user_vehicle_id else None
         model = vehicle.model if vehicle else "Corolla"
         year = vehicle.year if vehicle else None
         cases = self.case_bank.search(symptom_text=symptom, vehicle_model=model,

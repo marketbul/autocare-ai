@@ -19,3 +19,5 @@ P0562,System Voltage Low,Electrical,"failing alternator, loose drive belt, heavi
 P0563,System Voltage High,Electrical,"defective alternator voltage regulator, overcharging condition","burning electrical odor, blown fuses, bulb failures, battery fluid boiling",Critical,SAE J2012 Standard,75,Charging System
 
 # [2026-05-11] feat(dtc): [AUT-102] ingest SA
+
+# [2026-05-11] feat(dtc): [AUT-102] ingest SAE J20 by Talha Ali Bhatti

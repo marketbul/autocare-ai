@@ -1,0 +1,208 @@
+example_id,group_id,language,text,category,urgency,source,synthesised,reviewed
+s001-en,s001,en,Grinding noise when I press the brakes,braking,high,starter_written,yes,no
+s001-roman_ur,s001,roman_ur,brake lagate waqt ghisne ki awaz aati hai,braking,high,starter_written,yes,no
+s001-ur,s001,ur,بریک لگاتے وقت رگڑ کی آواز آتی ہے,braking,high,starter_written,yes,no
+s002-en,s002,en,Brakes make a high pitched squeal when stopping,braking,moderate,starter_written,yes,no
+s002-roman_ur,s002,roman_ur,brake lagane par cheekhne jaisi awaz aati hai,braking,moderate,starter_written,yes,no
+s002-ur,s002,ur,بریک لگانے پر چیخنے جیسی آواز آتی ہے,braking,moderate,starter_written,yes,no
+s003-en,s003,en,Brake pedal goes all the way to the floor and the car does not stop,braking,critical,starter_written,yes,no
+s003-roman_ur,s003,roman_ur,brake pedal neeche tak chala jata hai aur gaari nahi rukti,braking,critical,starter_written,yes,no
+s003-ur,s003,ur,بریک پیڈل نیچے تک چلا جاتا ہے اور گاڑی نہیں رکتی,braking,critical,starter_written,yes,no
+s004-en,s004,en,Red brake warning light stays on while driving,braking,critical,starter_written,yes,no
+s004-roman_ur,s004,roman_ur,chalate hue lal brake wali light jal rahi hai,braking,critical,starter_written,yes,no
+s004-ur,s004,ur,چلاتے ہوئے سرخ بریک والی لائٹ جل رہی ہے,braking,critical,starter_written,yes,no
+s005-en,s005,en,Car pulls to one side when I brake,braking,high,starter_written,yes,no
+s005-roman_ur,s005,roman_ur,brake lagane par gaari aik taraf khinchti hai,braking,high,starter_written,yes,no
+s005-ur,s005,ur,بریک لگانے پر گاڑی ایک طرف کھنچتی ہے,braking,high,starter_written,yes,no
+s006-en,s006,en,Brake pedal feels soft and spongy,braking,high,starter_written,yes,no
+s006-roman_ur,s006,roman_ur,brake pedal naram aur spongy lagta hai,braking,high,starter_written,yes,no
+s006-ur,s006,ur,بریک پیڈل نرم اور اسپنجی لگتا ہے,braking,high,starter_written,yes,no
+s007-en,s007,en,ABS warning light is on,braking,high,starter_written,yes,no
+s007-roman_ur,s007,roman_ur,ABS ki light jal rahi hai,braking,high,starter_written,yes,no
+s007-ur,s007,ur,اے بی ایس کی لائٹ جل رہی ہے,braking,high,starter_written,yes,no
+s008-en,s008,en,Brake pedal vibrates when stopping,braking,moderate,starter_written,yes,no
+s008-roman_ur,s008,roman_ur,rukte waqt brake pedal kaanpta hai,braking,moderate,starter_written,yes,no
+s008-ur,s008,ur,رکتے وقت بریک پیڈل کانپتا ہے,braking,moderate,starter_written,yes,no
+s009-en,s009,en,Brakes failed while driving,braking,critical,starter_written,yes,no
+s009-roman_ur,s009,roman_ur,chalte hue brake fail ho gaye,braking,critical,starter_written,yes,no
+s009-ur,s009,ur,چلتے ہوئے بریک فیل ہو گئے,braking,critical,starter_written,yes,no
+s010-en,s010,en,Check engine light is on but the car drives normally,engine,moderate,starter_written,yes,no
+s010-roman_ur,s010,roman_ur,check engine light jal rahi hai lekin gaari theek chal rahi hai,engine,moderate,starter_written,yes,no
+s010-ur,s010,ur,چیک انجن لائٹ جل رہی ہے لیکن گاڑی ٹھیک چل رہی ہے,engine,moderate,starter_written,yes,no
+s011-en,s011,en,Check engine light is flashing,engine,high,starter_written,yes,no
+s011-roman_ur,s011,roman_ur,check engine light jal bujh rahi hai,engine,high,starter_written,yes,no
+s011-ur,s011,ur,چیک انجن لائٹ جل بجھ رہی ہے,engine,high,starter_written,yes,no
+s012-en,s012,en,Engine is misfiring and shaking at idle,engine,high,starter_written,yes,no
+s012-roman_ur,s012,roman_ur,engine misfire kar raha hai aur idle par hil raha hai,engine,high,starter_written,yes,no
+s012-ur,s012,ur,انجن مس فائر کر رہا ہے اور آئیڈل پر ہل رہا ہے,engine,high,starter_written,yes,no
+s013-en,s013,en,Oil pressure warning light came on while driving,engine,critical,starter_written,yes,no
+s013-roman_ur,s013,roman_ur,chalate hue oil pressure ki light jal gayi,engine,critical,starter_written,yes,no
+s013-ur,s013,ur,چلاتے ہوئے آئل پریشر کی لائٹ جل گئی,engine,critical,starter_written,yes,no
+s014-en,s014,en,Knocking sound from the engine,engine,high,starter_written,yes,no
+s014-roman_ur,s014,roman_ur,engine se khat khat ki awaz aa rahi hai,engine,high,starter_written,yes,no
+s014-ur,s014,ur,انجن سے کھٹ کھٹ کی آواز آ رہی ہے,engine,high,starter_written,yes,no
+s015-en,s015,en,Car is hard to start in the morning,engine,moderate,starter_written,yes,no
+s015-roman_ur,s015,roman_ur,subah gaari mushkil se start hoti hai,engine,moderate,starter_written,yes,no
+s015-ur,s015,ur,صبح گاڑی مشکل سے اسٹارٹ ہوتی ہے,engine,moderate,starter_written,yes,no
+s016-en,s016,en,Engine stalls and shuts off while driving,engine,critical,starter_written,yes,no
+s016-roman_ur,s016,roman_ur,chalte chalte engine band ho jata hai,engine,critical,starter_written,yes,no
+s016-ur,s016,ur,چلتے چلتے انجن بند ہو جاتا ہے,engine,critical,starter_written,yes,no
+s017-en,s017,en,When should I change the engine oil,engine,low,starter_written,yes,no
+s017-roman_ur,s017,roman_ur,engine oil kab change karna chahiye,engine,low,starter_written,yes,no
+s017-ur,s017,ur,انجن آئل کب تبدیل کرنا چاہیے,engine,low,starter_written,yes,no
+s018-en,s018,en,Engine idle is a little rough,engine,moderate,starter_written,yes,no
+s018-roman_ur,s018,roman_ur,engine ka idle thora kharab hai,engine,moderate,starter_written,yes,no
+s018-ur,s018,ur,انجن کا آئیڈل تھوڑا خراب ہے,engine,moderate,starter_written,yes,no
+s019-en,s019,en,Blue smoke from the exhaust,engine,high,starter_written,yes,no
+s019-roman_ur,s019,roman_ur,silencer se neela dhuan nikal raha hai,engine,high,starter_written,yes,no
+s019-ur,s019,ur,سائلنسر سے نیلا دھواں نکل رہا ہے,engine,high,starter_written,yes,no
+s020-en,s020,en,Smoke is coming from under the bonnet,engine,critical,starter_written,yes,no
+s020-roman_ur,s020,roman_ur,bonnet ke neeche se dhuan nikal raha hai,engine,critical,starter_written,yes,no
+s020-ur,s020,ur,بونٹ کے نیچے سے دھواں نکل رہا ہے,engine,critical,starter_written,yes,no
+s021-en,s021,en,"Strong smell of petrol, fuel is leaking",engine,critical,starter_written,yes,no
+s021-roman_ur,s021,roman_ur,"petrol ki tez boo aa rahi hai, petrol leak ho raha hai",engine,critical,starter_written,yes,no
+s021-ur,s021,ur,پیٹرول کی تیز بو آ رہی ہے، پیٹرول لیک ہو رہا ہے,engine,critical,starter_written,yes,no
+s022-en,s022,en,Fuel average has dropped a little,engine,low,starter_written,yes,no
+s022-roman_ur,s022,roman_ur,petrol ki average thori kam ho gayi hai,engine,low,starter_written,yes,no
+s022-ur,s022,ur,پیٹرول کی ایوریج تھوڑی کم ہو گئی ہے,engine,low,starter_written,yes,no
+s023-en,s023,en,Engine has lost power and will not accelerate,engine,high,starter_written,yes,no
+s023-roman_ur,s023,roman_ur,engine ki power khatam ho gayi hai aur gaari race nahi pakarti,engine,high,starter_written,yes,no
+s023-ur,s023,ur,انجن کی پاور ختم ہو گئی ہے اور گاڑی ریس نہیں پکڑتی,engine,high,starter_written,yes,no
+s024-en,s024,en,Temperature gauge is in the red and the engine is overheating,cooling,critical,starter_written,yes,no
+s024-roman_ur,s024,roman_ur,temperature ki sui laal par hai aur engine garam ho raha hai,cooling,critical,starter_written,yes,no
+s024-ur,s024,ur,ٹمپریچر کی سوئی سرخ پر ہے اور انجن گرم ہو رہا ہے,cooling,critical,starter_written,yes,no
+s025-en,s025,en,High coolant temperature warning light is on,cooling,critical,starter_written,yes,no
+s025-roman_ur,s025,roman_ur,coolant temperature ki warning light jal rahi hai,cooling,critical,starter_written,yes,no
+s025-ur,s025,ur,کولنٹ ٹمپریچر کی وارننگ لائٹ جل رہی ہے,cooling,critical,starter_written,yes,no
+s026-en,s026,en,Coolant level in the reservoir is low,cooling,moderate,starter_written,yes,no
+s026-roman_ur,s026,roman_ur,reservoir mein coolant kam hai,cooling,moderate,starter_written,yes,no
+s026-ur,s026,ur,ریزروائر میں کولنٹ کم ہے,cooling,moderate,starter_written,yes,no
+s027-en,s027,en,Steam is coming out from the bonnet,cooling,critical,starter_written,yes,no
+s027-roman_ur,s027,roman_ur,bonnet se bhaap nikal rahi hai,cooling,critical,starter_written,yes,no
+s027-ur,s027,ur,بونٹ سے بھاپ نکل رہی ہے,cooling,critical,starter_written,yes,no
+s028-en,s028,en,Radiator fan does not run and temperature rises in traffic,cooling,high,starter_written,yes,no
+s028-roman_ur,s028,roman_ur,radiator fan nahi chalta aur traffic mein temperature barh jata hai,cooling,high,starter_written,yes,no
+s028-ur,s028,ur,ریڈی ایٹر فین نہیں چلتا اور ٹریفک میں ٹمپریچر بڑھ جاتا ہے,cooling,high,starter_written,yes,no
+s029-en,s029,en,Green coolant is leaking under the car,cooling,high,starter_written,yes,no
+s029-roman_ur,s029,roman_ur,gaari ke neeche hara coolant leak ho raha hai,cooling,high,starter_written,yes,no
+s029-ur,s029,ur,گاڑی کے نیچے سبز کولنٹ لیک ہو رہا ہے,cooling,high,starter_written,yes,no
+s030-en,s030,en,Sweet smell coming from the AC vents,cooling,moderate,starter_written,yes,no
+s030-roman_ur,s030,roman_ur,AC ke vents se meethi boo aati hai,cooling,moderate,starter_written,yes,no
+s030-ur,s030,ur,اے سی کے وینٹس سے میٹھی بو آتی ہے,cooling,moderate,starter_written,yes,no
+s031-en,s031,en,"Car will not start, only a clicking sound",electrical,moderate,starter_written,yes,no
+s031-roman_ur,s031,roman_ur,"gaari start nahi hoti, sirf tak tak ki awaz aati hai",electrical,moderate,starter_written,yes,no
+s031-ur,s031,ur,گاڑی اسٹارٹ نہیں ہوتی، صرف ٹک ٹک کی آواز آتی ہے,electrical,moderate,starter_written,yes,no
+s032-en,s032,en,Battery charging warning light is on while driving,electrical,high,starter_written,yes,no
+s032-roman_ur,s032,roman_ur,chalate hue battery charging wali light jal rahi hai,electrical,high,starter_written,yes,no
+s032-ur,s032,ur,چلاتے ہوئے بیٹری چارجنگ والی لائٹ جل رہی ہے,electrical,high,starter_written,yes,no
+s033-en,s033,en,One headlight is not working,electrical,moderate,starter_written,yes,no
+s033-roman_ur,s033,roman_ur,aik headlight kaam nahi kar rahi,electrical,moderate,starter_written,yes,no
+s033-ur,s033,ur,ایک ہیڈ لائٹ کام نہیں کر رہی,electrical,moderate,starter_written,yes,no
+s034-en,s034,en,Power window is not working,electrical,low,starter_written,yes,no
+s034-roman_ur,s034,roman_ur,power window kaam nahi kar rahi,electrical,low,starter_written,yes,no
+s034-ur,s034,ur,پاور ونڈو کام نہیں کر رہی,electrical,low,starter_written,yes,no
+s035-en,s035,en,Radio screen does not turn on,electrical,low,starter_written,yes,no
+s035-roman_ur,s035,roman_ur,radio ki screen on nahi hoti,electrical,low,starter_written,yes,no
+s035-ur,s035,ur,ریڈیو کی اسکرین آن نہیں ہوتی,electrical,low,starter_written,yes,no
+s036-en,s036,en,Headlights are dim and flickering,electrical,moderate,starter_written,yes,no
+s036-roman_ur,s036,roman_ur,headlights madham hain aur tim tima rahi hain,electrical,moderate,starter_written,yes,no
+s036-ur,s036,ur,ہیڈ لائٹس مدھم ہیں اور ٹمٹما رہی ہیں,electrical,moderate,starter_written,yes,no
+s037-en,s037,en,"Smart key battery is low, key not detected",electrical,low,starter_written,yes,no
+s037-roman_ur,s037,roman_ur,"chabi ki battery kam hai, key detect nahi hoti",electrical,low,starter_written,yes,no
+s037-ur,s037,ur,چابی کی بیٹری کم ہے، کی ڈیٹیکٹ نہیں ہوتی,electrical,low,starter_written,yes,no
+s038-en,s038,en,Horn is not working,electrical,moderate,starter_written,yes,no
+s038-roman_ur,s038,roman_ur,horn kaam nahi kar raha,electrical,moderate,starter_written,yes,no
+s038-ur,s038,ur,ہارن کام نہیں کر رہا,electrical,moderate,starter_written,yes,no
+s039-en,s039,en,Burning plastic smell from the dashboard wiring,electrical,critical,starter_written,yes,no
+s039-roman_ur,s039,roman_ur,dashboard ki wiring se plastic jalne ki boo aa rahi hai,electrical,critical,starter_written,yes,no
+s039-ur,s039,ur,ڈیش بورڈ کی وائرنگ سے پلاسٹک جلنے کی بو آ رہی ہے,electrical,critical,starter_written,yes,no
+s040-en,s040,en,Battery is weak and goes dead overnight,electrical,moderate,starter_written,yes,no
+s040-roman_ur,s040,roman_ur,battery kamzor hai aur raat bhar mein khatam ho jati hai,electrical,moderate,starter_written,yes,no
+s040-ur,s040,ur,بیٹری کمزور ہے اور رات بھر میں ختم ہو جاتی ہے,electrical,moderate,starter_written,yes,no
+s041-en,s041,en,Gear shifts feel jerky,transmission,moderate,starter_written,yes,no
+s041-roman_ur,s041,roman_ur,gear badalte waqt jhatka lagta hai,transmission,moderate,starter_written,yes,no
+s041-ur,s041,ur,گیئر بدلتے وقت جھٹکا لگتا ہے,transmission,moderate,starter_written,yes,no
+s042-en,s042,en,"Transmission is slipping, revs go up but speed does not",transmission,high,starter_written,yes,no
+s042-roman_ur,s042,roman_ur,"gear slip kar raha hai, RPM barhta hai par speed nahi",transmission,high,starter_written,yes,no
+s042-ur,s042,ur,گیئر سلپ کر رہا ہے، آر پی ایم بڑھتا ہے پر اسپیڈ نہیں,transmission,high,starter_written,yes,no
+s043-en,s043,en,Red transmission fluid leaking and a burning smell,transmission,high,starter_written,yes,no
+s043-roman_ur,s043,roman_ur,laal gear oil leak ho raha hai aur jalne ki boo hai,transmission,high,starter_written,yes,no
+s043-ur,s043,ur,سرخ گیئر آئل لیک ہو رہا ہے اور جلنے کی بو ہے,transmission,high,starter_written,yes,no
+s044-en,s044,en,Grinding noise when changing gears,transmission,moderate,starter_written,yes,no
+s044-roman_ur,s044,roman_ur,gear dalte waqt ghisne ki awaz aati hai,transmission,moderate,starter_written,yes,no
+s044-ur,s044,ur,گیئر ڈالتے وقت رگڑ کی آواز آتی ہے,transmission,moderate,starter_written,yes,no
+s045-en,s045,en,Car does not move when put in drive,transmission,high,starter_written,yes,no
+s045-roman_ur,s045,roman_ur,drive mein dalne par gaari aage nahi barhti,transmission,high,starter_written,yes,no
+s045-ur,s045,ur,ڈرائیو میں ڈالنے پر گاڑی آگے نہیں بڑھتی,transmission,high,starter_written,yes,no
+s046-en,s046,en,Whining noise from the gearbox,transmission,moderate,starter_written,yes,no
+s046-roman_ur,s046,roman_ur,gearbox se seeti jaisi awaz aati hai,transmission,moderate,starter_written,yes,no
+s046-ur,s046,ur,گیئر باکس سے سیٹی جیسی آواز آتی ہے,transmission,moderate,starter_written,yes,no
+s047-en,s047,en,Clutch is slipping,transmission,moderate,starter_written,yes,no
+s047-roman_ur,s047,roman_ur,clutch slip kar raha hai,transmission,moderate,starter_written,yes,no
+s047-ur,s047,ur,کلچ سلپ کر رہا ہے,transmission,moderate,starter_written,yes,no
+s048-en,s048,en,Clunking noise over bumps,suspension_steering,moderate,starter_written,yes,no
+s048-roman_ur,s048,roman_ur,speed breaker par khat khat ki awaz aati hai,suspension_steering,moderate,starter_written,yes,no
+s048-ur,s048,ur,اسپیڈ بریکر پر کھٹ کھٹ کی آواز آتی ہے,suspension_steering,moderate,starter_written,yes,no
+s049-en,s049,en,Steering wheel vibrates at high speed,suspension_steering,moderate,starter_written,yes,no
+s049-roman_ur,s049,roman_ur,tez speed par steering kaanpta hai,suspension_steering,moderate,starter_written,yes,no
+s049-ur,s049,ur,تیز رفتار پر اسٹیئرنگ کانپتا ہے,suspension_steering,moderate,starter_written,yes,no
+s050-en,s050,en,Steering suddenly became very heavy and the EPS light is on,suspension_steering,high,starter_written,yes,no
+s050-roman_ur,s050,roman_ur,steering achanak bohat bhari ho gaya aur EPS ki light jal gayi,suspension_steering,high,starter_written,yes,no
+s050-ur,s050,ur,اسٹیئرنگ اچانک بہت بھاری ہو گیا اور ای پی ایس کی لائٹ جل گئی,suspension_steering,high,starter_written,yes,no
+s051-en,s051,en,Car pulls to one side while driving straight,suspension_steering,moderate,starter_written,yes,no
+s051-roman_ur,s051,roman_ur,seedha chalate hue gaari aik taraf jati hai,suspension_steering,moderate,starter_written,yes,no
+s051-ur,s051,ur,سیدھا چلاتے ہوئے گاڑی ایک طرف جاتی ہے,suspension_steering,moderate,starter_written,yes,no
+s052-en,s052,en,Steering wheel locked while driving and I cannot steer,suspension_steering,critical,starter_written,yes,no
+s052-roman_ur,s052,roman_ur,chalate hue steering lock ho gaya aur ghoom nahi raha,suspension_steering,critical,starter_written,yes,no
+s052-ur,s052,ur,چلاتے ہوئے اسٹیئرنگ لاک ہو گیا اور گھوم نہیں رہا,suspension_steering,critical,starter_written,yes,no
+s053-en,s053,en,Car keeps bouncing after bumps,suspension_steering,moderate,starter_written,yes,no
+s053-roman_ur,s053,roman_ur,jhatke ke baad gaari uchalti rehti hai,suspension_steering,moderate,starter_written,yes,no
+s053-ur,s053,ur,جھٹکے کے بعد گاڑی اچھلتی رہتی ہے,suspension_steering,moderate,starter_written,yes,no
+s054-en,s054,en,Knocking noise when turning the steering,suspension_steering,moderate,starter_written,yes,no
+s054-roman_ur,s054,roman_ur,steering ghumane par khat khat hoti hai,suspension_steering,moderate,starter_written,yes,no
+s054-ur,s054,ur,اسٹیئرنگ گھمانے پر کھٹ کھٹ ہوتی ہے,suspension_steering,moderate,starter_written,yes,no
+s055-en,s055,en,Tyre pressure warning light is on,tyres_wheels,moderate,starter_written,yes,no
+s055-roman_ur,s055,roman_ur,tyre pressure ki light jal rahi hai,tyres_wheels,moderate,starter_written,yes,no
+s055-ur,s055,ur,ٹائر پریشر کی لائٹ جل رہی ہے,tyres_wheels,moderate,starter_written,yes,no
+s056-en,s056,en,I have a flat tyre,tyres_wheels,high,starter_written,yes,no
+s056-roman_ur,s056,roman_ur,tyre puncture ho gaya hai,tyres_wheels,high,starter_written,yes,no
+s056-ur,s056,ur,ٹائر پنکچر ہو گیا ہے,tyres_wheels,high,starter_written,yes,no
+s057-en,s057,en,Tyre tread is worn out and bald,tyres_wheels,high,starter_written,yes,no
+s057-roman_ur,s057,roman_ur,tyre ghis kar bilkul saaf ho gaye hain,tyres_wheels,high,starter_written,yes,no
+s057-ur,s057,ur,ٹائر گھس کر بالکل صاف ہو گئے ہیں,tyres_wheels,high,starter_written,yes,no
+s058-en,s058,en,There is a bulge on the tyre sidewall,tyres_wheels,high,starter_written,yes,no
+s058-roman_ur,s058,roman_ur,tyre ki side par ubhaar ban gaya hai,tyres_wheels,high,starter_written,yes,no
+s058-ur,s058,ur,ٹائر کی سائیڈ پر ابھار بن گیا ہے,tyres_wheels,high,starter_written,yes,no
+s059-en,s059,en,Tyres are wearing a little unevenly,tyres_wheels,low,starter_written,yes,no
+s059-roman_ur,s059,roman_ur,tyre thore ghair barabar ghis rahe hain,tyres_wheels,low,starter_written,yes,no
+s059-ur,s059,ur,ٹائر تھوڑے غیر برابر گھس رہے ہیں,tyres_wheels,low,starter_written,yes,no
+s060-en,s060,en,Wheel is wobbling and the wheel nuts are loose,tyres_wheels,critical,starter_written,yes,no
+s060-roman_ur,s060,roman_ur,pahiya hil raha hai aur nut dheele hain,tyres_wheels,critical,starter_written,yes,no
+s060-ur,s060,ur,پہیہ ہل رہا ہے اور نٹ ڈھیلے ہیں,tyres_wheels,critical,starter_written,yes,no
+s061-en,s061,en,When should I rotate the tyres,tyres_wheels,low,starter_written,yes,no
+s061-roman_ur,s061,roman_ur,tyre rotation kab karwani chahiye,tyres_wheels,low,starter_written,yes,no
+s061-ur,s061,ur,ٹائر روٹیشن کب کروانی چاہیے,tyres_wheels,low,starter_written,yes,no
+s062-en,s062,en,A tyre burst while driving,tyres_wheels,critical,starter_written,yes,no
+s062-roman_ur,s062,roman_ur,chalte hue tyre phat gaya,tyres_wheels,critical,starter_written,yes,no
+s062-ur,s062,ur,چلتے ہوئے ٹائر پھٹ گیا,tyres_wheels,critical,starter_written,yes,no
+s063-en,s063,en,How do I pair my phone with Bluetooth,general,low,starter_written,yes,no
+s063-roman_ur,s063,roman_ur,phone ko bluetooth se kaise connect karun,general,low,starter_written,yes,no
+s063-ur,s063,ur,فون کو بلوٹوتھ سے کیسے کنیکٹ کروں,general,low,starter_written,yes,no
+s064-en,s064,en,How do I set the clock,general,low,starter_written,yes,no
+s064-roman_ur,s064,roman_ur,ghari ka time kaise set karun,general,low,starter_written,yes,no
+s064-ur,s064,ur,گھڑی کا وقت کیسے سیٹ کروں,general,low,starter_written,yes,no
+s065-en,s065,en,Which engine oil grade is recommended,general,low,starter_written,yes,no
+s065-roman_ur,s065,roman_ur,kaun sa engine oil grade recommended hai,general,low,starter_written,yes,no
+s065-ur,s065,ur,کون سا انجن آئل گریڈ تجویز کیا گیا ہے,general,low,starter_written,yes,no
+s066-en,s066,en,How do I open the fuel tank door,general,low,starter_written,yes,no
+s066-roman_ur,s066,roman_ur,petrol tanki ka dhakkan kaise kholun,general,low,starter_written,yes,no
+s066-ur,s066,ur,پیٹرول ٹنکی کا ڈھکن کیسے کھولوں,general,low,starter_written,yes,no
+s067-en,s067,en,How do I use cruise control,general,low,starter_written,yes,no
+s067-roman_ur,s067,roman_ur,cruise control kaise use karte hain,general,low,starter_written,yes,no
+s067-ur,s067,ur,کروز کنٹرول کیسے استعمال کرتے ہیں,general,low,starter_written,yes,no
+s068-en,s068,en,What does the ECO indicator mean,general,low,starter_written,yes,no
+s068-roman_ur,s068,roman_ur,ECO indicator ka kya matlab hai,general,low,starter_written,yes,no
+s068-ur,s068,ur,ای سی او انڈیکیٹر کا کیا مطلب ہے,general,low,starter_written,yes,no
+s069-en,s069,en,How do I reset the maintenance reminder,general,low,starter_written,yes,no
+s069-roman_ur,s069,roman_ur,maintenance reminder kaise reset karun,general,low,starter_written,yes,no
+s069-ur,s069,ur,مینٹیننس ریمائنڈر کیسے ری سیٹ کروں,general,low,starter_written,yes,no

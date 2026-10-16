@@ -115,7 +115,7 @@ class ExplanationTrace(BaseModel):
 
 # Story 7 / M5: Repair Verifier
 class VerifyRepairRequest(BaseModel):
-    user_vehicle_id: str
+    user_vehicle_id: Optional[str] = None
     proposed_repair: str
     symptoms: str
     code: Optional[str] = None
@@ -162,7 +162,7 @@ class RootCauseResponse(BaseModel):
 
 # Story 9 / M8: Similar Cases
 class SimilarCasesRequest(BaseModel):
-    user_vehicle_id: str
+    user_vehicle_id: Optional[str] = None
     symptom: str
     code: Optional[str] = None
     top_k: int = 3

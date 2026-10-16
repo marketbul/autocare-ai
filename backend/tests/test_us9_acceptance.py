@@ -39,3 +39,5 @@ class Story9(unittest.TestCase):
         cases = self.bank.search(symptom_text="misfire", vehicle_model="Corolla", code="P0301")
         self.assertTrue(len(cases) >= 1)
         self.assertEqual(cases[0].provenance, "real")
+
+# [2026-07-28] test(verifier): [AUT-112] add 

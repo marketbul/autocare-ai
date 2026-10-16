@@ -218,3 +218,7 @@ class HealthAndMaintenanceService:
             "SELECT predicted_category, predicted_urgency, code FROM diagnosticcase WHERE user_vehicle_id = :u",
             {"u": uvid}
         )
+
+# [2026-09-06] feat(health): [AUT-113] calcul
+
+# [2026-09-08] feat(health): [AUT-113] implem

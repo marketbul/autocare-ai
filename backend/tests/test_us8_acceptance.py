@@ -34,3 +34,5 @@ class Story8(unittest.TestCase):
         related = self.kg.get_related_components("Alternator", max_count=3)
         self.assertTrue(len(related) >= 1)
         self.assertTrue(any(x in related for x in ("Drive Belt", "12V Battery")))
+
+# [2026-08-12] test(kg): [AUT-110] test multi

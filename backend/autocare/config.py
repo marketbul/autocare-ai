@@ -5,8 +5,12 @@ import os
 from dataclasses import dataclass, field
 
 # Vehicles this release accepts: (manufacturer, model) -> (first_year, last_year).
-# Lower-case keys. Add Honda Civic / Suzuki Swift here when their corpora exist.
-DEFAULT_SUPPORTED = {("toyota", "corolla"): (2014, 2025)}
+# All 3 in-scope vehicles from Proposal Section 4.2: Corolla, Civic, Swift (2015-2025).
+DEFAULT_SUPPORTED = {
+    ("toyota", "corolla"): (2015, 2025),
+    ("honda", "civic"): (2015, 2025),
+    ("suzuki", "swift"): (2015, 2025),
+}
 
 
 def _float(name: str, default: float) -> float:

@@ -281,3 +281,51 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(61
 .sev-pill.sev-moderate { color: var(--amber); border-color: rgba(242,169,59,.45); }
 .sev-pill.sev-severe { color: #FF8A93; border-color: rgba(226,55,68,.6); background: rgba(226,55,68,.12); }
 @media (max-width: 760px) { .damage-head { grid-template-columns: 1fr; } }
+
+/* Intelligent Modules: Verify, Health & Similar Cases */
+.form-card { display: grid; gap: 16px; margin-top: 14px; }
+.form-group { display: grid; gap: 6px; }
+.form-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.flex-1 { flex: 1; min-width: 240px; }
+.form-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
+
+/* Verify Screen */
+.result-card { margin-top: 20px; display: grid; gap: 14px; border-left: 4px solid var(--teal); }
+.verdict-supported { border-left-color: #16a34a; }
+.verdict-partially_supported { border-left-color: #eab308; }
+.verdict-unsupported { border-left-color: #dc2626; }
+.verdict-banner { display: flex; justify-content: space-between; align-items: center; }
+.badge-supported { background: rgba(22,163,74,.15); color: #22c55e; border: 1px solid rgba(34,197,94,.4); padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size: 13px; }
+.badge-partially_supported { background: rgba(234,179,8,.15); color: #facc15; border: 1px solid rgba(250,204,21,.4); padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size: 13px; }
+.badge-unsupported { background: rgba(220,38,38,.15); color: #f87171; border: 1px solid rgba(248,113,113,.4); padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size: 13px; }
+.path-trace { padding: 8px 12px; background: var(--carbon); border-radius: 8px; font-family: monospace; font-size: 13.5px; margin-top: 4px; }
+.verdict-disclaimer { border-top: 1px solid var(--seam); padding-top: 10px; color: var(--muted); }
+
+/* Health & Forecast Screen */
+.prediction-card { margin-top: 16px; background: linear-gradient(135deg, rgba(37,99,235,.08), rgba(61,214,207,.08)); border-color: rgba(61,214,207,.3); display: grid; gap: 6px; }
+.pred-header { display: flex; justify-content: space-between; align-items: center; }
+.pred-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--teal); }
+.pred-item { font-size: 20px; font-weight: 700; color: #fff; margin: 4px 0; }
+.badge-urgency-high { background: rgba(249,115,22,.15); color: #fb923c; border: 1px solid rgba(251,146,60,.4); padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.badge-urgency-moderate { background: rgba(234,179,8,.15); color: #facc15; border: 1px solid rgba(250,204,21,.4); padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.badge-urgency-routine { background: rgba(22,163,74,.15); color: #4ade80; border: 1px solid rgba(74,222,128,.4); padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.composite-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--seam); padding-bottom: 12px; margin-bottom: 14px; }
+.composite-score { font-size: 32px; font-weight: 800; color: var(--teal); }
+.groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.group-item { background: var(--carbon); border: 1px solid var(--seam); padding: 12px; border-radius: 10px; display: grid; gap: 6px; }
+.group-title-row { display: flex; justify-content: space-between; font-size: 13.5px; }
+.progress-bar { height: 7px; background: rgba(255,255,255,.08); border-radius: 999px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 999px; transition: width 0.3s; }
+.group-meta { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+.group-rec { font-size: 12.5px; color: #cbd5e1; margin-top: 4px; }
+
+/* Similar Cases Screen */
+.cases-list { margin-top: 18px; display: grid; gap: 12px; }
+.case-card { display: grid; gap: 10px; }
+.case-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.case-tags { display: flex; gap: 8px; }
+.badge-prov-real { background: rgba(34,197,94,.15); color: #4ade80; border: 1px solid rgba(74,222,128,.4); padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.badge-prov-seeded { background: rgba(148,163,184,.15); color: #94a3b8; border: 1px solid rgba(148,163,184,.3); padding: 3px 8px; border-radius: 6px; font-size: 11px; }
+.badge-similarity { background: rgba(61,214,207,.15); color: var(--teal); border: 1px solid rgba(61,214,207,.3); padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.case-outcome-box { background: rgba(0,0,0,.25); border-left: 3px solid var(--teal); padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 13.5px; }
+

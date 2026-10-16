@@ -16,7 +16,7 @@ from typing import Optional
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -32,7 +32,11 @@ import logging
 
 from .damage import MAX_PHOTOS, DamageService, build_damage_assessor
 from .scan import ImageRejected, build_code_reader, friendly_provider_error, read_codes
-from .schemas import DiagnoseRequest, DiagnoseResponse, ErrorResponse
+from .schemas import (DiagnoseRequest, DiagnoseResponse, ErrorResponse,
+                      HealthIndexResponse, NextServiceResponse,
+                      RootCauseRequest, RootCauseResponse,
+                      SimilarCasesRequest, SimilarCasesResponse,
+                      VerifyRepairRequest, VerifyRepairResponse)
 from .triage import TriageClassifier, load_or_train
 from .service import (DiagnoseError, DiagnoseService, GenerationFailed, UnsupportedVehicle,
                       VehicleProfileRequired)
@@ -263,6 +267,71 @@ async def assess_damage(body: DamagePhotos, request: Request, user: dict = Depen
     except Exception as exc:
         logging.getLogger("autocare.api").exception("damage assessment failed")
         raise HTTPException(502, detail={"error": "assessor_failed", "message": friendly_provider_error(exc)})
+
+
+# ---------------------------------------------------------------- intelligent modules (M5-M9)
+@app.post("/api/v1/diagnose/verify-repair", response_model=VerifyRepairResponse)
+async def verify_repair(body: VerifyRepairRequest, request: Request,
+                        user: dict = Depends(require("owner", "admin"))) -> dict:
+    """Story 7 / M5: Verify workshop recommendation against symptoms, DTC, manual & KG."""
+    service: DiagnoseService = request.app.state.service
+    return await run_in_threadpool(service.verify_repair, body.user_vehicle_id, body.proposed_repair,
+                                   body.symptoms, body.code, body.damage_location)
+
+
+@app.post("/api/v1/diagnose/root-cause", response_model=RootCauseResponse)
+async def root_cause(body: RootCauseRequest, request: Request,
+                     user: dict = Depends(require("owner", "admin"))) -> dict:
+    """Story 8 / M6: Multi-hop root-cause causal chain inference."""
+    service: DiagnoseService = request.app.state.service
+    chains = await run_in_threadpool(service.get_root_causes, body.symptom, body.max_depth)
+    return {"symptom": body.symptom, "chains": chains}
+
+
+@app.post("/api/v1/diagnose/similar-cases", response_model=SimilarCasesResponse)
+async def similar_cases(body: SimilarCasesRequest, request: Request,
+                        user: dict = Depends(require("owner", "admin"))) -> dict:
+    """Story 9 / M8: Find prior resolved cases matching vehicle and symptoms."""
+    service: DiagnoseService = request.app.state.service
+    cases = await run_in_threadpool(service.get_similar_cases, body.user_vehicle_id, body.symptom,
+                                    body.code, body.top_k)
+    return {"cases": cases}
+
+
+@app.get("/api/v1/vehicle/{user_vehicle_id}/health", response_model=HealthIndexResponse)
+async def vehicle_health(user_vehicle_id: str, request: Request,
+                         user: dict = Depends(require("owner", "admin"))) -> dict:
+    """Story 10 / M7.1: Vehicle Health Index across 6 component groups."""
+    service: DiagnoseService = request.app.state.service
+    return await run_in_threadpool(service.get_vehicle_health, user_vehicle_id)
+
+
+@app.get("/api/v1/vehicle/{user_vehicle_id}/maintenance-prediction", response_model=NextServiceResponse)
+async def maintenance_prediction(user_vehicle_id: str, request: Request,
+                                 user: dict = Depends(require("owner", "admin"))) -> dict:
+    """Story 11 / M7.2: Predict next due service item and mileage window."""
+    service: DiagnoseService = request.app.state.service
+    return await run_in_threadpool(service.predict_next_service, user_vehicle_id)
+
+
+class ReportPdfRequest(BaseModel):
+    user_vehicle_id: str
+    query: str
+    diagnosis: DiagnoseResponse
+
+
+@app.post("/api/v1/diagnose/report/pdf")
+async def download_report_pdf(body: ReportPdfRequest, request: Request,
+                              user: dict = Depends(require("owner", "admin"))):
+    """Story 13 / M9: Downloadable PDF service report."""
+    service: DiagnoseService = request.app.state.service
+    pdf_bytes = await run_in_threadpool(service.generate_report_pdf, body.user_vehicle_id,
+                                        body.query, body.diagnosis)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"attachment; filename=autocare-report-{body.diagnosis.case_id or 'export'}.pdf"}
+    )
 
 
 # ---------------------------------------------------------------- mechanic

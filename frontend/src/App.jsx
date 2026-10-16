@@ -5,6 +5,9 @@ import AuthScreen from "./screens/AuthScreen";
 import { AskScreen, GarageScreen, HistoryScreen } from "./screens/OwnerScreens";
 import { MyAdviceScreen, ShareAdviceScreen } from "./screens/MechanicScreens";
 import { DamageScreen } from "./screens/DamageScreen";
+import { VerifyScreen } from "./screens/VerifyScreen";
+import { HealthScreen } from "./screens/HealthScreen";
+import { SimilarCasesScreen } from "./screens/SimilarCasesScreen";
 import { AdminManuals, AdminNotes, AdminOverview, AdminUsers } from "./screens/AdminScreens";
 
 const BASE = import.meta.env?.BASE_URL ?? "/app/";
@@ -20,6 +23,7 @@ const I = {
   check: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l3.5 3.5v13.5H6z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M9 13.5l2.2 2.2L15.5 11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>,
   users: <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.8" /><path d="M3.5 19a5.5 5.5 0 0111 0M15.5 5.6a3 3 0 010 5.8M17 14.2A5 5 0 0120.5 19" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>,
   dent: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 15.5l2-5.2A2 2 0 017.4 9h9.2a2 2 0 011.9 1.3l2 5.2v2.5a1 1 0 01-1 1h-15a1 1 0 01-1-1v-2.5z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M9.5 12.5l1.6 1.4 1.4-2 1.5 1.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+  shield: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V7l8-4z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>,
   out: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h4a1 1 0 011 1v12a1 1 0 01-1 1h-4M10 16l-4-4 4-4M6 12h10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>,
 };
 
@@ -27,6 +31,9 @@ const I = {
 const NAV = {
   owner: [
     { href: "#/ask", label: "Ask AutoCare", icon: I.chat },
+    { href: "#/verify", label: "Verify repair", icon: I.shield },
+    { href: "#/health", label: "Health & forecast", icon: I.gauge },
+    { href: "#/similar", label: "Similar cases", icon: I.book },
     { href: "#/damage", label: "Damage check", icon: I.dent },
     { href: "#/cars", label: "My cars", icon: I.car },
     { href: "#/history", label: "History", icon: I.clock },
@@ -42,6 +49,9 @@ const NAV = {
     { href: "#/admin/users", label: "Users & roles", icon: I.users },
     { section: "Try it as an owner" },
     { href: "#/ask", label: "Ask AutoCare", icon: I.chat },
+    { href: "#/verify", label: "Verify repair", icon: I.shield },
+    { href: "#/health", label: "Health & forecast", icon: I.gauge },
+    { href: "#/similar", label: "Similar cases", icon: I.book },
     { href: "#/damage", label: "Damage check", icon: I.dent },
     { href: "#/cars", label: "My cars", icon: I.car },
     { href: "#/history", label: "History", icon: I.clock },
@@ -122,6 +132,15 @@ export default function App() {
   switch (route) {
     case "#/ask":
       screen = <AskScreen vehicles={vehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} initialQuery={askAgain} />;
+      break;
+    case "#/verify":
+      screen = <VerifyScreen vehicles={vehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} />;
+      break;
+    case "#/health":
+      screen = <HealthScreen vehicles={vehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} />;
+      break;
+    case "#/similar":
+      screen = <SimilarCasesScreen vehicles={vehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} />;
       break;
     case "#/damage":
       screen = <DamageScreen vehicles={vehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} />;

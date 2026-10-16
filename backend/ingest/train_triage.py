@@ -118,7 +118,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-# [2026-06-13] feat(ml): [AUT-107] train base
-
-# [2026-06-15] refactor(ml): [AUT-107B] imple

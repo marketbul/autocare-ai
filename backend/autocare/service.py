@@ -460,7 +460,3 @@ class DiagnoseService:
     def _vehicle_out(v: VehicleProfile) -> VehicleOut:
         return VehicleOut(user_vehicle_id=v.user_vehicle_id, manufacturer=v.manufacturer,
                           model=v.model, variant=v.variant, year=v.year)
-
-# [2026-05-22] feat(nlp): [AUT-105] add Urdu 
-
-# [2026-05-24] feat(nlp): [AUT-105] add Urdu and R by Danial Hameed

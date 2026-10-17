@@ -216,7 +216,3 @@ class NextServiceResponse(BaseModel):
     urgency: str
     rationale: str
 
-
-# [2026-05-31] fix(ocr): [AUT-106B] enhance c
-
-# [2026-06-03] fix(ocr): [AUT-106B] enhance contra by Danial Hameed

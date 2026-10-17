@@ -230,5 +230,3 @@ def generate_service_report_pdf(
 
     doc.build(story)
     return buffer.getvalue()
-
-# [2026-09-19] feat(report): [AUT-115] implem

@@ -20,5 +20,3 @@ class Story6(unittest.TestCase):
         self.assertIn("calibrated_confidence", trace)
         self.assertIn("abstention_gate", trace)
         self.assertEqual(trace["abstention_gate"], "passed")
-
-# [2026-06-25] test(calibration): [AUT-108] e

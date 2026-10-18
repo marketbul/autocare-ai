@@ -46,7 +46,3 @@ class Story10And11(unittest.TestCase):
         self.assertTrue(pred.target_mileage >= 82000)
         self.assertTrue(pred.days_remaining > 0)
         self.assertIn("-", pred.estimated_due_date)
-
-# [2026-09-10] test(health): [AUT-113] verify
-
-# [2026-09-05] test(health): [AUT-113] verify main by Abdullah Mudasir

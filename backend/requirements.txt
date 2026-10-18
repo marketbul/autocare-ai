@@ -10,5 +10,3 @@ transformers==4.46.3
 regex==2024.11.6            # newer builds are blocked by Windows Smart App Control on some PCs
 scikit-learn>=1.3           # Story 4 classifier (already installed with sentence-transformers)
 Pillow>=10                  # Story 3 (only for AUTOCARE_CODE_READER=tesseract)
-networkx>=3.0               # M6 Knowledge Graph causal engine
-reportlab>=4.0              # M9 PDF Service Audit Report generator

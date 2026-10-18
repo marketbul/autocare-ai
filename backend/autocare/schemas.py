@@ -216,7 +216,3 @@ class NextServiceResponse(BaseModel):
     urgency: str
     rationale: str
 
-
-# [2026-07-08] feat(trace): [AUT-111] assembl
-
-# [2026-07-05] feat(trace): [AUT-111] assemble tra by Talha Ali Bhatti

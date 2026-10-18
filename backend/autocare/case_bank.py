@@ -105,11 +105,3 @@ class CaseBank:
             {"o": resolution_text.strip(), "c": case_id}
         )
         return True
-
-# [2026-08-24] feat(casebank): [AUT-114] impl
-
-# [2026-08-26] feat(casebank): [AUT-114] add 
-
-# [2026-08-17] feat(casebank): [AUT-114] implement by Danial Hameed
-
-# [2026-08-19] feat(casebank): [AUT-114] add prove by Danial Hameed

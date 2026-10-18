@@ -122,5 +122,3 @@ export function SimilarCasesScreen({ vehicles, activeId, onPickVehicle, go }) {
     </div>
   );
 }
-
-// [2026-10-03] feat(ui): [AUT-116] integrate SimilarCasesScreen and PDF report download

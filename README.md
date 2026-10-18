@@ -204,16 +204,3 @@ npm run build      # rebuilds dist/ for http://localhost:8000/app/
 * The Roman Urdu / Urdu glossary in `language.py` is small and hand-written. Extend it from the team's labelled symptom set.
 * The "lite" backend is lexical and does not understand Urdu. Never report numbers from it.
 * `pdf_ingest.py` is a working baseline (font-size headings, WARNING/CAUTION boxes, tables, numbered steps), not the final L1 pipeline. Scanned PDFs need OCR first.
-
----
-
-## 👥 Project Team & Contributors
-
-| Name | Role | Email |
-| :--- | :--- | :--- |
-| **Muhammad Abdullah** | Project Lead & Full-Stack Architecture | `abdullah262686@gmail.com` |
-| **Danial Hameed** | Backend & API Engineering | `danialhameed755@gmail.com` |
-| **Abdullah Mudasir** | Frontend & DevOps Engineering | `abdullahmudasir27@gmail.com` |
-| **Talha Bhatti** | Data Pipeline & Knowledge Graph Engineering | `talhabhattiak47@gmail.com` |
-| **Ahmad Zahid** | Machine Learning & Triage Model Lead | `ahmadzahid5029@gmail.com` |
-

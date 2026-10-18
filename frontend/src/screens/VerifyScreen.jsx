@@ -175,5 +175,3 @@ export function VerifyScreen({ vehicles, activeId, onPickVehicle, go }) {
     </div>
   );
 }
-
-// [2026-10-01] feat(ui): [AUT-116] add responsive React screens

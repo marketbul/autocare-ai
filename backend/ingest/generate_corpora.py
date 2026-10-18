@@ -232,7 +232,3 @@ def generate_obd2_codes_csv():
 if __name__ == "__main__":
     generate_vehicles_csv()
     generate_obd2_codes_csv()
-
-# [2026-05-24] test(retrieval): [AUT-104] tes
-
-# [2026-05-26] test(retrieval): [AUT-104] test hyb by Danial Hameed

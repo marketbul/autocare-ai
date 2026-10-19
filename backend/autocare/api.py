@@ -385,17 +385,28 @@ async def pricing_quotes(model: str = "corolla", category: str = "all",
 async def graph_export(user: dict = Depends(require("owner", "admin"))) -> dict:
     """Export complete automotive directed causal knowledge graph for visual analytics (M6)."""
     service = getattr(app.state, "service", None)
-    if not service or not hasattr(service, "kg"):
+    if not service or not hasattr(service, "kg") or service.kg is None:
         return {"nodes": [], "edges": [], "stats": {"total_nodes": 0, "total_edges": 0}}
 
-    g = service.kg.graph
+    g = getattr(service.kg, "g", getattr(service.kg, "graph", None))
+    if g is None:
+        return {"nodes": [], "edges": [], "stats": {"total_nodes": 0, "total_edges": 0}}
+
     nodes = [
-        {"id": n, "label": g.nodes[n].get("label", n), "type": g.nodes[n].get("type", "concept")}
+        {
+            "id": n,
+            "label": g.nodes[n].get("canonical_name", g.nodes[n].get("label", n)),
+            "type": g.nodes[n].get("node_type", g.nodes[n].get("type", "concept"))
+        }
         for n in g.nodes
     ]
     edges = [
-        {"source": u, "target": v, "relation": g[u][v].get("relation", "causes"),
-         "weight": g[u][v].get("weight", 0.8)}
+        {
+            "source": u,
+            "target": v,
+            "relation": g[u][v].get("relation", "causes"),
+            "weight": g[u][v].get("weight", 0.8)
+        }
         for u, v in g.edges
     ]
     return {

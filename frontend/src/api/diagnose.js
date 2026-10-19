@@ -66,6 +66,7 @@ export const downloadReportPdf = async ({ userVehicleId, query, diagnosis }) => 
 export const auth = {
   login: (email, password) => api("/api/v1/auth/login", { method: "POST", body: { email, password } }),
   register: (full_name, email, password) => api("/api/v1/auth/register", { method: "POST", body: { full_name, email, password } }),
+  googleAuth: ({ credential, email, full_name, google_id }) => api("/api/v1/auth/google", { method: "POST", body: { credential, email, full_name, google_id } }),
   me: () => api("/api/v1/auth/me"),
 };
 

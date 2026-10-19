@@ -7,9 +7,9 @@ const BASE = import.meta.env?.BASE_URL ?? "/app/";
 const DEMO_CREDENTIALS = {
   owner: {
     email: "abdullah262686@gmail.com",
-    name: "Muhammad Abdullah",
+    name: "Abdullah",
     password: "password123",
-    label: "Car Owner (Muhammad Abdullah)"
+    label: "Car Owner (Abdullah)"
   },
   mechanic: {
     email: "mechanic@autocare.pk",
@@ -33,13 +33,12 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
   const [error, setError] = useState(null);
   const [showGoogleModal, setShowGoogleModal] = useState(false);
   const [googleEmail, setGoogleEmail] = useState("");
-  const [googleName, setGoogleName] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   function pickRole(r) {
     setRole(r);
-    // Optionally prefill email if empty or currently matching another demo
     const currentDemo = Object.values(DEMO_CREDENTIALS).find(c => c.email === form.email);
     if (!form.email || currentDemo) {
       setForm((f) => ({
@@ -51,15 +50,26 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
     }
   }
 
-  function applyDemo(r) {
+  async function directLoginRole(r) {
     const cred = DEMO_CREDENTIALS[r];
     setRole(r);
-    setForm({
-      email: cred.email,
-      password: cred.password,
-      full_name: cred.name
-    });
+    setForm({ email: cred.email, password: cred.password, full_name: cred.name });
+    setBusy(true);
     setError(null);
+    try {
+      const session = await auth.login(cred.email, cred.password);
+      onSignedIn(session);
+    } catch {
+      // If login fails, attempt register for demo
+      try {
+        const session = await auth.register(cred.name, cred.email, cred.password);
+        onSignedIn(session);
+      } catch (err) {
+        setError(err.message || "Failed to sign in demo user.");
+      }
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function submit(e) {
@@ -79,17 +89,14 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
   }
 
   async function handleGoogleAuth(emailToUse, nameToUse) {
-    const targetEmail = (emailToUse || googleEmail || "").trim();
-    if (!targetEmail) {
-      setError("Please provide a valid Google account email.");
-      return;
-    }
+    const targetEmail = (emailToUse || "abdullah262686@gmail.com").trim();
+    const targetName = (nameToUse || "Abdullah").trim();
     setBusy(true);
     setError(null);
     try {
       const session = await auth.googleAuth({
         email: targetEmail,
-        full_name: (nameToUse || googleName || targetEmail.split("@")[0]).trim()
+        full_name: targetName
       });
       setShowGoogleModal(false);
       onSignedIn(session);
@@ -104,15 +111,17 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
 
   return (
     <div className="auth-wrapper">
-      {/* Top Bar Theme Toggle */}
-      <div style={{
-        position: "absolute",
-        top: "20px",
-        right: "24px",
-        display: "flex",
-        alignItems: "center",
-        gap: "10px"
-      }}>
+      {/* Background Ambient Glow */}
+      <div className="auth-bg-glow" />
+
+      {/* Top Header Floating Bar */}
+      <div className="auth-top-bar">
+        <div className="auth-top-brand">
+          <img src={`${BASE}emblem-256.jpg`} alt="AutoCare AI" width="24" height="24" />
+          <span>AutoCare <b>AI</b></span>
+          <span className="auth-version-badge">v2.4 Enterprise</span>
+        </div>
+
         {onToggleTheme && (
           <button
             type="button"
@@ -139,33 +148,21 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
       </div>
 
       <div className="auth-card">
-        {/* Simple Brand Header */}
+        {/* Brand Header */}
         <div className="auth-header">
-          <img src={`${BASE}emblem-256.jpg`} alt="AutoCare AI" />
-          <h1>{signin ? "Sign in to AutoCare AI" : "Create your account"}</h1>
-          <p>Autonomous vehicle diagnostic & telemetry platform</p>
+          <div className="auth-logo-frame">
+            <img src={`${BASE}emblem-256.jpg`} alt="AutoCare AI" />
+          </div>
+          <h1>{signin ? "Welcome back" : "Get started with AutoCare AI"}</h1>
+          <p>Autonomous vehicle diagnostics, telemetry & repair transparency</p>
         </div>
 
-        {/* Option 1: Continue with Google */}
+        {/* Primary Action: Modern Google Auth Button */}
         <button
           type="button"
+          className="google-auth-btn"
           onClick={() => setShowGoogleModal(true)}
           disabled={busy}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "10px",
-            padding: "10px 16px",
-            background: "var(--surface-2)",
-            color: "var(--text-primary)",
-            border: "1px solid var(--border)",
-            borderRadius: "8px",
-            fontWeight: "600",
-            fontSize: "14px",
-            cursor: "pointer",
-            boxShadow: "var(--shadow-sm)"
-          }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
@@ -173,115 +170,45 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
             <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
             <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
           </svg>
-          <span>{signin ? "Sign in with Google" : "Create account with Google"}</span>
+          <span>{signin ? "Continue with Google" : "Sign up with Google"}</span>
         </button>
 
-        {/* Google Quick Modal */}
-        {showGoogleModal && (
-          <div style={{
-            padding: "14px",
-            background: "var(--surface-2)",
-            border: "1px solid var(--border)",
-            borderRadius: "10px",
-            display: "grid",
-            gap: "10px"
-          }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <b style={{ fontSize: "13px", color: "var(--text-primary)" }}>Google One-Click Sign In</b>
-              <button
-                type="button"
-                onClick={() => setShowGoogleModal(false)}
-                style={{ background: "none", border: 0, color: "var(--text-muted)", cursor: "pointer", fontSize: "15px" }}
-              >
-                ✕
-              </button>
-            </div>
-            <input
-              type="email"
-              placeholder="Enter your google email (e.g. user@gmail.com)"
-              value={googleEmail}
-              onChange={(e) => setGoogleEmail(e.target.value)}
-              style={{ fontSize: "13px" }}
-            />
-            <div style={{ display: "flex", gap: "8px" }}>
-              <button
-                type="button"
-                className="btn primary"
-                onClick={() => handleGoogleAuth()}
-                disabled={busy}
-                style={{ flex: 1, padding: "7px 0" }}
-              >
-                {busy ? "Verifying..." : "Verify & Continue"}
-              </button>
-              <button
-                type="button"
-                className="btn"
-                onClick={() => handleGoogleAuth("abdullah262686@gmail.com", "Muhammad Abdullah")}
-                disabled={busy}
-                style={{ fontSize: "12px" }}
-              >
-                Use Abdullah's Google Account
-              </button>
-            </div>
-          </div>
-        )}
-
         {/* Divider */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "2px 0" }}>
-          <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
-          <span style={{ fontSize: "12px", color: "var(--text-muted)", textTransform: "uppercase" }}>or with email</span>
-          <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+        <div className="auth-divider">
+          <div className="auth-divider-line" />
+          <span>or continue with email</span>
+          <div className="auth-divider-line" />
         </div>
 
-        {/* Role Selector Tabs (Car Owner, Mechanic, Admin) */}
+        {/* Role Selector Tabs */}
         <div>
-          <label style={{ display: "block", fontSize: "12.5px", fontWeight: "600", color: "var(--text-secondary)", marginBottom: "6px" }}>
-            Account Role
-          </label>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "6px",
-            background: "var(--surface-2)",
-            padding: "4px",
-            borderRadius: "8px",
-            border: "1px solid var(--border)"
-          }}>
+          <label className="auth-label">Select Account Role</label>
+          <div className="auth-role-tabs">
             {[
-              { id: "owner", label: "Car Owner" },
-              { id: "mechanic", label: "Mechanic" },
-              { id: "admin", label: "Admin" }
+              { id: "owner", label: "Car Owner", icon: "🚗" },
+              { id: "mechanic", label: "Mechanic", icon: "🔧" },
+              { id: "admin", label: "Admin", icon: "🛡️" }
             ].map((r) => (
               <button
                 key={r.id}
                 type="button"
                 onClick={() => pickRole(r.id)}
-                style={{
-                  padding: "6px 0",
-                  borderRadius: "6px",
-                  border: "none",
-                  background: role === r.id ? "var(--surface-1)" : "transparent",
-                  color: role === r.id ? "var(--primary)" : "var(--text-secondary)",
-                  fontWeight: role === r.id ? "700" : "500",
-                  fontSize: "12.5px",
-                  cursor: "pointer",
-                  boxShadow: role === r.id ? "var(--shadow-sm)" : "none",
-                  transition: "all 0.15s ease"
-                }}
+                className={`auth-role-tab ${role === r.id ? "is-selected" : ""}`}
               >
+                <span style={{ marginRight: "4px" }}>{r.icon}</span>
                 {r.label}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Standard Form */}
+        {/* Form Inputs */}
         <form className="form" onSubmit={submit}>
           {!signin && (
             <Field label="Full Name">
               <input
                 type="text"
-                placeholder="e.g. Muhammad Abdullah"
+                placeholder="e.g. Abdullah"
                 value={form.full_name}
                 onChange={set("full_name")}
                 required
@@ -292,7 +219,7 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
           <Field label="Email Address">
             <input
               type="email"
-              placeholder="your@email.com"
+              placeholder="name@example.com"
               value={form.email}
               onChange={set("email")}
               autoComplete="username"
@@ -301,50 +228,171 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
           </Field>
 
           <Field label="Password">
-            <input
-              type="password"
-              placeholder="••••••••••••"
-              value={form.password}
-              onChange={set("password")}
-              autoComplete={signin ? "current-password" : "new-password"}
-              required
-            />
+            <div style={{ position: "relative" }}>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••••••"
+                value={form.password}
+                onChange={set("password")}
+                autoComplete={signin ? "current-password" : "new-password"}
+                style={{ paddingRight: "40px" }}
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                tabIndex={-1}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "transparent",
+                  border: 0,
+                  color: "var(--text-muted)",
+                  cursor: "pointer",
+                  padding: "4px"
+                }}
+              >
+                {showPassword ? (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+              </button>
+            </div>
           </Field>
 
-          {error && <Alert>{error}</Alert>}
+          {error && <Alert tone="warn">{error}</Alert>}
 
-          <button className="btn primary" disabled={busy} style={{ width: "100%", padding: "10px 0", marginTop: "4px" }}>
-            {busy ? "Signing in..." : (signin ? `Sign in as ${role === 'owner' ? 'Car Owner' : role === 'mechanic' ? 'Mechanic' : 'Admin'}` : "Create Account")}
+          <button
+            type="submit"
+            className="btn primary"
+            disabled={busy}
+            style={{ width: "100%", padding: "11px 0", marginTop: "6px", fontWeight: "600", fontSize: "14px" }}
+          >
+            {busy ? "Authenticating..." : (signin ? `Sign in as ${role === 'owner' ? 'Car Owner' : role === 'mechanic' ? 'Mechanic' : 'System Admin'}` : "Create Account")}
           </button>
         </form>
 
-        {/* Quick Demo Fill Helper */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "8px",
-          fontSize: "12px",
-          color: "var(--text-muted)",
-          paddingTop: "4px"
-        }}>
-          <span>Quick Demo Fill:</span>
-          <button type="button" className="link" onClick={() => applyDemo("owner")}>Owner</button>
-          <span>•</span>
-          <button type="button" className="link" onClick={() => applyDemo("mechanic")}>Mechanic</button>
-          <span>•</span>
-          <button type="button" className="link" onClick={() => applyDemo("admin")}>Admin</button>
+        {/* Quick Demo One-Click Logins */}
+        <div className="auth-quick-demo">
+          <span className="auth-quick-label">⚡ 1-Click Instant Demo Login:</span>
+          <div className="auth-quick-chips">
+            <button
+              type="button"
+              className="auth-chip"
+              onClick={() => directLoginRole("owner")}
+              title="Sign in as Abdullah (Car Owner)"
+            >
+              🚗 Abdullah (Owner)
+            </button>
+            <button
+              type="button"
+              className="auth-chip"
+              onClick={() => directLoginRole("mechanic")}
+              title="Sign in as Certified Mechanic"
+            >
+              🔧 Mechanic
+            </button>
+            <button
+              type="button"
+              className="auth-chip"
+              onClick={() => directLoginRole("admin")}
+              title="Sign in as Administrator"
+            >
+              🛡️ Admin
+            </button>
+          </div>
         </div>
 
         {/* Bottom Switch */}
-        <div style={{ textAlign: "center", fontSize: "13px", color: "var(--text-secondary)", borderTop: "1px solid var(--border)", paddingTop: "14px" }}>
+        <div className="auth-footer-switch">
           {signin ? (
-            <>Don't have an account? <button type="button" className="link" onClick={() => setMode("signup")}>Create account</button></>
+            <>New to AutoCare AI? <button type="button" className="link" onClick={() => setMode("signup")}>Create account</button></>
           ) : (
             <>Already have an account? <button type="button" className="link" onClick={() => setMode("signin")}>Sign in</button></>
           )}
         </div>
       </div>
+
+      {/* Professional Google Account Chooser Modal */}
+      {showGoogleModal && (
+        <div className="google-modal-backdrop" onClick={() => setShowGoogleModal(false)}>
+          <div className="google-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="google-modal-head">
+              <svg width="22" height="22" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.98 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+              </svg>
+              <div>
+                <h3>Choose an account</h3>
+                <p>to continue to <b>AutoCare AI</b></p>
+              </div>
+              <button
+                type="button"
+                className="google-close-btn"
+                onClick={() => setShowGoogleModal(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Selected Google Account Row: Abdullah */}
+            <div
+              className="google-account-item"
+              onClick={() => handleGoogleAuth("abdullah262686@gmail.com", "Abdullah")}
+            >
+              <div className="google-avatar">
+                <span>A</span>
+              </div>
+              <div className="google-account-info">
+                <b>Abdullah</b>
+                <span>abdullah262686@gmail.com</span>
+                <small className="google-badge">PUCIT &bull; Roll #35 &bull; Signed In</small>
+              </div>
+              <div className="google-check-arrow">&rarr;</div>
+            </div>
+
+            {/* Custom Google Email Option */}
+            <div style={{ marginTop: "12px", borderTop: "1px solid var(--border)", paddingTop: "12px" }}>
+              <span style={{ fontSize: "12px", color: "var(--text-muted)", display: "block", marginBottom: "6px" }}>
+                Or use another Google email:
+              </span>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <input
+                  type="email"
+                  placeholder="your.email@gmail.com"
+                  value={googleEmail}
+                  onChange={(e) => setGoogleEmail(e.target.value)}
+                  style={{ fontSize: "13px", padding: "7px 10px" }}
+                />
+                <button
+                  type="button"
+                  className="btn primary"
+                  onClick={() => handleGoogleAuth(googleEmail, googleEmail.split("@")[0])}
+                  disabled={!googleEmail.trim() || busy}
+                  style={{ padding: "0 14px", fontSize: "12.5px" }}
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+
+            <div className="google-privacy-footer">
+              To continue, Google will share your name, email address, and language preference with AutoCare AI.
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

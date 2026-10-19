@@ -1,0 +1,167 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tokens-studio/figma-plugin/main/token-schema.json",
+  "name": "AutoCare AI Design Tokens",
+  "version": "2.0.0",
+  "color": {
+    "background": {
+      "canvas": {
+        "value": "#09090b",
+        "type": "color",
+        "description": "Deepest dark canvas background (Linear/Raycast benchmark)"
+      },
+      "card": {
+        "value": "#18181b",
+        "type": "color",
+        "description": "Elevated card surface (zinc-900)"
+      },
+      "card-muted": {
+        "value": "#121215",
+        "type": "color",
+        "description": "Subtle recessed card background"
+      },
+      "card-hover": {
+        "value": "#27272a",
+        "type": "color",
+        "description": "Hover interaction card surface"
+      },
+      "frosted": {
+        "value": "rgba(15, 15, 20, 0.75)",
+        "type": "color",
+        "description": "Glassmorphic frosted panel with backdrop blur"
+      }
+    },
+    "border": {
+      "hairline": {
+        "value": "rgba(255, 255, 255, 0.08)",
+        "type": "color",
+        "description": "Ultra-subtle hairline border (0.5pt to 1pt)"
+      },
+      "active": {
+        "value": "rgba(139, 92, 246, 0.45)",
+        "type": "color",
+        "description": "Accent focused hairline border"
+      },
+      "subtle": {
+        "value": "rgba(255, 255, 255, 0.04)",
+        "type": "color",
+        "description": "Inner separator hairline"
+      }
+    },
+    "accent": {
+      "violet": {
+        "value": "#8b5cf6",
+        "type": "color",
+        "description": "Electric Violet primary brand accent"
+      },
+      "violet-glow": {
+        "value": "rgba(139, 92, 246, 0.20)",
+        "type": "color",
+        "description": "Subtle radiant glow for active badges and cards"
+      },
+      "emerald": {
+        "value": "#10b981",
+        "type": "color",
+        "description": "Emerald green status indicator and safe thresholds"
+      },
+      "amber": {
+        "value": "#f59e0b",
+        "type": "color",
+        "description": "Amber warning indicator"
+      },
+      "rose": {
+        "value": "#ef4444",
+        "type": "color",
+        "description": "Severe critical diagnostic alert (10x safety penalty)"
+      },
+      "cyan": {
+        "value": "#06b6d4",
+        "type": "color",
+        "description": "Knowledge graph telemetry & multi-hop links"
+      }
+    },
+    "text": {
+      "primary": {
+        "value": "#f4f4f5",
+        "type": "color",
+        "description": "High-contrast off-white headline text"
+      },
+      "secondary": {
+        "value": "#a1a1aa",
+        "type": "color",
+        "description": "Muted zinc-400 label text"
+      },
+      "tertiary": {
+        "value": "#71717a",
+        "type": "color",
+        "description": "Subdued metadata and timestamps"
+      },
+      "inverse": {
+        "value": "#09090b",
+        "type": "color",
+        "description": "Dark text for light chip overlays"
+      }
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "display": {
+        "value": "Plus Jakarta Sans, Inter, -apple-system, sans-serif",
+        "type": "fontFamilies"
+      },
+      "mono": {
+        "value": "JetBrains Mono, SF Mono, Menlo, monospace",
+        "type": "fontFamilies"
+      }
+    },
+    "fontSizes": {
+      "xs": { "value": "11px", "type": "fontSizes" },
+      "sm": { "value": "13px", "type": "fontSizes" },
+      "base": { "value": "15px", "type": "fontSizes" },
+      "lg": { "value": "18px", "type": "fontSizes" },
+      "xl": { "value": "22px", "type": "fontSizes" },
+      "2xl": { "value": "28px", "type": "fontSizes" },
+      "3xl": { "value": "36px", "type": "fontSizes" }
+    },
+    "letterSpacing": {
+      "tight": { "value": "-0.025em", "type": "letterSpacing" },
+      "normal": { "value": "0em", "type": "letterSpacing" },
+      "wide": { "value": "0.05em", "type": "letterSpacing" }
+    },
+    "lineHeights": {
+      "tight": { "value": "1.2", "type": "lineHeights" },
+      "normal": { "value": "1.5", "type": "lineHeights" },
+      "relaxed": { "value": "1.75", "type": "lineHeights" }
+    }
+  },
+  "radii": {
+    "sm": { "value": "8px", "type": "borderRadius" },
+    "md": { "value": "12px", "type": "borderRadius" },
+    "lg": { "value": "16px", "type": "borderRadius" },
+    "xl": { "value": "20px", "type": "borderRadius" },
+    "2xl": { "value": "24px", "type": "borderRadius", "description": "Web Bento Card radius" },
+    "3xl": { "value": "32px", "type": "borderRadius", "description": "Mobile App Card radius" },
+    "full": { "value": "9999px", "type": "borderRadius" }
+  },
+  "boxShadow": {
+    "subtle-card": {
+      "value": "0 1px 3px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)",
+      "type": "boxShadow",
+      "description": "Faint inner highlight with ambient depth"
+    },
+    "glow-violet": {
+      "value": "0 8px 32px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255,255,255,0.1)",
+      "type": "boxShadow"
+    },
+    "frosted-nav": {
+      "value": "0 10px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.08)",
+      "type": "boxShadow"
+    }
+  },
+  "layout": {
+    "bento": {
+      "webGridGap": { "value": "16px", "type": "spacing" },
+      "mobileCardGap": { "value": "14px", "type": "spacing" },
+      "contentPadding": { "value": "24px", "type": "spacing" }
+    }
+  }
+}

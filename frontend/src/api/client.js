@@ -43,3 +43,11 @@ export async function api(path, { method = "GET", body, signal } = {}) {
   }
   return data;
 }
+
+export function get(path, options = {}) {
+  return api(path, { ...options, method: "GET" });
+}
+
+export function post(path, body, options = {}) {
+  return api(path, { ...options, method: "POST", body });
+}

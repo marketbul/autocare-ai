@@ -176,6 +176,6 @@ export function VerifyScreen({ vehicles, activeId, onPickVehicle, go }) {
   );
 }
 
-# [2026-10-01] feat(ui): [AUT-116] add respon
+// [2026-10-01] feat(ui): [AUT-116] add respon
 
 // [2026-09-29] feat(ui): [AUT-116] add responsive  by Abdullah Mudasir

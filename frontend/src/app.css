@@ -1,20 +1,19 @@
-/* AutoCare AI — palette taken from the logo:
-   brushed carbon, the red shield, the teal circuit lines. */
+/* AutoCare AI — Minimalist Deep Slate/Zinc Design System (Linear, Raycast & Apple iOS) */
 :root {
-  --carbon: #14171B;     /* page */
-  --gunmetal: #1B1F25;   /* panels */
-  --plate: #222830;      /* raised controls */
-  --seam: #2F3640;       /* borders */
-  --text: #E8ECF0;
-  --muted: #8F99A5;
-  --red: #E23744;        /* brand + the one primary action */
-  --red-deep: #9E1F2B;
-  --teal: #3DD6CF;       /* means only: verified from your manual */
-  --teal-dim: rgba(61, 214, 207, .12);
-  --amber: #F2A93B;      /* means only: caution */
-  --amber-dim: rgba(242, 169, 59, .12);
-  --display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
-  --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --carbon: #09090b;     /* Deep slate/zinc canvas */
+  --gunmetal: #121215;   /* Surface elevation 1 */
+  --plate: #18181b;      /* Surface card elevation 2 */
+  --seam: rgba(255, 255, 255, 0.08); /* Hairline border */
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --red: #8b5cf6;        /* Electric Violet primary accent */
+  --red-deep: #6d28d9;
+  --teal: #10b981;       /* Emerald verified accent */
+  --teal-dim: rgba(16, 185, 129, 0.12);
+  --amber: #f59e0b;      /* Amber cautionary accent */
+  --amber-dim: rgba(245, 158, 11, 0.12);
+  --display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --urdu: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
   color-scheme: dark;
 }
@@ -22,12 +21,11 @@
 * { box-sizing: border-box; }
 html { background: var(--carbon); }
 body {
-  margin: 0; color: var(--text); font: 15.5px/1.6 var(--body);
+  margin: 0; color: var(--text); font: 15px/1.6 var(--body);
   -webkit-font-smoothing: antialiased;
-  /* faint brushed-metal sheen, like the logo backdrop */
   background:
-    radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.045), transparent 60%),
-    repeating-linear-gradient(115deg, rgba(255,255,255,.012) 0 2px, transparent 2px 5px),
+    radial-gradient(1000px 500px at 50% -10%, rgba(139, 92, 246, 0.07), transparent 70%),
+    radial-gradient(800px 400px at 80% 20%, rgba(16, 185, 129, 0.04), transparent 60%),
     var(--carbon);
   min-height: 100vh;
 }

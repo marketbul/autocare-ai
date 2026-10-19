@@ -13,10 +13,12 @@ import { GraphScreen } from "./screens/GraphScreen";
 import { PricingScreen } from "./screens/PricingScreen";
 import { ModelAnalyticsScreen } from "./screens/ModelAnalyticsScreen";
 import { CorpusScreen } from "./screens/CorpusScreen";
+import { BentoDashboardScreen } from "./screens/BentoDashboardScreen";
 
 const BASE = import.meta.env?.BASE_URL ?? "/app/";
 
 const I = {
+  bento: <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="1.8" fill="none" /><rect x="14" y="3" width="7" height="4" rx="1.5" stroke="currentColor" strokeWidth="1.8" fill="none" /><rect x="14" y="10" width="7" height="11" rx="2" stroke="currentColor" strokeWidth="1.8" fill="none" /><rect x="3" y="13" width="7" height="8" rx="2" stroke="currentColor" strokeWidth="1.8" fill="none" /></svg>,
   chat: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>,
   car: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l1.5-4.3A2 2 0 018.4 6.4h7.2a2 2 0 011.9 1.3L19 12M4 12h16v4.5a1 1 0 01-1 1H5a1 1 0 01-1-1V12z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><circle cx="7.5" cy="14.8" r="1.1" fill="currentColor" /><circle cx="16.5" cy="14.8" r="1.1" fill="currentColor" /></svg>,
   clock: <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.8" /><path d="M12 8v4.5l3 2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>,
@@ -38,6 +40,7 @@ const I = {
 // Navigation per role. An admin can also ask questions, to test the system.
 const NAV = {
   owner: [
+    { href: "#/dashboard", label: "Diagnostic Hub", icon: I.bento },
     { href: "#/ask", label: "Ask AutoCare", icon: I.chat },
     { href: "#/verify", label: "Verify repair", icon: I.shield },
     { href: "#/health", label: "Health & forecast", icon: I.gauge },
@@ -55,6 +58,7 @@ const NAV = {
     { href: "#/advice", label: "My advice", icon: I.list },
   ],
   admin: [
+    { href: "#/dashboard", label: "Diagnostic Hub", icon: I.bento },
     { href: "#/admin", label: "Overview", icon: I.gauge },
     { href: "#/admin/notes", label: "Mechanic notes", icon: I.check },
     { href: "#/admin/manuals", label: "Manuals & sources", icon: I.book },
@@ -147,6 +151,9 @@ export default function App() {
 
   let screen;
   switch (route) {
+    case "#/dashboard":
+      screen = <BentoDashboardScreen go={go} />;
+      break;
     case "#/ask":
       screen = <AskScreen vehicles={vehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} initialQuery={askAgain} />;
       break;

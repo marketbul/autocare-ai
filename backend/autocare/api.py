@@ -130,6 +130,13 @@ class SignIn(BaseModel):
     password: str
 
 
+class GoogleAuthIn(BaseModel):
+    credential: Optional[str] = None
+    email: Optional[str] = None
+    full_name: Optional[str] = None
+    google_id: Optional[str] = None
+
+
 def _session(user: dict) -> dict:
     return {"token": make_token(user["user_id"], user["role"]), "user": user}
 
@@ -149,6 +156,37 @@ async def login(body: SignIn, request: Request) -> dict:
     user = await run_in_threadpool(accounts(request).authenticate, body.email, body.password)
     if not user:
         raise HTTPException(401, detail={"error": "bad_login", "message": "Email or password is incorrect."})
+    return _session(user)
+
+
+@app.post("/api/v1/auth/google")
+async def google_auth(body: GoogleAuthIn, request: Request) -> dict:
+    """Authenticate or verify a user via Google Account (OAuth / One-Tap / Email verification)."""
+    email = (body.email or "").strip().lower()
+    full_name = (body.full_name or "").strip()
+
+    if body.credential and "." in body.credential:
+        try:
+            import base64
+            parts = body.credential.split(".")
+            if len(parts) >= 2:
+                payload_raw = parts[1]
+                padded = payload_raw + "=" * (-len(payload_raw) % 4)
+                claims = json.loads(base64.urlsafe_b64decode(padded.encode()).decode("utf-8"))
+                email = claims.get("email", email).strip().lower()
+                full_name = claims.get("name", full_name).strip()
+        except Exception:
+            pass
+
+    if not email:
+        raise HTTPException(400, detail={"error": "missing_google_email", "message": "Google email verification failed."})
+
+    user = await run_in_threadpool(
+        accounts(request).authenticate_or_register_google,
+        email=email,
+        full_name=full_name,
+        google_id=body.google_id
+    )
     return _session(user)
 
 

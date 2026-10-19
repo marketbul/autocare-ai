@@ -73,6 +73,30 @@ class Accounts:
         # Self sign-up always creates an owner; only an admin can grant other roles.
         return self.create_user(full_name, email, password, "owner")
 
+    def authenticate_or_register_google(self, email: str, full_name: str = "", google_id: str | None = None) -> dict:
+        email = (email or "").strip().lower()
+        if not email or not _EMAIL.match(email):
+            raise Invalid("A valid Google email address is required.")
+        rows = self.db.query("SELECT * FROM appuser WHERE email = :e", {"e": email})
+        if rows:
+            return _public(rows[0])
+        name = full_name.strip() if full_name else email.split("@")[0].replace(".", " ").title()
+        oauth_pwd = f"oauth_google_{uuid.uuid4().hex}"
+        row = {
+            "user_id": str(uuid.uuid4()),
+            "full_name": name,
+            "email": email,
+            "password_hash": hash_password(oauth_pwd),
+            "role": "owner",
+            "created_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
+        }
+        self.db.execute(
+            """INSERT INTO appuser (user_id, full_name, email, password_hash, role, created_at)
+               VALUES (:user_id, :full_name, :email, :password_hash, :role, :created_at)""",
+            row
+        )
+        return _public(row)
+
     def authenticate(self, email: str, password: str) -> dict | None:
         rows = self.db.query("SELECT * FROM appuser WHERE email = :e", {"e": (email or "").strip().lower()})
         if rows and verify_password(password or "", rows[0]["password_hash"]):

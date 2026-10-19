@@ -35,6 +35,8 @@ const I = {
   chart: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>,
   corpus: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5a2.5 2.5 0 01-2.5-2.5v-15z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M8 7h8M8 11h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>,
   out: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h4a1 1 0 011 1v12a1 1 0 01-1 1h-4M10 16l-4-4 4-4M6 12h10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+  sun: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
+  moon: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
 };
 
 // Navigation per role. An admin can also ask questions, to test the system.
@@ -101,6 +103,20 @@ export default function App() {
   const [vehicles, setVehicles] = useState([]);
   const [activeId, setActiveId] = useState("");
   const [askAgain, setAskAgain] = useState("");
+  
+  // Theme State (Dark or Light)
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem("autocare_theme") || "dark"; } catch { return "dark"; }
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem("autocare_theme", theme); } catch {}
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
+  }, []);
 
   // Restore a saved session.
   useEffect(() => {
@@ -143,7 +159,7 @@ export default function App() {
   }
 
   if (checking) return <div className="boot"><img src={`${BASE}emblem-256.jpg`} alt="" /></div>;
-  if (!user) return <AuthScreen onSignedIn={signedIn} />;
+  if (!user) return <AuthScreen onSignedIn={signedIn} theme={theme} onToggleTheme={toggleTheme} />;
 
   const nav = NAV[user.role];
   const allowed = nav.filter((n) => n.href).map((n) => n.href);
@@ -200,8 +216,8 @@ export default function App() {
     <div className="shell">
       <aside className="rail">
         <a className="brand" href={nav[0].href}>
-          <img src={`${BASE}emblem-256.jpg`} alt="" width="44" height="44" />
-          <span><b>AutoCare AI</b><small>Connectivity & diagnostics</small></span>
+          <img src={`${BASE}emblem-256.jpg`} alt="" width="36" height="36" />
+          <span><b>AutoCare AI</b><small>Diagnostics & Telemetry</small></span>
         </a>
         <nav className="rail-nav" aria-label="Main">
           {nav.map((n, i) => n.section
@@ -212,17 +228,23 @@ export default function App() {
         <div className="account">
           <span className="avatar" aria-hidden="true">{user.full_name.slice(0, 1).toUpperCase()}</span>
           <span className="account-who"><b>{user.full_name}</b><small>{ROLE_LABEL[user.role]}</small></span>
+          <button className="icon-btn" onClick={toggleTheme} title={`Switch to ${theme === "dark" ? "Light" : "Dark"} mode`} aria-label="Toggle theme">
+            {theme === "dark" ? I.sun : I.moon}
+          </button>
           <button className="icon-btn" onClick={signOut} title="Sign out" aria-label="Sign out">{I.out}</button>
         </div>
       </aside>
 
       <header className="topbar">
-        <a className="brand" href={nav[0].href}><img src={`${BASE}emblem-256.jpg`} alt="" width="34" height="34" /></a>
+        <a className="brand" href={nav[0].href}><img src={`${BASE}emblem-256.jpg`} alt="" width="30" height="30" /></a>
         <nav className="topnav" aria-label="Main">
           {nav.filter((n) => n.href).map((n) => (
             <a key={n.href} href={n.href} className={route === n.href ? "is-active" : ""}>{n.label}</a>
           ))}
         </nav>
+        <button className="icon-btn" onClick={toggleTheme} title={`Switch to ${theme === "dark" ? "Light" : "Dark"} mode`} aria-label="Toggle theme">
+          {theme === "dark" ? I.sun : I.moon}
+        </button>
         <button className="icon-btn" onClick={signOut} aria-label="Sign out">{I.out}</button>
       </header>
 

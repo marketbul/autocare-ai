@@ -9,6 +9,10 @@ import { VerifyScreen } from "./screens/VerifyScreen";
 import { HealthScreen } from "./screens/HealthScreen";
 import { SimilarCasesScreen } from "./screens/SimilarCasesScreen";
 import { AdminManuals, AdminNotes, AdminOverview, AdminUsers } from "./screens/AdminScreens";
+import { GraphScreen } from "./screens/GraphScreen";
+import { PricingScreen } from "./screens/PricingScreen";
+import { ModelAnalyticsScreen } from "./screens/ModelAnalyticsScreen";
+import { CorpusScreen } from "./screens/CorpusScreen";
 
 const BASE = import.meta.env?.BASE_URL ?? "/app/";
 
@@ -24,6 +28,10 @@ const I = {
   users: <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.8" /><path d="M3.5 19a5.5 5.5 0 0111 0M15.5 5.6a3 3 0 010 5.8M17 14.2A5 5 0 0120.5 19" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>,
   dent: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 15.5l2-5.2A2 2 0 017.4 9h9.2a2 2 0 011.9 1.3l2 5.2v2.5a1 1 0 01-1 1h-15a1 1 0 01-1-1v-2.5z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M9.5 12.5l1.6 1.4 1.4-2 1.5 1.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>,
   shield: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v6c0 5-4 9-8 10-4-1-8-5-8-10V7l8-4z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+  graph: <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.8" /><circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.8" /><circle cx="12" cy="18" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.8" /><path d="M7.8 7.8l3.4 8.4M16.2 7.8l-3.4 8.4M8.5 6h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>,
+  tag: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><circle cx="7" cy="7" r="1.5" fill="currentColor" /></svg>,
+  chart: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+  corpus: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5a2.5 2.5 0 01-2.5-2.5v-15z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M8 7h8M8 11h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>,
   out: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h4a1 1 0 011 1v12a1 1 0 01-1 1h-4M10 16l-4-4 4-4M6 12h10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>,
 };
 
@@ -33,6 +41,10 @@ const NAV = {
     { href: "#/ask", label: "Ask AutoCare", icon: I.chat },
     { href: "#/verify", label: "Verify repair", icon: I.shield },
     { href: "#/health", label: "Health & forecast", icon: I.gauge },
+    { href: "#/graph", label: "Causal Graph (M6)", icon: I.graph },
+    { href: "#/pricing", label: "Parts & Labour (PKR)", icon: I.tag },
+    { href: "#/analytics", label: "Model Reliability", icon: I.chart },
+    { href: "#/corpus", label: "Manuals Corpus (45)", icon: I.corpus },
     { href: "#/similar", label: "Similar cases", icon: I.book },
     { href: "#/damage", label: "Damage check", icon: I.dent },
     { href: "#/cars", label: "My cars", icon: I.car },
@@ -47,6 +59,11 @@ const NAV = {
     { href: "#/admin/notes", label: "Mechanic notes", icon: I.check },
     { href: "#/admin/manuals", label: "Manuals & sources", icon: I.book },
     { href: "#/admin/users", label: "Users & roles", icon: I.users },
+    { section: "Intelligent Modules & Analytics" },
+    { href: "#/graph", label: "Causal Graph (M6)", icon: I.graph },
+    { href: "#/pricing", label: "Parts & Labour (PKR)", icon: I.tag },
+    { href: "#/analytics", label: "Model Reliability", icon: I.chart },
+    { href: "#/corpus", label: "Manuals Corpus (45)", icon: I.corpus },
     { section: "Try it as an owner" },
     { href: "#/ask", label: "Ask AutoCare", icon: I.chat },
     { href: "#/verify", label: "Verify repair", icon: I.shield },
@@ -147,6 +164,18 @@ export default function App() {
       break;
     case "#/cars":
       screen = <GarageScreen vehicles={vehicles} reloadVehicles={reloadVehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} />;
+      break;
+    case "#/graph":
+      screen = <GraphScreen />;
+      break;
+    case "#/pricing":
+      screen = <PricingScreen />;
+      break;
+    case "#/analytics":
+      screen = <ModelAnalyticsScreen />;
+      break;
+    case "#/corpus":
+      screen = <CorpusScreen />;
       break;
     case "#/history":
       screen = <HistoryScreen vehicles={vehicles} onAskAgain={(c) => { pickVehicle(c.user_vehicle_id); if (c.kind === "damage") { go("#/damage"); return; } setAskAgain(c.question); go("#/ask"); }} />;

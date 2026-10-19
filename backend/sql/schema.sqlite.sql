@@ -163,4 +163,4 @@ CREATE TABLE IF NOT EXISTS pricereference (
 );
 
 
-# [2026-05-13] test(dtc): [AUT-102] add asser
+-- [2026-05-13] test(dtc): [AUT-102] add assertions for DTC severity

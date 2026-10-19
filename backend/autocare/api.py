@@ -346,7 +346,7 @@ async def pricing_quotes(model: str = "corolla", category: str = "all",
 @app.get("/api/v1/diagnose/graph/export")
 async def graph_export(user: dict = Depends(require("owner", "admin"))) -> dict:
     """Export complete automotive directed causal knowledge graph for visual analytics (M6)."""
-    service: DiagnoseService = request_app_service = getattr(app.state, "service", None)
+    service = getattr(app.state, "service", None)
     if not service or not hasattr(service, "kg"):
         return {"nodes": [], "edges": [], "stats": {"total_nodes": 0, "total_edges": 0}}
 

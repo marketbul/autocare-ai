@@ -220,9 +220,6 @@ export default function App() {
         <div className="account">
           <span className="avatar" aria-hidden="true">{user.full_name.slice(0, 1).toUpperCase()}</span>
           <span className="account-who"><b>{user.full_name}</b><small>{ROLE_LABEL[user.role]}</small></span>
-          <button className="icon-btn" onClick={toggleTheme} title={`Switch to ${theme === "dark" ? "Light" : "Dark"} mode`} aria-label="Toggle theme">
-            {theme === "dark" ? I.sun : I.moon}
-          </button>
           <button className="icon-btn" onClick={signOut} title="Sign out" aria-label="Sign out">{I.out}</button>
         </div>
       </aside>
@@ -234,9 +231,6 @@ export default function App() {
             <a key={n.href} href={n.href} className={route === n.href ? "is-active" : ""}>{n.label}</a>
           ))}
         </nav>
-        <button className="icon-btn" onClick={toggleTheme} title={`Switch to ${theme === "dark" ? "Light" : "Dark"} mode`} aria-label="Toggle theme">
-          {theme === "dark" ? I.sun : I.moon}
-        </button>
         <button className="icon-btn" onClick={signOut} aria-label="Sign out">{I.out}</button>
       </header>
 

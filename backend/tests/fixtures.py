@@ -146,4 +146,4 @@ __all__ = ["build", "FakeLLM", "TEST_SETTINGS", "replace", "triage_model"]
 
 # [2026-05-07] test(taxonomy): [AUT-101] add 
 
-# [2026-10-07] test(suite): [AUT-120] author 
+# [2026-05-07] test(taxonomy): [AUT-101] add vehic by Talha Ali Bhatti

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Alert } from "./ui";
 
 export function SettingsScreen({ user, theme, onToggleTheme, go }) {
@@ -22,15 +22,15 @@ export function SettingsScreen({ user, theme, onToggleTheme, go }) {
   }
 
   return (
-    <div className="page" style={{ maxWidth: "800px" }}>
+    <div className="page" style={{ maxWidth: "860px" }}>
       <div className="page-head">
         <div>
-          <h1>Settings & Preferences</h1>
-          <p>Manage your interface theme, vehicle diagnostic units, language, and account security.</p>
+          <h1>Settings & Workspace</h1>
+          <p>Customize your diagnostic copilot, telemetry display, language, and theme preferences.</p>
         </div>
         {savedMsg && (
           <span style={{
-            padding: "6px 12px",
+            padding: "6px 14px",
             background: "var(--success-dim)",
             border: "1px solid var(--success-border)",
             color: "var(--success)",
@@ -38,118 +38,103 @@ export function SettingsScreen({ user, theme, onToggleTheme, go }) {
             fontSize: "13px",
             fontWeight: "600"
           }}>
-            ✓ Preferences saved
+            ✓ Settings saved
           </span>
         )}
       </div>
 
-      {/* 1. Appearance & Theme */}
+      {/* 1. Appearance & Theme Selection with Visual Cards */}
       <div className="panel">
-        <h2 style={{ marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+        <h2 style={{ marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px", fontSize: "16px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="12" cy="12" r="5"/>
             <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
           </svg>
-          Appearance
+          Interface Appearance
         </h2>
 
-        <div style={{ display: "grid", gap: "16px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div>
-              <b style={{ display: "block", fontSize: "14px", color: "var(--text-primary)" }}>Theme Mode</b>
-              <small style={{ color: "var(--text-muted)", fontSize: "12.5px" }}>Choose between clean light mode or dark slate mode.</small>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+          {/* Dark Mode Card */}
+          <div
+            onClick={() => theme !== "dark" && onToggleTheme && onToggleTheme()}
+            style={{
+              padding: "16px",
+              borderRadius: "12px",
+              border: `2px solid ${theme === "dark" ? "var(--primary)" : "var(--border)"}`,
+              background: theme === "dark" ? "var(--surface-2)" : "var(--surface-1)",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+              <b style={{ color: "var(--text-primary)", fontSize: "14px" }}>🌙 Dark Zinc Mode</b>
+              {theme === "dark" && <span style={{ color: "var(--primary)", fontWeight: "700", fontSize: "12px" }}>Active</span>}
             </div>
+            <p style={{ margin: 0, fontSize: "12.5px", color: "var(--text-muted)" }}>
+              High-contrast carbon canvas designed for workshop bay screens and low-light inspection environments.
+            </p>
+          </div>
 
-            <div style={{ display: "flex", gap: "6px", background: "var(--surface-2)", padding: "4px", borderRadius: "8px", border: "1px solid var(--border)" }}>
-              <button
-                type="button"
-                onClick={() => theme !== "light" && onToggleTheme && onToggleTheme()}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "6px 12px",
-                  borderRadius: "6px",
-                  border: "none",
-                  background: theme === "light" ? "var(--surface-1)" : "transparent",
-                  color: theme === "light" ? "var(--primary)" : "var(--text-secondary)",
-                  fontWeight: theme === "light" ? "700" : "500",
-                  fontSize: "13px",
-                  cursor: "pointer",
-                  boxShadow: theme === "light" ? "var(--shadow-sm)" : "none"
-                }}
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-                </svg>
-                Light
-              </button>
-
-              <button
-                type="button"
-                onClick={() => theme !== "dark" && onToggleTheme && onToggleTheme()}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "6px 12px",
-                  borderRadius: "6px",
-                  border: "none",
-                  background: theme === "dark" ? "var(--surface-1)" : "transparent",
-                  color: theme === "dark" ? "var(--primary)" : "var(--text-secondary)",
-                  fontWeight: theme === "dark" ? "700" : "500",
-                  fontSize: "13px",
-                  cursor: "pointer",
-                  boxShadow: theme === "dark" ? "var(--shadow-sm)" : "none"
-                }}
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-                Dark
-              </button>
+          {/* Light Mode Card */}
+          <div
+            onClick={() => theme !== "light" && onToggleTheme && onToggleTheme()}
+            style={{
+              padding: "16px",
+              borderRadius: "12px",
+              border: `2px solid ${theme === "light" ? "var(--primary)" : "var(--border)"}`,
+              background: theme === "light" ? "var(--surface-2)" : "var(--surface-1)",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+              <b style={{ color: "var(--text-primary)", fontSize: "14px" }}>☀️ Crisp Light Mode</b>
+              {theme === "light" && <span style={{ color: "var(--primary)", fontWeight: "700", fontSize: "12px" }}>Active</span>}
             </div>
+            <p style={{ margin: 0, fontSize: "12.5px", color: "var(--text-muted)" }}>
+              Clean, daylight-readable corporate white surface matching Apple and Linear design guidelines.
+            </p>
           </div>
         </div>
       </div>
 
       {/* 2. Diagnostic & Language Preferences */}
       <div className="panel">
-        <h2 style={{ marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+        <h2 style={{ marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px", fontSize: "16px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
           </svg>
-          Diagnostic Preferences
+          Diagnostic Engine & Localization
         </h2>
 
         <div style={{ display: "grid", gap: "16px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
             <div>
               <label style={{ display: "block", fontSize: "13px", fontWeight: "600", marginBottom: "6px", color: "var(--text-primary)" }}>
-                Preferred Diagnostic Language
+                Diagnostic Language Engine
               </label>
               <select value={lang} onChange={(e) => { setLang(e.target.value); handleSave(); }}>
-                <option value="en">English (Official Workshop Manuals)</option>
-                <option value="roman_ur">Roman Urdu (gaari garam ho rahi hai)</option>
-                <option value="ur">اردو (قومی زبان)</option>
+                <option value="en">English (Official OEM Service Manuals)</option>
+                <option value="roman_ur">Roman Urdu (Desi Mechanic Terminology)</option>
+                <option value="ur">اردو (قومی زبان و تکنیکی لغات)</option>
               </select>
             </div>
 
             <div>
               <label style={{ display: "block", fontSize: "13px", fontWeight: "600", marginBottom: "6px", color: "var(--text-primary)" }}>
-                Distance Units
+                Telemetry Units
               </label>
               <select value={units} onChange={(e) => { setUnits(e.target.value); handleSave(); }}>
-                <option value="km">Kilometers (km) - Pakistan Standard</option>
-                <option value="mi">Miles (mi)</option>
+                <option value="km">Kilometers (km) &bull; Celsius (°C) &bull; PKR (₨)</option>
+                <option value="mi">Miles (mi) &bull; Fahrenheit (°F) &bull; USD ($)</option>
               </select>
             </div>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "8px", borderTop: "1px solid var(--border)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "10px", borderTop: "1px solid var(--border)" }}>
             <div>
-              <b style={{ display: "block", fontSize: "13.5px", color: "var(--text-primary)" }}>10× Safety Priority Triage</b>
-              <small style={{ color: "var(--text-muted)", fontSize: "12px" }}>Automatically flags brake, steering, and coolant boil hazards as Critical Stop alerts.</small>
+              <b style={{ display: "block", fontSize: "13.5px", color: "var(--text-primary)" }}>High-Urgency Mechanical Safety Intercept</b>
+              <small style={{ color: "var(--text-muted)", fontSize: "12px" }}>Immediately triggers critical warnings when brake hydraulic drop or coolant boil is identified.</small>
             </div>
             <input
               type="checkbox"
@@ -159,10 +144,10 @@ export function SettingsScreen({ user, theme, onToggleTheme, go }) {
             />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "8px", borderTop: "1px solid var(--border)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "10px", borderTop: "1px solid var(--border)" }}>
             <div>
-              <b style={{ display: "block", fontSize: "13.5px", color: "var(--text-primary)" }}>Service Maintenance Reminders</b>
-              <small style={{ color: "var(--text-muted)", fontSize: "12px" }}>Proactive notifications when oil or brake pads approach service intervals.</small>
+              <b style={{ display: "block", fontSize: "13.5px", color: "var(--text-primary)" }}>Predictive Wear & Maintenance Notifications</b>
+              <small style={{ color: "var(--text-muted)", fontSize: "12px" }}>Alerts before engine oil degradation or brake pad wear reaches safety thresholds.</small>
             </div>
             <input
               type="checkbox"
@@ -174,19 +159,24 @@ export function SettingsScreen({ user, theme, onToggleTheme, go }) {
         </div>
       </div>
 
-      {/* 3. Account & Authentication Info */}
+      {/* 3. Account Profile Information */}
       <div className="panel">
-        <h2 style={{ marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+        <h2 style={{ marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px", fontSize: "16px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
           </svg>
-          Account Profile
+          Account & Project Team Profile
         </h2>
 
         <div style={{ display: "grid", gap: "12px", fontSize: "13.5px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
-            <span style={{ color: "var(--text-secondary)" }}>Full Name</span>
-            <b style={{ color: "var(--text-primary)" }}>{user?.full_name || "Muhammad Abdullah"}</b>
+            <span style={{ color: "var(--text-secondary)" }}>Student Name</span>
+            <b style={{ color: "var(--text-primary)" }}>{user?.full_name || "Abdullah"}</b>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
+            <span style={{ color: "var(--text-secondary)" }}>PUCIT Roll Number</span>
+            <b style={{ color: "var(--primary)" }}>BSDSF23A035 (35)</b>
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
@@ -195,29 +185,29 @@ export function SettingsScreen({ user, theme, onToggleTheme, go }) {
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
-            <span style={{ color: "var(--text-secondary)" }}>Account Role</span>
+            <span style={{ color: "var(--text-secondary)" }}>Current Workspace Role</span>
             <span className="pill pill-ok" style={{ textTransform: "capitalize" }}>{user?.role || "owner"}</span>
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0" }}>
-            <span style={{ color: "var(--text-secondary)" }}>Google Authentication</span>
+            <span style={{ color: "var(--text-secondary)" }}>Authentication Status</span>
             <span style={{ color: "var(--success)", fontWeight: "600", display: "inline-flex", alignItems: "center", gap: "4px" }}>
-              ✓ Verified Active
+              ✓ Google Verified &bull; Active
             </span>
           </div>
         </div>
       </div>
 
-      {/* 4. Project & System Information */}
+      {/* 4. Academic & FYP Meta */}
       <div className="panel" style={{ background: "var(--surface-2)" }}>
         <h2 style={{ marginBottom: "10px", fontSize: "14px", color: "var(--text-secondary)" }}>
-          System & Build Information
+          Academic Project Specification
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", fontSize: "12.5px", color: "var(--text-muted)" }}>
-          <div>Project: <b>AutoCare AI (FYP-1)</b></div>
-          <div>Institution: <b>PUCIT / Dept of Computer Science</b></div>
-          <div>Version: <b>2.4.0 (Production Release)</b></div>
-          <div>Engine API: <b>FastAPI + SQLite + NetworkX</b></div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", fontSize: "12.5px", color: "var(--text-muted)" }}>
+          <div>Project: <b>AutoCare AI (FYP Venture)</b></div>
+          <div>Institution: <b>PUCIT, University of the Punjab</b></div>
+          <div>Course: <b>Entrepreneurship for Computing Students</b></div>
+          <div>Instructor: <b>Dr. Sadeeqa R. Khan</b></div>
         </div>
       </div>
     </div>

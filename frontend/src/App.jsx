@@ -39,36 +39,36 @@ const I = {
   moon: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
 };
 
-// Streamlined & clean navigation per role (7 items instead of 12)
 const NAV = {
   owner: [
-    { href: "#/dashboard", label: "Dashboard", icon: I.bento },
-    { href: "#/ask", label: "Ask AI Diagnosis", icon: I.chat },
+    { href: "#/dashboard", label: "Dashboard", icon: I.bento, badge: "Live" },
+    { href: "#/ask", label: "Ask AI Copilot", icon: I.chat, badge: "AI" },
     { href: "#/cars", label: "My Garage", icon: I.car },
-    { href: "#/health", label: "Health & Service", icon: I.gauge },
-    { href: "#/pricing", label: "Parts & Quotes (PKR)", icon: I.tag },
-    { href: "#/history", label: "History", icon: I.clock },
+    { href: "#/health", label: "Health & Telemetry", icon: I.gauge },
+    { href: "#/pricing", label: "Parts & Quotes", icon: I.tag, badge: "PKR" },
+    { href: "#/history", label: "Diagnostic History", icon: I.clock },
     { href: "#/settings", label: "Settings", icon: I.settings },
   ],
   mechanic: [
     { href: "#/advice/new", label: "Share Advice", icon: I.wrench },
     { href: "#/advice", label: "My Advice", icon: I.list },
-    { href: "#/pricing", label: "Parts & Quotes", icon: I.tag },
+    { href: "#/pricing", label: "Parts & Quotes", icon: I.tag, badge: "PKR" },
     { href: "#/settings", label: "Settings", icon: I.settings },
   ],
   admin: [
-    { href: "#/dashboard", label: "Dashboard", icon: I.bento },
-    { href: "#/admin", label: "Admin Overview", icon: I.gauge },
+    { href: "#/dashboard", label: "Executive Dashboard", icon: I.bento },
+    { href: "#/admin", label: "System Overview", icon: I.gauge },
     { href: "#/admin/notes", label: "Mechanic Notes", icon: I.check },
-    { href: "#/admin/manuals", label: "Manuals & Sources", icon: I.book },
+    { href: "#/admin/manuals", label: "Manuals & Vector Store", icon: I.book },
     { href: "#/admin/users", label: "Users & Roles", icon: I.users },
-    { section: "Advanced Tools" },
+    { section: "Advanced AI Tools" },
     { href: "#/graph", label: "Causal Graph", icon: I.graph },
     { href: "#/analytics", label: "Model Analytics", icon: I.chart },
     { href: "#/settings", label: "Settings", icon: I.settings },
   ],
 };
-const ROLE_LABEL = { owner: "Car owner", mechanic: "Mechanic", admin: "Admin" };
+
+const ROLE_LABEL = { owner: "Car Owner", mechanic: "Mechanic", admin: "Administrator" };
 
 function useHash() {
   const [hash, setHash] = useState(() => window.location.hash || "");
@@ -91,8 +91,9 @@ export default function App() {
   const [vehicles, setVehicles] = useState([]);
   const [activeId, setActiveId] = useState("");
   const [askAgain, setAskAgain] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   
-  // Theme State (Dark or Light)
+  // Theme State
   const [theme, setTheme] = useState(() => {
     try { return localStorage.getItem("autocare_theme") || "dark"; } catch { return "dark"; }
   });
@@ -106,11 +107,12 @@ export default function App() {
     setTheme((t) => (t === "dark" ? "light" : "dark"));
   }, []);
 
-  // Restore a saved session.
+  // Restore saved session
   useEffect(() => {
     if (!getToken()) return;
     auth.me().then(setUser).catch(() => setToken(null)).finally(() => setChecking(false));
   }, []);
+
   useEffect(() => {
     const out = () => { setToken(null); setUser(null); };
     window.addEventListener("autocare:signed-out", out);
@@ -128,17 +130,20 @@ export default function App() {
     });
     return list;
   }, [canOwn, user]);
+
   useEffect(() => { reloadVehicles().catch(() => {}); }, [reloadVehicles]);
 
   function pickVehicle(id) {
     setActiveId(id);
-    try { localStorage.setItem(vehicleKey(user), id); } catch { /* ignore */ }
+    try { localStorage.setItem(vehicleKey(user), id); } catch {}
   }
+
   function signedIn({ token, user: u }) {
     setToken(token);
     setUser(u);
     go(NAV[u.role][0].href);
   }
+
   function signOut() {
     setToken(null);
     setUser(null);
@@ -146,13 +151,35 @@ export default function App() {
     go("#/");
   }
 
-  if (checking) return <div className="boot"><img src={`${BASE}emblem-256.jpg`} alt="" /></div>;
-  if (!user) return <AuthScreen onSignedIn={signedIn} theme={theme} onToggleTheme={toggleTheme} />;
+  function handleQuickSearch(e) {
+    if (e.key === "Enter" && searchQuery.trim()) {
+      setAskAgain(searchQuery.trim());
+      setSearchQuery("");
+      go("#/ask");
+    }
+  }
+
+  if (checking) {
+    return (
+      <div className="boot">
+        <div className="boot-spinner" />
+        <img src={`${BASE}emblem-256.jpg`} alt="AutoCare AI" width="48" height="48" />
+        <span>Loading AutoCare AI Telemetry...</span>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthScreen onSignedIn={signedIn} theme={theme} onToggleTheme={toggleTheme} />;
+  }
 
   const nav = NAV[user.role] || NAV.owner;
   const allowed = nav.filter((n) => n.href).map((n) => n.href);
   const route = (allowed.includes(hash) || ["#/settings", "#/graph", "#/pricing", "#/analytics", "#/corpus", "#/verify", "#/similar", "#/damage"].includes(hash))
     ? hash : nav[0].href;
+
+  const currentNav = nav.find((n) => n.href === route);
+  const activeVehicle = vehicles.find((v) => v.user_vehicle_id === activeId);
 
   let screen;
   switch (route) {
@@ -206,35 +233,116 @@ export default function App() {
 
   return (
     <div className="shell">
+      {/* Sleek Modern Sidebar */}
       <aside className="rail">
         <a className="brand" href={nav[0].href}>
-          <img src={`${BASE}emblem-256.jpg`} alt="" width="34" height="34" />
-          <span><b>AutoCare AI</b><small>Diagnostics Platform</small></span>
+          <div className="brand-logo-frame">
+            <img src={`${BASE}emblem-256.jpg`} alt="AutoCare AI" width="30" height="30" />
+          </div>
+          <div>
+            <b>AutoCare AI</b>
+            <small>Diagnostics Co-Pilot</small>
+          </div>
         </a>
-        <nav className="rail-nav" aria-label="Main">
+
+        {/* Workspace Mode Badge */}
+        <div className="workspace-badge">
+          <span className="live-dot" />
+          <span>PUCIT Telemetry Node</span>
+        </div>
+
+        <nav className="rail-nav" aria-label="Main Navigation">
           {nav.map((n, i) => n.section
             ? <p key={i} className="nav-heading">{n.section}</p>
-            : <a key={n.href} href={n.href} className={`nav-item ${route === n.href ? "is-active" : ""}`}
-                aria-current={route === n.href ? "page" : undefined}>{n.icon}<span>{n.label}</span></a>)}
+            : (
+              <a
+                key={n.href}
+                href={n.href}
+                className={`nav-item ${route === n.href ? "is-active" : ""}`}
+                aria-current={route === n.href ? "page" : undefined}
+              >
+                {n.icon}
+                <span style={{ flex: 1 }}>{n.label}</span>
+                {n.badge && <span className="nav-badge">{n.badge}</span>}
+              </a>
+            ))}
         </nav>
+
+        {/* Sidebar Footer User Card */}
         <div className="account">
-          <span className="avatar" aria-hidden="true">{user.full_name.slice(0, 1).toUpperCase()}</span>
-          <span className="account-who"><b>{user.full_name}</b><small>{ROLE_LABEL[user.role]}</small></span>
-          <button className="icon-btn" onClick={signOut} title="Sign out" aria-label="Sign out">{I.out}</button>
+          <span className="avatar" aria-hidden="true">
+            {user.full_name.slice(0, 1).toUpperCase()}
+          </span>
+          <div className="account-who">
+            <b>{user.full_name}</b>
+            <small>{ROLE_LABEL[user.role]}</small>
+          </div>
+          <button className="icon-btn" onClick={signOut} title="Sign out" aria-label="Sign out">
+            {I.out}
+          </button>
         </div>
       </aside>
 
-      <header className="topbar">
-        <a className="brand" href={nav[0].href}><img src={`${BASE}emblem-256.jpg`} alt="" width="28" height="28" /></a>
-        <nav className="topnav" aria-label="Main">
-          {nav.filter((n) => n.href).map((n) => (
-            <a key={n.href} href={n.href} className={route === n.href ? "is-active" : ""}>{n.label}</a>
-          ))}
-        </nav>
-        <button className="icon-btn" onClick={signOut} aria-label="Sign out">{I.out}</button>
-      </header>
+      {/* Main Content Area */}
+      <div className="content-shell">
+        {/* Sleek Top Navigation Header Bar */}
+        <header className="desktop-topbar">
+          <div className="topbar-left">
+            <div className="breadcrumb">
+              <span className="breadcrumb-root">AutoCare AI</span>
+              <span className="breadcrumb-sep">/</span>
+              <span className="breadcrumb-current">{currentNav?.label || "Workspace"}</span>
+            </div>
 
-      <main className="main" key={route}>{screen}</main>
+            {/* Active Monitored Vehicle Quick Pill */}
+            {activeVehicle && (
+              <div className="active-car-pill" onClick={() => go("#/cars")} title="Switch or edit vehicle">
+                <span className="car-pulse-dot" />
+                <span><b>{activeVehicle.label}</b></span>
+                <span className="pill-divider">&bull;</span>
+                <span style={{ color: "var(--text-muted)" }}>{activeVehicle.current_mileage ? `${activeVehicle.current_mileage.toLocaleString()} km` : "Telemetry Active"}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="topbar-right">
+            {/* Quick AI Command Search */}
+            <div className="topbar-search">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input
+                type="text"
+                placeholder="Ask AI or search DTC (e.g. P0217)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleQuickSearch}
+              />
+              <span className="search-shortcut">↵ Enter</span>
+            </div>
+
+            {/* Theme Toggle Button in Topbar */}
+            <button
+              type="button"
+              className="topbar-theme-btn"
+              onClick={toggleTheme}
+              title={`Switch to ${theme === "dark" ? "Light" : "Dark"} mode`}
+            >
+              {theme === "dark" ? I.sun : I.moon}
+            </button>
+
+            {/* User Profile Mini Badge */}
+            <div className="topbar-user" onClick={() => go("#/settings")}>
+              <span className="topbar-avatar">{user.full_name.slice(0, 1).toUpperCase()}</span>
+              <span className="topbar-username">{user.full_name}</span>
+            </div>
+          </div>
+        </header>
+
+        {/* Screen Content */}
+        <main className="main" key={route}>{screen}</main>
+      </div>
     </div>
   );
 }

@@ -188,10 +188,27 @@ class AutomotiveKnowledgeGraph:
 
         return list(neighbors)[:max_count]
 
-# [2026-08-10] feat(kg): [AUT-110] build Netw
+    def find_all_causal_paths(self, symptom: str, max_depth: int = 3) -> list[dict]:
+        """Exhaustively trace all upstream root causes with multiplicative confidence scores (M6)."""
+        target = self.match_node(symptom)
+        if not target or target not in self.g:
+            return []
 
-# [2026-08-14] refactor(kg): [AUT-110] optimi
+        results = []
+        for n in self.g.nodes:
+            if self.node_metadata.get(n, {}).get("node_type") in ("root_cause", "component"):
+                if nx.has_path(self.g, n, target):
+                    for path in nx.all_simple_paths(self.g, n, target, cutoff=max_depth):
+                        conf = 1.0
+                        for u, v in zip(path[:-1], path[1:]):
+                            conf *= self.g[u][v].get("weight", 0.8)
+                        results.append({
+                            "root_cause_id": n,
+                            "root_cause_label": self.node_metadata.get(n, {}).get("canonical_name", n),
+                            "path": [self.node_metadata.get(x, {}).get("canonical_name", x) for x in path],
+                            "confidence": round(conf, 3),
+                            "hops": len(path) - 1
+                        })
+        results.sort(key=lambda x: (x["confidence"], -x["hops"]), reverse=True)
+        return results
 
-# [2026-07-18] feat(kg): [AUT-110] build NetworkX  by Talha Ali Bhatti
-
-# [2026-07-22] refactor(kg): [AUT-110] optimize cy by Talha Ali Bhatti

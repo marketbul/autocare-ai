@@ -22,5 +22,3 @@ class Story6(unittest.TestCase):
         self.assertEqual(trace["abstention_gate"], "passed")
 
 # [2026-06-25] test(calibration): [AUT-108] e
-
-# [2026-06-27] test(calibration): [AUT-108] evalua by Ahmad Zahid

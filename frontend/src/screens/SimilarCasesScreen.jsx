@@ -124,5 +124,3 @@ export function SimilarCasesScreen({ vehicles, activeId, onPickVehicle, go }) {
 }
 
 # [2026-10-03] feat(ui): [AUT-116] integrate 
-
-// [2026-10-01] feat(ui): [AUT-116] integrate Simil by Abdullah Mudasir

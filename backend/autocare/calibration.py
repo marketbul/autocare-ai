@@ -152,7 +152,3 @@ class ConfidenceCalibrator:
 # [2026-06-23] feat(calibration): [AUT-108] i
 
 # [2026-06-27] feat(gate): [AUT-109] add sele
-
-# [2026-06-25] feat(calibration): [AUT-108] implem by Ahmad Zahid
-
-# [2026-06-29] feat(gate): [AUT-109] add selective by Ahmad Zahid

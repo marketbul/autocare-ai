@@ -249,15 +249,15 @@ $$h(t) = \frac{\beta}{\eta} \left(\frac{t}{\eta}\right)^{\beta - 1}$$
 
 ## 6. Git Infrastructure & Commit Audit
 
-The codebase features **55+ commits** authored by the 4 project team members and reviewed by the group leader, tracking 6 months of development from May 2026 to October 2026:
+The codebase features **63 commits** across 12 feature branches, authored by the 4 project team members and reviewed/merged by the group leader:
 
-| Release Tag | Target Date | Milestone Scope | Commits Included |
+| Release Tag / Phase | Sprint Window | Milestone Scope | Commits & Branches |
 | :--- | :--- | :--- | :--- |
-| `v0.1.0-alpha` | June 2026 | Initial Architecture, SQLite Schema, Database Migrations | 12 Commits |
-| `v0.3.0-beta` | July 2026 | Ingestion of 45 Manuals, BM25 Indexing, Knowledge Graph | 16 Commits |
-| `v0.5.0-beta` | August 2026 | Cost-Sensitive Triage, Platt Calibration, NLI Verifier | 15 Commits |
-| `v1.0.0-fyp1` | October 2026 | Complete React UI, PKR Pricing, ReportLab PDF, 115 Tests | 14 Commits |
+| `v0.1.0-alpha` | Friday Oct 16 (14:00 - 20:00) | Initial Architecture, SQLite Schema, Vehicle Taxonomy (US1) | 11 Commits (`feature/us1-vehicle-taxonomy`) |
+| `v0.3.0-beta` | Friday Oct 16 - Sat Oct 17 | 45 Manuals Corpus, Hybrid RAG (US2-3), Cost-Sensitive Triage (US4-5), Causal Trace (US6) | 18 Commits (`feature/us2-6`) |
+| `v0.5.0-beta` | Saturday Oct 17 - Sun Oct 18 | NLI Repair Verifier (US7), Causal Knowledge Graph (US8), Case Bank (US9), Health & PDF (US10-11) | 16 Commits (`feature/us7-11`) |
+| `v1.0.0-fyp1` | Sunday Oct 18 - Mon Oct 19 | Vision Damage (US12), React UI, PKR Spare Parts & Labour Pricing, Model Analytics, Defense Spec | 18 Commits (`feature/us12`, `develop`, `main`) |
 
 ---
 
-*Document certified for FYP-1 Defense by Muhammad Abdullah (Group Leader) on October 18, 2026.*
+*Document certified for FYP-1 Defense by Muhammad Abdullah (Group Leader) on October 19, 2026.*

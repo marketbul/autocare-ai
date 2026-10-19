@@ -137,22 +137,29 @@ class OpenAICompatibleGenerator:
 
     def translate_query(self, question: str, language: str) -> str:
         """Rewrite an Urdu / Roman-Urdu question as a short English search query."""
-        content = self._chat({
-            "temperature": 0,
-            "messages": [
-                {"role": "system", "content": TRANSLATE_PROMPT},
-                {"role": "user", "content": question},
-            ],
-        })
-        return content.strip().strip('"').splitlines()[0] if content.strip() else ""
+        try:
+            content = self._chat({
+                "temperature": 0,
+                "messages": [
+                    {"role": "system", "content": TRANSLATE_PROMPT},
+                    {"role": "user", "content": question},
+                ],
+            })
+            return content.strip().strip('"').splitlines()[0] if content.strip() else ""
+        except Exception:
+            return ""
 
     def generate(self, question, language, vehicle, evidence):
-        content = self._chat({
-            "temperature": 0,
-            "response_format": {"type": "json_object"},
-            "messages": build_messages(question, language, vehicle, evidence),
-        })
-        return parse_claims(content)
+        try:
+            content = self._chat({
+                "temperature": 0,
+                "response_format": {"type": "json_object"},
+                "messages": build_messages(question, language, vehicle, evidence),
+            })
+            return parse_claims(content)
+        except Exception:
+            # Graceful fallback to extractive generator if LLM provider is down or unconfigured
+            return ExtractiveGenerator().generate(question, language, vehicle, evidence)
 
 
 class ExtractiveGenerator:
@@ -164,18 +171,21 @@ class ExtractiveGenerator:
 
     language = "en"
 
+    def translate_query(self, question: str, language: str) -> str:
+        return ""
+
     def generate(self, question, language, vehicle, evidence):
         claims = []
-        for e in evidence[:3]:
+        for e in evidence[:4]:
             sentences = re.split(r"(?<=[.!?])\s+", " ".join(e.chunk.text.split()))
             text = " ".join(sentences[:2]).strip()
             if text:
-                claims.append({"text": text, "evidence_ids": [e.label]})
+                claims.append({"text": text, "text_en": text, "evidence_ids": [e.label]})
         return claims
 
 
 def build_generator(settings) -> Generator:
-    if settings.generation_mode == "extractive":
+    if settings.generation_mode == "extractive" or not getattr(settings, "llm_api_key", "").strip():
         return ExtractiveGenerator()
     if settings.generation_mode == "llm":
         return OpenAICompatibleGenerator(settings.llm_base_url, settings.llm_api_key,

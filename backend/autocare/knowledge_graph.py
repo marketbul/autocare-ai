@@ -191,7 +191,3 @@ class AutomotiveKnowledgeGraph:
 # [2026-08-10] feat(kg): [AUT-110] build Netw
 
 # [2026-08-14] refactor(kg): [AUT-110] optimi
-
-# [2026-07-18] feat(kg): [AUT-110] build NetworkX  by Talha Ali Bhatti
-
-# [2026-07-22] refactor(kg): [AUT-110] optimize cy by Talha Ali Bhatti

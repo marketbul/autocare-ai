@@ -462,5 +462,3 @@ class DiagnoseService:
                           model=v.model, variant=v.variant, year=v.year)
 
 # [2026-05-22] feat(nlp): [AUT-105] add Urdu 
-
-# [2026-05-24] feat(nlp): [AUT-105] add Urdu and R by Danial Hameed

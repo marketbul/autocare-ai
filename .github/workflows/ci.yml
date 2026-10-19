@@ -34,14 +34,9 @@ jobs:
 
       - name: Lint with Ruff
         run: |
-          ruff check backend/autocare --exit-zero
+          ruff check backend/autocare backend/ingest
 
       - name: Run Unit & Acceptance Tests
-        env:
-          AUTOCARE_ML_BACKEND: lite
-          AUTOCARE_DATABASE_URL: sqlite:///autocare.db
-          AUTOCARE_CODE_READER: off
-          AUTOCARE_GENERATION_MODE: extractive
         run: |
           cd backend
           python -m unittest discover -s tests

@@ -4,11 +4,11 @@
 *Retrieval-augmented reasoning, calibrated urgency classification, repair-claim verification, and predictive maintenance in English, Urdu and Roman Urdu*
 
 ### Project Members
-- **Talha Ali Bhatti** (BSDSF23A016) — Group Leader / AI-ML Lead
-- **Danial Hameed** (BSDSF23A014) — Data and Retrieval Lead
-- **Abdullah Gill** (BSDSF23A032) — Backend Lead
-- **Ahmad Zahid** (BSDSF23A033) — Frontend Lead
-- **Abdullah Aslam** (BSDSF23A035) — Integration and QA Lead
+- **Talha Ali Bhatti** (BSDSF23A016) — AI-ML & Knowledge Graph Lead
+- **Danial Hameed** (BSDSF23A014) — Data & Retrieval Lead
+- **Muhammad Abdullah** (BSDSF23A032) — Group Leader & System Architect
+- **Ahmad Zahid** (BSDSF23A033) — ML Triage & Verification Lead
+- **Abdullah Mudasir** (BSDSF23A027) — Frontend & DevOps Lead
 
 ### Supervisor
 - **Dr. Khurram Shehzad**  

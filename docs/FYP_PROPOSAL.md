@@ -6,9 +6,9 @@
 ### Project Members
 - **Talha Ali Bhatti** (BSDSF23A016) — AI-ML & Knowledge Graph Lead
 - **Danial Hameed** (BSDSF23A014) — Data & Retrieval Lead
-- **Muhammad Abdullah** (BSDSF23A032) — Group Leader & System Architect
+- **Abdullah** (BSDSF23A035) — Group Leader & System Architect
 - **Ahmad Zahid** (BSDSF23A033) — ML Triage & Verification Lead
-- **Abdullah Mudasir** (BSDSF23A027) — Frontend & DevOps Lead
+- **Muhammad Abdullah** (BSDSF23A032) — Frontend & Mobile App Lead
 
 ### Supervisor
 - **Dr. Khurram Shehzad**  

@@ -2,7 +2,7 @@
 ## Venture: AutoCare AI — Intelligent Automotive Diagnostics & Telemetry Platform
 **Course:** Entrepreneurship for Computing Students (BS CS / BS IT / BS DS) — Fall 2026  
 **Instructor:** Dr. Sadeeqa R. Khan, Department of Computer Science (PUCIT), University of the Punjab  
-**Authors:** Muhammad Abdullah, Talha Ali Bhatti, Abdullah Mudasir, Ahmad Zahid, Danial Hameed  
+**Authors:** Abdullah (BSDSF23A035), Talha Ali Bhatti (BSDSF23A016), Danial Hameed (BSDSF23A014), Ahmad Zahid (BSDSF23A033), Muhammad Abdullah (BSDSF23A032)  
 
 ---
 

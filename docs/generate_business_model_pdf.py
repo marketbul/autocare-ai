@@ -218,8 +218,8 @@ def build_pdf(filename):
             Paragraph("Email Address", tbl_head)
         ],
         [
-            Paragraph("<b>BSDSF23A032</b>", tbl_cell_bold),
-            Paragraph("Muhammad Abdullah", tbl_cell_bold),
+            Paragraph("<b>BSDSF23A035</b>", tbl_cell_bold),
+            Paragraph("Abdullah", tbl_cell_bold),
             Paragraph("BS Data Science", tbl_cell),
             Paragraph("Group Leader / System Architect", tbl_cell),
             Paragraph("abdullah262686@gmail.com", tbl_cell)
@@ -246,8 +246,8 @@ def build_pdf(filename):
             Paragraph("ahmadzahid5029@gmail.com", tbl_cell)
         ],
         [
-            Paragraph("<b>BSDSF23A027</b>", tbl_cell_bold),
-            Paragraph("Abdullah Mudasir", tbl_cell_bold),
+            Paragraph("<b>BSDSF23A032</b>", tbl_cell_bold),
+            Paragraph("Muhammad Abdullah", tbl_cell_bold),
             Paragraph("BS Data Science", tbl_cell),
             Paragraph("Frontend & Mobile App Lead", tbl_cell),
             Paragraph("abdullahmudasir27@gmail.com", tbl_cell)

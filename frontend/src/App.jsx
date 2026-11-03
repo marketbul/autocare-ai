@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getToken, setToken } from "./api/client";
 import { auth, owner } from "./api/diagnose";
 import AuthScreen from "./screens/AuthScreen";
+import { UnifiedOwnerDashboard } from "./screens/UnifiedOwnerDashboard";
 import { AskScreen, GarageScreen, HistoryScreen } from "./screens/OwnerScreens";
 import { MyAdviceScreen, ShareAdviceScreen } from "./screens/MechanicScreens";
 import { DamageScreen } from "./screens/DamageScreen";
@@ -19,6 +20,7 @@ import { SettingsScreen } from "./screens/SettingsScreen";
 const BASE = import.meta.env?.BASE_URL ?? "/app/";
 
 const I = {
+  diagnostic: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><circle cx="12" cy="12" r="9"/></svg>,
   bento: <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="1.8" fill="none" /><rect x="14" y="3" width="7" height="4" rx="1.5" stroke="currentColor" strokeWidth="1.8" fill="none" /><rect x="14" y="10" width="7" height="11" rx="2" stroke="currentColor" strokeWidth="1.8" fill="none" /><rect x="3" y="13" width="7" height="8" rx="2" stroke="currentColor" strokeWidth="1.8" fill="none" /></svg>,
   chat: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>,
   car: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l1.5-4.3A2 2 0 018.4 6.4h7.2a2 2 0 011.9 1.3L19 12M4 12h16v4.5a1 1 0 01-1 1H5a1 1 0 01-1-1V12z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><circle cx="7.5" cy="14.8" r="1.1" fill="currentColor" /><circle cx="16.5" cy="14.8" r="1.1" fill="currentColor" /></svg>,
@@ -39,14 +41,13 @@ const I = {
   moon: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
 };
 
+// Streamlined & clean navigation per role
 const NAV = {
   owner: [
-    { href: "#/dashboard", label: "Dashboard", icon: I.bento, badge: "Live" },
-    { href: "#/ask", label: "Ask AI Copilot", icon: I.chat, badge: "AI" },
+    { href: "#/dashboard", label: "Diagnostic Workspace", icon: I.diagnostic, badge: "Unified" },
     { href: "#/cars", label: "My Garage", icon: I.car },
-    { href: "#/health", label: "Health & Telemetry", icon: I.gauge },
-    { href: "#/pricing", label: "Parts & Quotes", icon: I.tag, badge: "PKR" },
-    { href: "#/history", label: "Diagnostic History", icon: I.clock },
+    { href: "#/pricing", label: "PKR Price Guide", icon: I.tag, badge: "Lahore" },
+    { href: "#/history", label: "History & Reports", icon: I.clock },
     { href: "#/settings", label: "Settings", icon: I.settings },
   ],
   mechanic: [
@@ -155,7 +156,7 @@ export default function App() {
     if (e.key === "Enter" && searchQuery.trim()) {
       setAskAgain(searchQuery.trim());
       setSearchQuery("");
-      go("#/ask");
+      go("#/dashboard");
     }
   }
 
@@ -175,7 +176,7 @@ export default function App() {
 
   const nav = NAV[user.role] || NAV.owner;
   const allowed = nav.filter((n) => n.href).map((n) => n.href);
-  const route = (allowed.includes(hash) || ["#/settings", "#/graph", "#/pricing", "#/analytics", "#/corpus", "#/verify", "#/similar", "#/damage"].includes(hash))
+  const route = (allowed.includes(hash) || ["#/ask", "#/settings", "#/graph", "#/pricing", "#/analytics", "#/corpus", "#/verify", "#/similar", "#/damage", "#/health"].includes(hash))
     ? hash : nav[0].href;
 
   const currentNav = nav.find((n) => n.href === route);
@@ -184,10 +185,29 @@ export default function App() {
   let screen;
   switch (route) {
     case "#/dashboard":
-      screen = <BentoDashboardScreen go={go} />;
+      screen = (
+        <UnifiedOwnerDashboard
+          vehicles={vehicles}
+          activeId={activeId}
+          onPickVehicle={pickVehicle}
+          reloadVehicles={reloadVehicles}
+          go={go}
+          initialQuery={askAgain}
+        />
+      );
       break;
     case "#/ask":
-      screen = <AskScreen vehicles={vehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} initialQuery={askAgain} />;
+      // Backward compatibility redirect / direct ask view
+      screen = (
+        <UnifiedOwnerDashboard
+          vehicles={vehicles}
+          activeId={activeId}
+          onPickVehicle={pickVehicle}
+          reloadVehicles={reloadVehicles}
+          go={go}
+          initialQuery={askAgain}
+        />
+      );
       break;
     case "#/cars":
       screen = <GarageScreen vehicles={vehicles} reloadVehicles={reloadVehicles} activeId={activeId} onPickVehicle={pickVehicle} go={go} />;
@@ -199,7 +219,7 @@ export default function App() {
       screen = <PricingScreen />;
       break;
     case "#/history":
-      screen = <HistoryScreen vehicles={vehicles} onAskAgain={(c) => { pickVehicle(c.user_vehicle_id); if (c.kind === "damage") { go("#/damage"); return; } setAskAgain(c.question); go("#/ask"); }} />;
+      screen = <HistoryScreen vehicles={vehicles} onAskAgain={(c) => { pickVehicle(c.user_vehicle_id); if (c.kind === "damage") { go("#/damage"); return; } setAskAgain(c.question); go("#/dashboard"); }} />;
       break;
     case "#/settings":
       screen = <SettingsScreen user={user} theme={theme} onToggleTheme={toggleTheme} go={go} />;
@@ -228,12 +248,22 @@ export default function App() {
     case "#/admin/notes": screen = <AdminNotes />; break;
     case "#/admin/manuals": screen = <AdminManuals />; break;
     case "#/admin/users": screen = <AdminUsers me={user} />; break;
-    default: screen = <BentoDashboardScreen go={go} />;
+    default:
+      screen = (
+        <UnifiedOwnerDashboard
+          vehicles={vehicles}
+          activeId={activeId}
+          onPickVehicle={pickVehicle}
+          reloadVehicles={reloadVehicles}
+          go={go}
+          initialQuery={askAgain}
+        />
+      );
   }
 
   return (
     <div className="shell">
-      {/* Sleek Modern Sidebar */}
+      {/* Modern Clean Sidebar */}
       <aside className="rail">
         <a className="brand" href={nav[0].href}>
           <div className="brand-logo-frame">
@@ -248,7 +278,7 @@ export default function App() {
         {/* Workspace Mode Badge */}
         <div className="workspace-badge">
           <span className="live-dot" />
-          <span>PUCIT Telemetry Node</span>
+          <span>PUCIT FYP Node</span>
         </div>
 
         <nav className="rail-nav" aria-label="Main Navigation">
@@ -291,7 +321,7 @@ export default function App() {
             <div className="breadcrumb">
               <span className="breadcrumb-root">AutoCare AI</span>
               <span className="breadcrumb-sep">/</span>
-              <span className="breadcrumb-current">{currentNav?.label || "Workspace"}</span>
+              <span className="breadcrumb-current">{currentNav?.label || "Diagnostic Workspace"}</span>
             </div>
 
             {/* Active Monitored Vehicle Quick Pill */}
@@ -314,7 +344,7 @@ export default function App() {
               </svg>
               <input
                 type="text"
-                placeholder="Ask AI or search DTC (e.g. P0217)..."
+                placeholder="Ask symptom or DTC (e.g. P0217)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={handleQuickSearch}

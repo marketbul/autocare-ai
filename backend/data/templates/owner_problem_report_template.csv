@@ -1,0 +1,2 @@
+report_id,make,model,variant,manufacturing_year,mileage_km,city,problem_title,problem_narrative,symptoms,driving_condition,repair_done,total_bill_pkr,repair_success
+rep_001,Honda,Civic,1.8 Oriel,2018,92000,Karachi,Power steering rack hardness and fluid leak,The hydraulic steering became extremely stiff during parking and oil was dripping near the front left tire,hard steering; fluid leak; whining sound,parking and slow turning,Replaced steering rack oil seals and flushed ATF fluid,16500,yes

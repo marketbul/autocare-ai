@@ -30,6 +30,14 @@ yarn-error.log*
 backups/
 *.zip
 
+# Runtime Data Engine Outputs
+backend/data/audit_log.jsonl
+backend/data/processed/
+backend/data/ml_ready/
+backend/data/reports/
+backend/data/media_vault/
+
+
 .vscode/
 .idea/
 .DS_Store

@@ -1,0 +1,166 @@
+{
+  "version": "1.0",
+  "description": "Configurable YouTube Data API search queries for AI Auto Pakistan automotive intelligence collection",
+  "queries": [
+    {
+      "id": "q001",
+      "query": "Suzuki Alto engine problem Pakistan",
+      "target_make": "Suzuki",
+      "target_model": "Alto",
+      "suspected_category": "engine",
+      "language": "en"
+    },
+    {
+      "id": "q002",
+      "query": "Suzuki Cultus overheating issue",
+      "target_make": "Suzuki",
+      "target_model": "Cultus",
+      "suspected_category": "cooling_system",
+      "language": "en"
+    },
+    {
+      "id": "q003",
+      "query": "Toyota Corolla engine knocking",
+      "target_make": "Toyota",
+      "target_model": "Corolla",
+      "suspected_category": "engine",
+      "language": "en"
+    },
+    {
+      "id": "q004",
+      "query": "Honda City suspension noise",
+      "target_make": "Honda",
+      "target_model": "City",
+      "suspected_category": "suspension",
+      "language": "en"
+    },
+    {
+      "id": "q005",
+      "query": "Honda Civic AC problem",
+      "target_make": "Honda",
+      "target_model": "Civic",
+      "suspected_category": "air_conditioning",
+      "language": "en"
+    },
+    {
+      "id": "q006",
+      "query": "Car starting problem Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "starting_and_ignition",
+      "language": "en"
+    },
+    {
+      "id": "q007",
+      "query": "Engine misfire symptoms Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "engine",
+      "language": "en"
+    },
+    {
+      "id": "q008",
+      "query": "Car vibration while driving Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "suspension",
+      "language": "en"
+    },
+    {
+      "id": "q009",
+      "query": "Car smoke from exhaust Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "exhaust_system",
+      "language": "en"
+    },
+    {
+      "id": "q010",
+      "query": "Car battery problems Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "battery_and_charging",
+      "language": "en"
+    },
+    {
+      "id": "q011",
+      "query": "Car fuel average problems Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "fuel_system",
+      "language": "en"
+    },
+    {
+      "id": "q012",
+      "query": "Car transmission problems Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "transmission",
+      "language": "en"
+    },
+    {
+      "id": "q013",
+      "query": "Car mechanic repair Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": null,
+      "language": "en"
+    },
+    {
+      "id": "q014",
+      "query": "Dashboard warning lights Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "interior_and_dashboard",
+      "language": "en"
+    },
+    {
+      "id": "q015",
+      "query": "Car maintenance Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": null,
+      "language": "en"
+    },
+    {
+      "id": "q016",
+      "query": "gaari start nahi ho rahi solution",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "starting_and_ignition",
+      "language": "roman_ur"
+    },
+    {
+      "id": "q017",
+      "query": "engine se awaz ana mechanical repair Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "engine",
+      "language": "roman_ur"
+    },
+    {
+      "id": "q018",
+      "query": "Suzuki Wagon R gear shifting problem",
+      "target_make": "Suzuki",
+      "target_model": "Wagon R",
+      "suspected_category": "transmission",
+      "language": "en"
+    },
+    {
+      "id": "q019",
+      "query": "Toyota Yaris brake pad replacement Pakistan",
+      "target_make": "Toyota",
+      "target_model": "Yaris",
+      "suspected_category": "brakes",
+      "language": "en"
+    },
+    {
+      "id": "q020",
+      "query": "Car radiator coolant leak repair",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "cooling_system",
+      "language": "en"
+    }
+  ]
+}

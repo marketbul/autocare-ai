@@ -1,0 +1,2 @@
+interview_id,mechanic_name,experience_years,workshop_name,city,interview_date,consent,make,model,years,fault_topic,symptoms,diagnostic_advice,recommended_parts,estimated_labor_cost_pkr
+int_001,Ustad Muhammad Rafiq,22,Rafiq Autos Badami Bagh,Lahore,2026-05-02,yes,Suzuki,Alto,2019-2024,Alto 660cc catalytic converter choke and engine sluggishness,poor pickup; fuel average drop; check engine light,Remove catalytic converter and ultrasonic clean or replace; avoid knocking out the honeycomb mesh,Catalytic cleaner; exhaust manifold gasket,2500

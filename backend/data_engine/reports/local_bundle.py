@@ -125,8 +125,9 @@ class LocalFolderBundleExporter:
                     except Exception:
                         continue
 
-        # 5b. Export single consolidated Problem & Solution Q&A file
+        # 5b. Export consolidated YouTube & Facebook Q&A Problem & Solution JSON files
         qa_path, qa_summary = self._export_consolidated_qa_file(records, raw_by_vid)
+        fb_qa_path, fb_qa_summary = self._export_facebook_qa_file(records)
 
         # 6. Check prerequisite tool / API key availability honestly
         env_status = {
@@ -138,7 +139,7 @@ class LocalFolderBundleExporter:
         # 7. Write README_LOCAL_BUNDLE.md
         readme_path = self.bundle_dir / "README_LOCAL_BUNDLE.md"
         readme_path.write_text(
-            self._build_readme(stats, env_status, len(copied_images), len(copied_audio), copied_yt, qa_summary),
+            self._build_readme(stats, env_status, len(copied_images), len(copied_audio), copied_yt, qa_summary, fb_qa_summary),
             encoding="utf-8",
         )
 
@@ -159,6 +160,8 @@ class LocalFolderBundleExporter:
             "ai_agent_knowledge": str(agent_jsonl),
             "qa_solutions_file": str(qa_path),
             "qa_solutions_summary": qa_summary,
+            "facebook_qa_file": str(fb_qa_path),
+            "facebook_qa_summary": fb_qa_summary,
             "total_records": total_real,
             "screenshots_copied": len(copied_images),
             "audio_files_copied": len(copied_audio),
@@ -280,6 +283,58 @@ class LocalFolderBundleExporter:
         )
         return out_path, summary
 
+    def _export_facebook_qa_file(
+        self,
+        records: List[Dict[str, Any]],
+    ) -> tuple[Path, Dict[str, Any]]:
+        """Writes a consolidated JSON file for curated Facebook community Q&A records."""
+        fb_records = [r for r in records if r.get("source_id") == "facebook_research_import"]
+        makes_counter: Counter[str] = Counter()
+        models_counter: Counter[str] = Counter()
+        items: List[Dict[str, Any]] = []
+
+        for rec in fb_records:
+            make = rec.get("make") or "Generic"
+            model = rec.get("model") or "Multi-Model"
+            makes_counter[make] += 1
+            models_counter[f"{make} {model}".strip()] += 1
+            items.append({
+                "record_id": rec.get("record_id"),
+                "make": make,
+                "model": model,
+                "variant": rec.get("variant"),
+                "manufacturing_year": rec.get("manufacturing_year"),
+                "fault_category_id": rec.get("fault_category_id"),
+                "category_name": rec.get("category_name"),
+                "problem_title": rec.get("problem_title"),
+                "problem_description": rec.get("problem_description"),
+                "symptoms": rec.get("symptoms") or [],
+                "proposed_solution": rec.get("recommended_solution"),
+                "estimated_cost_pkr": rec.get("estimated_cost_pkr"),
+                "city": rec.get("city"),
+                "language": rec.get("language"),
+                "verification_status": rec.get("verification_status") or "unverified",
+                "human_review_status": rec.get("human_review_status"),
+                "source_url": rec.get("source_url"),
+            })
+
+        summary = {
+            "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "total_facebook_records": len(items),
+            "with_solutions": sum(1 for x in items if x["proposed_solution"]),
+            "makes_breakdown": dict(makes_counter.most_common()),
+            "top_models_breakdown": dict(models_counter.most_common(25)),
+            "input_folder": str(self.repo_root / "Facebook_Community_QA"),
+            "verification_note": "Community Facebook Q&A records imported from curated public discussions; rows remain unverified unless human-approved.",
+        }
+
+        out_path = self.bundle_dir / "facebook_qa_solutions.json"
+        out_path.write_text(
+            json.dumps({"summary": summary, "records": items}, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        return out_path, summary
+
     @staticmethod
     def _has_whisper() -> bool:
         for mod in ("faster_whisper", "whisper"):
@@ -298,13 +353,15 @@ class LocalFolderBundleExporter:
         aud_count: int,
         yt_files: int,
         qa_summary: Dict[str, Any],
+        fb_qa_summary: Dict[str, Any],
     ) -> str:
         return f"""# AI Auto Pakistan — Local Dataset Bundle (Zero-Port File Edition)
 **Generated At (UTC):** {dt.datetime.now(dt.timezone.utc).isoformat()}
 
 ## Files Inside This Folder
 * `dataset_viewer.html` — Double-click to browse, search, and filter all records directly in your browser (no localhost port needed).
-* `owner_mechanic_qa_solutions.json` — Single consolidated Problem & Solution Q&A + Whisper transcript file ({qa_summary['total_youtube_records']} YouTube records; {qa_summary['with_solutions']} with proposed solutions).
+* `owner_mechanic_qa_solutions.json` — Single consolidated YouTube Problem & Solution Q&A + Whisper transcript file ({qa_summary['total_youtube_records']} YouTube records; {qa_summary['with_solutions']} with proposed solutions).
+* `facebook_qa_solutions.json` — Curated Facebook Community Q&A Problem & Solution file ({fb_qa_summary['total_facebook_records']} Facebook records; add CSV/JSON files into `Facebook_Community_QA/` to populate).
 * `ai_agent_knowledge.jsonl` — Structured AI-Agent RAG & Triage dataset (`is_verified_fact` boundary included).
 * `master_dataset.json`, `master_dataset.jsonl`, `master_dataset.csv` — Complete cleaned records.
 * `ml_splits/` — Leak-free `train.jsonl`, `val.jsonl`, `test.jsonl`, and `dataset_card.json`.
@@ -313,8 +370,9 @@ class LocalFolderBundleExporter:
 * `youtube_raw/` — Raw YouTube Data API v3 metadata + comment JSON batches ({yt_files} file(s)).
 
 ## Current Honest Inventory
-* **Total Verified Local Records:** {stats['real_records_count']}
+* **Total Real Records:** {stats['real_records_count']}
 * **YouTube Videos Harvested:** {stats['real_by_source'].get('youtube_official_api', 0)}
+* **Facebook Curated Q&A Imported:** {fb_qa_summary['total_facebook_records']}
 * **YouTube API Key Configured:** {env_status['youtube_api_key_set']}
 * **Whisper Speech-to-Text Installed:** {env_status['whisper_installed']}
 * **yt-dlp Installed (for Creative Commons / permitted videos):** {env_status['yt_dlp_installed']}
@@ -384,7 +442,7 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
 <body>
   <header>
     <h1>AI Auto Pakistan — Offline Local Dataset Folder Viewer (No Port Required)</h1>
-    <p>Loaded directly from local disk files • Master JSONL, <a href="owner_mechanic_qa_solutions.json" target="_blank" style="color:#5eead4;">Consolidated Q&amp;A Problem/Solution File</a>, AI-Agent Knowledge, ML Splits, Screenshots &amp; Audio</p>
+    <p>Loaded directly from local disk files • Master JSONL, <a href="owner_mechanic_qa_solutions.json" target="_blank" style="color:#5eead4;">YouTube Q&amp;A JSON</a>, <a href="facebook_qa_solutions.json" target="_blank" style="color:#5eead4;">Facebook Q&amp;A JSON</a>, AI-Agent Knowledge, ML Splits, Screenshots &amp; Audio</p>
   </header>
   <main>
     <div class="banner" id="blocker-banner"></div>
@@ -447,6 +505,7 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
     const kpis = [
       ["Real Records", s.real_records_count],
       ["YouTube Videos", s.real_by_source.youtube_official_api || 0],
+      ["Facebook Q&As", s.real_by_source.facebook_research_import || 0],
       ["Manuals & OBD-II", s.real_by_source.manuals_and_bulletins || 0],
       ["Symptom Corpus", s.real_by_source.starter_symptom_corpus || 0],
       ["PKR Price Refs", s.real_by_source.pakistan_price_reference || 0],

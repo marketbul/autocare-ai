@@ -72,6 +72,9 @@ def test_local_folder_bundle_exporter(tmp_path: Path):
     assert Path(res["qa_solutions_file"]).exists()
     qa_payload = json.loads(Path(res["qa_solutions_file"]).read_text(encoding="utf-8"))
     assert "summary" in qa_payload and "records" in qa_payload
+    assert Path(res["facebook_qa_file"]).exists()
+    fb_payload = json.loads(Path(res["facebook_qa_file"]).read_text(encoding="utf-8"))
+    assert "summary" in fb_payload and "records" in fb_payload
     assert (bundle_out / "ml_splits" / "dataset_card.json").exists()
     assert res["viewer_file_url"].startswith("file:///")
 

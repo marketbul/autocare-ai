@@ -210,7 +210,9 @@ def normalize_make_model(make_str: Optional[str], model_str: Optional[str]) -> t
         if re.search(pat, combined):
             return res
 
-    # Fallback title-casing
+    # Fallback title-casing (canonicalize uppercase brand acronyms like KIA / MG)
     clean_make = make_str.strip().title() if make_str else None
+    if clean_make and clean_make.lower() in {"kia", "mg", "dfsk"}:
+        clean_make = clean_make.upper()
     clean_model = model_str.strip().title() if model_str else None
     return clean_make, clean_model

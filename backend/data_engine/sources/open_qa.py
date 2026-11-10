@@ -35,8 +35,8 @@ _HTML_TAG_RE = re.compile(r"<[^>]+>")
 _WHITESPACE_RE = re.compile(r"\s+")
 
 DEFAULT_SE_QUERIES: Tuple[Dict[str, str], ...] = (
-    {"id": "se_toyota", "param": "q", "value": "toyota corolla yaris", "label": "Toyota"},
-    {"id": "se_honda", "param": "q", "value": "honda civic city", "label": "Honda"},
+    {"id": "se_toyota", "param": "q", "value": "toyota corolla yaris prius", "label": "Toyota"},
+    {"id": "se_honda", "param": "q", "value": "honda civic city accord", "label": "Honda"},
     {"id": "se_suzuki", "param": "q", "value": "suzuki swift alto cultus", "label": "Suzuki"},
     {"id": "se_hyundai_kia", "param": "q", "value": "hyundai elantra tucson kia sportage", "label": "Hyundai/KIA"},
     {"id": "se_brakes", "param": "tagged", "value": "brakes", "label": "Brakes"},
@@ -46,20 +46,37 @@ DEFAULT_SE_QUERIES: Tuple[Dict[str, str], ...] = (
     {"id": "se_transmission", "param": "tagged", "value": "transmission", "label": "Transmission"},
     {"id": "se_electrical", "param": "tagged", "value": "electrical", "label": "Electrical"},
     {"id": "se_suspension", "param": "tagged", "value": "suspension", "label": "Suspension"},
+    {"id": "se_clutch", "param": "tagged", "value": "clutch", "label": "Clutch"},
+    {"id": "se_alternator", "param": "tagged", "value": "alternator", "label": "Alternator"},
+    {"id": "se_battery", "param": "tagged", "value": "battery", "label": "Battery"},
+    {"id": "se_ac", "param": "tagged", "value": "air-conditioning", "label": "AC"},
+    {"id": "se_fuel", "param": "tagged", "value": "fuel-system", "label": "Fuel"},
+    {"id": "se_ignition", "param": "tagged", "value": "ignition", "label": "Ignition"},
+    {"id": "se_steering", "param": "tagged", "value": "steering", "label": "Steering"},
+    {"id": "se_oil", "param": "tagged", "value": "oil", "label": "Oil"},
+    {"id": "se_cel", "param": "tagged", "value": "check-engine-light", "label": "CEL"},
+    {"id": "se_misfire", "param": "tagged", "value": "misfire", "label": "Misfire"},
 )
 
 DEFAULT_NHTSA_VEHICLES: Tuple[Tuple[str, str], ...] = (
     ("toyota", "corolla"),
     ("toyota", "yaris"),
     ("toyota", "prius"),
+    ("toyota", "camry"),
+    ("toyota", "rav4"),
     ("honda", "civic"),
     ("honda", "accord"),
+    ("honda", "cr-v"),
+    ("honda", "fit"),
     ("hyundai", "elantra"),
     ("hyundai", "tucson"),
+    ("hyundai", "sonata"),
     ("kia", "sportage"),
+    ("kia", "rio"),
     ("suzuki", "swift"),
+    ("suzuki", "grand vitara"),
 )
-DEFAULT_NHTSA_YEARS: Tuple[int, ...] = (2016, 2018, 2020, 2022, 2024)
+DEFAULT_NHTSA_YEARS: Tuple[int, ...] = (2012, 2014, 2016, 2018, 2020, 2022, 2024)
 
 
 def clean_html_text(raw: str) -> str:
@@ -90,6 +107,7 @@ class StackExchangeMechanicsCollector:
         self.taxonomy = get_taxonomy_manager()
 
     def _get_json(self, client: httpx.Client, url: str, params: Dict[str, Any]) -> Dict[str, Any]:
+        time.sleep(0.15)
         resp = client.get(url, params=params)
         resp.raise_for_status()
         data = resp.json()
@@ -100,7 +118,7 @@ class StackExchangeMechanicsCollector:
     def fetch_answered_qa(
         self,
         topics: Optional[Iterable[Dict[str, str]]] = None,
-        top_vote_pages: int = 3,
+        top_vote_pages: int = 8,
         pagesize: int = 100,
     ) -> List[Dict[str, Any]]:
         """Collects answered Stack Exchange questions paired with sorted mechanic answers."""
@@ -109,61 +127,70 @@ class StackExchangeMechanicsCollector:
 
         with httpx.Client(timeout=self.config.request_timeout_seconds, headers=headers) as client:
             for topic in (topics if topics is not None else DEFAULT_SE_QUERIES):
-                params = {
-                    "site": "mechanics",
-                    "answers": 1,
-                    "sort": "votes",
-                    "order": "desc",
-                    "pagesize": min(pagesize, 100),
-                    "filter": "withbody",
-                    topic["param"]: topic["value"],
-                }
-                data = self._get_json(client, f"{SE_API_BASE}/search/advanced", params)
-                for q in data.get("items", []):
-                    qid = q.get("question_id")
-                    if qid and qid not in seen_questions:
-                        seen_questions[qid] = q
-
-            for page in range(1, top_vote_pages + 1):
-                data = self._get_json(
-                    client,
-                    f"{SE_API_BASE}/search/advanced",
-                    {
+                try:
+                    params = {
                         "site": "mechanics",
                         "answers": 1,
                         "sort": "votes",
                         "order": "desc",
-                        "page": page,
                         "pagesize": min(pagesize, 100),
                         "filter": "withbody",
-                    },
-                )
-                for q in data.get("items", []):
-                    qid = q.get("question_id")
-                    if qid and qid not in seen_questions:
-                        seen_questions[qid] = q
-                if not data.get("has_more"):
+                        topic["param"]: topic["value"],
+                    }
+                    data = self._get_json(client, f"{SE_API_BASE}/search/advanced", params)
+                    for q in data.get("items", []):
+                        qid = q.get("question_id")
+                        if qid and qid not in seen_questions:
+                            seen_questions[qid] = q
+                except Exception:
+                    continue
+
+            for page in range(1, top_vote_pages + 1):
+                try:
+                    data = self._get_json(
+                        client,
+                        f"{SE_API_BASE}/search/advanced",
+                        {
+                            "site": "mechanics",
+                            "answers": 1,
+                            "sort": "votes",
+                            "order": "desc",
+                            "page": page,
+                            "pagesize": min(pagesize, 100),
+                            "filter": "withbody",
+                        },
+                    )
+                    for q in data.get("items", []):
+                        qid = q.get("question_id")
+                        if qid and qid not in seen_questions:
+                            seen_questions[qid] = q
+                    if not data.get("has_more"):
+                        break
+                except Exception:
                     break
 
             qids = list(seen_questions.keys())
             answers_by_qid: Dict[int, List[Dict[str, Any]]] = {}
             for i in range(0, len(qids), 100):
                 batch_ids = ";".join(str(x) for x in qids[i : i + 100])
-                ans_data = self._get_json(
-                    client,
-                    f"{SE_API_BASE}/questions/{batch_ids}/answers",
-                    {
-                        "site": "mechanics",
-                        "sort": "votes",
-                        "order": "desc",
-                        "pagesize": 100,
-                        "filter": "withbody",
-                    },
-                )
-                for ans in ans_data.get("items", []):
-                    aqid = ans.get("question_id")
-                    if aqid:
-                        answers_by_qid.setdefault(aqid, []).append(ans)
+                try:
+                    ans_data = self._get_json(
+                        client,
+                        f"{SE_API_BASE}/questions/{batch_ids}/answers",
+                        {
+                            "site": "mechanics",
+                            "sort": "votes",
+                            "order": "desc",
+                            "pagesize": 100,
+                            "filter": "withbody",
+                        },
+                    )
+                    for ans in ans_data.get("items", []):
+                        aqid = ans.get("question_id")
+                        if aqid:
+                            answers_by_qid.setdefault(aqid, []).append(ans)
+                except Exception:
+                    continue
 
         items: List[Dict[str, Any]] = []
         now_iso = dt.datetime.now(dt.timezone.utc).isoformat()
@@ -285,7 +312,7 @@ class NHTSAComplaintsCollector:
         self,
         vehicles: Optional[Iterable[Tuple[str, str]]] = None,
         years: Optional[Iterable[int]] = None,
-        max_complaints_per_model_year: int = 8,
+        max_complaints_per_model_year: int = 15,
     ) -> Dict[str, List[Dict[str, Any]]]:
         """Fetches deduplicated NHTSA recalls and sampled owner complaints across shared models."""
         seen_recalls: Dict[str, Dict[str, Any]] = {}
@@ -416,7 +443,7 @@ class NHTSAComplaintsCollector:
                     ),
                     source=SourceQualityInfo(
                         source_platform="nhtsa_official_api",
-                        source_url=f"https://www.nhtsa.gov/vehicle/{year_val}/{make.upper()}/{model.upper()}#complaints",
+                        source_url=f"https://www.nhtsa.gov/vehicle/{year_val}/{make.upper()}/{model.upper()}#complaints-{odi}",
                         source_id=f"nhtsa_cmp_{odi}",
                         collection_date=now_iso,
                         language="en",

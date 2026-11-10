@@ -44,9 +44,10 @@ const I = {
 // Streamlined & clean navigation per role
 const NAV = {
   owner: [
-    { href: "#/dashboard", label: "Diagnostic Workspace", icon: I.diagnostic, badge: "Unified" },
+    { href: "#/dashboard", label: "Diagnostic Workspace", icon: I.diagnostic, badge: "AI Diagnostics" },
     { href: "#/cars", label: "My Garage", icon: I.car },
     { href: "#/pricing", label: "PKR Price Guide", icon: I.tag, badge: "Lahore" },
+    { href: "#/health", label: "Vehicle Health Radar", icon: I.gauge, badge: "94%" },
     { href: "#/history", label: "History & Reports", icon: I.clock },
     { href: "#/settings", label: "Settings", icon: I.settings },
   ],

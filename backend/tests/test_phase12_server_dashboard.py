@@ -6,8 +6,9 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
+from data_engine.config import get_config
 from data_engine.server import app
-from data_engine.sources import LocalDatasetConsolidator
+from data_engine.sources import AutomotiveBlogImporter, LocalDatasetConsolidator
 from data_engine.storage import StorageManager
 
 
@@ -60,6 +61,17 @@ def test_dashboard_and_read_endpoints():
     res_tpl = client.get("/api/v1/dataset/templates/pakwheels_research_template.csv")
     assert res_tpl.status_code == 200
     assert "thread_url" in res_tpl.text
+
+    res_blog_tpl = client.get("/api/v1/dataset/templates/automotive_blogs_research_template.csv")
+    assert res_blog_tpl.status_code == 200
+    assert "article_url" in res_blog_tpl.text
+
+    blog_recs = AutomotiveBlogImporter().import_manual_csv(
+        get_config().templates_dir / "automotive_blogs_research_template.csv"
+    )
+    assert len(blog_recs) == 1
+    assert blog_recs[0].vehicle.make == "Suzuki"
+    assert blog_recs[0].vehicle.model == "Alto"
 
     res_exp = client.get("/api/v1/dataset/export/csv")
     assert res_exp.status_code == 200

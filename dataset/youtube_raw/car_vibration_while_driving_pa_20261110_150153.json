@@ -1,0 +1,499 @@
+{
+  "source": "youtube_official_api",
+  "search_query": "Car vibration while driving Pakistan",
+  "record_count": 5,
+  "harvested_at": "2026-11-10T15:01:53.569862+00:00",
+  "items": [
+    {
+      "video_id": "mEfy_-pCY28",
+      "video_title": "Signs You Need to Replace Worn Engine Mounts😱 #shorts #carcare #carmaintenance #",
+      "video_description": "",
+      "channel_name": "CarSutra",
+      "channel_id": "UCsyNmT083LR6WNU3jLZa8PA",
+      "video_url": "https://www.youtube.com/watch?v=mEfy_-pCY28",
+      "thumbnail_url": "https://i.ytimg.com/vi/mEfy_-pCY28/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2022-08-23T07:01:08Z",
+      "duration": "00:45",
+      "view_count": 197404,
+      "like_count": 3384,
+      "comment_count": 38,
+      "tags": [],
+      "search_query_used": "Car vibration while driving Pakistan",
+      "vehicle_make": "Suzuki",
+      "vehicle_model": "Alto",
+      "suspected_fault_category": "FC-01",
+      "language": "hi",
+      "comments": [
+        {
+          "comment_id": "UgxPlOIttzaw0gRaLnR4AaABAg",
+          "text": "This issue is most common with tata cars.Thank you for highlighting the same",
+          "intent": "problem_occurrence",
+          "like_count": 26,
+          "published_at": "2022-08-26T00:54:02Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyeXC77-L2KrCXMZyV4AaABAg",
+          "text": "Engine mount tutne se engine damage nehi hota... Srif vibration hota he.....",
+          "intent": "problem_occurrence",
+          "like_count": 29,
+          "published_at": "2022-08-25T06:11:05Z",
+          "replies": [
+            {
+              "text": "Beta hota hi kharab",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2023-08-22T19:41:35Z"
+            },
+            {
+              "text": "Acha engine hilega zyda to damge ni hoga kya components",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2026-04-13T22:05:33Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzeaHIsQx5rXuk7wGt4AaABAg",
+          "text": "Lagta hai local buses to engine mount kharab hone ke baad seedhe engine ko weld krdeti hain chassy se, itne gande vibration hote hain idle par ki imagine Krna mushkil hai. Lekin accelerate krne par smooth out ho jata.",
+          "intent": "problem_occurrence",
+          "like_count": 8,
+          "published_at": "2024-10-14T20:23:05Z",
+          "replies": [
+            {
+              "text": "Lots of busses mai rubber type Mount nahi atte woh metal ke bracket se secure hota hai chassis ke saath",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2026-08-05T05:55:29Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwiWZOeujuSrqGVOqt4AaABAg",
+          "text": "Today only I changed.first I thought it was a clutch issue then company was not letting me know what's the actual problem then I fought nicely then they told me that the engine a and b mount is gone and I replaced it for free as it was under warranty.",
+          "intent": "suggested_solution",
+          "like_count": 1,
+          "published_at": "2025-01-30T12:08:48Z",
+          "replies": [
+            {
+              "text": "How many kilogram after",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2025-04-01T13:00:01Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzNHeJF9teaYl9Pokl4AaABAg",
+          "text": "My car makes growling noise whenever i accelerate and stops when the speed it steady. Kindly tell me the cause and solution",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2026-08-24T09:45:21Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugx18GVzpFUxlwWw8oh4AaABAg",
+          "text": "Cost kitna ata hai engine mount ka swift me",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2024-02-22T04:24:31Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugwf9ilPQSh-FvvsPt54AaABAg",
+          "text": "Bhalla sahab ab toh subscriber bad gaye ab SUV wagarah lo. Hum bhi badi gaadi ke regular video dekhe",
+          "intent": "suggested_solution",
+          "like_count": 2,
+          "published_at": "2022-08-25T00:10:10Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgxIesJ9jBgq2bMb9y54AaABAg",
+          "text": "Why put the title in English?",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2025-01-17T14:46:22Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugyo9ySNGMwB-tLk5g14AaABAg",
+          "text": "super",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2023-05-27T12:04:01Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugxq4UQY68Me5WFaBI94AaABAg",
+          "text": "bhai meri alto me [PLATE REDACTED] mounting change karne k baad bhi front vibration ho rahi hai, to iska kya karan hai bhai.....",
+          "intent": "suggested_solution",
+          "like_count": 1,
+          "published_at": "2024-12-27T16:34:53Z",
+          "replies": [
+            {
+              "text": "Alto m thoda bhut vibration hoga h",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2025-05-15T08:08:32Z"
+            },
+            {
+              "text": "3 cylinder he na toh vibration to hoga hi",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2025-06-12T10:08:20Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwRxFlXFxGkXC3a5894AaABAg",
+          "text": "engine ko kuch nhi hota bs jhatka sa lagta h ek",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2026-01-02T04:06:07Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgxLF4DIZd1LJsM_-h94AaABAg",
+          "text": "Why would you put the title in English if you're speaking indian😓",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2025-07-17T20:23:30Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyPOXGSrbu0EL7LSmN4AaABAg",
+          "text": "👌👍",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-02-24T15:42:59Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzpYfha4UxnB71bcXl4AaABAg",
+          "text": "Bhai nexon le ya creta for long term ?",
+          "intent": "discussion",
+          "like_count": 6,
+          "published_at": "2022-08-23T07:53:10Z",
+          "replies": [
+            {
+              "text": "Nexon",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2022-08-23T08:04:03Z"
+            },
+            {
+              "text": "@pavitragera2019 but Turbo engine . Is not for long term ..and Natural aspirated engine..are more reliable",
+              "intent": "discussion",
+              "like_count": 3,
+              "published_at": "2022-08-23T08:23:32Z"
+            },
+            {
+              "text": "Nexon ya creta ki jagaha brezza le lo isme aapko power, mileage, safety aur look sab kuchh mil jayega",
+              "intent": "discussion",
+              "like_count": 5,
+              "published_at": "2022-08-23T09:08:27Z"
+            },
+            {
+              "text": "@NoopurDixit nahi maruti ki Car ni leni",
+              "intent": "discussion",
+              "like_count": 3,
+              "published_at": "2022-08-23T09:14:57Z"
+            },
+            {
+              "text": "Creta lelo \nBest rahegi long term ke liye",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2022-08-23T09:17:54Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwxG_3SoMJePz8HvrN4AaABAg",
+          "text": "Worst \"english\" I ever heard",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2025-04-12T23:31:28Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [
+        "This issue is most common with tata cars.Thank you for highlighting the same",
+        "Engine mount tutne se engine damage nehi hota... Srif vibration hota he.....",
+        "Lagta hai local buses to engine mount kharab hone ke baad seedhe engine ko weld krdeti hain chassy se, itne gande vibration hote hain idle par ki imagine Krna mushkil hai. Lekin accelerate krne par smooth out ho jata.",
+        "engine ko kuch nhi hota bs jhatka sa lagta h ek"
+      ],
+      "extracted_solution_comments": [
+        "Today only I changed.first I thought it was a clutch issue then company was not letting me know what's the actual problem then I fought nicely then they told me that the engine a and b mount is gone and I replaced it for free as it was under warranty.",
+        "My car makes growling noise whenever i accelerate and stops when the speed it steady. Kindly tell me the cause and solution",
+        "Bhalla sahab ab toh subscriber bad gaye ab SUV wagarah lo. Hum bhi badi gaadi ke regular video dekhe",
+        "bhai meri alto me [PLATE REDACTED] mounting change karne k baad bhi front vibration ho rahi hai, to iska kya karan hai bhai....."
+      ],
+      "collection_date": "2026-11-10T15:01:52.436154+00:00"
+    },
+    {
+      "video_id": "LYxw5denrM8",
+      "video_title": "🚗 Gaari Mein Zyada Vibration Ya Gear Change Karte Waqt Jhatkay?  #fixsavari #automobile #pakistan",
+      "video_description": "Ho sakta hai aapki gaari ka Engine Mount kharab ho! ⚠️ In 3 warning signs ko ignore na karein, warna chhoti problem bara kharcha ban sakti hai.\n\nApni gaari ki health ka khayal rakhein aur timely inspection karwayein.\n\nFollow Fix Savari for more smart car tips!\n\n#FixSavari #CarCare #EngineMount #CarMaintenance #AutoTips #PakistanCars",
+      "channel_name": "FixSavari",
+      "channel_id": "UChtDkf9OSL74PGDhBE4gdSg",
+      "video_url": "https://www.youtube.com/watch?v=LYxw5denrM8",
+      "thumbnail_url": "https://i.ytimg.com/vi/LYxw5denrM8/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2026-11-05T17:45:40Z",
+      "duration": "00:41",
+      "view_count": 391,
+      "like_count": 8,
+      "comment_count": 0,
+      "tags": [],
+      "search_query_used": "Car vibration while driving Pakistan",
+      "vehicle_make": null,
+      "vehicle_model": "🚗 Gaari Mein Zyada Vibration Ya Gear Change Karte Waqt Jhatkay?  #Fixsavari #Automobile #Pakistan Ho Sakta Hai Aapki Gaari Ka Engine Mount Kharab Ho! ⚠️ In 3 Warning Signs Ko Ignore Na Karein, Warna Chhoti Problem Bara Kharcha Ban Sakti Hai.\n\nApni Gaari Ki Health Ka Khayal Rakhein Aur Timely Inspection Karwayein.\n\nFollow Fix Savari For More Smart Car Tips!\n\n#Fixsavari #Carcare #Enginemount #Carmaintenance #Autotips #Pakistancars",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [],
+      "collection_date": "2026-11-10T15:01:52.659279+00:00"
+    },
+    {
+      "video_id": "5wa2Qwnusic",
+      "video_title": "MG Car Wheel Alignment & Wheel Balancing in Pakistan | Steering Vibration Fix",
+      "video_description": "MG car wheel alignment and wheel balancing service completed at Advance Auto. In this video we fix steering vibration, tyre wobbling, uneven tyre wear and improve road grip for a smooth and comfortable drive. Proper 3D wheel alignment and computerized wheel balancing increase tyre life, improve fuel average and keep your MG SUV stable on high speed.\nServices Included:\n✔ MG wheel alignment\n✔ MG wheel balancing\n✔ 3D computerized alignment\n✔ Steering vibration repair\n✔ Tyre balancing weights adjustment\n✔ Suspension inspection\nVisit Advance Auto for:\nWheel Alignment | Wheel Balancing | Tyres | Engine Oil | Brake Service | Suspension Work | Car Detailing | PPF | Tint | AC Service\n📍 Advance Auto Studio Islamabad / Rawalpindi\n#MG #MGHS #MGZS #WheelAlignment #WheelBalancing #MGPakistan #CarMaintenance #TyreBalancing #SteeringVibration #3DAlignment #AdvanceAuto #SUVMaintenance #AutoWorkshop #PakistanCars #CarCare\nExtra High-Search Hashtags\n#mgcar\n#mgwheelalignment\n#mgwheelbalancing\n#caralignment\n#alignmentservice\n#wheelbalancingmachine\n#tyrevibration\n#suvcare\n#automobile\n#carservice\n#rawalpindi\n#islamabad\n#pakistanauto\n#viralvideo\n#youtubevideo",
+      "channel_name": "Advance Auto & Tyre Shop",
+      "channel_id": "UCoucP_IjWR_eyybqkoZKlUQ",
+      "video_url": "https://www.youtube.com/watch?v=5wa2Qwnusic",
+      "thumbnail_url": "https://i.ytimg.com/vi/5wa2Qwnusic/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2026-05-18T17:36:09Z",
+      "duration": "00:16",
+      "view_count": 2080,
+      "like_count": 8,
+      "comment_count": 0,
+      "tags": [
+        "mg car",
+        "wheel alignment",
+        "wheel balancing",
+        "MG",
+        "3 D"
+      ],
+      "search_query_used": "Car vibration while driving Pakistan",
+      "vehicle_make": null,
+      "vehicle_model": "Mg Car Wheel Alignment & Wheel Balancing In Pakistan | Steering Vibration Fix Mg Car Wheel Alignment And Wheel Balancing Service Completed At Advance Auto. In This Video We Fix Steering Vibration, Tyre Wobbling, Uneven Tyre Wear And Improve Road Grip For A Smooth And Comfortable Drive. Proper 3D Wheel Alignment And Computerized Wheel Balancing Increase Tyre Life, Improve Fuel Average And Keep Your Mg Suv Stable On High Speed.\nServices Included:\n✔ Mg Wheel Alignment\n✔ Mg Wheel Balancing\n✔ 3D Computerized Alignment\n✔ Steering Vibration Repair\n✔ Tyre Balancing Weights Adjustment\n✔ Suspension Inspection\nVisit Advance Auto For:\nWheel Alignment | Wheel Balancing | Tyres | Engine Oil | Brake Service | Suspension Work | Car Detailing | Ppf | Tint | Ac Service\n📍 Advance Auto Studio Islamabad / Rawalpindi\n#Mg #Mghs #Mgzs #Wheelalignment #Wheelbalancing #Mgpakistan #Carmaintenance #Tyrebalancing #Steeringvibration #3Dalignment #Advanceauto #Suvmaintenance #Autoworkshop #Pakistancars #Carcare\nExtra High-Search Hashtags\n#Mgcar\n#Mgwheelalignment\n#Mgwheelbalancing\n#Caralignment\n#Alignmentservice\n#Wheelbalancingmachine\n#Tyrevibration\n#Suvcare\n#Automobile\n#Carservice\n#Rawalpindi\n#Islamabad\n#Pakistanauto\n#Viralvideo\n#Youtubevideo",
+      "suspected_fault_category": "FC-01",
+      "language": "ur",
+      "comments": [],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [],
+      "collection_date": "2026-11-10T15:01:52.887068+00:00"
+    },
+    {
+      "video_id": "WkPM2v_H1Go",
+      "video_title": "Vibrations issues 😩of Honda Civic Reborn | PKDM| Pakistan",
+      "video_description": "",
+      "channel_name": "Call Me Haider",
+      "channel_id": "UCy8k-Hpq5sYs_dCLGDt3W4A",
+      "video_url": "https://www.youtube.com/watch?v=WkPM2v_H1Go",
+      "thumbnail_url": "https://i.ytimg.com/vi/WkPM2v_H1Go/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2023-01-07T13:39:18Z",
+      "duration": "02:25",
+      "view_count": 4336,
+      "like_count": 61,
+      "comment_count": 21,
+      "tags": [],
+      "search_query_used": "Car vibration while driving Pakistan",
+      "vehicle_make": "Honda",
+      "vehicle_model": "Civic",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgwdJdrSpXwcL1zB9pN4AaABAg",
+          "text": "You make awesome videos",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2024-01-12T08:25:58Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugy6prC0NGR7v7WD0LZ4AaABAg",
+          "text": "Bhai ye back view lcd wala sheesha kahan se aur kitnay ka lagwaya hai",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2023-04-14T17:17:28Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugz_XwWE7Cb1FGdzxch4AaABAg",
+          "text": "Holding tyre kich kya hota hai ???",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2023-03-08T01:15:57Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzavyD_m0Pv8iMWOcN4AaABAg",
+          "text": "Khich matlab?",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2023-02-04T11:30:41Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugw4_AvokTSqBlAjCrR4AaABAg",
+          "text": "Vibration mtlb missing?",
+          "intent": "problem_occurrence",
+          "like_count": 1,
+          "published_at": "2023-01-07T22:13:42Z",
+          "replies": [
+            {
+              "text": "Nhi Nhi, vibration means body kampneee ajateee",
+              "intent": "problem_occurrence",
+              "like_count": 1,
+              "published_at": "2023-01-10T09:05:10Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugz_ebgRK_fDs6aRaBd4AaABAg",
+          "text": "sir total kinty pssy lag gay ap k main bi phir krva lyta hun or honda ha original use krun ya nikkon ka jo ap na lagya",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2023-01-10T08:55:49Z",
+          "replies": [
+            {
+              "text": "Total 4500 gear mount \n5500 engine mount \nUpper Khich 3200\nLower khích 2950 all were Nippons bht achay hain you can use them and can be tension free for 30k KMS at least",
+              "intent": "cost_experience",
+              "like_count": 1,
+              "published_at": "2023-01-10T09:04:34Z"
+            },
+            {
+              "text": "@callmehaider7334 thank uh bhi jan",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2023-01-10T09:23:24Z"
+            },
+            {
+              "text": "@callmehaider7334 ap ki gari kay fuel avg dayti ha mri [PLATE REDACTED] sa uper ni jatii city main",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2023-01-10T09:23:42Z"
+            },
+            {
+              "text": "@callmehaider7334 jasy marzi chaloo max mujy 8 mili long [PLATE REDACTED] max",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2023-01-10T09:24:08Z"
+            },
+            {
+              "text": "@callmehaider7334bhai what is upper khich and lower khich",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2023-12-28T17:42:09Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzFbNmQxjzaK_vnUvR4AaABAg",
+          "text": "Brother apke mount kharab huwey hain? Nippon k achey hain? Ya original dalwaney chahiye\nPlease reply",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2024-05-17T20:45:23Z",
+          "replies": [
+            {
+              "text": "Go for Original, my experience was not good with nippon 1 saal baad they became hard",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2024-05-17T20:50:32Z"
+            },
+            {
+              "text": "39k m aik timing side engine foundation original milrahi hai lena chahiye? Aur made in taiwan is around 11k",
+              "intent": "cost_experience",
+              "like_count": 0,
+              "published_at": "2024-05-17T20:54:42Z"
+            },
+            {
+              "text": "Brother go for Qabli.",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-05-23T17:18:43Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugx3_9J0HSdnBniGLFt4AaABAg",
+          "text": "yar chawlain thori maara kr",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2023-01-07T13:46:34Z",
+          "replies": [
+            {
+              "text": "WhatsApp aa 😂",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2023-01-07T13:49:27Z"
+            },
+            {
+              "text": "@callmehaider7334 aaja agar number hai to..pta hai nhi tujhy mai kon hon🤣",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2023-01-07T13:59:05Z"
+            },
+            {
+              "text": "Tu Khusreee hai Khusreeeee wo b Mahaaa Controversial Khusreee 🤣😂 🦜",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2023-01-07T14:02:07Z"
+            },
+            {
+              "text": "Tatti",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2023-05-11T10:48:31Z"
+            }
+          ]
+        }
+      ],
+      "extracted_problem_comments": [
+        "Vibration mtlb missing?",
+        "Brother apke mount kharab huwey hain? Nippon k achey hain? Ya original dalwaney chahiye\nPlease reply"
+      ],
+      "extracted_solution_comments": [
+        "Bhai ye back view lcd wala sheesha kahan se aur kitnay ka lagwaya hai",
+        "@callmehaider7334 jasy marzi chaloo max mujy 8 mili long [PLATE REDACTED] max"
+      ],
+      "collection_date": "2026-11-10T15:01:53.301640+00:00"
+    },
+    {
+      "video_id": "T-uhBvawEYw",
+      "video_title": "TOYOTA VITZ 👉🏾 IDENTIFIED VIBRATION /SHAKING AND SOLUTIONS FOUND #india #pakistan #painting",
+      "video_description": "",
+      "channel_name": "NEW ENGINEERING TACTICS ",
+      "channel_id": "UCgy7IoDcVMDxRg0HdkqN8VA",
+      "video_url": "https://www.youtube.com/watch?v=T-uhBvawEYw",
+      "thumbnail_url": "https://i.ytimg.com/vi/T-uhBvawEYw/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2024-09-30T23:33:01Z",
+      "duration": "00:53",
+      "view_count": 118,
+      "like_count": 2,
+      "comment_count": 0,
+      "tags": [],
+      "search_query_used": "Car vibration while driving Pakistan",
+      "vehicle_make": "Toyota",
+      "vehicle_model": "Vitz",
+      "suspected_fault_category": null,
+      "language": "en",
+      "comments": [],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [],
+      "collection_date": "2026-11-10T15:01:53.565427+00:00"
+    }
+  ]
+}

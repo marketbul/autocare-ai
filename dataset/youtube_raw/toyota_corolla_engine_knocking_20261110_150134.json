@@ -1,0 +1,660 @@
+{
+  "source": "youtube_official_api",
+  "search_query": "Toyota Corolla engine knocking",
+  "record_count": 5,
+  "harvested_at": "2026-11-10T15:01:34.748288+00:00",
+  "items": [
+    {
+      "video_id": "LNXLw8o-eVw",
+      "video_title": "Toyota Corolla engine  knocking issues",
+      "video_description": "Toyota Corolla engine  knocking issues",
+      "channel_name": "Fazal Amin autos",
+      "channel_id": "UC30VOtU-AMhCxRTwvQjGF7A",
+      "video_url": "https://www.youtube.com/watch?v=LNXLw8o-eVw",
+      "thumbnail_url": "https://i.ytimg.com/vi/LNXLw8o-eVw/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2024-06-25T13:18:57Z",
+      "duration": "01:07",
+      "view_count": 613,
+      "like_count": 19,
+      "comment_count": 3,
+      "tags": [],
+      "search_query_used": "Toyota Corolla engine knocking",
+      "vehicle_make": "Toyota",
+      "vehicle_model": "Corolla",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgxLxHr6b3ph-A28i6F4AaABAg",
+          "text": "Mashallah",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2024-07-03T17:02:52Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzuL6UzEwMIhkEXmoJ4AaABAg",
+          "text": "What is the solution to this noise",
+          "intent": "suggested_solution",
+          "like_count": 1,
+          "published_at": "2024-07-10T11:32:40Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugx8rLsAqJXcZAlPuYZ4AaABAg",
+          "text": "Pory Pakistan my yahe petrol hy is solution Kya hy",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2024-06-26T07:02:34Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [
+        "Mashallah",
+        "What is the solution to this noise",
+        "Pory Pakistan my yahe petrol hy is solution Kya hy"
+      ],
+      "collection_date": "2026-11-10T15:01:33.265920+00:00"
+    },
+    {
+      "video_id": "zVsix2pOT7s",
+      "video_title": "Corolla engine knock",
+      "video_description": "Rod bearings were ok, but replaced anyway\nValve shim clearance checked\n55psi oil pressure\nAll belts and pulleys replaced\nTiming set replaced\nwater pump replaced\nNo signs of sludge or metal in pan\n\n7AFE engine has a knocking sound, but I cannot find it!",
+      "channel_name": "Gage Fixes Everything",
+      "channel_id": "UCe2X1gc0xnfSLYvv0PvKlpw",
+      "video_url": "https://www.youtube.com/watch?v=zVsix2pOT7s",
+      "thumbnail_url": "https://i.ytimg.com/vi/zVsix2pOT7s/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2024-01-18T15:28:19Z",
+      "duration": "00:50",
+      "view_count": 5974,
+      "like_count": 28,
+      "comment_count": 36,
+      "tags": [
+        "corolla engine knock",
+        "corolla knocking engine",
+        "corolla engine noise",
+        "rod knock",
+        "toyota coroall engine knock",
+        "7afe",
+        "4afe",
+        "corolla 1.8 engine knock",
+        "1.8l engine knocking",
+        "7afe engine knock",
+        "7afe engine knocking",
+        "4afe engine knock",
+        "4afe engine knocking",
+        "7afe knocking",
+        "knocking noise",
+        "engine knocking",
+        "engine ticking",
+        "engine noise",
+        "already replaced rod bearings",
+        "still kocking",
+        "replaced",
+        "what is this noise",
+        "what causes engine knock",
+        "what is this knocking",
+        "fix engine knock"
+      ],
+      "search_query_used": "Toyota Corolla engine knocking",
+      "vehicle_make": "Toyota",
+      "vehicle_model": "Corolla",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "Ugwx7tCRmDUX4WLhM194AaABAg",
+          "text": "I’ve heard cam lifters can cause this granted so could the crank bearings",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2024-01-20T05:41:53Z",
+          "replies": [
+            {
+              "text": "Yup, the first thing i checked was the cam shims (no lifters on this one) Checked and replaced rod bearings, no help either,",
+              "intent": "suggested_solution",
+              "like_count": 2,
+              "published_at": "2024-01-29T15:11:37Z"
+            },
+            {
+              "text": "You ever figured out what it was ?",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2025-07-25T18:32:18Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxeA12uIel3SxyL3id4AaABAg",
+          "text": "It’s too fast to be a bottom end noise. Do those cars use a chain drive? What does your oil pressure look like",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2024-01-20T08:08:23Z",
+          "replies": [
+            {
+              "text": "Oil pressure is 55psi at idle. It is a timing belt, which I replaced :(",
+              "intent": "suggested_solution",
+              "like_count": 1,
+              "published_at": "2024-01-29T15:09:23Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgyrvX3X8lRHsUnK0fZ4AaABAg",
+          "text": "First of all check oil pressure, some older chain tensioners make that sound when there is low oil pressure",
+          "intent": "suggested_solution",
+          "like_count": 2,
+          "published_at": "2024-01-20T06:40:21Z",
+          "replies": [
+            {
+              "text": "oil pressure is 55psi at idle. Brand new timing belt",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-29T15:10:44Z"
+            },
+            {
+              "text": "@gagefixeseverything its the lifter shim over bucket clearance ,,, ive just reset mine 0.030 exhaust [PLATE REDACTED].020 on the inlet\n4afe settings inlet 0,015 [PLATE REDACTED].025 mm\nExhaust 0.025 [PLATE REDACTED].035 mm\nthis is a twin OHV solid cams....\nwhen i did the number 4 inlet from factory clearance 0.016 [PLATE REDACTED],018 i increaded the clearance to about 0.021 it staeted to make that noise....",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2024-10-29T09:05:20Z"
+            },
+            {
+              "text": "@gagefixeseverything@dougohboy5190 Can you take a look at my Corolla video, do you think it's the same issue? That or a pulley bearing are my best guesses: https://www.youtube.com/shorts/g5YT0-2WxXQ",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2025-05-23T00:15:43Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwR_xNX2O8kfc8MtdB4AaABAg",
+          "text": "Did you plastigage the clearance on the bearings? Maybe a piston is slapping the head - can you scope it? When you dropped the pan did you clean the internal filter? Did you check the thrust bearings when you did the bottom end -any play front to back on the crank? Did you change your tensioner when you did the belt? Have you checked your plugs to make sure they're good?",
+          "intent": "suggested_solution",
+          "like_count": 1,
+          "published_at": "2025-09-21T07:35:10Z",
+          "replies": [
+            {
+              "text": "I checked all of these except the crankshaft thrust. It was the craziest thing. I spent a rediculous amount of time searching for the mysterious ticking noise. I traded the car at a rally last year, and it's still going strong with the same noise 😮",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2025-09-21T13:03:48Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwBkMWqU3y0aQz003p4AaABAg",
+          "text": "Sir what the problem in dis car ??  May car is like that in  your videos how to solve the knoking ??",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2025-01-19T11:44:42Z",
+          "replies": [
+            {
+              "text": "I took this engine apart and found now issues, It is still driving strong 1 year later with the noise",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2025-01-21T16:42:34Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxXPeLbA_Z1tsZ7fz94AaABAg",
+          "text": "Got it too🤗. Been strong 55k miles so far",
+          "intent": "cost_experience",
+          "like_count": 1,
+          "published_at": "2025-10-13T03:49:08Z",
+          "replies": [
+            {
+              "text": "The noise never got worse or better even after a bottom end rebuild!",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2025-10-16T22:27:00Z"
+            },
+            {
+              "text": "Just rebuilt my 4zz because of that noise and I can't figure it out either... One thing I definitely think tho is that it is oil related ... Somewhere. Probably head but not valves so definitely maybe rockers... Definitely not lifter tick but these vvti' gears ? Maybe idk. Lol send help I want it gone. Car drives really good tho except that noise.",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2025-12-13T00:09:42Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgylSQKbbb0pm5-wQFh4AaABAg",
+          "text": "Does the sound also faster when you rev it? Same issue with mine, yeah it still drive strong.",
+          "intent": "problem_occurrence",
+          "like_count": 1,
+          "published_at": "2025-02-26T05:54:27Z",
+          "replies": [
+            {
+              "text": "Yes it does. I drove the car like this for over 1 year! Still going strong.",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2025-02-26T12:52:11Z"
+            },
+            {
+              "text": "​@gagefixeseverythingfound it now? one friend of mine says it's the piston pin. have you look into that when you rebuilt it? Will wait for your update. Many thanks!",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2025-07-03T12:25:56Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxZaOZc1Dowaed7nRd4AaABAg",
+          "text": "Having this issue same vehicle did you find the solution?",
+          "intent": "suggested_solution",
+          "like_count": 2,
+          "published_at": "2024-04-23T10:40:54Z",
+          "replies": [
+            {
+              "text": "NO! I even rebuilt the bottom end haha. The car has great power, doesn't consume oil, and has been getting around 40mpg still. I've put over 1k miles on it since this video",
+              "intent": "cost_experience",
+              "like_count": 0,
+              "published_at": "2024-04-24T01:47:03Z"
+            },
+            {
+              "text": "@gagefixeseverythingcould be a rattle from outside the engine ive had one coming from the alternator.. as one guy up said its too fast for it to be a bottom end sound also",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-05-26T04:54:17Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzV1SONS4jnvC5vD6x4AaABAg",
+          "text": "Crank bearings?",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2024-01-20T00:32:33Z",
+          "replies": [
+            {
+              "text": "Rebuilt the bottom end, still does it!",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-29T15:12:07Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzQzs1BRdrl8C8XJPJ4AaABAg",
+          "text": "Have you checked exhaust mainfold for cracks ?",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2024-01-20T00:19:14Z",
+          "replies": [
+            {
+              "text": "Nah it ain’t that, I’m currently dealing with a bad exhaust gasket and the prev owner of my car who reused stretch bolts and the tick from an exhaust leak is a lot lighter of a tapping",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2024-01-20T11:14:56Z"
+            },
+            {
+              "text": "Yes, but it isnt that. It is a physical knock you can feel. Feels like a rod bearings, but it isnt",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-29T15:12:51Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxSMc_KTX6BNoXjBw94AaABAg",
+          "text": "Any luck finding an issue?",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2024-10-24T22:29:01Z",
+          "replies": [
+            {
+              "text": "Haha nope, still making the exact some noise 1yr and thousands of miles later. I took apart the entire bottom end and never found the issues. Valve lash adjusters were all i spec also. I may dive back into this and try to figure it out one day",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2024-11-05T00:31:51Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzonDvV35syv_kAkXh4AaABAg",
+          "text": "Prahaps Steering pump",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-08-22T02:09:27Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgxobX0m_aclg76RmoJ4AaABAg",
+          "text": "maybe it's injectors making that sound?",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2024-10-23T18:26:45Z",
+          "replies": [
+            {
+              "text": "I do alot of bench cleaning of injectors. ,The injectors are a light clicking noise.. this noise is a very loud metallic sound.",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2024-11-05T00:33:01Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwD2Li32Gqvt5BF6xh4AaABAg",
+          "text": "I don't think thats knock\nModern cars don't knock that much specially on idle \nAnd thats too fast for around 800 rpm",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2024-01-20T09:17:12Z",
+          "replies": [
+            {
+              "text": "I have never run across a sound like this that was not rod bearings . I have had the entire bottom end apart and have not been able to fine anything.",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-29T15:10:23Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzTq0kwYDQboyY0BDt4AaABAg",
+          "text": "Remove the drive belts and pray it disappears",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2024-01-20T04:18:11Z",
+          "replies": [
+            {
+              "text": "Tried that too. Rebuilt the bottom end, still does it!",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-29T15:12:02Z"
+            }
+          ]
+        }
+      ],
+      "extracted_problem_comments": [
+        "Does the sound also faster when you rev it? Same issue with mine, yeah it still drive strong.",
+        "Any luck finding an issue?"
+      ],
+      "extracted_solution_comments": [
+        "Yup, the first thing i checked was the cam shims (no lifters on this one) Checked and replaced rod bearings, no help either,",
+        "Oil pressure is 55psi at idle. It is a timing belt, which I replaced :(",
+        "First of all check oil pressure, some older chain tensioners make that sound when there is low oil pressure",
+        "Did you plastigage the clearance on the bearings? Maybe a piston is slapping the head - can you scope it? When you dropped the pan did you clean the internal filter? Did you check the thrust bearings when you did the bottom end -any play front to back on the crank? Did you change your tensioner when you did the belt? Have you checked your plugs to make sure they're good?",
+        "I checked all of these except the crankshaft thrust. It was the craziest thing. I spent a rediculous amount of time searching for the mysterious ticking noise. I traded the car at a rally last year, and it's still going strong with the same noise 😮"
+      ],
+      "collection_date": "2026-11-10T15:01:33.693624+00:00"
+    },
+    {
+      "video_id": "PaYhemY3bqk",
+      "video_title": "2003 Toyota Corolla Engine Knock",
+      "video_description": "This is the 1.8L with the 1ZZ type Engine i believe, Wife's friend borrowed it and then with out our knowing took it on a 700 mile round trip we believe, they brought it back knocking and two quarts low on oil. So what you all think time to replace or rebuild it? Maybe something else like valves?\n\nUpdate: For those asking what I found out and what I did.\n\nPulled the oil pan and found the number 1 piston crank bearing had spun due to oil starvation, which was allowing the piston to slap the underside of the heads.\n\nPulled the heads and found they had been cracked above the piston from it hitting.\n\nRough estimate of parts needing to be replaced was, Heads, Crank and bearings, Piston and rod, oil pump, this is what I saw without totally tearing down the engine for a complete breakdown of parts.\n\nThe amount of repair and replacement parts, plus time versus a rebuilt crate engine was close to the same price but even that was not economical for this old of a car.\n\nScrapped out what I could on Ebay and dragged the husk down to the wrecker yard.",
+      "channel_name": "W Broad",
+      "channel_id": "UCDks8WHjZDqVgk0fLjvVFiA",
+      "video_url": "https://www.youtube.com/watch?v=PaYhemY3bqk",
+      "thumbnail_url": "https://i.ytimg.com/vi/PaYhemY3bqk/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2014-04-14T21:29:36Z",
+      "duration": "00:49",
+      "view_count": 27138,
+      "like_count": 82,
+      "comment_count": 24,
+      "tags": [
+        "2003",
+        "Valve Noise",
+        "Engine Noise",
+        "Enging Knocking",
+        "Toyota Corolla (Automobile Model)",
+        "18l",
+        "Toyota (Brand)",
+        "Corolla"
+      ],
+      "search_query_used": "Toyota Corolla engine knocking",
+      "vehicle_make": "Toyota",
+      "vehicle_model": "Corolla",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "Ugj5qpOYU9hlI3gCoAEC",
+          "text": "It's the baffle inside the intake manifold.",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2015-05-18T00:36:02Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UggzZHzhY9Ev-ngCoAEC",
+          "text": "You probably have a low octane rating on your fuel or lack of lubrication somewhere around upper cylinder head area. Valves and lifters can cause knocking sound if it is not receiving enough oil.",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2017-05-15T22:26:03Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UggIdD8XInbqlXgCoAEC",
+          "text": "[PLATE REDACTED] Corolla S has the same problem. I was unaware that the motor was burning oil until one night I realized the motor was ticking then found it only had two quarts of oil in it. Now it has a bad rod knock.",
+          "intent": "problem_occurrence",
+          "like_count": 4,
+          "published_at": "2014-06-16T00:27:15Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwPU5oJb2beidXO4vN4AaABAg",
+          "text": "i have that bad knocking sound in my toyota matrix 2004 1zz engine",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2021-06-28T04:11:40Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwGK4m7AP3ZzPHQuBV4AaABAg",
+          "text": "How can you fix the problem I have the same problem with my Toyota Corolla 2002",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2020-12-19T16:40:45Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwWWhSaD8UsU8Dd_Dh4AaABAg",
+          "text": "Lifter it sounds like mine is doing the same thing I got a 2002 Toyota Corolla",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2021-02-19T22:27:39Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugw8wqJafUj-uRmM5X94AaABAg",
+          "text": "Connecting rod Rod bearing.",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2018-05-10T16:41:53Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzAqay2J6Ro1tEAQbV4AaABAg",
+          "text": "Camgear need to be change and your timing chain and tensioner",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2025-04-10T18:57:45Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgjuS0N30GoK5ngCoAEC",
+          "text": "What ended up being the problem?",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2017-05-06T07:44:16Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugzlgf-JUY-C60YWJXl4AaABAg",
+          "text": "Piston slap",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2021-08-31T02:38:51Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzhhG9YK509IB5OOat4AaABAg",
+          "text": "How u do to fixed",
+          "intent": "suggested_solution",
+          "like_count": 1,
+          "published_at": "2018-04-29T13:21:29Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UghGBLpFMe7jKHgCoAEC",
+          "text": "did you find the problem.",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2017-05-15T04:02:54Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UghGf1vnow4sC3gCoAEC",
+          "text": "just wondering if you ever found out what caused this i have takin my engine apart beacuse of this problem and still cant figure it out please get back to me asap @w_broad",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2016-10-28T01:10:37Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UggRavpt4MirCngCoAEC",
+          "text": "what was wrong with it?",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2017-05-21T16:02:56Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugy5SoGwq9VkKYCoo9F4AaABAg",
+          "text": "Funny how many ignorant people make assumtions when it can be many things. Gotta LOL",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2022-01-23T22:36:48Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [
+        "[PLATE REDACTED] Corolla S has the same problem. I was unaware that the motor was burning oil until one night I realized the motor was ticking then found it only had two quarts of oil in it. Now it has a bad rod knock.",
+        "How can you fix the problem I have the same problem with my Toyota Corolla 2002",
+        "What ended up being the problem?",
+        "did you find the problem.",
+        "just wondering if you ever found out what caused this i have takin my engine apart beacuse of this problem and still cant figure it out please get back to me asap @w_broad"
+      ],
+      "extracted_solution_comments": [
+        "Camgear need to be change and your timing chain and tensioner",
+        "How u do to fixed"
+      ],
+      "collection_date": "2026-11-10T15:01:34.053714+00:00"
+    },
+    {
+      "video_id": "vsDXXPQlOBo",
+      "video_title": "Corolla 2016 engine knocking sound job done.ocv exhaust wrong parts  installation.",
+      "video_description": "",
+      "channel_name": "DANNY",
+      "channel_id": "UCEE6Arm0whFK2P4IE86THcQ",
+      "video_url": "https://www.youtube.com/watch?v=vsDXXPQlOBo",
+      "thumbnail_url": "https://i.ytimg.com/vi/vsDXXPQlOBo/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2025-03-04T21:07:00Z",
+      "duration": "02:03",
+      "view_count": 60,
+      "like_count": 6,
+      "comment_count": 1,
+      "tags": [],
+      "search_query_used": "Toyota Corolla engine knocking",
+      "vehicle_make": "Toyota",
+      "vehicle_model": "Corolla",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgyfcsHLPzdvk30ejOx4AaABAg",
+          "text": "Good job lods",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2025-03-04T21:34:13Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [],
+      "collection_date": "2026-11-10T15:01:34.318240+00:00"
+    },
+    {
+      "video_id": "PPT7GDtaeuQ",
+      "video_title": "1993 corolla engine noise rod knock?",
+      "video_description": "",
+      "channel_name": "Jose",
+      "channel_id": "UClT4FOO_s5oCqd0aH81qBFQ",
+      "video_url": "https://www.youtube.com/watch?v=PPT7GDtaeuQ",
+      "thumbnail_url": "https://i.ytimg.com/vi/PPT7GDtaeuQ/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2025-08-26T07:05:13Z",
+      "duration": "00:10",
+      "view_count": 5274,
+      "like_count": 22,
+      "comment_count": 6,
+      "tags": [],
+      "search_query_used": "Toyota Corolla engine knocking",
+      "vehicle_make": "Toyota",
+      "vehicle_model": "Corolla",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgzufY4B38vGhS5tn8h4AaABAg",
+          "text": "Sounds like top end, hard to say in a video though 🤣",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-08-27T22:34:48Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzHiMAQIcepYRiHhrx4AaABAg",
+          "text": "Timing guide/ tensioner",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2025-08-26T23:42:53Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzgUnsXktwNpTvllAZ4AaABAg",
+          "text": "Kinda sounds like loud fuel injectors",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2025-08-26T23:57:07Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugx4ok6UI-4g0Vy2WIp4AaABAg",
+          "text": "They all kind of sound like that",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2025-08-27T00:40:46Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzB10gCpUn08lYLmcp4AaABAg",
+          "text": "Hi, [PLATE REDACTED] Echo has this exact clicking sound. You ever figure out a cause/fix?",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-01-04T01:55:35Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugy7dwzJYw_0NS-a3gd4AaABAg",
+          "text": "Sounds like timing is off and valves r clanking?",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2025-08-27T00:19:51Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [],
+      "collection_date": "2026-11-10T15:01:34.743246+00:00"
+    }
+  ]
+}

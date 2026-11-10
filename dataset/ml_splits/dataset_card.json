@@ -1,0 +1,80 @@
+{
+  "dataset_name": "AI Auto Pakistan ML Splits",
+  "split_ratios": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "split_sizes": {
+    "train": 7531,
+    "val": 1614,
+    "test": 1615,
+    "total": 10760
+  },
+  "leak_prevention_method": "Grouped by canonical source URL & ID",
+  "class_distribution": {
+    "train": {
+      "FC-04": 600,
+      "Uncategorized": 1530,
+      "FC-06": 456,
+      "FC-02": 322,
+      "FC-01": 2815,
+      "FC-10": 178,
+      "FC-16": 160,
+      "FC-07": 478,
+      "FC-05": 243,
+      "FC-13": 172,
+      "FC-15": 171,
+      "FC-12": 36,
+      "FC-09": 151,
+      "FC-03": 113,
+      "FC-18": 17,
+      "FC-11": 19,
+      "FC-17": 25,
+      "FC-08": 30,
+      "FC-14": 15
+    },
+    "val": {
+      "FC-16": 33,
+      "FC-10": 30,
+      "Uncategorized": 318,
+      "FC-15": 34,
+      "FC-01": 635,
+      "FC-06": 110,
+      "FC-04": 132,
+      "FC-03": 23,
+      "FC-07": 111,
+      "FC-05": 44,
+      "FC-13": 30,
+      "FC-02": 57,
+      "FC-09": 25,
+      "FC-08": 8,
+      "FC-11": 5,
+      "FC-12": 10,
+      "FC-18": 3,
+      "FC-14": 2,
+      "FC-17": 4
+    },
+    "test": {
+      "Uncategorized": 332,
+      "FC-13": 36,
+      "FC-04": 125,
+      "FC-16": 34,
+      "FC-07": 102,
+      "FC-05": 54,
+      "FC-02": 65,
+      "FC-06": 107,
+      "FC-01": 619,
+      "FC-15": 37,
+      "FC-10": 26,
+      "FC-12": 8,
+      "FC-03": 19,
+      "FC-09": 30,
+      "FC-08": 4,
+      "FC-17": 8,
+      "FC-11": 4,
+      "FC-18": 4,
+      "FC-14": 1
+    }
+  }
+}

@@ -1,0 +1,1208 @@
+{
+  "source": "youtube_official_api",
+  "search_query": "Car maintenance Pakistan",
+  "record_count": 5,
+  "harvested_at": "2026-11-10T15:02:20.401091+00:00",
+  "items": [
+    {
+      "video_id": "ntPYIca4MIk",
+      "video_title": "Suzuki Cultus maintenance & restoration",
+      "video_description": "",
+      "channel_name": "Life in a Pakistan ",
+      "channel_id": "UC8NRYcSu2OXWUj8Av0lJXvA",
+      "video_url": "https://www.youtube.com/watch?v=ntPYIca4MIk",
+      "thumbnail_url": "https://i.ytimg.com/vi/ntPYIca4MIk/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2024-08-21T19:29:37Z",
+      "duration": "00:10",
+      "view_count": 258586,
+      "like_count": 1946,
+      "comment_count": 28,
+      "tags": [],
+      "search_query_used": "Car maintenance Pakistan",
+      "vehicle_make": "Suzuki",
+      "vehicle_model": "Cultus",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgzyoW9ez5QLpjP1KaB4AaABAg",
+          "text": "please make full video on it",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2026-03-09T10:55:16Z",
+          "replies": [
+            {
+              "text": "Soon brother",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2026-03-21T03:18:49Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugylto-rMCBIXlASpB94AaABAg",
+          "text": "Very nice cultus",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2025-04-01T12:24:21Z",
+          "replies": [
+            {
+              "text": "So nice of you",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2025-04-22T13:25:43Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzlQFe2SqjvjK7JX0p4AaABAg",
+          "text": "nice",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2026-02-27T07:25:45Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgxyCKS7iyskqdsyr854AaABAg",
+          "text": "Whats that spray in the silencer",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2026-07-16T17:30:52Z",
+          "replies": [
+            {
+              "text": "Catalytic cleaner",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2026-09-28T04:00:51Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxMIKqhyj0rxktm8wp4AaABAg",
+          "text": "😮 wow",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-02-28T15:24:17Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugywk00V_hWhqPFzZeZ4AaABAg",
+          "text": "Exhaust se Kia nikala aur kesay nikala",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-08-20T00:15:13Z",
+          "replies": [
+            {
+              "text": "Cat cleaner.",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2026-09-28T04:00:15Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgybNlV2YFMtJ_UqEBl4AaABAg",
+          "text": "❤",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2025-11-07T19:47:29Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzbfkhECfXlDXROT-t4AaABAg",
+          "text": "Bhai 2013 model kitne me mile ga",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-08-25T03:34:54Z",
+          "replies": [
+            {
+              "text": "Bhai mai [PLATE REDACTED] model le rha dhundne [PLATE REDACTED] lakh tak mil jayga",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2026-09-21T04:39:53Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwDOV2jCJbwTSNWNX14AaABAg",
+          "text": "Assalam u alaikum \nBhaiya address or budget kya hai ayse he cleaning krwani hai engine ki",
+          "intent": "suggested_solution",
+          "like_count": 0,
+          "published_at": "2026-10-17T09:57:49Z",
+          "replies": [
+            {
+              "text": "Saadi town, kindly visit so we can check the car and discuss the budget.",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2026-11-04T17:51:33Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugw38dv8fpmwZv_HyMh4AaABAg",
+          "text": "location?",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2025-06-06T19:48:27Z",
+          "replies": [
+            {
+              "text": "Saadi town",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2025-06-07T04:22:28Z"
+            },
+            {
+              "text": "sadi town mein kidhar hay bhai? please location link share krdo google maps ka",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2025-07-12T20:26:04Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugz46NxLQepZSgyC-bF4AaABAg",
+          "text": "Bhae yae Cultus 2015 ha mraay pass... Mjay eske Aysee he Service r maintenance kraani ha",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2025-06-01T19:39:46Z",
+          "replies": [
+            {
+              "text": "Ho jaye gi bhai Kya karwana hai apny?",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2025-06-01T20:39:58Z"
+            },
+            {
+              "text": "Meri car cultus ( 2008 model hy ) \njab AC par cahalata hu to CAR mar jaati hy \nfull pedal push par kaafi time leti hy chalny mei\nkiya waja hy ?​@life_inPakistan",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2025-06-08T19:53:08Z"
+            },
+            {
+              "text": "​@abdullahijaz2041bhai mere paas bhi exact same model hy aur ittefaaq se same masla hy",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2025-06-09T07:27:04Z"
+            },
+            {
+              "text": "Same model , and same problem 😮",
+              "intent": "problem_occurrence",
+              "like_count": 0,
+              "published_at": "2025-07-19T16:51:38Z"
+            },
+            {
+              "text": "⁠@oliversmith8338  app ka masla solve howa",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2025-07-19T16:52:24Z"
+            }
+          ]
+        }
+      ],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [
+        "Catalytic cleaner",
+        "Cat cleaner.",
+        "Assalam u alaikum \nBhaiya address or budget kya hai ayse he cleaning krwani hai engine ki",
+        "Saadi town, kindly visit so we can check the car and discuss the budget.",
+        "Meri car cultus ( 2008 model hy ) \njab AC par cahalata hu to CAR mar jaati hy \nfull pedal push par kaafi time leti hy chalny mei\nkiya waja hy ?​@life_inPakistan"
+      ],
+      "collection_date": "2026-11-10T15:02:18.817973+00:00"
+    },
+    {
+      "video_id": "JPY56noXxec",
+      "video_title": "Basic Car Maintaince & Daily Routine Checkup Tips for Beginners",
+      "video_description": "In this video I will tell you guys how to Maintain your car and check your car yourself at home without visiting mechanic. In urdu/hindi for beginners \n\nI hope you guys will like it :)\n\nFollow me on Instagram\nhttps://www.instagram.com/wajahatgarage/\nDon't Forget to -----SUBSCRIBE--- Wajahat Ahmad Garage --- for More\n\nThis channel is about cars and cars related topics videos of Pakistan. You can share your videos with us if you want them to be upload on this channel\n\nNote: We evaluate every video that you share and if we found the video to be valid or essential to be uploaded we will upload it on Wajahat Ahmad Garage, otherwise it will be ignore. Also you should be the one who owns the video\n\nIf you have any kind of query feel free to contact. wajahatahmad529@gmail.com\n\ntags:\nBasic Car Maintenance Tips Basic Checkup all level checkup AC service of your car topup in Hindi. how to check engine oil, how to check coolant level in car, how to check if engine oil needs replacement, when to change engine oil, how to change air filter, how to maintain your car, how to check your car yourself, how to check if car battery is good. how to check transmission oil.",
+      "channel_name": "Wajahat Ahmad Garage",
+      "channel_id": "UCi05-PjP9GQJ4GNrqKH2obg",
+      "video_url": "https://www.youtube.com/watch?v=JPY56noXxec",
+      "thumbnail_url": "https://i.ytimg.com/vi/JPY56noXxec/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2021-06-02T15:30:01Z",
+      "duration": "12:10",
+      "view_count": 187991,
+      "like_count": 5315,
+      "comment_count": 285,
+      "tags": [],
+      "search_query_used": "Car maintenance Pakistan",
+      "vehicle_make": null,
+      "vehicle_model": "Basic Car Maintaince & Daily Routine Checkup Tips For Beginners In This Video I Will Tell You Guys How To Maintain Your Car And Check Your Car Yourself At Home Without Visiting Mechanic. In Urdu/Hindi For Beginners \n\nI Hope You Guys Will Like It :)\n\nFollow Me On Instagram\nHttps://Www.Instagram.Com/Wajahatgarage/\nDon'T Forget To -----Subscribe--- Wajahat Ahmad Garage --- For More\n\nThis Channel Is About Cars And Cars Related Topics Videos Of Pakistan. You Can Share Your Videos With Us If You Want Them To Be Upload On This Channel\n\nNote: We Evaluate Every Video That You Share And If We Found The Video To Be Valid Or Essential To Be Uploaded We Will Upload It On Wajahat Ahmad Garage, Otherwise It Will Be Ignore. Also You Should Be The One Who Owns The Video\n\nIf You Have Any Kind Of Query Feel Free To Contact. Wajahatahmad529@Gmail.Com\n\nTags:\nBasic Car Maintenance Tips Basic Checkup All Level Checkup Ac Service Of Your Car Topup In Hindi. How To Check Engine Oil, How To Check Coolant Level In Car, How To Check If Engine Oil Needs Replacement, When To Change Engine Oil, How To Change Air Filter, How To Maintain Your Car, How To Check Your Car Yourself, How To Check If Car Battery Is Good. How To Check Transmission Oil. I Just Took Car Yesterday And Now After Watching I Am Expert.Thanks Same 😂 Thank You Very Much Im A Beginner It Helps Me Alot  Very Informative Video Thanks Alot جزاک اللہ  I Was Really Looking For Such Easy, Understandable Video \n Thank You  Nice And In-Depth Information 👏 Well Done Sir  Wow Very Informative Bro Brilliant Job I M A Beginner Or Aj Is Video Se Buat Kuch Seekha Allah Bless You ❤️  Masha'Allah, Nice. Such Wonderful Knowledge Is Shared With Us Viewers In The Video.\n\nMay Allah'S Blessings Be Upon You. Truly. ♥️♥️♥️♥️  Bro Main Apki Video Bohat Sok Sy Dekhta Hon You Are Great.Love U  اپکا اواز اور اپکا اخلاق بھت اچھا لگتا ہے اسلے سسکرائپ کیا جی  Thanks To You Bro It'S Very Helpful ❤  Mashaallah Bro Buhat Asani Hogai Apki Video Se  Bro I Love Your Videos So Much 💕  Thankkkkkkkkkkkkkkkkkkk Youuuuuuu For This Amazing Video, Mera Jald Have Car Lene Ka Irada Hai Khair Se Insha'Allah, Mjy Hmsha Ek Anxiety Hoti Thi Jb Mai Car Ki In Cheezon K Bare Mai Sochti Thi, I Thought Ye To Males Hi Check Kr Skte Hain, But Aap Ne Itna Easy Kr K Smjhaya K M Already Feeling Pro 😋  Watching Here From Uae. Really Appreciate Your Efforts ❤  Really Informative 4 The Beginners",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgyHtLCikinSDzVYwRR4AaABAg",
+          "text": "I just took car yesterday and now after watching i am expert.thanks",
+          "intent": "discussion",
+          "like_count": 16,
+          "published_at": "2024-06-08T10:42:18Z",
+          "replies": [
+            {
+              "text": "Same 😂",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2025-10-04T08:09:27Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzCeQ5E0Zuc9qcoYE94AaABAg",
+          "text": "Thank you very much im a beginner it helps me alot",
+          "intent": "discussion",
+          "like_count": 14,
+          "published_at": "2021-11-25T11:35:27Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugxr8E5H7mKq011ghyN4AaABAg",
+          "text": "Very informative video thanks alot جزاک اللہ",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2026-09-19T05:50:45Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugxi06waIXTBGDUYTk14AaABAg",
+          "text": "I was really looking for such easy, understandable video \n Thank you",
+          "intent": "discussion",
+          "like_count": 5,
+          "published_at": "2024-11-22T19:12:36Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugx3IVRcw5Q9wVwTE2F4AaABAg",
+          "text": "Nice and in-depth information 👏 well done sir",
+          "intent": "discussion",
+          "like_count": 10,
+          "published_at": "2021-12-17T12:42:20Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwiLE7m0oIRO2Vc1LB4AaABAg",
+          "text": "wow very informative bro brilliant job i m a beginner or aj is video se buat kuch seekha Allah bless you ❤️",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2023-05-12T17:15:22Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyaX6WobiatAB6jcCB4AaABAg",
+          "text": "Masha'Allah, nice. Such wonderful knowledge is shared with us viewers in the video.\n\nMay Allah's blessings be upon you. Truly. ♥️♥️♥️♥️",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2025-11-18T05:11:21Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugz6l7qvQ9xMibhiVod4AaABAg",
+          "text": "Bro main apki video bohat sok sy dekhta hon you are great.Love u",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2022-08-29T19:35:34Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugz5SUdKjFCzvoUG4SB4AaABAg",
+          "text": "اپکا اواز اور اپکا اخلاق بھت اچھا لگتا ہے اسلے سسکرائپ کیا جی",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2024-11-07T06:40:10Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzmBOEDdTKYNrzICap4AaABAg",
+          "text": "Thanks to you Bro it's very helpful ❤",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-10-13T16:50:34Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzjiI6pUvBlCvVTvN14AaABAg",
+          "text": "MashaALLAH bro buhat Asani hogai apki video se",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2022-03-02T23:23:45Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugy1qKNc7GZ6opc4eyJ4AaABAg",
+          "text": "Bro I love your videos so much 💕",
+          "intent": "discussion",
+          "like_count": 5,
+          "published_at": "2021-06-02T17:51:28Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwlGRcebLnTBaSuGKh4AaABAg",
+          "text": "Thankkkkkkkkkkkkkkkkkkk youuuuuuu for this amazing video, mera jald have car lene ka irada hai Khair se insha'Allah, mjy hmsha ek anxiety hoti thi jb mai car ki in cheezon k bare mai sochti thi, i thought ye to males hi check kr skte hain, but aap ne itna easy kr k smjhaya k m already feeling Pro 😋",
+          "intent": "suggested_solution",
+          "like_count": 1,
+          "published_at": "2025-03-19T03:13:44Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyR4m_2RaQ7J8VGuoN4AaABAg",
+          "text": "Watching here from UAE. Really appreciate your efforts ❤",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2024-07-27T22:50:46Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwNno7_xRV9tC4UXHN4AaABAg",
+          "text": "Really informative 4 the beginners",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2023-07-08T06:42:51Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [
+        "Thankkkkkkkkkkkkkkkkkkk youuuuuuu for this amazing video, mera jald have car lene ka irada hai Khair se insha'Allah, mjy hmsha ek anxiety hoti thi jb mai car ki in cheezon k bare mai sochti thi, i thought ye to males hi check kr skte hain, but aap ne itna easy kr k smjhaya k m already feeling Pro 😋"
+      ],
+      "collection_date": "2026-11-10T15:02:19.233087+00:00"
+    },
+    {
+      "video_id": "1Zap7vjsZ1Y",
+      "video_title": "Undercarriage Maintenance Tips | PakWheels",
+      "video_description": "Today, we are back with another informative video. In this we video, we will show you that how you can take care of your car's undercarriage. Watch complete video for tips and tricks to maintain your car.\n\nProduct Links:\n\n👉https://www.pakwheels.com/accessories-spare-parts/tonyin-car-care-sweeper-engine-surface-cleaner-473ml-4817959\n\n👉https://www.pakwheels.com/accessories-spare-parts/wd40-silicone-lubricant-400ml-2314640\n\n👉https://www.pakwheels.com/accessories-spare-parts/wd-40-specialist-engine-degreaser-500ml-2315520\n\n👉https://www.pakwheels.com/accessories-spare-parts/tonyin-car-care-tar-and-sticker-remover-473ml-6429918?posted=true\n\n📲 Call/WhatsApp: 0316-7670125\n✔️ Doorstep Delivery Nationwide \n\n______________________________________________\nLooking to sell your CAR?\n👉Post a free ad: https://www.pakwheels.com/used-cars/sell\nOr\n👉Avail Sell It For Me Service: https://www.pakwheels.com/products/pakwheels-sell-it-for-me/\n______________________________________________\n🔔Download Our App:🔔\nFor Android: http://ow.ly/8o1d30revBP\nFor IOS: https://apps.apple.com/pk/app/pakwheels/id739776365\n______________________________________________\nFor more, visit: https://www.pakwheels.com/\n👉https://www.facebook.com/pakwheels/\n👉https://twitter.com/PakWheels\n👉https://www.instagram.com/pakwheels/\n\n*****Gari Ki Deals, Only On PakWheels!*****",
+      "channel_name": "PakWheels.com",
+      "channel_id": "UC6LRyDpPgR2ypljDuCvU-cw",
+      "video_url": "https://www.youtube.com/watch?v=1Zap7vjsZ1Y",
+      "thumbnail_url": "https://i.ytimg.com/vi/1Zap7vjsZ1Y/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2022-01-29T08:06:18Z",
+      "duration": "04:00",
+      "view_count": 68560,
+      "like_count": 2532,
+      "comment_count": 85,
+      "tags": [
+        "PakWheels",
+        "Cars in Pakistan",
+        "Bikes in Pakistan",
+        "Used Cars",
+        "New Cars",
+        "Auto Shop",
+        "Pakistan",
+        "Lahore",
+        "Karachi",
+        "Islamabad"
+      ],
+      "search_query_used": "Car maintenance Pakistan",
+      "vehicle_make": null,
+      "vehicle_model": "Undercarriage Maintenance Tips | Pakwheels Today, We Are Back With Another Informative Video. In This We Video, We Will Show You That How You Can Take Care Of Your Car'S Undercarriage. Watch Complete Video For Tips And Tricks To Maintain Your Car.\n\nProduct Links:\n\n👉Https://Www.Pakwheels.Com/Accessories-Spare-Parts/Tonyin-Car-Care-Sweeper-Engine-Surface-Cleaner-473Ml-4817959\n\n👉Https://Www.Pakwheels.Com/Accessories-Spare-Parts/Wd40-Silicone-Lubricant-400Ml-2314640\n\n👉Https://Www.Pakwheels.Com/Accessories-Spare-Parts/Wd-40-Specialist-Engine-Degreaser-500Ml-2315520\n\n👉Https://Www.Pakwheels.Com/Accessories-Spare-Parts/Tonyin-Car-Care-Tar-And-Sticker-Remover-473Ml-6429918?Posted=True\n\n📲 Call/Whatsapp: 0316-7670125\n✔️ Doorstep Delivery Nationwide \n\n______________________________________________\nLooking To Sell Your Car?\n👉Post A Free Ad: Https://Www.Pakwheels.Com/Used-Cars/Sell\nOr\n👉Avail Sell It For Me Service: Https://Www.Pakwheels.Com/Products/Pakwheels-Sell-It-For-Me/\n______________________________________________\n🔔Download Our App:🔔\nFor Android: Http://Ow.Ly/8O1D30Revbp\nFor Ios: Https://Apps.Apple.Com/Pk/App/Pakwheels/Id739776365\n______________________________________________\nFor More, Visit: Https://Www.Pakwheels.Com/\n👉Https://Www.Facebook.Com/Pakwheels/\n👉Https://Twitter.Com/Pakwheels\n👉Https://Www.Instagram.Com/Pakwheels/\n\n*****Gari Ki Deals, Only On Pakwheels!***** Nice Video, Great Work. Undercarriage Should Only Be Washed If Required. And No There Is No Need To Dry It With Air Either. Do You Dry Your Car Undersides After Driving In Rain Or Through A Puddle. Nothing Should Be Applied There, Not Diesel, Not Silicone. Even Silicone Lubricants Attract Dust And Form A Layer Of Abrasive Dust Which Will Only Hasten The Degradation Of Rubber Parts. If You Are Really Into Undercarriage Care Then Wash It Regularly, Look For Signs Of Rust, Treat It By Applying Rust Protector Or Rust Converter & Paint It, Look For Worn Rubber Parts And Replace Those. That'S It. Brother How To Protect Undercarriage In Rain Or After Rain When Grease,Dust And Other Impurities Have Accumulated In The Undercarriage Floor And Rubber Parts ۔ Do We Have A Pre Or Post Rain Ritual In This Regard۔ Please Share Your Experience And Relevant Products If You Use? @Muhammadarsalanmalick6504 As I Mentioned In My Above Post, There Is No Pre-Rain Ritual. Post-Rain, Once The Rainy Season Is Over, You Should Wash The Underside With Clean Water And That'S It. Keep Inspecting The Underside Every 6 Months And Apply Paint Or Rust Protector E.G. Red Oxide Commonly Known As Zinc Oxide Paint If You See Rust. There Are Specialized Products For Protecting The Undercarriage Like Coal-Tar But They Are Expensive And Not Worth It. The Rims On This [Plate Redacted] Look Amazing ❤  I Was Looking For Rubber Softener And How To Protect Car From Rust Let Alone Under Carriage.  All In One Video.  Bhai Itna Sab Kuch Karne Ke Liye To Apna Zaati Service Station Kholna Parega 😜 Sahi Bt Hy Bhai , Kn Service Center Wala Etny Chochaly Bardash Kry Ga Keep Up The Good Work Bro. Very Informative Video For Lots Of Us Here.  Yar Plz Is Gari Ka Aik User Review Do I Know Its Owners Review Is Already Uploaded But I Want One More Video  Great Video Bro. Please Do A Video If A Car Has Undercoat Done. How To Perform This Cleaning On A Car With Undercoat.  Very Nice  Beautiful White Accord  Keep On Making Such Sort Of Informative Videos  Beautiful Accord Mashaallah  Gari Wash Krwane K Bad Usy Kbi B Fori Garage Mn Khra Na Kren Usy Km Se Km 5Km Chlaen Ta K Hwa Phir K Sb Dry Ho Jae  یا اللہ ہم سب کی مشکلات آسان فرمائیں  آمین ثم آمین یا رب العالمین...  Very Informative And Important Lesson For Car Lovers As I Am👌🏻😍\n💚🇵🇰💚❤🇹🇷❤  Short Vdo May Achi Knowledge  Boss Nice Video Ha Ap Ke Lakin Ap  \nNay Salam Sai Ni Kia",
+      "suspected_fault_category": "FC-01",
+      "language": "ur",
+      "comments": [
+        {
+          "comment_id": "UgxBaUQ5_zwRZsQa0Ld4AaABAg",
+          "text": "Nice video, great work. Undercarriage should only be washed if required. And no there is no need to dry it with air either. Do you dry your car undersides after driving in rain or through a puddle. NOTHING should be applied there, not diesel, not silicone. Even silicone lubricants attract dust and form a layer of abrasive dust which will only hasten the degradation of rubber parts. If you are really into undercarriage care then wash it regularly, look for signs of rust, treat it by applying rust protector or rust converter & paint it, look for worn rubber parts and replace those. That's it.",
+          "intent": "suggested_solution",
+          "like_count": 20,
+          "published_at": "2022-01-30T15:12:03Z",
+          "replies": [
+            {
+              "text": "Brother how to protect undercarriage in rain or after rain when grease,dust and other impurities have accumulated in the undercarriage floor and rubber parts ۔ Do we have a pre or post rain ritual in this regard۔ Please share your experience and relevant products if you use?",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2023-07-19T09:37:00Z"
+            },
+            {
+              "text": "@muhammadarsalanmalick6504 As I mentioned in my above post, there is no pre-rain ritual. Post-rain, once the rainy season is over, you should wash the underside with clean water and that's it. Keep inspecting the underside every 6 months and apply paint or rust protector e.g. red oxide commonly known as zinc oxide paint if you see rust. There are specialized products for protecting the undercarriage like coal-tar but they are expensive and not worth it.",
+              "intent": "suggested_solution",
+              "like_count": 2,
+              "published_at": "2023-07-19T12:03:08Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxnwhYNLtO5DN6jusV4AaABAg",
+          "text": "The rims on this [PLATE REDACTED] look amazing ❤",
+          "intent": "discussion",
+          "like_count": 9,
+          "published_at": "2022-01-29T13:23:54Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwBZvAEzCJVJ71BeQd4AaABAg",
+          "text": "I was looking for rubber softener and how to protect car from rust let alone under carriage.  All in one video.",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2022-01-29T13:02:35Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyyOJf8ZusP-a9xOVt4AaABAg",
+          "text": "bhai itna sab kuch karne ke liye to apna zaati service station kholna parega 😜",
+          "intent": "discussion",
+          "like_count": 8,
+          "published_at": "2022-01-29T09:45:14Z",
+          "replies": [
+            {
+              "text": "Sahi bt hy bhai , kn service center wala etny chochaly bardash kry ga",
+              "intent": "suggested_solution",
+              "like_count": 2,
+              "published_at": "2022-01-29T16:05:46Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzsR6RzQnaDfxKceGx4AaABAg",
+          "text": "Keep up the good work bro. Very informative video for lots of us here.",
+          "intent": "discussion",
+          "like_count": 9,
+          "published_at": "2022-01-29T08:23:36Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugy8C8GVenb8ObJ8On54AaABAg",
+          "text": "Yar plz is gari ka aik user review do i know its owners review is already uploaded but i want one more video",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2022-01-29T09:54:07Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugw5KsIByLbEk0iIa1R4AaABAg",
+          "text": "Great video bro. Please do a video if a car has undercoat done. How to perform this cleaning on a car with undercoat.",
+          "intent": "suggested_solution",
+          "like_count": 4,
+          "published_at": "2022-01-29T09:21:21Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugy80rl9NpNiIfC1X7N4AaABAg",
+          "text": "Very nice  beautiful white accord",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2022-05-01T01:52:52Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwQZuiyyvsuNYKKWPR4AaABAg",
+          "text": "Keep on making such sort of informative videos",
+          "intent": "discussion",
+          "like_count": 4,
+          "published_at": "2022-01-29T08:12:56Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyU3-XdZc-ccf51oYd4AaABAg",
+          "text": "Beautiful accord MashaAllah",
+          "intent": "discussion",
+          "like_count": 4,
+          "published_at": "2022-01-29T09:59:24Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyjDI6YMDy_Jo-6zGx4AaABAg",
+          "text": "gari wash krwane k bad usy kbi b fori garage mn khra na kren usy km se km 5km chlaen ta k hwa phir k sb dry ho jae",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2022-01-29T08:57:18Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzmDS6wkXe5fAwT7cJ4AaABAg",
+          "text": "یا اللہ ہم سب کی مشکلات آسان فرمائیں  آمین ثم آمین یا رب العالمین...",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2022-01-29T09:32:50Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzyC1N_9O6Vqv4fsvd4AaABAg",
+          "text": "Very Informative and Important lesson for Car Lovers As I Am👌🏻😍\n💚🇵🇰💚❤🇹🇷❤",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2022-02-04T20:53:56Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyN4eIPYjIH7d1zadF4AaABAg",
+          "text": "Short vdo may achi knowledge",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2023-07-05T10:15:16Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgxR0gFY20NmvTvRLNd4AaABAg",
+          "text": "Boss nice video ha ap ke lakin ap  \nNay salam sai ni kia",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2022-01-29T09:00:05Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [
+        "Nice video, great work. Undercarriage should only be washed if required. And no there is no need to dry it with air either. Do you dry your car undersides after driving in rain or through a puddle. NOTHING should be applied there, not diesel, not silicone. Even silicone lubricants attract dust and form a layer of abrasive dust which will only hasten the degradation of rubber parts. If you are really into undercarriage care then wash it regularly, look for signs of rust, treat it by applying rust protector or rust converter & paint it, look for worn rubber parts and replace those. That's it.",
+        "@muhammadarsalanmalick6504 As I mentioned in my above post, there is no pre-rain ritual. Post-rain, once the rainy season is over, you should wash the underside with clean water and that's it. Keep inspecting the underside every 6 months and apply paint or rust protector e.g. red oxide commonly known as zinc oxide paint if you see rust. There are specialized products for protecting the undercarriage like coal-tar but they are expensive and not worth it.",
+        "Sahi bt hy bhai , kn service center wala etny chochaly bardash kry ga",
+        "Great video bro. Please do a video if a car has undercoat done. How to perform this cleaning on a car with undercoat."
+      ],
+      "collection_date": "2026-11-10T15:02:19.659492+00:00"
+    },
+    {
+      "video_id": "hc-PY2zMdYo",
+      "video_title": "Honda Civic 2014 Restoration | Moving Forward With The Project | Ep. 3",
+      "video_description": "In this episode of the PakWheels Restoration Series, the Honda Civic 2014 Rebirth project moves further with suspension work, exhaust, fuel, and servicing.\n\nThe episode covers the suspension check, remaining issues after repairs, exhaust work, fuel cost, service at the PakWheels Service Center, oil and air filters, gear oil, fuel efficiency, remaining defects, and light fitment.\n\nLike, Share & Subscribe to PakWheels for more Restoration Episodes, car transformations, and automotive content from Pakistan.\n\n👉Write your Car's Review: https://www.pakwheels.com/new-cars/reviews/\n\n______________________________________________\n\nLooking to sell your CAR?\n👉Post a free ad: https://www.pakwheels.com/used-cars/sell\nOr\n👉Avail Sell It For Me Service: https://www.pakwheels.com/products/pakwheels-sell-it-for-me/\n👉 Autostore: https://bit.ly/3MNa4uP\n\n______________________________________________\n\n🔔Download Our App:🔔\nFor Android: http://ow.ly/8o1d30revBP\nFor IOS: https://apps.apple.com/pk/app/pakwheels/id739776365\n\n______________________________________________\n\nFor more, visit: https://www.pakwheels.com/\n👉https://www.facebook.com/pakwheels/\n👉https://twitter.com/PakWheels\n👉https://www.instagram.com/pakwheels/\n\n*****Gari Ki Deals, Only On PakWheels!*****\n\n#PakWheels #2026 #Vlog #PakWheelsVlog",
+      "channel_name": "PakWheels Vlogs",
+      "channel_id": "UCeoxr1wpSRNPjnoHL-Lxflw",
+      "video_url": "https://www.youtube.com/watch?v=hc-PY2zMdYo",
+      "thumbnail_url": "https://i.ytimg.com/vi/hc-PY2zMdYo/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2026-11-10T11:57:48Z",
+      "duration": "32:44",
+      "view_count": 7534,
+      "like_count": 523,
+      "comment_count": 25,
+      "tags": [
+        "PakWheels",
+        "Vlog",
+        "PakWheelsVlog",
+        "Gaari",
+        "Cars in Pakistan",
+        "Bikes in Pakistan",
+        "Islamabad",
+        "Lahore",
+        "Karachi",
+        "Vlogs",
+        "2024"
+      ],
+      "search_query_used": "Car maintenance Pakistan",
+      "vehicle_make": "Honda",
+      "vehicle_model": "Civic",
+      "suspected_fault_category": "FC-05",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgzMC5yK438GY8SI4Z94AaABAg",
+          "text": "Sir aap ne Auto show pr bhot hi achi trha situation ko manage kia 🎉 love you from Multan 🎉🎉",
+          "intent": "discussion",
+          "like_count": 3,
+          "published_at": "2026-11-10T13:48:35Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugwt8yroI60CxQ5T7X54AaABAg",
+          "text": "Add Glass/Windshiled treatment and headlight tint service for winter/fog season. much needed for the time",
+          "intent": "problem_occurrence",
+          "like_count": 1,
+          "published_at": "2026-11-10T13:41:08Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzaBO5ItPqEkwL8bMl4AaABAg",
+          "text": "one suggestion: if its intro of video, please mention it on screen.",
+          "intent": "discussion",
+          "like_count": 2,
+          "published_at": "2026-11-10T12:18:26Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzQN1D6VWmX7jitGbR4AaABAg",
+          "text": "Ajj butt sahab punjabi mein bat nhi krhy 😂sunil bhai ny camera k pichy smjaya hoga achy se",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T14:13:11Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgyRrtVxr5mpi4xHi-V4AaABAg",
+          "text": "Karachi main bhi open kren service center, kum se [PLATE REDACTED] open kren Karachi main.",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T14:16:02Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugzx4PQ_wItBAZbf7Mx4AaABAg",
+          "text": "ZABARDAST G.",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2026-11-10T11:59:03Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwsaxyP5t3Q-jkexDh4AaABAg",
+          "text": "To make all thing work fine in prestigious condition of car it takes alot of patience & money at same time to have a amazing drive feel.\nHave gain more knowledge from this video",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T13:39:29Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzJMTUQpeEAKDl8bhp4AaABAg",
+          "text": "Pakwheels ki report ke according to shocks good the. 😮😮",
+          "intent": "discussion",
+          "like_count": 5,
+          "published_at": "2026-11-10T12:45:19Z",
+          "replies": [
+            {
+              "text": "Good one. Yes you are right. As per inspection  report shocks were okay. But they have to change all for of them.",
+              "intent": "suggested_solution",
+              "like_count": 1,
+              "published_at": "2026-11-10T12:48:37Z"
+            },
+            {
+              "text": "Inspection quality to obv achi hogi😢",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2026-11-10T12:49:31Z"
+            },
+            {
+              "text": "Inspection quality to obv achi hogi😢",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2026-11-10T12:49:33Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugyv2n7TpX7E57dNGE94AaABAg",
+          "text": "Use OEM parts or new kyb shocks.",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T13:11:58Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzsyCw03Jz-16Z3AdR4AaABAg",
+          "text": "Mujhy pakwheel ky kuch parts ky rates local market sy Zara opar mehsos hue (10 : 11) lykin Skil or labor ki Jo service dy rhy phir 👍 hy",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T14:22:33Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgzYgvaLcfgt97Hqc0p4AaABAg",
+          "text": "Why still 5km/L average?",
+          "intent": "problem_occurrence",
+          "like_count": 0,
+          "published_at": "2026-11-10T14:58:50Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgwxJj5P43bTGi_9Zil4AaABAg",
+          "text": "Yeh kia baat hue gari Karachi sy i hy 😅 ,, ye hamary pas hy [PLATE REDACTED] dot sy opar kbhi petrol nahi hota 😂",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T14:08:17Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgymFEcybLFAkycqeSF4AaABAg",
+          "text": "Gasi shock dabtay nahin bhai sb\nOil walay dabtay hain\nIs ke aglay oil pichlay gasi hain",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T14:31:46Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgxJKSsfo5z_7Oq-QIR4AaABAg",
+          "text": "First 😁",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T11:58:44Z",
+          "replies": []
+        },
+        {
+          "comment_id": "UgxYRGobJwPdXT7Vsgd4AaABAg",
+          "text": "Front or rear shock kabli daale hen ya new?",
+          "intent": "discussion",
+          "like_count": 0,
+          "published_at": "2026-11-10T13:27:43Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [
+        "Add Glass/Windshiled treatment and headlight tint service for winter/fog season. much needed for the time",
+        "Why still 5km/L average?"
+      ],
+      "extracted_solution_comments": [
+        "Good one. Yes you are right. As per inspection  report shocks were okay. But they have to change all for of them."
+      ],
+      "collection_date": "2026-11-10T15:02:19.965938+00:00"
+    },
+    {
+      "video_id": "xMzIAGmwuzc",
+      "video_title": "best mechanic seriously #automobileengineering #repair #automobile #car #engine",
+      "video_description": "",
+      "channel_name": "Best Mechanics Around the World",
+      "channel_id": "UCNA3-eExmgK3b6SwHczKbgA",
+      "video_url": "https://www.youtube.com/watch?v=xMzIAGmwuzc",
+      "thumbnail_url": "https://i.ytimg.com/vi/xMzIAGmwuzc/hqdefault.jpg",
+      "license": "youtube",
+      "has_captions": false,
+      "publication_date": "2023-10-27T03:11:36Z",
+      "duration": "00:08",
+      "view_count": 23278696,
+      "like_count": 97427,
+      "comment_count": 3397,
+      "tags": [],
+      "search_query_used": "Car maintenance Pakistan",
+      "vehicle_make": null,
+      "vehicle_model": "Best Mechanic Seriously #Automobileengineering #Repair #Automobile #Car #Engine  Am I The Only One That Was Yearning To See The Thing Started? Nope! I Was Hoping For At Least A Bump!! Yes, Please Turn The Engine Over Just For The Hell Of It 😂Me Too It Won’T Start…It’S Locked Up😂 No I Can Never Get The Time I Spent Watching This Back. 95K Likes ..... Makes You Question Those People You'Ll Get It Back By Typing Lol Instead Of Tying Out Laugh Out Loud! @Getreal1175  Your Comment Was As Dumb As The Video .. You Spent 3 Times As Long Writing This Bullshit Comment... And Now You'Ve Wasted More Time Viewing This Notification. @Freerangesimp  And You Wasted Time Writing Your Comment To Him .... \"Sounds Like Something In My Engine Is Locked Up\" 🤣 He Can Honestly Tell The Customer That The Serpentine Belt Is Locked Up. 😂🤣🤣🤣🤣🤣 Haha Good One Clever 😅 Now What Do We Do When We Have To Tell Him That The Engine Has Been Seized? 😂😂😂😂 I'M Far From A Mechanic, But This Just Looked Wrong As A Soup Sandwich From The Beginning. Yet We Dip Our Grilled Cheese In Tomato..... So The Thief Didn'T Get Away With Your Car....... But Now You Have $5,000 In Damages 😂😂😂😂😂 The Car Will Start And [Plate Redacted] Minuts- 1 Hour Depend On The Conditions Modern Cars Won’T Run At All. I Have Officially Seen The Dumbest Bull Crap In My Entire Life [Plate Redacted] Years So Far!!! Well There You Went And Challenged The Universe, And I'M Holding Its Beer. Get Ready To Be Amazed Again. They Will Always Make A Better Idiot. Lol 😂🤣 Keep Scrolling The Youtube And You Will Find Plenty More💯 Yeah, But His Drive Belt Locked Up! \"Honey,  The Car Is Making Weird Banging Sound. \"\n\"Did You Unlock The Engine Before You Left?\"😂 Can'T Believe No One Liked This Yet 😂😂😂😂 ❤❤❤❤❤❤❤❤❤❤❤❤❤ Very Cheeky Omg 🤯 I Fucking Love It 🤘🔥🤘🇦🇺 😂😂😂 That Keeps It From Breaking Because Now It’S Locked On.  For The Customer Who Refuses To Pay His Repair Bill.  Hahaha Lein Sale After 30 Days Only Problem Is The Bill Only Dropped To The Price Of Some Bolt Cutter ​@Jakesummers707Not Even That Just A 7 Dollar Belt. Not To Mention You Can Still Just Drive Away You Just Better Have A Jumpbox Or Be With A Buddy After About 5 Minutes Of Driving. Nothing A Cut Off Wheel Can'T Handle Lol @Tonyh4966 Well The Vast Majority Of Americans Have No Idea How To Do That This Absolutely Proves The Saying “You Can’T Fix $Tupid” Amen Brother Agree. Really Dumb Idea. Ik Man You’Re Screwed Oh Maybe, I Thought It Was. Your Not Guna Pay Find Out. 😂 It'S Sarcasm!!😂 You Were 100% Correct About Not Being Able To Fix Stupid But You Forgot To Mention How Perfectly You Executed It. Wasted My Time Watching This, And Now I'M Wasting Time Typing This. And I'M Wasting My Time Reading The Comments For One That Made All This Worthwhile 😂😂😂😂😂 Laughing..Me Reading Comments 😅😅 🤣🤣 Same! 😂😂😂😂😂😂😂 Damn It…… \"Your Bill And Padlock Key Are At The Cashier.\" Yup Exactly Wouldn'T Stop Anything May Make A Noise Untill U Go To Auto Zone Un Tighten The Pulls Amd Boom Bye Bye Belt And Lock ❤❤❤❤❤❤❤❤❤ ​@Youngskennels5381 No Bye Bye Alternator Someone Failed The Lockout Tag You Classes 😂... Lock Out Tag Out😂Haven'T Heard That In Years❤ Or Maybe He Knows The Customer Has A Spare Key And The Repair Is Done. That'S A Good One! Seriously,Someones Going To Get Hurt With Such Slack Standards(The Fkn Truck Will Die,But Never The Camera Man) He'S Done Fixing The Car  So  Tomorrow Customer Will Pay Then Pick Up Their Car So Don'T Try And Take It In The Night Or Your Car Will Suffer. Just An  Insurance Tactic.",
+      "suspected_fault_category": "FC-01",
+      "language": "en",
+      "comments": [
+        {
+          "comment_id": "UgweibjGvGnqbROFGyB4AaABAg",
+          "text": "Am I the only one that was yearning to see the thing started?",
+          "intent": "discussion",
+          "like_count": 3557,
+          "published_at": "2024-01-02T00:30:00Z",
+          "replies": [
+            {
+              "text": "Nope! I was hoping for at least a bump!!",
+              "intent": "discussion",
+              "like_count": 37,
+              "published_at": "2024-01-02T19:56:33Z"
+            },
+            {
+              "text": "Yes, please turn the engine over just for the hell of it",
+              "intent": "discussion",
+              "like_count": 48,
+              "published_at": "2024-01-02T22:24:02Z"
+            },
+            {
+              "text": "😂me too",
+              "intent": "discussion",
+              "like_count": 10,
+              "published_at": "2024-01-02T22:40:54Z"
+            },
+            {
+              "text": "It won’t start…it’s locked up😂",
+              "intent": "discussion",
+              "like_count": 147,
+              "published_at": "2024-01-02T23:33:59Z"
+            },
+            {
+              "text": "No",
+              "intent": "discussion",
+              "like_count": 3,
+              "published_at": "2024-01-03T00:11:50Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugx7w9KFsheKiY48n-x4AaABAg",
+          "text": "I can never get the time I spent watching this back.",
+          "intent": "discussion",
+          "like_count": 225,
+          "published_at": "2024-01-06T00:33:15Z",
+          "replies": [
+            {
+              "text": "95k likes ..... makes you question those people",
+              "intent": "cost_experience",
+              "like_count": 5,
+              "published_at": "2026-06-19T01:46:11Z"
+            },
+            {
+              "text": "You'll get it back by typing LOL instead of tying out laugh out loud!",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2026-06-19T19:14:48Z"
+            },
+            {
+              "text": "@getreal1175  Your comment was as dumb as the video ..",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2026-06-19T21:42:22Z"
+            },
+            {
+              "text": "you spent 3 times as long writing this bullshit comment... and now you've wasted more time viewing this notification.",
+              "intent": "discussion",
+              "like_count": 4,
+              "published_at": "2026-07-02T20:12:37Z"
+            },
+            {
+              "text": "@freerangesimp  And you wasted time writing your comment to him ....",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2026-07-02T22:57:53Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwcwUc4q27ZdYUALpZ4AaABAg",
+          "text": "\"Sounds like something in my engine is locked up\"",
+          "intent": "discussion",
+          "like_count": 98,
+          "published_at": "2024-01-06T05:44:26Z",
+          "replies": [
+            {
+              "text": "🤣",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2026-06-15T01:03:24Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "Ugy3tl6oQagT-TdAXup4AaABAg",
+          "text": "He can honestly tell the customer that the serpentine belt is locked up.",
+          "intent": "discussion",
+          "like_count": 1110,
+          "published_at": "2024-01-04T06:51:22Z",
+          "replies": [
+            {
+              "text": "😂🤣🤣🤣🤣🤣",
+              "intent": "discussion",
+              "like_count": 11,
+              "published_at": "2024-01-04T17:56:18Z"
+            },
+            {
+              "text": "Haha good one",
+              "intent": "discussion",
+              "like_count": 6,
+              "published_at": "2024-01-04T21:38:02Z"
+            },
+            {
+              "text": "Clever",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2024-01-04T23:11:59Z"
+            },
+            {
+              "text": "😅 now what do we do when we have to tell him that the engine has been seized?",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-05T00:10:10Z"
+            },
+            {
+              "text": "😂😂😂😂",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-05T00:22:33Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxIqijv3toQY5xyK-94AaABAg",
+          "text": "I'm far from a mechanic, but this just looked wrong as a soup sandwich from the beginning.",
+          "intent": "suggested_solution",
+          "like_count": 18,
+          "published_at": "2024-01-06T16:54:09Z",
+          "replies": [
+            {
+              "text": "yet we dip our grilled cheese in tomato.....",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2026-10-08T01:08:19Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzMsdH0Jgjyf5djq9F4AaABAg",
+          "text": "So the thief didn't get away with your car....... but now you have $5,000 in damages 😂😂😂😂😂",
+          "intent": "discussion",
+          "like_count": 140,
+          "published_at": "2024-01-06T20:54:47Z",
+          "replies": [
+            {
+              "text": "The car Will start AND [PLATE REDACTED] minuts- 1 hour depend on the conditions",
+              "intent": "discussion",
+              "like_count": 4,
+              "published_at": "2024-04-25T02:51:37Z"
+            },
+            {
+              "text": "Modern cars won’t run at all.",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2024-05-02T14:15:37Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgzHTSrlddVJtyrDAgd4AaABAg",
+          "text": "I have officially seen the dumbest bull crap in my entire life [PLATE REDACTED] years so far!!!",
+          "intent": "discussion",
+          "like_count": 111,
+          "published_at": "2024-01-05T04:16:36Z",
+          "replies": [
+            {
+              "text": "Well there you went and challenged the universe, and I'm holding its beer. Get ready to be amazed again. They will always make a better idiot. LOL",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2026-07-09T15:55:45Z"
+            },
+            {
+              "text": "😂🤣 keep scrolling the YouTube and you will find plenty more💯",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2026-08-14T22:17:54Z"
+            },
+            {
+              "text": "Yeah, but his drive belt locked up!",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2026-10-01T00:34:41Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxFv1zhjC5SGABCjsh4AaABAg",
+          "text": "\"Honey,  the car is making weird banging sound. \"\n\"Did you unlock the engine before you left?\"😂",
+          "intent": "discussion",
+          "like_count": 256,
+          "published_at": "2024-01-04T23:50:59Z",
+          "replies": [
+            {
+              "text": "Can't believe no one liked this yet",
+              "intent": "discussion",
+              "like_count": 3,
+              "published_at": "2024-01-05T01:56:53Z"
+            },
+            {
+              "text": "😂😂😂😂",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-05T22:28:29Z"
+            },
+            {
+              "text": "❤❤❤❤❤❤❤❤❤❤❤❤❤",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-06T08:46:26Z"
+            },
+            {
+              "text": "Very Cheeky OMG 🤯 I fucking love IT 🤘🔥🤘🇦🇺",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2024-01-06T14:11:12Z"
+            },
+            {
+              "text": "😂😂😂",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2024-01-06T15:58:34Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwTT63v90ycA4gLbnN4AaABAg",
+          "text": "That keeps it from breaking because now it’s locked on.",
+          "intent": "discussion",
+          "like_count": 6,
+          "published_at": "2024-01-06T02:18:04Z",
+          "replies": []
+        },
+        {
+          "comment_id": "Ugwh808rwtOMLre1Gdt4AaABAg",
+          "text": "For the customer who refuses to pay his repair bill.  HAHAHA",
+          "intent": "suggested_solution",
+          "like_count": 598,
+          "published_at": "2024-01-01T18:14:31Z",
+          "replies": [
+            {
+              "text": "Lein sale after 30 days",
+              "intent": "discussion",
+              "like_count": 5,
+              "published_at": "2024-01-04T02:11:52Z"
+            },
+            {
+              "text": "Only problem is the bill only dropped to the price of some bolt cutter",
+              "intent": "problem_occurrence",
+              "like_count": 5,
+              "published_at": "2024-01-04T05:25:49Z"
+            },
+            {
+              "text": "​@jakesummers707not even that just a 7 dollar belt. Not to mention you can still just drive away you just better have a jumpbox or be with a buddy after about 5 minutes of driving.",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2024-01-04T18:38:35Z"
+            },
+            {
+              "text": "Nothing a cut off wheel can't handle lol",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2024-01-04T21:53:14Z"
+            },
+            {
+              "text": "@tonyh4966 well the vast majority of Americans have no idea how to do that",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2024-01-04T21:58:37Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwBS0M8vgNfNbq0LCZ4AaABAg",
+          "text": "This absolutely proves the saying “you can’t fix $tupid”",
+          "intent": "discussion",
+          "like_count": 616,
+          "published_at": "2023-12-27T14:37:32Z",
+          "replies": [
+            {
+              "text": "AMEN BROTHER",
+              "intent": "discussion",
+              "like_count": 4,
+              "published_at": "2023-12-31T00:22:15Z"
+            },
+            {
+              "text": "Agree. Really dumb idea.",
+              "intent": "discussion",
+              "like_count": 6,
+              "published_at": "2023-12-31T14:20:05Z"
+            },
+            {
+              "text": "Ik man you’re screwed",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2023-12-31T16:03:28Z"
+            },
+            {
+              "text": "Oh maybe, I thought it was. Your not guna pay find out. 😂",
+              "intent": "discussion",
+              "like_count": 2,
+              "published_at": "2024-01-01T09:31:49Z"
+            },
+            {
+              "text": "It's sarcasm!!😂 YOU WERE 100% CORRECT ABOUT NOT BEING ABLE TO FIX STUPID BUT YOU FORGOT TO MENTION HOW PERFECTLY YOU EXECUTED IT.",
+              "intent": "discussion",
+              "like_count": 6,
+              "published_at": "2024-01-01T09:59:34Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxXHvK1yzo-vkQBE8B4AaABAg",
+          "text": "Wasted my time watching this, and now I'm wasting time typing this.",
+          "intent": "discussion",
+          "like_count": 770,
+          "published_at": "2024-01-05T23:26:04Z",
+          "replies": [
+            {
+              "text": "and I'm wasting my time reading the comments for one that made all this worthwhile 😂😂😂😂😂",
+              "intent": "discussion",
+              "like_count": 22,
+              "published_at": "2024-01-06T01:38:51Z"
+            },
+            {
+              "text": "Laughing..me reading comments 😅😅",
+              "intent": "discussion",
+              "like_count": 12,
+              "published_at": "2024-01-06T03:29:56Z"
+            },
+            {
+              "text": "🤣🤣 same!",
+              "intent": "discussion",
+              "like_count": 6,
+              "published_at": "2024-01-06T06:08:27Z"
+            },
+            {
+              "text": "😂😂😂😂😂😂😂",
+              "intent": "discussion",
+              "like_count": 5,
+              "published_at": "2024-01-06T08:32:57Z"
+            },
+            {
+              "text": "Damn it……",
+              "intent": "discussion",
+              "like_count": 5,
+              "published_at": "2024-01-06T09:55:42Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgxzerC1B4ouAVd0X-94AaABAg",
+          "text": "\"Your bill and padlock key are at the cashier.\"",
+          "intent": "discussion",
+          "like_count": 280,
+          "published_at": "2024-01-02T22:46:36Z",
+          "replies": [
+            {
+              "text": "Yup",
+              "intent": "discussion",
+              "like_count": 4,
+              "published_at": "2024-01-06T00:07:03Z"
+            },
+            {
+              "text": "Exactly",
+              "intent": "discussion",
+              "like_count": 4,
+              "published_at": "2024-01-06T01:58:18Z"
+            },
+            {
+              "text": "Wouldn't stop anything may make a noise untill u go to auto zone un tighten the pulls amd boom bye bye belt and lock",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2024-01-06T07:49:39Z"
+            },
+            {
+              "text": "❤❤❤❤❤❤❤❤❤",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2024-01-06T08:46:10Z"
+            },
+            {
+              "text": "​@youngskennels5381 no bye bye alternator",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-06T10:13:47Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwrHoNecg_S2OcmQdt4AaABAg",
+          "text": "Someone failed the lockout tag you classes 😂...",
+          "intent": "discussion",
+          "like_count": 213,
+          "published_at": "2023-12-18T05:58:55Z",
+          "replies": [
+            {
+              "text": "Lock out tag out😂haven't heard that in years❤",
+              "intent": "discussion",
+              "like_count": 1,
+              "published_at": "2024-01-03T04:33:12Z"
+            },
+            {
+              "text": "or maybe he knows the customer has a spare key and the repair is done.",
+              "intent": "suggested_solution",
+              "like_count": 0,
+              "published_at": "2024-01-03T18:44:57Z"
+            },
+            {
+              "text": "That's a good one!",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-03T18:53:44Z"
+            },
+            {
+              "text": "Seriously,someones going to get hurt with such slack standards(the fkn truck will die,but never the camera man)",
+              "intent": "discussion",
+              "like_count": 0,
+              "published_at": "2024-01-03T20:11:03Z"
+            }
+          ]
+        },
+        {
+          "comment_id": "UgwlGYXqN7fQQMlclVh4AaABAg",
+          "text": "He's done fixing the car  so  tomorrow customer will pay then pick up their car so don't try and take it in the night or your car will suffer. Just an  insurance tactic.",
+          "intent": "discussion",
+          "like_count": 1,
+          "published_at": "2026-07-12T14:01:51Z",
+          "replies": []
+        }
+      ],
+      "extracted_problem_comments": [],
+      "extracted_solution_comments": [
+        "I'm far from a mechanic, but this just looked wrong as a soup sandwich from the beginning.",
+        "Well there you went and challenged the universe, and I'm holding its beer. Get ready to be amazed again. They will always make a better idiot. LOL",
+        "For the customer who refuses to pay his repair bill.  HAHAHA",
+        "or maybe he knows the customer has a spare key and the repair is done."
+      ],
+      "collection_date": "2026-11-10T15:02:20.397129+00:00"
+    }
+  ]
+}

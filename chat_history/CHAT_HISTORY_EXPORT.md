@@ -1,0 +1,2535 @@
+# AutoCare AI / AI Auto Pakistan — Shareable Chat History Export
+
+- **Conversation ID:** `2ed12049-53aa-43c1-982a-0f64af9fa83e`
+- **Total Conversation Turns Exported:** `89`
+- **Security Note:** API keys matching `AIza...` have been replaced with `[YOUTUBE_API_KEY_REDACTED]`.
+
+---
+
+### 1. [USER] (2026-11-09T13:56:14Z)
+
+MASTER PROJECT PROMPT — AI AUTO PAKISTAN
+
+Multi-Source Automotive Dataset Collection, Engineering and AI Preparation
+
+Act as a Senior Data Engineer, Automotive AI Researcher, Machine Learning Engineer, Backend Developer and Data Architect.
+
+I am developing a university Final Year Project named AI Auto Pakistan.
+
+Your primary responsibility at this stage is to build a complete, reliable and scalable multi-source automotive data collection and dataset engineering system for Pakistani vehicles.
+
+Do not immediately build a chatbot or a basic website. First, focus on collecting, organizing, processing, validating and preparing high-quality automotive data for future AI/ML models.
+
+---
+
+1. PROJECT OBJECTIVE
+
+Build an automotive intelligence dataset platform that collects and organizes information from multiple sources:
+
+1. YouTube
+2. Facebook
+3. PakWheels
+4. Authorized automotive websites and blogs
+5. Public technical documentation and vehicle manuals
+6. Mechanic interviews and consent-based submissions
+7. Car-owner problem reports and repair experiences
+
+The final dataset should help train and evaluate future AI systems for:
+
+- Automotive fault diagnosis
+- Engine sound classification
+- Vehicle component recognition
+- Dashboard warning-light recognition
+- Automotive image and video understanding
+- NLP-based vehicle problem understanding
+- Repair recommendation
+- Maintenance prediction
+- Repair cost estimation
+
+The initial geographical focus is Pakistan.
+
+Support Pakistani automotive terminology, English, Urdu, Roman Urdu and Punjabi.
+
+---
+
+2. FIRST: INSPECT THE EXISTING PROJECT
+
+Before changing anything:
+
+1. Inspect the entire existing project directory.
+2. Identify existing Python scripts, configuration files, schemas and datasets.
+3. Inspect requirements.txt and existing dependencies.
+4. Identify which features are already implemented.
+5. Do not unnecessarily overwrite existing working code.
+6. Prepare a clear implementation plan.
+7. Create backups before making destructive changes.
+8. Maintain a clean and modular project structure.
+
+If an existing feature is incomplete, improve it rather than creating a duplicate.
+
+---
+
+3. MULTI-SOURCE DATA COLLECTION
+
+Build separate collection modules for every source.
+
+A. YouTube
+
+Collect automotive content related to Pakistani vehicles.
+
+Required metadata:
+
+- Video ID
+- Video title
+- Video description
+- Channel name
+- Channel ID
+- Video URL
+- Publication date
+- Duration
+- View count
+- Like count, when available
+- Comment count, when available
+- Tags, when available
+- Search query used
+- Vehicle make
+- Vehicle model
+- Suspected fault category
+- Language
+- Collection date
+
+Use the official YouTube Data API wherever applicable.
+
+Search multiple queries, not just one.
+
+Example search queries:
+
+- Suzuki Alto engine problem Pakistan
+- Suzuki Cultus overheating issue
+- Toyota Corolla engine knocking
+- Honda City suspension noise
+- Honda Civic AC problem
+- Car starting problem Pakistan
+- Engine misfire symptoms
+- Car vibration while driving
+- Car smoke from exhaust
+- Car battery problems
+- Car fuel average problems
+- Car transmission problems
+- Car mechanic repair Pakistan
+- Dashboard warning lights Pakistan
+- Car maintenance Pakistan
+
+Create a configurable search-query file so I can add more queries without modifying Python code.
+
+Important:
+Collect metadata first. Do not automatically download copyrighted videos, audio or subtitles. Process media only when permission, ownership or another lawful basis exists.
+
+B. Facebook
+
+Create a Facebook data acquisition module.
+
+Target information:
+
+- Public automotive posts
+- Public automotive page discussions
+- Vehicle owner complaints
+- Mechanic responses
+- Repair recommendations
+- Common vehicle faults
+- Parts recommendations
+- Maintenance discussions
+- Repair price experiences
+- Vehicle-specific questions and answers
+
+Use authorized Meta APIs and permitted access methods.
+
+Do not bypass authentication, privacy settings, platform restrictions or API permissions.
+
+Do not harvest private profiles, private groups, personal phone numbers or private conversations.
+
+Where automated API access is unavailable, provide a manual research-import system.
+
+Create a CSV template for manually entering useful Facebook research findings.
+
+Store source URL, date, vehicle details, problem, proposed solution, evidence and review status.
+
+C. PakWheels
+
+Create a PakWheels research and import module.
+
+Relevant information:
+
+- Automotive blogs
+- Vehicle ownership experiences
+- Technical discussions
+- Common vehicle problems
+- Repair experiences
+- Maintenance recommendations
+- Vehicle comparisons
+- Spare parts discussions
+- Mechanic recommendations
+- Fuel economy discussions
+- Repair cost experiences
+
+Important:
+Respect PakWheels Terms of Service. Do not build an unauthorized crawler or automated scraper.
+
+Use written permission, licensed datasets, authorized APIs if available, or manually researched notes where permitted.
+
+Create a structured CSV/Excel import template for PakWheels research.
+
+Every imported record must preserve its original source reference.
+
+D. Other automotive sources
+
+Create an extensible source registry.
+
+Allow future addition of:
+
+- Official manufacturer documentation
+- Vehicle owner's manuals
+- Public technical service documentation where licensed
+- Automotive research papers
+- Authorized repair databases
+- Mechanic interviews
+- Car-owner submissions
+
+Each source must have its own collection method, permission status, limitations and attribution information.
+
+---
+
+4. DATASET STRUCTURE
+
+Design a normalized and extensible automotive data schema.
+
+Every automotive record should support the following fields.
+
+Vehicle information
+
+- record_id
+- make
+- model
+- variant
+- manufacturing_year
+- engine_cc
+- engine_type
+- fuel_type
+- transmission
+- mileage_km
+- vehicle_generation
+- market_country
+
+Problem information
+
+- problem_title
+- problem_description
+- symptoms
+- fault_category
+- affected_component
+- suspected_causes
+- confirmed_causes
+- severity
+- problem_frequency
+- driving_conditions
+- occurrence_conditions
+
+Audio information
+
+- audio_file_reference
+- audio_type
+- sound_description
+- sound_category
+- engine_rpm, if available
+- recording_conditions
+- vehicle_stationary_or_moving
+- audio_quality
+- human_verified_label
+
+Examples of sound categories:
+
+- Engine knocking
+- Ticking
+- Rattling
+- Grinding
+- Squealing
+- Belt noise
+- Exhaust noise
+- Misfire
+- Suspension noise
+- Wheel bearing noise
+- Starter motor noise
+
+Image and video information
+
+- image_reference
+- video_reference
+- media_type
+- detected_component
+- visible_damage
+- dashboard_warning_light
+- smoke_color
+- image_description
+- video_timestamp
+- annotation_status
+
+Examples:
+
+- Engine components
+- Battery
+- Radiator
+- Tires
+- Brakes
+- Suspension
+- Exhaust
+- Dashboard warning lights
+- Oil leakage
+- Coolant leakage
+- White smoke
+- Black smoke
+- Blue smoke
+
+Repair information
+
+- recommended_solution
+- repair_steps
+- required_parts
+- required_tools
+- repair_difficulty
+- estimated_repair_time
+- mechanic_experience
+- repair_success
+- verification_status
+
+Cost information
+
+- estimated_cost_pkr
+- minimum_cost_pkr
+- maximum_cost_pkr
+- parts_cost_pkr
+- labor_cost_pkr
+- price_date
+- city
+- price_source
+
+Never assume an old repair price is a current market price.
+
+Source and quality information
+
+- source_platform
+- source_url
+- source_id
+- source_author_or_channel, where appropriate
+- publication_date
+- collection_date
+- language
+- evidence_reference
+- rights_basis
+- permission_status
+- confidence_score
+- human_review_status
+- reviewer_notes
+
+Use null for unknown values. Never invent missing information.
+
+---
+
+5. AUTOMOTIVE FAULT TAXONOMY
+
+Create a structured fault taxonomy.
+
+At minimum, support these categories:
+
+1. Engine
+2. Transmission
+3. Clutch
+4. Brakes
+5. Suspension
+6. Steering
+7. Electrical system
+8. Battery and charging
+9. Cooling system
+10. Fuel system
+11. Exhaust system
+12. Air conditioning
+13. Tires and wheels
+14. Sensors and ECU
+15. Body and exterior
+16. Interior and dashboard
+17. Starting and ignition
+18. Lubrication system
+
+Every fault should have a unique category ID.
+
+Allow multiple symptoms and possible causes for a single fault.
+
+Distinguish between:
+
+- Owner-reported problem
+- Mechanic-suggested cause
+- Mechanic-confirmed diagnosis
+- Verified repair outcome
+
+Do not treat a social media comment as a confirmed mechanical diagnosis.
+
+---
+
+6. VIDEO AND TRANSCRIPTION PIPELINE
+
+Create a modular video metadata and authorized-media processing pipeline.
+
+For authorized media only:
+
+1. Extract or import the permitted media.
+2. Extract audio.
+3. Convert audio into a suitable format.
+4. Generate transcripts using Whisper or faster-whisper.
+5. Support Urdu, English, Roman Urdu and Punjabi where possible.
+6. Preserve original transcript.
+7. Create a cleaned transcript.
+8. Detect language.
+9. Extract vehicle names and automotive terms.
+10. Extract symptoms.
+11. Extract possible causes.
+12. Extract repair recommendations.
+13. Extract parts and cost mentions.
+14. Preserve timestamps and links to original evidence.
+
+Do not automatically convert a transcript's claims into verified facts.
+
+Store extracted claims separately from verified knowledge.
+
+---
+
+7. NLP AND DATA EXTRACTION
+
+Build a modular NLP processing pipeline.
+
+It should eventually identify:
+
+- Vehicle make and model
+- Vehicle year
+- Engine size
+- Problem symptoms
+- Automotive components
+- Fault categories
+- Possible causes
+- Repair recommendations
+- Spare parts
+- Repair prices
+- Language
+- Sentiment or owner experience, if useful
+
+Support different ways of expressing the same problem.
+
+Examples:
+
+- "Gaari start nahi ho rahi"
+- "Car won't start"
+- "Engine cranking but not starting"
+- "گاڑی اسٹارٹ نہیں ہو رہی"
+
+Map these to a common problem representation without losing the original wording.
+
+Do not force a fault label when the evidence is insufficient.
+
+---
+
+8. DATA CLEANING AND QUALITY CONTROL
+
+Implement:
+
+- Duplicate detection
+- Duplicate video ID detection
+- Duplicate source URL detection
+- Missing-field analysis
+- Invalid vehicle-year detection
+- Invalid price detection
+- Language detection
+- Text normalization
+- Category normalization
+- Schema validation
+- Broken-reference detection
+- Data provenance tracking
+
+Create a quality report showing:
+
+- Total records
+- Records by source
+- Records by vehicle
+- Records by fault category
+- Records by language
+- Missing fields
+- Duplicate records
+- Unverified records
+- Permission/review status
+- Records ready for ML
+- Records requiring manual review
+
+Never silently delete records. Keep an audit log of cleaning operations.
+
+---
+
+9. DATABASE DESIGN
+
+Prepare a database structure that can later support the complete AI Auto Pakistan application.
+
+Recommended architecture:
+
+- PostgreSQL for structured automotive data
+- pgvector for future semantic search
+- Object storage for authorized images, audio and video
+- Metadata references connecting media to database records
+
+Create tables for:
+
+- vehicles
+- vehicle_variants
+- fault_categories
+- diagnostic_records
+- symptoms
+- repair_solutions
+- repair_costs
+- sources
+- media_assets
+- transcripts
+- annotations
+- mechanic_submissions
+- dataset_reviews
+- collection_jobs
+- audit_logs
+
+Use unique IDs and proper foreign keys.
+
+Avoid storing large media files directly inside PostgreSQL.
+
+For the local prototype, use a simple local storage directory with database references. Keep the design ready for future object storage.
+
+---
+
+10. FRONTEND AND BACKEND PREPARATION
+
+Prepare a modular architecture for future application integration.
+
+Backend:
+
+- Python
+- FastAPI
+- PostgreSQL
+- Pydantic validation
+
+Frontend:
+
+- React
+
+Provide API endpoints for:
+
+- Adding a vehicle record
+- Searching vehicle problems
+- Importing research records
+- Uploading authorized media
+- Retrieving fault categories
+- Viewing repair information
+- Retrieving cost estimates
+- Viewing dataset statistics
+- Reviewing and approving records
+
+Use proper validation and error handling.
+
+Do not expose API keys or credentials in frontend code.
+
+---
+
+11. DATASET OUTPUTS
+
+The system must produce clean and documented outputs:
+
+1. Raw source metadata
+2. Normalized automotive records
+3. Cleaned dataset
+4. Human-reviewed dataset
+5. Audio metadata and authorized audio references
+6. Image metadata and authorized image references
+7. Video metadata and permitted transcript references
+8. Structured repair knowledge
+9. Cost dataset with date and location
+10. ML-ready training and evaluation datasets
+
+Support:
+
+- CSV
+- JSON
+- JSONL
+- PostgreSQL
+
+Keep raw, processed, validated and ML-ready datasets separate.
+
+---
+
+12. MACHINE LEARNING PREPARATION
+
+Do not train a large model immediately.
+
+First prepare datasets for future experiments:
+
+A. Text classification:
+Predict automotive fault categories from user-described symptoms.
+
+B. Audio classification:
+Classify engine and mechanical sounds.
+
+C. Image classification:
+Recognize vehicle components, visible faults and dashboard warning lights.
+
+D. Multimodal diagnosis:
+Combine vehicle details, text, audio and images.
+
+E. Repair recommendation:
+Retrieve relevant verified repair knowledge.
+
+Create train, validation and test splits while preventing duplicate or near-identical source content from leaking across splits.
+
+Keep evaluation data separate from training data.
+
+Document dataset limitations and class imbalance.
+
+---
+
+13. DASHBOARD AND REPORTING
+
+Create a simple dataset engineering dashboard showing:
+
+- Total collected records
+- YouTube records
+- Facebook research records
+- PakWheels research records
+- Other source records
+- Total vehicles covered
+- Fault categories covered
+- Audio samples
+- Image samples
+- Video metadata records
+- Transcribed records
+- Reviewed records
+- ML-ready records
+
+Include charts and filtering by vehicle, source, fault and language.
+
+Do not display invented collection statistics. Show zero when no records have been collected.
+
+---
+
+14. SECURITY, LEGAL AND ETHICAL REQUIREMENTS
+
+This is mandatory.
+
+- Use official APIs and authorized access methods.
+- Respect website Terms of Service.
+- Respect copyright and licensing.
+- Do not bypass rate limits or access restrictions.
+- Do not scrape private groups or private accounts.
+- Do not collect unnecessary personal information.
+- Remove personal identifiers from owner submissions.
+- Keep API keys in environment variables.
+- Never upload .env files or credentials to GitHub.
+- Preserve source attribution and permission records.
+- Allow records to be flagged or removed when required.
+- Distinguish anecdotal information from verified technical information.
+
+Do not claim that data is legally reusable merely because it is publicly visible.
+
+---
+
+15. IMPLEMENTATION ORDER
+
+Work in these stages.
+
+Phase 1: Existing project inspection and architecture.
+
+Phase 2: Dataset schema and automotive fault taxonomy.
+
+Phase 3: YouTube API metadata collection.
+
+Phase 4: Facebook authorized API integration and manual research import.
+
+Phase 5: PakWheels manual/authorized research import.
+
+Phase 6: Owner and mechanic submission templates.
+
+Phase 7: Data normalization, deduplication and validation.
+
+Phase 8: Transcription and authorized media-processing pipeline.
+
+Phase 9: Database integration.
+
+Phase 10: Dataset dashboard and quality reports.
+
+Phase 11: ML-ready dataset preparation.
+
+Phase 12: Documentation and testing.
+
+Do not skip phases or pretend that a module is complete when it is not.
+
+---
+
+16. FINAL DELIVERABLES
+
+At completion, provide:
+
+1. Complete working source code.
+2. Clean project directory structure.
+3. Database schema and migrations.
+4. Dataset collection scripts.
+5. YouTube API integration.
+6. Facebook authorized/manual import workflow.
+7. PakWheels authorized/manual import workflow.
+8. CSV and Excel research templates.
+9. NLP and transcription modules.
+10. Data cleaning and validation scripts.
+11. Dataset quality dashboard.
+12. Example records clearly marked as examples.
+13. Installation instructions for Windows.
+14. .env.example file.
+15. requirements.txt.
+16. README.md with beginner-friendly instructions.
+17. Unit tests and integration tests.
+18. A report explaining what works, what needs API credentials, what requires permission and what remains incomplete.
+
+For each source, show:
+
+- What data can be collected
+- How it is collected
+- Whether API access is required
+- Whether permission is required
+- What limitations exist
+
+---
+
+17. IMPORTANT WORKING INSTRUCTIONS
+
+I am a beginner in data engineering and need understandable implementation.
+
+Explain the work in simple language.
+
+Build actual working code rather than only giving recommendations.
+
+Do not generate fake datasets and present them as real collected data.
+
+Do not claim that YouTube, Facebook or PakWheels data has been collected until the relevant collection process has successfully run.
+
+Start with a small test collection, verify the results, then scale gradually.
+
+Do not collect thousands of low-quality records just to increase dataset size.
+
+Prioritize accuracy, traceability, source diversity and verified automotive knowledge.
+
+At the end of each phase, provide:
+
+- What you implemented
+- Files created or changed
+- How to run it
+- Test results
+- Remaining tasks
+- Any API keys or permissions I must provide
+
+Start by inspecting my existing AI Auto Pakistan project and then implement Phase 1. Do not stop after generating a plan.
+
+---
+
+### 2. [ASSISTANT] (2026-11-09T14:11:04Z)
+
+# AI Auto Pakistan — Multi-Source Automotive Dataset Collection & Engineering Platform
+
+I have completed the inspection of your existing project and implemented **Phase 1: Existing Project Inspection & Architecture**. 
+
+A complete system architecture document has been generated in the project artifacts:  
+[AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md](file:///C:/Users/ABDUL/.gemini/antigravity/brain/2ed12049-53aa-43c1-982a-0f64af9fa83e/AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md)
+
+---
+
+## 1. What Was Discovered During Project Inspection
+
+Your project located at [`C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2) is the codebase for your university Final Year Project (**AI Auto Pakistan / AutoCare AI**).
+
+### Existing Assets & Capabilities
+* **Backend Framework:** FastAPI with Pydantic validation and SQLite/PostgreSQL schemas.
+* **Vehicle Scope:** Toyota Corolla, Honda Civic, and Suzuki Swift (2015–2025) in [`vehicles.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/vehicles.csv).
+* **Multilingual Foundations:** Rule-based detection and keyword expansion for English, Urdu, and Roman Urdu (e.g., *awaz*, *garam*, *dhuan*, *jhatka*) in [`language.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/autocare/language.py).
+* **Automotive Knowledge Base:** Ingestion modules for OEM manuals, SAE J2012 OBD-II codes, starter mechanic interview notes, and a localized Pakistani spare parts and labor pricing database in PKR (`pricing.py`).
+* **Test Suite:** **114 existing unit and acceptance tests** were discovered and verified to pass on your system.
+
+### Gaps Identified for Multi-Source Dataset Engineering
+1. **No multi-source automated collectors:** No modules existed for YouTube Data API v3 metadata harvesting, Facebook research imports, or PakWheels forum research imports.
+2. **Missing unified schema & fault taxonomy:** The schema did not yet cover audio acoustics (engine knocking, rattling), component images/dashboard lights, video metadata, or an 18-category fault taxonomy covering Pakistan's broader fleet (Suzuki Alto, Cultus, Mehran, WagonR, City, Yaris).
+3. **No audit logging & deduplication:** There was no append-only audit trail tracking record provenance or detecting duplicate video IDs and URLs.
+4. **No leak-free ML dataset splitter:** No pipeline existed to create train/val/test splits grouped by source and vehicle to prevent data leakage.
+
+---
+
+## 2. What Was Implemented in Phase 1
+
+### A. Safety & Backup
+Before making any changes, a complete safety snapshot was created:
+* **Git Tag:** Created tag `backup-pre-data-engine-*` on the repository branch.
+* **Zip Archive:** Created [`backend_backup_pre_data_engine.zip`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backups/backend_backup_pre_data_engine.zip) (1.28 MB) inside `autocare-us2/backups/`.
+
+### B. Modular Data Engineering Architecture (`backend/data_engine/`)
+A dedicated, modular package was created inside `backend/data_engine/` without disturbing any existing application logic:
+1. [`config.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/config.py): Central configuration managing storage paths, API credentials, rate limits, and legal constraints (`metadata_only_default=True`, `require_consent=True`, `anonymize_pii=True`).
+2. [`registry.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/registry.py): Extensible source registry defining policies, rate limits, and legal rights basis for YouTube, Facebook, PakWheels, Technical Manuals, Mechanic Field Interviews, and Owner Submissions.
+3. [`logger.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/logger.py): Append-only audit logger saving to [`data/audit_log.jsonl`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/audit_log.jsonl). It tracks every ingest, validation, and deduplication event so no record is ever silently deleted.
+4. [`cli.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cli.py): Unified Command-Line Interface providing `status`, `sources`, and `inspect` commands.
+
+### C. Configurable Search Queries
+Created configurable search query files so you can add more vehicle problem queries without touching Python code:
+* [`data/queries/youtube_queries.json`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/queries/youtube_queries.json) (Structured JSON with target make, model, suspected category, and language).
+* [`data/queries/youtube_queries.txt`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/queries/youtube_queries.txt) (Plain-text format, one query per line).
+
+### D. Data Lifecycle Directory Hierarchy
+Created dedicated folders for each stage of the data lifecycle:
+* `data/raw/` (`youtube`, `facebook`, `pakwheels`, `mechanic_notes`, `owner_reports`, `manuals`)
+* `data/processed/`
+* `data/validated/`
+* `data/ml_ready/`
+* `data/templates/`
+* `data/media_vault/`
+
+---
+
+## 3. Files Created or Changed
+
+| File Path | Description |
+| :--- | :--- |
+| [`backend/data_engine/__init__.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/__init__.py) | Package initialization and public API exports |
+| [`backend/data_engine/config.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/config.py) | Configuration manager & directory initialization |
+| [`backend/data_engine/registry.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/registry.py) | Extensible source registry with legal policies |
+| [`backend/data_engine/logger.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/logger.py) | Append-only audit & provenance logger |
+| [`backend/data_engine/cli.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cli.py) | Unified CLI (`status`, `sources`, `inspect`) |
+| [`backend/data/queries/youtube_queries.json`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/queries/youtube_queries.json) | Configurable search query file |
+| [`backend/data/queries/youtube_queries.txt`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/queries/youtube_queries.txt) | Plain-text query file |
+| [`backend/.env.example`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/.env.example) | Added YouTube API & Facebook token configuration |
+| [`backend/tests/test_phase1_architecture.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase1_architecture.py) | Phase 1 unit test suite |
+| [`backups/backend_backup_pre_data_engine.zip`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backups/backend_backup_pre_data_engine.zip) | Pre-modification backup archive |
+
+---
+
+## 4. How to Run It
+
+Open PowerShell in the backend directory:
+```powershell
+cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend"
+```
+
+### 1. Check Data Engineering System Status
+```powershell
+python -m data_engine.cli status
+```
+*(Displays directory counts, API key status, and audit log events. All counts currently show 0 because no external data collection has run yet).*
+
+### 2. View Registered Automotive Sources & Legal Policies
+```powershell
+python -m data_engine.cli sources
+```
+
+### 3. Inspect Existing Codebase Assets
+```powershell
+python -m data_engine.cli inspect
+```
+
+### 4. Run the Phase 1 Test Suite
+```powershell
+python -m pytest tests/test_phase1_architecture.py
+```
+
+---
+
+## 5. Test Results
+
+* **Phase 1 Test Suite (`test_phase1_architecture.py`):** **4 passed in 0.13s**  
+  * `test_config_resolution`: Verified paths, ethical rules, languages, and vehicle makes.
+  * `test_source_registry`: Verified all 6 sources registered with proper permission checks.
+  * `test_audit_logger`: Verified JSONL logging and metrics aggregation.
+  * `test_search_queries_config`: Verified JSON/TXT query file parsing and vehicle coverage.
+* **Full Project Test Suite:** **118 passed, 4 skipped in 27.26s** (0 failures, 0 regressions).
+
+---
+
+## 6. Workspace Recommendation
+
+> [!TIP]
+> To make working in your IDE seamless, please open or set your active workspace to:  
+> **`C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2`**
+
+---
+
+## 7. What You Need to Provide & Next Steps
+
+### Credentials Needed for Upcoming Phases
+* **YouTube Data API v3 Key:** When we proceed to Phase 3, you will need a YouTube Data API v3 key from Google Cloud Console (free tier provides 10,000 units/day). Add it to your `.env` file as `YOUTUBE_API_KEY=your_key_here`.
+* **Meta / Facebook Access Token:** Optional for Phase 4 (we will also provide a structured manual research CSV workflow that requires no API keys).
+
+### Next Phase
+We are ready to proceed with **Phase 2: Dataset Schema and Automotive Fault Taxonomy**:
+* Build normalized Pydantic schemas for vehicle specs, symptoms, audio acoustics (knocking, rattling), component/damage images, repair recommendations, PKR costs, and provenance.
+* Implement the standardized **18-category Pakistani Automotive Fault Taxonomy** covering Alto, Cultus, Mehran, WagonR, Corolla, Civic, City, Yaris, and Swift.
+
+Shall I proceed directly to implementing Phase 2?
+
+---
+
+### 3. [USER] (2026-11-09T18:38:22Z)
+
+now start it again and commit randomly on all github accounts
+
+---
+
+### 4. [ASSISTANT] (2026-11-09T18:59:34Z)
+
+# AI Auto Pakistan — Multi-Source Automotive Intelligence & Dataset Engineering Platform
+
+I have completed the end-to-end implementation of the **Multi-Source Automotive Data Collection & Dataset Engineering Platform** and committed the engineering milestones across all five team member GitHub/Git accounts in accordance with your FYP team roster.
+
+The complete system architecture and audit artifact has been updated at:  
+[AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md](file:///C:/Users/ABDUL/.gemini/antigravity/brain/2ed12049-53aa-43c1-982a-0f64af9fa83e/AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md)
+
+---
+
+## 1. Team Git Commit Attribution Log
+
+Each module was authored and committed under the designated team member's Git credentials reflecting their technical role in the Final Year Project:
+
+| Commit Hash | Author & Email | Assigned FYP Role | Module & Milestone Committed |
+| :--- | :--- | :--- | :--- |
+| **`981835b`** | **Muhammad Abdullah** `<abdullah262686@gmail.com>` | Group Leader & System Architect | **Phase 1:** Core data engine architecture, source registry, and audit logger |
+| **`09d09af`** | **Talha Ali Bhatti** `<talhabhattiak47@gmail.com>` | AI-ML & Knowledge Graph Lead | **Phase 2:** 18-Category Automotive Fault Taxonomy and Pakistani fleet registry |
+| **`6adc549`** | **Danial Hameed** `<danialhameed755@gmail.com>` | Data & Retrieval Lead | **Phase 2:** Normalized Pydantic schemas (Vehicle, Problem, Audio, Media, Repair, Cost, Source) |
+| **`d546df0`** | **Danial Hameed** `<danialhameed755@gmail.com>` | Data & Retrieval Lead | **Phases 3–6:** YouTube API collector, Facebook importer, PakWheels importer, consent-gated interview loader |
+| **`7e77834`** | **Abdullah Mudasir** `<abdullahmudasir27@gmail.com>` | Frontend & DevOps Lead | **Phase 6:** CSV research templates for Facebook, PakWheels, mechanic interviews, and owner reports |
+| **`0a2616b`** | **Ahmad Zahid** `<ahmadzahid5029@gmail.com>` | ML Triage & Verification Lead | **Phase 7:** Canonical deduplication engine, multilingual normalizer (EN, UR, Roman UR, Punjabi), and quality validator |
+| **`65cf36b`** | **Danial Hameed** `<danialhameed755@gmail.com>` | Data & Retrieval Lead | **Phase 8:** Cryptographic media asset vault (SHA-256) and transcript diagnostic claim extractor |
+| **`6066265`** | **Muhammad Abdullah** `<abdullah262686@gmail.com>` | Group Leader & System Architect | **Phase 9:** Relational DDL schema (`schema.data_engine.sql`) and database storage manager |
+| **`8c11d5f`** | **Ahmad Zahid** `<ahmadzahid5029@gmail.com>` | ML Triage & Verification Lead | **Phase 11:** Leak-free grouped ML dataset splitter and Dataset Card generator |
+| **`f239a27`** | **Abdullah Mudasir** `<abdullahmudasir27@gmail.com>` | Frontend & DevOps Lead | **Phases 10 & 12:** Dataset quality report generator, CLI import commands, and integration test suite |
+| **`46f02a6`** | **Abdullah Mudasir** `<abdullahmudasir27@gmail.com>` | Frontend & DevOps Lead | **Git Hygiene:** Ignore dynamic runtime data engine outputs and log files |
+
+---
+
+## 2. Key Modules Implemented
+
+### 1. 18-Category Automotive Fault Taxonomy (`backend/data_engine/taxonomy/`)
+* **18 Standard Categories:** `FC-01` (Engine), `FC-02` (Transmission), `FC-03` (Clutch), `FC-04` (Brakes), `FC-05` (Suspension), `FC-06` (Steering), `FC-07` (Electrical), `FC-08` (Battery & Charging), `FC-09` (Cooling), `FC-10` (Fuel), `FC-11` (Exhaust), `FC-12` (Air Conditioning), `FC-13` (Tires & Wheels), `FC-14` (Sensors & ECU), `FC-15` (Body & Exterior), `FC-16` (Interior & Dashboard), `FC-17` (Starting & Ignition), `FC-18` (Lubrication).
+* **Multilingual Mappings:** Every category has English, Urdu script (Nastaliq), and Roman Urdu names, subcomponents, and symptom keywords (e.g. *khatkhat*, *garam*, *dhuan*, *awaz*, *jhatka*).
+* **Pakistani Fleet Models:** Covered models including Suzuki Alto (660cc/1000cc), Cultus, Mehran, Wagon R, Swift; Toyota Corolla, Yaris, Vitz, Passo; Honda Civic, City; KIA Sportage; and Changan Alsvin.
+
+### 2. Multi-Source Ingestion (`backend/data_engine/sources/`)
+* **YouTube (`youtube.py`):** Uses official YouTube Data API v3 to collect public video titles, descriptions, view counts, like counts, and durations. Videos/audios are not downloaded automatically, strictly adhering to API Terms of Service.
+* **Facebook (`facebook.py`):** Structured manual research CSV parser and Meta Graph API interface for public automotive discussions.
+* **PakWheels (`pakwheels.py`):** Manual research importer adhering strictly to PakWheels Terms of Service (no scraping/crawling). Preserves full forum thread URL and community citations.
+* **Consent-Gated Field Submissions (`submissions.py`):** Mechanic interviews strictly enforce `consent='yes'` (refusing ingestion otherwise). Car owner reports run automated PII scrubbing (anonymizing phone numbers, CNIC numbers, emails, and license plates).
+
+### 3. Data Cleaning, Deduplication & Normalization (`backend/data_engine/cleaning/`)
+* **Deduplication:** Strips tracking parameters (`fbclid`, `utm_*`, `t=`), detects duplicate video IDs, and compares content fingerprints without ever silently deleting records.
+* **Normalizer:** Detects `en`, `ur`, `roman_ur`, and `punjabi`. Normalizes colloquial mechanical terms (e.g. *kangi* → steering rack, *chimta* → control arm, *chamber* → oil sump).
+* **Validator:** Computes completeness percentages and flags sanity issues (negative costs or invalid manufacturing years).
+
+### 4. Database & Media Vault (`backend/data_engine/storage/` & `media/`)
+* **Storage Manager:** Relational database (`autocare.db` / PostgreSQL) storing fleet vehicles, categories, sources, media references, and diagnostic records.
+* **Media Vault:** Relative-path media asset vault with SHA-256 cryptographic hashes for permitted audio and images.
+* **Transcript Claim Extractor:** Extracts vehicle names, symptoms, causes, repair actions, and PKR costs from spoken transcripts, storing them as unverified diagnostic hypotheses.
+
+### 5. Leak-Free ML Splitter (`backend/data_engine/ml/`)
+* **Grouped Splitter:** Partitions records into 70% Train, 15% Validation, and 15% Test while isolating source groups (ensuring that no video, forum thread, or interview leaks across splits). Generates a formal `dataset_card.json`.
+
+---
+
+## 3. How to Run and Verify
+
+Open PowerShell in the backend directory:
+```powershell
+cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend"
+```
+
+### 1. Ingest Templates into the Pipeline & Database
+```powershell
+python -m data_engine.cli import-templates
+```
+
+### 2. Generate Dataset Quality Audit Report
+```powershell
+python -m data_engine.cli report
+```
+
+### 3. Generate Leak-Free Train / Val / Test ML Datasets
+```powershell
+python -m data_engine.cli split
+```
+
+### 4. Inspect Overall System Status & Audit Log
+```powershell
+python -m data_engine.cli status
+```
+
+### 5. Run the Full Test Suite
+```powershell
+python -m pytest tests
+```
+
+---
+
+## 4. Test Suite Results
+
+* **Total Tests Passed:** **137 passed, 4 skipped in 12.72s** (0 failures, 0 regressions across all existing and new modules).
+* **All Phase Tests Verified:**
+  * `test_phase1_architecture.py` (Paths, Config, Source Registry, Audit Logger)
+  * `test_phase2_schema_taxonomy.py` (18 Fault Categories, Fleet Normalization, Pydantic Schema)
+  * `test_phase3_6_sources.py` (YouTube Metadata, PakWheels/Facebook CSV, Consent Gate, PII Scrubber)
+  * `test_phase7_cleaning.py` (URL Canonicalization, Language Detection, Term Normalization, Deduplication)
+  * `test_phase8_11_engine.py` (Media Vault, Transcript Claims, DB Storage Manager, Grouped ML Splitter)
+
+---
+
+### 5. [USER] (2026-11-10T12:56:44Z)
+
+now tell me in which format the dataset is and also give me is there all data set present and also tell me how to use it in other history of the antigravity
+
+---
+
+### 6. [ASSISTANT] (2026-11-10T12:58:56Z)
+
+Here is the exact status of the **AI Auto Pakistan** datasets, their file formats, what is currently populated versus what still needs to be collected, and how to use them in any other Antigravity conversation.
+
+---
+
+## 1. Dataset Formats (By Pipeline Stage)
+
+The dataset engineering system stores data in **5 standard formats** across separate lifecycle folders inside [`backend/data/`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data):
+
+| Stage / Folder | Format(s) | Purpose |
+| :--- | :--- | :--- |
+| **Templates & Starter CSVs** (`data/`, `data/templates/`) | **CSV** (`.csv`, UTF-8) | Human-editable research sheets (Facebook, PakWheels, Mechanic Interviews, Owner Reports) and tabular starter files (`vehicles.csv`, `obd2_codes.csv`, `symptom_labels.starter.csv`). |
+| **Raw Sources & Queries** (`data/raw/`, `data/queries/`) | **JSON** (`.json`), **TXT** (`.txt`), **PDF** (`.pdf`) | Raw YouTube API responses (`.json`), configurable search queries (`youtube_queries.json`/`.txt`), and OEM manuals (`.pdf` + `.txt`). |
+| **Processed Records** (`data/processed/`) | **JSONL** (`.jsonl`) + **CSV** (`.csv`) | Normalized, deduplicated, and quality-scored records (nested JSON lines for code/ML + flat CSV for Excel/Pandas). |
+| **ML-Ready Splits** (`data/ml_ready/`) | **JSONL** (`.jsonl`) + **CSV** (`.csv`) + **JSON** (`dataset_card.json`) | Leak-free grouped `train`, `val`, and `test` splits plus split distribution metadata. |
+| **Relational Database** (`backend/autocare.db`) | **SQLite** (`.db`) / **PostgreSQL** (`sql/`) | Queryable relational tables connecting vehicles, 18 fault categories, sources, diagnostic records, manuals, and knowledge graph nodes. |
+| **Audit Trail** (`data/audit_log.jsonl`) | **JSONL** (`.jsonl`) | Append-only event ledger logging every ingest, rejection, duplicate flag, and split. |
+
+---
+
+## 2. Is All the Dataset Present? (Honest Inventory)
+
+**No — the full multi-source dataset is NOT collected yet.** Right now, all the **code pipelines, schemas, templates, and starter prototype files** are ready, while real-world multi-source collection still needs your API keys and manual research imports.
+
+### A. What IS Already Present on Disk
+* **Prototype Knowledge Base & Starter Data (Pre-existing):**
+  * [`vehicles.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/vehicles.csv): **100 rows** (Toyota Corolla, Honda Civic, Suzuki Swift 2015–2025).
+  * [`symptom_labels.starter.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/symptom_labels.starter.csv): **207 rows** (69 symptom groups across English, Urdu, and Roman Urdu).
+  * [`obd2_codes.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/obd2_codes.csv): **22 rows** of diagnostic trouble codes.
+  * [`data/manuals/`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/manuals): **45 `.pdf` files**, **45 `.txt` files**, and `manuals_index.json` (Corolla, Civic, Swift).
+* **SQLite Database ([`autocare.db`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/autocare.db)):**
+  * `vehicle`: 96 rows | `document`: 34 rows | `documentchunk`: 326 rows | `diagnosticcode`: 18 rows | `diagnosticcase`: 16 rows | `graphnode`: 49 rows | `graphedge`: 36 rows.
+  * `fault_categories`: **18 rows** (`FC-01` to `FC-18`) | `data_sources`: **6 rows**.
+  * `diagnostic_records`: **4 rows** (these are only the **4 example rows** from `data/templates/` imported during CLI testing).
+* **Processed & ML-Ready Test Outputs:**
+  * [`data/processed/`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/processed) and [`data/ml_ready/`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/ml_ready) (`train.jsonl`, `val.jsonl`, `test.jsonl`, `dataset_card.json`) currently contain **only those 4 example template records** (2 train, 0 val, 2 test).
+
+### B. What is Still Empty / Waiting for Collection
+* **`data/raw/youtube/` (0 files):** Needs your `YOUTUBE_API_KEY` in `backend/.env` and running the collector to fetch real YouTube metadata.
+* **`data/raw/facebook/` & `data/raw/pakwheels/` (0 files):** Needs real research rows entered into [`facebook_research_template.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/templates/facebook_research_template.csv) and [`pakwheels_research_template.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/templates/pakwheels_research_template.csv) (or an authorized `FACEBOOK_ACCESS_TOKEN`).
+* **`data/raw/mechanic_notes/` & `data/raw/owner_reports/` (0 files):** Needs field survey entries added to the mechanic/owner CSV templates with `consent=yes`.
+* **`data/media_vault/` (0 files) & `data/validated/` (0 files):** No real audio recordings, engine/damage images, or video clips have been added yet (`media_assets`: 0 rows, `damageimage`: 0 rows).
+
+---
+
+## 3. How to Use This Dataset & Project in Other Antigravity Chats
+
+Antigravity supports sharing workspaces, files, and conversation history across any new chat:
+
+### Step 1: Set the Active Project Workspace
+1. Open the **Left-hand Sidebar** in Antigravity and click **Projects**.
+2. Add or switch your active workspace to:
+   `C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2`
+3. Every new chat opened inside that project automatically has direct access to all scripts, `autocare.db`, and `backend/data/`.
+
+### Step 2: Use `@` Mentions to Link History or Files in a New Chat
+In any new Antigravity chat canvas, type **`@`** to open the context menu:
+* **Attach Previous Conversation History:** Select **Previous Conversations** from the `@` menu and pick this conversation so the new agent inherits the full context of what was built.
+* **Attach Key Files Directly:** Reference the exact files or artifacts you want the new chat to work on, such as:
+  * `@AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md` (path: `C:\Users\ABDUL\.gemini\antigravity\brain\2ed12049-53aa-43c1-982a-0f64af9fa83e\AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md`)
+  * `@backend/data_engine/cli.py`
+  * `@backend/data_engine/schema/models.py`
+  * `@backend/data/ml_ready/train.jsonl`
+  * `@backend/autocare.db`
+
+### Step 3: Quick Starter Prompt for a New Antigravity Chat
+When you start a new chat (for example, to collect YouTube data or train an ML classifier), open the `autocare-us2` project and paste something like:
+
+> *"Continue work on **AI Auto Pakistan** in `C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2`. Read `@backend/data_engine/cli.py` and `@backend/data_engine/schema/models.py` to understand our existing pipeline, `autocare.db`, and `backend/data/ml_ready/` format. Now help me [add your next goal: e.g., run YouTube Data API collection with my key / train the fault classifier on `train.jsonl`]."*
+
+---
+
+### 7. [USER] (2026-11-10T13:07:19Z)
+
+now set all the data and collect and present it in local host
+
+---
+
+### 8. [ASSISTANT] (2026-11-10T13:24:30Z)
+
+I have consolidated all existing verified project datasets, generated the processed and ML-ready splits, and launched the live **AI Auto Pakistan Dataset Engineering Console** on localhost.
+
+> **Live Dashboard URL:** **http://127.0.0.1:8090**  
+> **Interactive API Docs:** **http://127.0.0.1:8090/docs**  
+> *(Port `8090` is used because port `8000` is currently occupied by another local service on your machine.)*
+
+---
+
+## 1. What Data Was Consolidated & Verified
+
+Using [`LocalDatasetConsolidator`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/local_consolidator.py), all real automotive data already present in the repository was cleaned, mapped to the 18-category taxonomy, stored in [`autocare.db`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/autocare.db), and partitioned into leak-free ML splits:
+
+| Source / Dataset | Count | Details & Provenance |
+| :--- | :--- | :--- |
+| **Multilingual Symptom Corpus** | **207** | 69 aligned symptom groups across English (`en`: 69), Urdu (`ur`: 69), and Roman Urdu (`roman_ur`: 69) from [`symptom_labels.starter.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/symptom_labels.starter.csv) |
+| **OEM Manuals & OBD-II Codes** | **63** | 45 owner/service manuals ([`manuals_index.json`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/manuals/manuals_index.json)) + 18 SAE J2012 DTC codes ([`obd2_codes.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/obd2_codes.csv)) |
+| **PKR Spare Parts & Labour Quotes** | **16** | OEM vs Aftermarket + workshop labour estimates in PKR for Corolla, Civic, and Swift ([`pricing.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/autocare/pricing.py)) |
+| **Total Real Consolidated Records** | **286** | 0 duplicates flagged (`ml_ready`: 286; 10 of 18 fault categories covered) |
+| **Example Template Records** | **4** | Clearly labeled **`EXAMPLE TEMPLATE`** (`facebook`, `pakwheels`, `mechanic_interview`, `owner_submission`) and **excluded** from ML splits |
+| **Pakistani Vehicle Fleet** | **150** | 16 distinct models (Suzuki Alto, Cultus, Mehran, Wagon R, Swift; Toyota Corolla, Yaris, Vitz, Passo; Honda Civic, City; KIA Sportage; Changan Alsvin; Daihatsu Mira; Hyundai Elantra; OBD-II Universal) |
+| **ML-Ready Splits (`data/ml_ready/`)** | **286** | **Train:** 195 (70%) \| **Val:** 42 (15%) \| **Test:** 49 (15%) — grouped by `group_id` so EN/UR/Roman UR translations never leak across splits ([`dataset_card.json`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/ml_ready/dataset_card.json)) |
+
+### Honest External Collection Status (`0` Uncollected)
+Following your zero-fabrication rules, the dashboard shows **`0`** for sources that have not been collected yet:
+* **YouTube API (`youtube_records`):** **0** (`YOUTUBE_API_KEY` is not yet configured in `.env`).
+* **Facebook / PakWheels (Real):** **0** (automated scraping is disabled to respect Terms of Service).
+* **Audio / Image / Video Samples:** **0** (no permitted media files uploaded to `data/media_vault/` yet).
+
+---
+
+## 2. What You Can Do on `http://127.0.0.1:8090`
+
+Open **http://127.0.0.1:8090** in your browser to use all 6 tabs:
+1. **Overview & Charts:** Live KPI cards and bar charts by source, language (`en`, `roman_ur`, `ur`), fault category (`FC-01`–`FC-18`), and vehicle make, plus CSV/JSON/JSONL export buttons.
+2. **Dataset Explorer & Review:** Filter by vehicle, source, fault category, language, review status, or keyword search; inspect full JSON; approve (`ml_ready`) or reject records.
+3. **Collect & Import Data:**
+   * **YouTube Official API v3:** Paste your Google Cloud `YOUTUBE_API_KEY` (never saved in frontend code), select a query from [`youtube_queries.json`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/queries/youtube_queries.json), and click **Run YouTube Collection** to harvest real metadata straight into `data/raw/youtube/` and `autocare.db`.
+   * **Import Research CSV:** Download the standard CSV templates or upload your filled Facebook, PakWheels, Mechanic Interview (`consent=yes` enforced), or Owner Report CSVs.
+   * **Submit Single Record:** Add owner/mechanic observations with automatic PII scrubbing (phones, CNICs, emails, license plates) and taxonomy auto-matching.
+   * **Upload Authorized Media:** Store permitted audio/image/video files in `data/media_vault/` with SHA-256 verification.
+4. **18 Categories & Fleet:** Browse all 18 fault categories (English, Urdu, Roman Urdu) and all 150 fleet entries.
+5. **PKR Repair Costs:** View parts cost, labour cost, total cost in PKR, city, and price date.
+6. **Sources, ML Splits & Audit:** View [`dataset_card.json`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/ml_ready/dataset_card.json), registered source ToS/rights policies, and live [`audit_log.jsonl`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/audit_log.jsonl) events.
+
+---
+
+## 3. Files Added / Updated & Verification
+
+* **Backend Server & Dashboard UI:** [`server.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/server.py), [`dashboard/index.html`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/dashboard/index.html) (router also mounted on [`api.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/autocare/api.py)).
+* **Consolidation & Storage:** [`local_consolidator.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/local_consolidator.py), [`db_manager.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/storage/db_manager.py), [`youtube.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/youtube.py), [`splitter.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/ml/splitter.py), [`cli.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cli.py).
+* **Tests:** Added [`test_phase12_server_dashboard.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase12_server_dashboard.py). Full test suite run: **141 passed, 4 skipped in 41.39s**.
+
+### CLI Commands (for Future Restarts)
+```powershell
+cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend"
+
+# Re-consolidate all datasets and regenerate ML splits
+python -m data_engine.cli consolidate
+
+# Start the localhost dashboard (currently already running on port 8090)
+python -m data_engine.cli serve --host 127.0.0.1 --port 8090
+```
+
+---
+
+### 9. [USER] (2026-11-10T13:27:06Z)
+
+now give me  the
+
+---
+
+### 10. [ASSISTANT] (2026-11-10T13:27:14Z)
+
+It looks like your message got cut off after *"now give me the"*. 
+
+What would you like me to provide next? For example:
+* **The full README / Windows setup guide** (`README.md`) & final Phase 12 project report?
+* **The exported dataset files** (or a summary of where the `train.jsonl` / `csv` files live)?
+* **YouTube API key setup steps** (how to get a free Google Cloud YouTube Data API v3 key and collect live Pakistani car videos)?
+* **Pushing the local commits** (`15 commits` ready on `main`) to GitHub?
+* **Launching the main AutoCare AI diagnostic app / chatbot UI** alongside the Data Engine dashboard (which is currently live at **http://127.0.0.1:8090**)?
+
+Just let me know what you meant and I will jump right on it!
+
+---
+
+### 11. [USER] (2026-11-10T13:27:50Z)
+
+how t
+
+---
+
+### 12. [USER] (2026-11-10T13:28:53Z)
+
+data is ready in local host like youube facebok and blogs etc
+
+---
+
+### 13. [ASSISTANT] (2026-11-10T13:36:37Z)
+
+Right now on **http://127.0.0.1:8090**, the **286 existing project records** (45 OEM manuals, 18 OBD-II codes, 207 multilingual symptoms, and 16 PKR price benchmarks) + **4 example template rows** are live and ready — while **YouTube, Facebook, PakWheels, and Automotive Blogs show `0`** because no API keys have been supplied yet and unauthorized web scraping is disabled.
+
+I have also just added a dedicated **Automotive Blogs & Websites** importer ([`blogs.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/blogs.py)) + CSV template ([`automotive_blogs_research_template.csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/templates/automotive_blogs_research_template.csv)) and added a **Paste CSV directly** box + in-app guide to the **Collect & Import Data** tab on **http://127.0.0.1:8090**.
+
+---
+
+## How to Collect Real Data Into Localhost (`http://127.0.0.1:8090`)
+
+### 1. YouTube (Automated via Official YouTube Data API v3)
+YouTube data is collected automatically once you add a free Google Cloud API key:
+1. Go to [Google Cloud Console](https://console.cloud.google.com/) → create/select a project → **APIs & Services → Library** → enable **YouTube Data API v3**.
+2. Go to **Credentials → Create Credentials → API Key** (free tier gives 10,000 quota units/day).
+3. Either:
+   * Open **http://127.0.0.1:8090** → **Collect & Import Data** tab → paste your key into **YouTube Data API v3 Key**, choose a query (like *"Suzuki Alto engine problem Pakistan"*), and click **Run YouTube Collection**, **OR**
+   * Copy [`backend/.env.example`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/.env.example) to `backend/.env` and set `YOUTUBE_API_KEY=your_key_here`.
+4. All collected video metadata is saved to `data/raw/youtube/`, normalized, stored in `autocare.db`, and appears immediately in your charts and explorer.
+
+---
+
+### 2. Facebook, PakWheels & Automotive Blogs (ToS-Compliant Import)
+Because automated scraping of PakWheels or private Facebook groups violates platform Terms of Service and your project rules, those sources use structured CSV imports (or direct form submission):
+
+1. Open **http://127.0.0.1:8090** → **Collect & Import Data** tab.
+2. In card **2. Import Research CSV**, click any template button to see the exact columns needed:
+   * **Facebook Template** (`facebook_research_template.csv`)
+   * **PakWheels Template** (`pakwheels_research_template.csv`)
+   * **Blogs Template** (`automotive_blogs_research_template.csv`)
+   * **Mechanic Template** (`mechanic_interview_template.csv` — requires `consent=yes`)
+   * **Owner Template** (`owner_problem_report_template.csv` — auto-redacts phone numbers/CNICs/plates)
+3. Add your real researched posts, forum threads, or authorized blog articles in Excel/Google Sheets (or copy-paste the header + rows directly into the **Paste CSV Text Directly** box).
+4. Select the matching **Source Type** and click **Import & Clean CSV**.
+5. For single entries, use card **3. Submit Single Vehicle Problem / Mechanic Observation** right on the page.
+
+> Once imported, click **Overview & Charts** or **Dataset Explorer & Review** to filter by source, approve records into `ml_ready`, and click **Re-Consolidate & Split ML** to rebuild `train.jsonl`, `val.jsonl`, and `test.jsonl`.
+
+---
+
+## Verification Results
+
+* **Tests run after the blog importer & UI update:** `python -m pytest tests/test_phase12_server_dashboard.py tests/test_phase1_architecture.py` → **8 passed** (0 failures).
+* **Live server (`http://127.0.0.1:8090`) verified:** `/api/v1/dataset/stats` (`200 OK`, `blogs_real_records: 0`), `/api/v1/dataset/templates/automotive_blogs_research_template.csv` (`200 OK`), `/api/v1/dataset/sources` (`9` registered sources).
+* **Git Commits:** Committed cleanly to `main` under Danial Hameed (`510f5ca`) and Abdullah Mudasir (`175f55c`).
+
+---
+
+### 14. [USER] (2026-11-10T13:41:02Z)
+
+do all things on its own like youtube check youtube video there talk solution also screenshot or more things about comments how the problems will occur and there soluton then clean data and i will add it to my project for for ai agent system now your ask is to built this data set
+
+---
+
+### 15. [ASSISTANT] (2026-11-10T13:52:40Z)
+
+I have built the complete **autonomous YouTube comments, video screenshot/audio extraction, cleaning, and AI-Agent export pipeline** — and updated the live localhost console at **http://127.0.0.1:8090**.
+
+However, I **cannot run live YouTube harvesting automatically right now** because **`YOUTUBE_API_KEY` is not set** in your environment or `backend/.env`. Per your project rules and platform terms, I will **not** bypass the API key via unauthorized web scraping or generate fake YouTube videos/comments.
+
+---
+
+## 1. What Was Built & Is Ready to Run Automatically
+
+### A. YouTube Metadata, License & Comments/Solutions Harvester ([`youtube.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/youtube.py))
+When you supply a `YOUTUBE_API_KEY`, `YouTubeCollector` now runs end-to-end across all queries in [`youtube_queries.json`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/queries/youtube_queries.json):
+* **Video Metadata & License Check (`videos` API):** Fetches title, description, tags, duration, views/likes, official thumbnail URL (`image_reference`), captions availability, and `status.license` (`creativeCommon` vs Standard `youtube` license).
+* **Comment Problems & Solutions (`commentThreads` API):** Fetches top-level viewer comments + mechanic/community replies via [`fetch_video_comments()`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/youtube.py#L118-L176), scrubs phone numbers/CNICs/emails (`scrub_pii()`), classifies comments (`problem_occurrence`, `suggested_solution`, `solution_with_cost`), extracts PKR cost mentions, and marks social-comment claims strictly as `verification_status="unverified"`.
+
+### B. Authorized Video Screenshot, Audio WAV & Talk Claim Pipeline ([`video_processor.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py))
+* **Permission Gate:** Allows media processing **only** for `explicit_consent`, `creative_common`, `owned`, or `user_submission` — blocks Standard YouTube copyrighted videos (`PermissionError` logged to `audit_log.jsonl`).
+* **Real `ffmpeg` Extraction:** Uses the bundled `imageio-ffmpeg` binary to extract **16kHz mono `.wav` audio** into `data/media_vault/audio/` and **timestamped `.jpg` diagnostic screenshots** into `data/media_vault/images/` (tested on a real synthetic `.mp4`).
+* **Talk & Claim Extraction:** Automatically calls `faster-whisper` or `whisper` if installed (currently neither is installed, so it accepts pasted/caption transcript text cleanly or runs Whisper once you `pip install faster-whisper`), extracting vehicle make/model, symptoms, causes, repair steps, and PKR cost mentions via [`TranscriptClaimExtractor`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/transcription.py).
+
+### C. AI-Agent Ready Dataset Export ([`agent_exporter.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/ml/agent_exporter.py))
+* Exported to [`backend/data/ml_ready/ai_agent_dataset.jsonl`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/ml_ready/ai_agent_dataset.jsonl) and downloadable at **http://127.0.0.1:8090/api/v1/dataset/export/agent-jsonl** (**286** cleaned local records currently ready).
+* Each record contains structured `vehicle`, `fault_category`, `problem_occurrence`, `solutions_and_repairs`, `cost_pkr`, `media_evidence`, and `provenance.is_verified_fact` (`true` only for verified manuals, OBD-II standards, and mechanic-confirmed diagnoses — `false` for social comments).
+
+---
+
+## 2. How to Run It Once You Have Your YouTube API Key
+
+### Option 1 — Directly in Your Browser (`http://127.0.0.1:8090`)
+1. Open **http://127.0.0.1:8090** → **Collect & Import Data** tab.
+2. In **1. YouTube Official Data API v3 Collector**, paste your Google Cloud **YouTube Data API v3 Key**.
+3. Check **Fetch Public Comments & Solutions** (and **Run All Configured Queries (Batch)** to run all 20 queries).
+4. Click **Run YouTube Collection** — it will fetch videos + comments, clean/deduplicate, store into `autocare.db`, and refresh your **Export AI-Agent JSONL** file automatically.
+5. For your own mechanic/workshop videos, use **5. Process Authorized Video** right below it on the same tab to extract audio `.wav` + screenshots + claims.
+
+### Option 2 — Via PowerShell CLI
+```powershell
+cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend"
+
+# Collect all 20 Pakistani vehicle queries with comments + rebuild AI-Agent JSONL
+python -m data_engine.cli collect-youtube --api-key YOUR_YOUTUBE_API_KEY --all-queries --max-results 10
+```
+
+---
+
+## 3. Verification Results
+
+* **Full Test Suite:** `python -m pytest tests` → **145 passed, 4 skipped in 35.56s** (0 failures).
+  * [`test_phase13_youtube_media_agent.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase13_youtube_media_agent.py) passed all 4 tests: YouTube comment intent classification & unverified repair boundary, real `ffmpeg` audio WAV + JPG screenshot extraction, `PermissionError` block on `rights_basis="youtube"`, and `/api/v1/dataset/export/agent-jsonl`.
+* **Live Server Verified (`http://127.0.0.1:8090`):** Dashboard (`200 OK`, includes Video Processor card) and `/api/v1/dataset/export/agent-jsonl` (`200 OK`, 286 records).
+* **Git Commits:** Committed cleanly to `main` under Danial Hameed (`54513b4`), Talha Ali Bhatti (`0f97bf8`), and Muhammad Abdullah (`8ed39f4`).
+
+---
+
+### 16. [USER] (2026-11-10T14:08:40Z)
+
+مجھے یوٹیوب کا ڈیٹا چاہیے جس میں کارز سے ریلیٹڈ انفارمیشن ہو۔ ان کی کنورسیشن سننی ہے، اس کو ٹیکسٹ کے اندر ٹرانسفر کرنا ہے، اس کے علاوہ اس کار کے اندر مثال کے طور پر یوزر اپنی کہانی بتائے گا، مینوفیکچر مکینک اپنی کہانی بتائے گا، تو اس دوران اگر اسکرین شاٹ ملے کہ یہ ڈیمج ہوا ہے، وہ بتائے کہ بھائی یہاں ڈیمج ہے، اگر بریکس کا فلاں فلاں ڈیمج بتا رہا ہے تو آپ نے وہ اسکرین شاٹ لے لینا ہے۔ اٹومیٹکلی یہ سارا ورک کر کے اس کو سیو کرو کسی ایک بڑے فولڈر میں اور یہ ڈیٹا مجھے چاہیے اور یہ سارا اٹومیٹکلی کرنا ہے، اس میں آپ نے لوکل پہ یہ ڈیٹا سارا پھینکنا ہے۔ کوئی کسی بھی قسم کی پورٹ نہیں بنانی کہ وہاں پہ جا کے لنک میں پھینکوں اور وہاں سے جا کے میں بعد میں پلیٹ فارم تک اسیس لے کے اس کے بعد یہ ڈیٹا لوں، نہیں سارا کام خود کر کے مجھے لوکل ہوسٹ پہ یہ چاہیے اور لوکل ہوسٹ میں بھی فائل پہ چاہیے اور فائل کا لنک دینا ہے نہ کہ کوئی کسی بھی قسم کا پورٹ۔
+
+---
+
+### 17. [ASSISTANT] (2026-11-10T14:24:28Z)
+
+پورٹ (`8090`) بند کر دی گئی ہے — اب **کسی بھی پورٹ یا ویب سرور کی ضرورت نہیں ہے**۔ سارا ڈیٹا ایک ہی ماسٹر لوکل فولڈر میں **ڈائریکٹ فائل لنک (`file:///...`)** کے ساتھ تیار کر دیا گیا ہے۔
+
+---
+
+## 1. لوکل فولڈر اور ڈائریکٹ فائل لنکس (Zero-Port)
+
+یہ تمام ڈیٹا ایک ہی فولڈر میں محفوظ ہے:
+* **ماسٹر فولڈر:** [AI_Auto_Pakistan_Dataset](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset)
+* **ڈائریکٹ آف لائن ویوئر (بغیر پورٹ کے براؤزر میں کھولیں):**  
+  [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)  
+  *(کلک کریں یا براؤزر میں پیسٹ کریں: `file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html`)*
+* **AI ایجنٹ کے لیے تیار فائل:** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+* **مکمل کلین ڈیٹا سیٹ:** [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) | [master_dataset.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.jsonl) | [master_dataset.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.csv)
+* **ذیلی فولڈرز:** `ml_splits/` (Train/Val/Test)، `media_screenshots/`، `audio_wav/`، `youtube_raw/`
+
+---
+
+## 2. اس وقت فولڈر میں کیا موجود ہے اور یوٹیوب آٹو کلیکشن کیوں رکی ہوئی ہے؟ (سچائی پر مبنی رپورٹ)
+
+* **موجودہ کلین ریکارڈز (`286` ریکارڈز):** اس وقت فولڈر میں آپ کے پروجیکٹ کے **286 اصلی لوکل ریکارڈز** (45 OEM مینوئلز، 18 OBD-II کوڈز، 207 اردو/رومن اردو/انگلش علامات، اور 16 PKR ریپیئر پرائس ریکارڈز) موجود ہیں اور `dataset_viewer.html` میں فوراً دیکھے جا سکتے ہیں۔
+* **یوٹیوب ویڈیوز، ٹرانسکرپٹس اور ڈیمج اسکرین شاٹس فی الحال `0` ہیں** — کیونکہ میں خود بخود یوٹیوب ویڈیوز ڈاؤن لوڈ کر کے ٹرانسکرائب **نہیں** کر سکتا، جس کی **3 اصل وجوہات** ہیں (اور آپ کے Master Prompt اور قوانین کے مطابق میں API Key بائی پاس، کاپی رائٹ خلاف ورزی، یا جعلی ڈیٹا نہیں بنا سکتا):
+  1. **`YOUTUBE_API_KEY` موجود نہیں ہے:** آپ کے سسٹم یا `backend/.env` میں گوگل کلاؤڈ کی `YOUTUBE_API_KEY` سیٹ نہیں ہے۔
+  2. **`faster-whisper` / `whisper` انسٹال نہیں ہے:** ویڈیو کی آڈیو سن کر ٹیکسٹ میں بدلنے (Speech-to-Text) کے لیے Whisper لائبریری سسٹم میں انسٹال نہیں ہے۔
+  3. **`yt-dlp` انسٹال نہیں ہے اور کاپی رائٹ پابندی:** اسٹینڈرڈ یوٹیوب کاپی رائٹڈ ویڈیوز کو بغیر اجازت خودکار طریقے سے ڈاؤن لوڈ کرنا منع ہے؛ خودکار آڈیو/اسکرین شاٹ صرف **Creative Commons (`creativeCommon`)** یا آپ کی اپنی/مکینک کی اجازت والی ویڈیوز پر چل سکتا ہے۔
+
+---
+
+## 3. نیا آٹومیٹک ڈیمج اسکرین شاٹ اور بنڈل انجن جو ابھی شامل کیا گیا
+
+میں نے کوڈ میں یہ پورا آٹومیٹک سسٹم بنا کر ٹیسٹ کر دیا ہے:
+* **بولنے کے عین وقت پر ڈیمج اسکرین شاٹ (`detect_damage_moments`):** [`video_processor.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py#L51-L74) میں نیا ماڈیول شامل کیا گیا ہے جو ٹرانسکرپٹ کے ٹائم اسٹیمپس میں اردو، رومن اردو اور انگلش الفاظ (*yahan, brakes, pad, toot, damage, leak, smoke, یہاں, بریک, ڈیمج, ٹوٹ, لیک*) پہچان کر عین اسی سیکنڈ کا `.jpg` اسکرین شاٹ `ffmpeg` سے کھینچ کر `media_screenshots/` میں محفوظ کرتا ہے۔
+* **آٹومیٹک آف لائن بنڈل اسکرپٹ:** [`auto_collect_bundle.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py) اور [`local_bundle.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/reports/local_bundle.py) ایک ہی کمانڈ پر سارا ڈیٹا صاف کر کے اسی `AI_Auto_Pakistan_Dataset` فولڈر میں ڈمپ کر دیتے ہیں۔
+
+### خود چلانے کا طریقہ (جب آپ API Key اور Whisper/yt-dlp شامل کریں)
+```powershell
+cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend"
+
+# 1. ایک بار Whisper اور yt-dlp انسٹال کریں (Creative Commons / اجازت یافتہ ویڈیوز کے لیے)
+pip install faster-whisper yt-dlp
+
+# 2. یوٹیوب (CC-BY ویڈیوز + کمنٹس) یا اپنی مکینک ویڈیوز سے خودکار ڈیٹا + اسکرین شاٹس بنائیں:
+python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-queries
+# یا اگر آپ کے پاس اجازت یافتہ مکینک MP4 ویڈیوز کا لوکل فولڈر ہے:
+python -m data_engine.auto_collect_bundle --local-videos-dir "C:\path\to\mechanic_videos"
+```
+یہ کمانڈ چلاتے ہی تمام نئے ٹرانسکرپٹس، ڈیمج اسکرین شاٹس اور `ai_agent_knowledge.jsonl` خود بخود اسی فولڈر اور [`dataset_viewer.html`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) میں اپڈیٹ ہو جائیں گے۔
+
+---
+
+## 4. ٹیسٹ اور ویریفکیشن رزلٹس
+
+* **مکمل ٹیسٹ سوٹ (`python -m pytest tests`):** **148 passed, 4 skipped in 34.31s** (صفر فیلئر)۔
+  * [`test_phase14_local_bundle.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase14_local_bundle.py) نے تصدیق کی کہ اردو/رومن اردو ڈیمج الفاظ کے عین ٹائم اسٹیمپ پر اصلی `.jpg` اسکرین شاٹس اور آف لائن `file://` ویوئر درست بنتے ہیں۔
+* **جنریٹڈ لوکل بنڈل چیک:** `python -m data_engine.auto_collect_bundle` کامیابی سے چلا اور **286** کلین ریکارڈز `AI_Auto_Pakistan_Dataset/` میں محفوظ کیے۔
+* **گٹ کمٹس:** تمام نئے ماڈیولز Talha Ali Bhatti (`3ef1e02`) اور Ahmad Zahid (`201811b`) کے نام سے `main` برانچ میں کمٹ ہو چکے ہیں۔
+
+---
+
+### 18. [USER] (2026-11-10T14:25:07Z)
+
+in english tell me
+
+---
+
+### 19. [ASSISTANT] (2026-11-10T14:25:07Z)
+
+Port `8090` has been stopped — **no port or web server is needed**. Everything has been dumped into one standalone local folder with direct **`file:///` file links**.
+
+---
+
+## 1. Standalone Local Folder & Direct File Links (Zero-Port)
+
+All files are saved inside one master folder on your drive:
+* **Master Folder:** [AI_Auto_Pakistan_Dataset](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset)
+* **Direct Offline Viewer (Open directly in Chrome/Edge, no port needed):**  
+  [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)  
+  *(Direct link: `file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html`)*
+* **AI-Agent Ready Knowledge File:** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+* **Master Cleaned Dataset:** [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) | [master_dataset.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.jsonl) | [master_dataset.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.csv)
+* **Subfolders:** `ml_splits/` (Train/Val/Test), `media_screenshots/`, `audio_wav/`, `youtube_raw/`
+
+---
+
+## 2. What Is Inside Right Now & Why Live YouTube Collection Is Blocked
+
+* **Consolidated Clean Records (`286` records):** The folder currently holds **286 real local records** from your project (45 OEM manuals, 18 SAE J2012 OBD-II codes, 207 Urdu/Roman Urdu/English symptom labels, and 16 PKR repair price benchmarks), all browsable immediately inside `dataset_viewer.html`.
+* **YouTube Videos, Spoken Transcripts, and Damage Screenshots currently equal `0`** — I cannot automatically harvest and transcribe YouTube car videos right now for **3 exact reasons** (and per your Master Prompt and security rules, I cannot bypass API credentials, download copyrighted videos without permission, or fabricate data):
+  1. **`YOUTUBE_API_KEY` is not set:** No Google Cloud YouTube Data API v3 key is configured in your environment or `backend/.env`.
+  2. **`faster-whisper` / `whisper` is not installed:** Local Speech-to-Text cannot transcribe video audio into text until Whisper is installed.
+  3. **`yt-dlp` is not installed & copyright restrictions:** Downloading standard copyrighted YouTube streams without permission is prohibited by your project rules; automated audio/screenshot extraction is enabled only for **Creative Commons (`creativeCommon`)** or explicitly consented/owned videos.
+
+---
+
+## 3. New Automatic Damage-Screenshot & Local Bundle Engine Built
+
+The automated pipeline code is built and verified:
+* **Spoken Damage-Moment Screenshot Extractor (`detect_damage_moments`):** Added inside [`video_processor.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py#L51-L74) to scan timed speech segments for multilingual damage cues (*yahan, brakes, pad, toot, damage, leak, smoke, یہاں, بریک, ڈیمج, ٹوٹ, لیک*) and automatically capture `.jpg` screenshots via `ffmpeg` at those exact spoken timestamps into `media_screenshots/`.
+* **One-Command Autonomous Bundler:** [`auto_collect_bundle.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py) and [`local_bundle.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/reports/local_bundle.py) run the full pipeline cleanly into `AI_Auto_Pakistan_Dataset/` with zero ports.
+
+### How to Run Full Collection Into This Folder (Once You Supply Credentials/Tools)
+```powershell
+cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend"
+
+# 1. One-time install of Whisper (speech-to-text) & yt-dlp (for CC-BY / permitted videos)
+pip install faster-whisper yt-dlp
+
+# 2. Run autonomous YouTube metadata + comments + CC-BY audio/screenshots collection:
+python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-queries
+
+# Or process your own folder of consented mechanic/owner MP4 videos:
+python -m data_engine.auto_collect_bundle --local-videos-dir "C:\path\to\mechanic_videos"
+```
+This automatically populates `youtube_raw/`, `audio_wav/`, `media_screenshots/`, `ai_agent_knowledge.jsonl`, and refreshes [`dataset_viewer.html`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html).
+
+---
+
+## 4. Verification Results
+
+* **Full Test Suite (`python -m pytest tests`):** **148 passed, 4 skipped in 34.31s** (0 failures).
+  * [`test_phase14_local_bundle.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase14_local_bundle.py) verified multilingual damage-cue timestamp detection, real `ffmpeg` `.jpg` screenshot capture at spoken damage moments, and the zero-port `file://` bundle exporter.
+* **Local Bundle Execution:** `python -m data_engine.auto_collect_bundle` succeeded and generated the `AI_Auto_Pakistan_Dataset/` folder with **286** clean records.
+* **Git Commits:** Committed cleanly on `main` under Talha Ali Bhatti (`3ef1e02`) and Ahmad Zahid (`201811b`).
+
+---
+
+### 20. [USER] (2026-11-10T14:29:43Z)
+
+i will do automaically all things or not more currently it is in backend
+
+---
+
+### 21. [ASSISTANT] (2026-11-10T14:44:00Z)
+
+**Yes — the automation pipeline is built and ready**, and **`faster-whisper` (Speech-to-Text) is now detected as installed (`"whisper_installed": true`)**.
+
+And you no longer need to go inside `backend/` to run it — I placed everything directly at the **top level** of your project folder (`C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2`):
+
+---
+
+## 1. Root-Level Folders & One-Click Launcher (No `backend/` Commands Needed)
+
+1. **One-Click Automatic Runner:** [`run_auto_collector.bat`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/run_auto_collector.bat)  
+   * Just **double-click** `run_auto_collector.bat`.
+   * On first run, it asks you to paste your `YOUTUBE_API_KEY` (and saves it into `backend/.env`), runs the full pipeline automatically, and opens the offline viewer directly in your browser (no port needed).
+2. **Consented Video Drop-Folder:** [`Consented_Mechanic_Videos`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Consented_Mechanic_Videos)  
+   * Drop any permitted mechanic or car-owner `.mp4` videos here and double-click `run_auto_collector.bat` — it automatically extracts audio WAVs, transcribes speech with `faster-whisper`, captures `.jpg` damage screenshots at exact spoken damage moments, cleans data, and updates your dataset.
+3. **Your Final Output Folder:** [`AI_Auto_Pakistan_Dataset`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset)  
+   * Direct offline viewer link: [`dataset_viewer.html`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) (`file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html`)
+   * Direct AI-Agent dataset: [`ai_agent_knowledge.jsonl`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+
+---
+
+## 2. Only 2 Things Left for Live YouTube Video Harvesting
+
+Right now, `python -m data_engine.auto_collect_bundle` ran cleanly and verified your current environment status:
+* `whisper_installed`: **`true`** (`faster-whisper` is ready!)
+* `youtube_api_key_set`: **`false`** → Paste your Google Cloud **YouTube Data API v3 Key** when `run_auto_collector.bat` prompts you.
+* `yt_dlp_installed`: **`false`** → Run `pip install yt-dlp` once if you want it to automatically download Creative Commons (`creativeCommon`) YouTube car videos for audio transcription and damage screenshots (Standard copyrighted YouTube videos remain metadata + comments only per your copyright rules).
+
+---
+
+### 22. [USER] (2026-11-10T14:46:05Z)
+
+how to paste it
+
+---
+
+### 23. [ASSISTANT] (2026-11-10T14:46:05Z)
+
+Here are the **2 easiest ways** to paste your `YOUTUBE_API_KEY` on Windows:
+
+### Method 1 — Paste in the Command Window (`run_auto_collector.bat`)
+1. Copy your YouTube API key (`Ctrl + C`).
+2. Double-click [`run_auto_collector.bat`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/run_auto_collector.bat) in `C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\`.
+3. When the black window stops and asks:
+   `Paste your YouTube Data API v3 Key (or press Enter to skip YouTube):`
+   **Right-Click** inside the black window (or press `Ctrl + V`), then press **Enter**.
+4. It saves the key into `backend/.env` automatically and starts collecting!
+
+---
+
+### Method 2 — Paste Using Notepad (`backend/.env`)
+1. Open the folder `C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend\`.
+2. Copy `.env.example` and rename the copy to **`.env`** (or if `.env` already exists, open it with **Notepad**).
+3. Find the line `YOUTUBE_API_KEY=` and paste your key right after `=` with **no spaces**, like this:
+   ```env
+   YOUTUBE_API_KEY=AIzaSyYourActualKeyHere
+   ```
+4. Press `Ctrl + S` to save, close Notepad, and double-click [`run_auto_collector.bat`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/run_auto_collector.bat).
+
+> *(Tip: To also download Creative Commons car videos automatically for transcription and damage screenshots, run `pip install yt-dlp` once in PowerShell before double-clicking `run_auto_collector.bat`.)*
+
+---
+
+### 24. [USER] (2026-11-10T14:48:46Z)
+
+if i give you api key will you do it
+
+---
+
+### 25. [ASSISTANT] (2026-11-10T14:48:46Z)
+
+**Yes — paste your YouTube Data API v3 key here and I will do it for you right away.**
+
+As soon as you share it, I will:
+1. Save it safely into `backend/.env` (which is already listed in `.gitignore`, so it will **never** be committed to GitHub).
+2. Run [`auto_collect_bundle.py`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py) across your Pakistani vehicle queries to collect real YouTube video metadata, licenses, and viewer/mechanic comments & solutions.
+3. Clean, deduplicate, and export everything into your standalone [`AI_Auto_Pakistan_Dataset`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset) folder and update [`dataset_viewer.html`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) + [`ai_agent_knowledge.jsonl`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl).
+
+*(Also let me know if you want me to install `yt-dlp` via `pip install yt-dlp` so any Creative Commons car videos found can automatically be downloaded, transcribed with `faster-whisper`, and have damage screenshots extracted too!)*
+
+> **Security tip:** In Google Cloud Console, restrict your API key to **YouTube Data API v3** only (you can also regenerate/rotate the key anytime after we finish).
+
+---
+
+### 26. [USER] (2026-11-10T14:49:29Z)
+
+how i genrate api key
+
+---
+
+### 27. [ASSISTANT] (2026-11-10T14:49:30Z)
+
+Here is the exact **2-minute step-by-step way** to generate a free **YouTube Data API v3 Key** (no credit card needed):
+
+1. **Open Google Cloud Console:**  
+   Go to [https://console.cloud.google.com/](https://console.cloud.google.com/) and sign in with your Gmail account.
+
+2. **Create a Project:**
+   * Click the **Project Dropdown** at the top left (next to the Google Cloud logo) → click **New Project**.
+   * Enter name: `AI-Auto-Pakistan` → click **Create**.
+   * Once created, make sure `AI-Auto-Pakistan` is selected in the top dropdown.
+
+3. **Enable YouTube Data API v3:**
+   * Click the top search bar, type **`YouTube Data API v3`**, and select it from the results.
+   * Click the blue **ENABLE** button.
+
+4. **Generate the API Key:**
+   * In the left sidebar, go to **APIs & Services → Credentials** (or click **Create Credentials**).
+   * Click **+ CREATE CREDENTIALS** at the top → select **API key**.
+   * A popup will appear with your key starting with **`AIzaSy...`**.
+   * *(Recommended)* Click **Edit API key** → under **API restrictions**, select **Restrict key** → check **YouTube Data API v3** → click **Save**.
+
+5. **Paste It Here:**
+   * Copy the `AIzaSy...` key and paste it right here in our chat (and let me know if you also want me to run `pip install yt-dlp` so any Creative Commons car videos can be downloaded, transcribed with `faster-whisper`, and have damage screenshots extracted automatically).
+
+*(Google gives **10,000 free quota units per day** — we will run a small test collection first, verify the results, and then scale cleanly.)*
+
+---
+
+### 28. [USER] (2026-11-10T14:52:14Z)
+
+is it free
+
+---
+
+### 29. [ASSISTANT] (2026-11-10T14:52:15Z)
+
+**Yes, it is 100% free** — you do **not** need a credit card or billing account to generate and use a YouTube Data API v3 key.
+
+Here is how the free tier works:
+* **Free Daily Quota:** Every Google Cloud project automatically gets **10,000 free quota units per day**.
+* **No Hidden Charges:** If you ever reach 10,000 units in a day, Google never charges you — the API simply pauses until your quota resets the next day.
+* **What You Can Collect for Free:**
+  * 1 search query = `100` units
+  * Video details batch = `1` unit
+  * 1 video's comment thread = `1` unit
+  * So running **all 20 Pakistani car search queries** (5–10 videos each + viewer/mechanic comments) uses roughly **2,100–2,300 units** — well within your **10,000 free daily units**.
+
+Go ahead and generate the `AIzaSy...` key in Google Cloud Console and paste it here whenever you're ready!
+
+---
+
+### 30. [ASSISTANT] (2026-11-10T14:55:47Z)
+
+You are on the exact right screen! Just follow these two quick steps right on that popup:
+
+1. Click the **`Select API restrictions`** dropdown (where it currently says **`No APIs selected`**).
+   * **If you see `YouTube Data API v3` in the list:** Select/check **`YouTube Data API v3`** → click **OK**.
+   * **If `YouTube Data API v3` is NOT in the list yet:** Click the blue **`API Library`** link right under that dropdown → search **`YouTube Data API v3`** → click **Enable** → then come back to **Credentials → + Create credentials → API key** and select **`YouTube Data API v3`**.
+2. Leave **Application restrictions** set to **`None`** (as it already is).
+3. Click the blue **`Create`** button at the bottom left.
+
+Once you click **Create**, Google will show your new key starting with **`AIzaSy...`** — copy it and paste it here!
+
+---
+
+### 31. [USER] (2026-11-10T14:58:07Z)
+
+[YOUTUBE_API_KEY_REDACTED]
+
+
+now doo all things related to youtube and scrab all data from video
+
+---
+
+### 32. [ASSISTANT] (2026-11-10T15:23:18Z)
+
+Everything related to YouTube collection, comment problem/solution extraction, Creative Commons audio transcription (`faster-whisper`), spoken damage-moment screenshots (`ffmpeg`), cleaning, and local file packaging has now run end-to-end with **no server port needed**.
+
+> **Security Note:** Your `YOUTUBE_API_KEY` was saved strictly inside [`backend/.env`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/.env) (verified git-ignored via `.gitignore`). Because you pasted it in chat, consider rotating/regenerating it in Google Cloud Console once you finish collecting.
+
+---
+
+## 1. Real YouTube Data Collected & Processed
+
+1. **Pakistani Automotive Videos + Comments (Official YouTube Data API v3):**
+   * Executed all **20 Pakistani search queries** (Suzuki Alto, Cultus, Wagon R, Toyota Corolla, Yaris, Honda Civic, City, overheating, starting, brakes, misfire, smoke, battery, fuel average, dashboard lights).
+   * Collected **100 Pakistani automotive videos** + **1,145 real viewer/mechanic comments & replies** (scrubbed for PII, classified into `problem_occurrence`, `suggested_solution`, `solution_with_cost`, and tagged `verification_status="unverified"`).
+   * Standard `youtube`-licensed videos were strictly kept as metadata + comments + thumbnail references (never downloaded illegally).
+
+2. **Creative Commons (`creativeCommon`) Videos — Spoken Transcripts & Damage Screenshots:**
+   * Queried YouTube Data API v3 (`videoLicense="creativeCommon"`), collecting **15 CC-BY diagnostic videos** across brake damage, engine knocking, radiator coolant loss, and charging faults.
+   * Processed **5 CC-BY clips** legally via `yt_dlp` + `ffmpeg` + **`faster-whisper`**, extracting **5 `.wav` audio files**, full speech-to-text transcripts, and **14 real `.jpg` screenshots** captured at spoken damage/fault moments (`1ikMl0SwL4s`, `GPhsvjLn11I`, `8rp47mwkCF8`, `xxWJchBRiXs`, `gC0prUoXSPw`).
+
+3. **Cleaned & Packaged Totals:**
+   * **401 total clean real records** (286 consolidated local records + 115 YouTube records, after deduplication).
+   * **Leak-Free ML Splits:** **281 Train** \| **59 Val** \| **61 Test** (`401` total) in [`ml_splits/`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ml_splits).
+
+---
+
+## 2. Direct Local Files & `file:///` Links (No Port Required)
+
+All outputs are dumped into one standalone folder:  
+* **Master Folder:** [AI_Auto_Pakistan_Dataset](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset)
+* **Offline Browser Viewer (Open directly via `file://`):**  
+  [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)  
+  *(Direct URL: `file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html`)*
+* **AI-Agent Ready Knowledge Dataset:** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+* **Master Exports:** [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) \| [master_dataset.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.jsonl) \| [master_dataset.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.csv)
+* **Media Folders:** [media_screenshots/](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/media_screenshots) (**14** `.jpg` files) \| [audio_wav/](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/audio_wav) (**5** `.wav` files) \| [youtube_raw/](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/youtube_raw) (**25** `.json` files)
+
+Whenever you want to scale up or process your own mechanic `.mp4` videos in [`Consented_Mechanic_Videos`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Consented_Mechanic_Videos), simply double-click [`run_auto_collector.bat`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/run_auto_collector.bat).
+
+---
+
+## 3. Verification Results
+
+* **Full Test Suite (`python -m pytest tests`):** **148 passed, 4 skipped in 30.99s** (0 failures).
+* **Git Commits:** Committed cleanly to `main` under Danial Hameed (`23a19bc`), Talha Ali Bhatti (`f8f8f19`), and Abdullah Mudasir (`9bd5288`).
+
+---
+
+### 33. [USER] (2026-11-10T15:24:26Z)
+
+also commit on abdullah 2626 profile and also tell me youtube all data clear or not
+
+---
+
+### 34. [ASSISTANT] (2026-11-10T15:34:30Z)
+
+Running the full backend test suite now and waiting for completion.
+
+---
+
+### 35. [ASSISTANT] (2026-11-10T15:35:53Z)
+
+Running the full backend test suite (`154` items) and waiting for completion before creating the commit.
+
+---
+
+### 36. [ASSISTANT] (2026-11-10T15:36:41Z)
+
+Committed the YouTube cleanup/audit fixes under the `Abdullah <abdullah262686@gmail.com>` profile and rebuilt the offline dataset bundle (`AI_Auto_Pakistan_Dataset/`).
+
+---
+
+### 1. Git Commit (`Abdullah <abdullah262686@gmail.com>`)
+- **Commit:** `8af0f39` (`8af0f390d8d54dec4a06666a4b00753aec353569`) on `main` (local commit; not pushed)
+- **Author & Committer:** `Abdullah <abdullah262686@gmail.com>`
+- **Message:** `fix(youtube-audit): [AUT-166] deduplicate CC-BY YouTube records, filter STT noise, and add fleet word-boundary matching`
+- **Files committed:**
+  - [youtube_audit.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cleaning/youtube_audit.py) ([`audit_and_clean_youtube_records`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cleaning/youtube_audit.py#L23-L175))
+  - [cleaning/__init__.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cleaning/__init__.py)
+  - [fleet.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/taxonomy/fleet.py) ([`normalize_make_model`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/taxonomy/fleet.py#L178-L216))
+  - [video_processor.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py) ([`AuthorizedMediaPipeline.process_authorized_video`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py#L230-L356))
+  - [auto_collect_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py)
+  - [test_phase14_local_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase14_local_bundle.py)
+- Pre-existing untracked PID docs (`Big_Data_Project_Initiation_Document_AutoCare.*`, `build_pid_*.py`) and git-ignored secrets/outputs (`backend/.env`, `backend/autocare.db`, `AI_Auto_Pakistan_Dataset/`) were not committed.
+
+---
+
+### 2. Is All YouTube Data Clean? — Honest Audit Result
+
+**Short answer:** **Structurally deduplicated and safe to browse, but not 100% ML-verified.** Here is the exact breakdown after running [`audit_and_clean_youtube_records`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cleaning/youtube_audit.py#L23-L175):
+
+#### What is clean (`Yes`)
+- **Zero duplicates:** `5` duplicate CC-BY UUID rows were merged into their canonical `yt_<video_id>` records (`audit_log.jsonl` recorded `5` `youtube_audit` merge entries), leaving **`110` unique YouTube records** and **`0` duplicate URLs**.
+- **STT noise removed:** Punctuation-only Whisper output (`. . . . .` on `yt_8rp47mwkCF8`) was replaced with its clean YouTube video description, and [`AuthorizedMediaPipeline.process_authorized_video`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py#L283-L286) now falls back to `title` whenever fewer than `10` alphanumeric characters are transcribed.
+- **Vehicle & category normalization:** [`normalize_make_model`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/taxonomy/fleet.py#L178-L216) uses word-boundary regexes (`Suzuki: 22`, `Toyota: 15`, `Honda: 13`, `Hyundai: 1`, `Generic: 59`), and **`101` of `110`** YouTube rows now map to fault category IDs.
+
+#### Remaining gaps & caveats (Not 100% clean)
+1. **Unverified claims (`110 / 110`):** Every YouTube row (`110`) has `verification_status = "unverified"` (`78` include comment-extracted solutions, which are unverified community advice rather than workshop-confirmed repairs).
+2. **Pending human review (`36 / 110`):** `74` rows have `human_review_status = "ml_ready"` and `36` remain `"pending"`.
+3. **Uncategorized titles (`9 / 110`):** `9` rows still have `fault_category_id = null` (mostly EV/battery/charging, fuel average, starting, Vitz vibration, and Wagon R gear-play titles, including CC-BY clip `yt_1ikMl0SwL4s` *"Car Says 'Charging Fault'? Don't Panic — Do This First ⚡🚗"*).
+4. **Generic vehicle labels (`59 / 110`):** `59` videos are tagged `Generic / Multi-Model` because their titles/descriptions do not specify a single car model.
+5. **Media & Whisper coverage (`5 / 110` CC-BY only):**
+   - Only the `5` Creative Commons videos have downloaded audio (`.wav`) and screenshots (`14` `.jpg` files in the bundle). The remaining `105` standard-licensed videos intentionally hold metadata and public comments only.
+   - Among those `5` CC-BY rows, `3` (`yt_gC0prUoXSPw`, `yt_1ikMl0SwL4s`, `yt_GPhsvjLn11I`) retain extracted `[Whisper Transcript]` speech text, while `2` (`yt_8rp47mwkCF8` after noise replacement, and `yt_xxWJchBRiXs`) fall back to raw video descriptions without a `[Whisper Transcript]` prefix.
+
+---
+
+### 3. Rebuilt Zero-Port Bundle & Verification
+- **Offline Folder Viewer (`no server port`):** [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)
+- **Updated Bundle Totals:** `396` non-example records (`277` train / `59` val / `60` test), `14` screenshots copied, `5` audio `.wav` files copied, `25` raw YouTube JSON files copied.
+- **Test Suite (run after final edit):** `python -m pytest tests` inside `backend` -> **`150 passed, 4 skipped in 16.39s`**.
+
+---
+
+### 37. [USER] (2026-11-10T15:38:09Z)
+
+is all data available now like screenshot audio between car owner and mechnic and problems and there solution and all data will be for toyota suzuki and corolla etc
+
+---
+
+### 38. [ASSISTANT] (2026-11-10T15:45:33Z)
+
+**No — not all of those pieces are populated yet.** The automated pipeline (Whisper transcription + damage-moment screenshot capture + local bundle export) is built and working, but here is the exact state of what is **currently inside** [AI_Auto_Pakistan_Dataset](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) (`396` total records) vs. what is still missing:
+
+---
+
+### 1. Screenshots & Audio (`5` videos only — NOT Pakistani cars yet)
+- **What is available:** **`5` `.wav` audio files** in [audio_wav/](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/audio_wav) and **`14` `.jpg` screenshots** in [media_screenshots/](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/media_screenshots).
+- **What is missing:** Those `5` media records come only from global English Creative Commons (`creative_common`) clips (`4 Generic / Multi-Model`, `1 Hyundai Elantra`) — **none** of your Toyota/Suzuki Pakistani videos have audio or screenshots downloaded (`0 / 50`).
+- **Why:** The Pakistani Toyota, Suzuki, and Honda YouTube videos fetched so far use the standard YouTube license, so the pipeline only collects their **metadata + public comments** without downloading video/audio files. Meanwhile, [Consented_Mechanic_Videos](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Consented_Mechanic_Videos/README.txt) currently has **no local mechanic/owner videos** added yet.
+
+---
+
+### 2. Owner ↔ Mechanic Conversations (Not captured as real audio dialogues yet)
+- **Recorded owner–mechanic dialogues:** **Not yet available** (`0` real Pakistani workshop/owner interviews have been supplied in [Consented_Mechanic_Videos](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Consented_Mechanic_Videos/README.txt); `4` illustrative `example_template` rows in SQLite are excluded from the `396` bundle records).
+- **What you DO have right now:**
+  - **`78` YouTube records** contain real public **owner questions and community/mechanic replies** in Roman Urdu, Urdu, and English extracted from YouTube comments.
+  - **`3` CC-BY videos** (`yt_gC0prUoXSPw`, `yt_1ikMl0SwL4s`, `yt_GPhsvjLn11I`) have extracted `[Whisper Transcript]` speech text (the other `2` CC-BY clips fell back to video descriptions).
+
+---
+
+### 3. Problems & Solutions (`396` problems vs. `94` solutions)
+- **Problems / Symptoms (`396 / 396`):** Every record in [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) has a fault/problem description:
+  - `207` `starter_symptom_corpus` (Toyota Corolla symptoms)
+  - `110` `youtube_official_api` (YouTube problem videos + comments)
+  - `63` `manuals_and_bulletins` (OBD-II, Toyota, Honda, Suzuki)
+  - `16` `pakistan_price_reference` (Pakistani repair cost items)
+- **Solutions (`94 / 396` only):**
+  - Only **`94` records** currently have a populated `recommended_solution` (`78` from YouTube comments — all marked `verification_status = "unverified"` — and `16` from `pakistan_price_reference`).
+  - The remaining **`302` records** (`207` symptom corpus + `63` manuals/bulletins + `32` YouTube videos without extracted solution comments) have `recommended_solution = null`.
+  - *(Small data quirk observed: the PII redactor replaced a voltage number like `12.5v` with `[PLATE REDACTED].5v` inside `yt_GPhsvjLn11I`'s comment solution.)*
+
+---
+
+### 4. Brands & Models (`Toyota`, `Suzuki`, `Corolla`, etc. — `80%`, not `100%`)
+Out of the **`396`** records in the dataset, **Toyota, Suzuki, and Honda account for `318` records (`80.3%`)**, while the other **`78` records** are Generic/Universal/Hyundai:
+- **Toyota (`243` total):** `Corolla` (`236` — `228` local corpus/manuals + `8` YouTube), `Yaris` (`5`), `Vitz` (`1`), `Fortuner` (`1`)
+- **Suzuki (`42` total):** `Swift` (`20`), `Alto` (`8`), `Cultus` (`7`), `Wagon R` (`4`), `Mehran` (`3`)
+- **Honda (`33` total):** `Civic` (`27`), `City` (`6`)
+- **Hyundai (`1`):** `Elantra` (`1`)
+- **Generic / Universal (`77` total):** `Generic | Multi-Model` (`59` YouTube videos without a specific model in the title/description) and `Universal | OBD-II Standard` (`18` generic OBD-II codes)
+
+---
+
+### How to Get Real Owner ↔ Mechanic Audio + Damage Screenshots for Toyota Corolla / Suzuki
+Whenever you have **your own mechanic/owner recordings** or **videos where the creator gave permission** (e.g., Toyota Corolla brake damage, Suzuki Alto/Cultus overheating), place those `.mp4` / `.mkv` / `.wav` files into [Consented_Mechanic_Videos](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Consented_Mechanic_Videos/README.txt) and re-run [auto_collect_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py) — the pipeline will automatically extract the 16 kHz `.wav` audio, Whisper speech transcript, spoken damage-moment `.jpg` screenshots, and update [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) with zero ports required.
+
+---
+
+### 39. [USER] (2026-11-10T15:47:40Z)
+
+آپ انہی ویڈیوز کے اندر جو آڈیو ہے، اس میں سے یوزر جو کار کا اونر ہے اور جو مکینک ہے، وہ آپس میں جو پرابلم ڈسکشن کر رہے ہیں، اس بیس پہ ٹرانسکرپٹ نکال سکتے ہو، ایزیلی نکل سکتا ہے اور اس کو ایکسٹریکٹ کر کے ایک فائل میں بنا دو۔ یعنی کہ آڈیو ہو گئی، اسی کے اندر ہمیں پرابلم بھی ملے گا، سلوشن بھی ملے گا اور ویڈیو کے ذریعے ہم نے اسکرین شاٹ سے ڈیٹا نکالنا ہے اور کم از کم یہ 500 ویڈیوز کا ڈیٹا ہونا چاہیے یوٹیوب کا۔
+
+---
+
+### 40. [ASSISTANT] (2026-11-10T15:49:14Z)
+
+YouTube سے **500+ گاڑیوں کی ویڈیوز** کا ڈیٹا اور **ایک ہی فائل** میں Problem + Solution ٹرانسکرپٹ اکٹھا کیا جا سکتا ہے، لیکن **2 اہم حدود (Blockers)** آپ کو پہلے واضح بتانا ضروری ہیں:
+
+1. **Standard YouTube ویڈیوز سے آڈیو / اسکرین شاٹس ڈاؤن لوڈ نہیں کیے جا سکتے (Copyright & Permission Check):**
+   - اس پراجیکٹ کا کوڈ ([video_processor.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py#L35-L106), [youtube.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/youtube.py#L6-L11), [config.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/config.py#L67-L70), [auto_collect_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py#L44-L54)) صرف **`creative_common` (`creativeCommon` لائسنس)** یا **اجازت یافتہ (`explicit_consent` / `owned`)** ویڈیوز سے آڈیو اور اسکرین شاٹس نکالنے کی اجازت دیتا ہے۔
+   - پاکستان کے زیادہ تر مکینک / Toyota / Suzuki چینلز **Standard YouTube License** استعمال کرتے ہیں — اس لیے ان کی ویڈیوز ڈاؤن لوڈ کر کے `.wav` آڈیو یا اسکرین شاٹس نکالنا ممکن نہیں (صرف میٹاڈیٹا اور پبلک کمنٹس لیے جا سکتے ہیں)، اور Creative Commons لائسنس والی اردو/پاکستانی Toyota Corolla یا Suzuki کی 500 ویڈیوز یوٹیوب پر موجود نہیں ہیں۔
+2. **آڈیو سے خودکار "Car Owner" بمقابلہ "Mechanic" آواز الگ کرنا (Speaker Diarization):**
+   - موجودہ `faster-whisper` اور [`TranscriptClaimExtractor`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/transcription.py#L55-L114) آواز کو ٹیکسٹ میں بدلتے ہیں، لیکن آواز کی پہچان سے **Speaker 1 (Owner)** اور **Speaker 2 (Mechanic)** کو الگ نہیں کرتے (اور زیادہ تر ویڈیوز میں صرف ایک مکینک ہی مسئلہ اور حل بیان کرتا ہے)۔
+   - البتہ ٹیکسٹ کی بنیاد پر **Owner Problem Statements** اور **Mechanic Repair / Solution Statements** کو الگ سیکشنز میں نکال کر **ایک ہی فائل** میں محفوظ کیا جا سکتا ہے۔
+
+---
+
+### قانونی اور ممکنہ آپشنز (Sanctioned Paths)
+نیچے دیے گئے آپشنز میں سے بتائیں کہ آپ کون سا کام کروانا چاہتے ہیں:
+
+---
+
+### 41. [USER] (2026-11-10T15:49:55Z)
+
+in english tel me
+
+---
+
+### 42. [ASSISTANT] (2026-11-10T15:49:55Z)
+
+Yes — we can collect **500+ YouTube automotive videos** and export a **single consolidated Problem & Solution transcript file**, **but there are two strict gaps/limitations** you should know upfront:
+
+### 1. Why Audio & Screenshots Cannot Be Extracted from All 500 YouTube Videos
+- Most Pakistani Toyota Corolla, Suzuki, and Honda mechanic videos use the **Standard YouTube License**, not Creative Commons.
+- This project strictly enforces copyright & API Terms of Service checks in [`AuthorizedMediaPipeline`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/video_processor.py#L35-L106) (`PERMITTED_RIGHTS_BASES` allows only `creative_common`, `explicit_consent`, `user_submission`, `owned`), [`YouTubeCollector`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/youtube.py#L6-L11), [`DataEngineConfig`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/config.py#L67-L70) (`allow_unauthorized_scraping = False`), and [`download_cc_video_if_permitted`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py#L44-L54).
+- We cannot bypass those permission checks:
+  - **Standard YouTube videos:** We can legally collect **500+ videos' metadata, problem descriptions, and public owner/mechanic Q&A comment threads** via the official YouTube Data API v3, **not** download their `.mp4`/`.wav` audio or screenshots.
+  - **Audio + Whisper Transcripts + Damage Screenshots:** Only allowed on **Creative Commons (`creativeCommon`)** YouTube videos (global automotive clips, far fewer than 500 Urdu/Pakistani car videos) or **your own/consented MP4 videos** placed in [Consented_Mechanic_Videos](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Consented_Mechanic_Videos/README.txt).
+
+### 2. Why "Car Owner vs. Mechanic" Voice Separation Is Text-Based
+- `faster-whisper` and [`TranscriptClaimExtractor`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/media/transcription.py#L55-L114) convert speech to timed text (`start`, `end`, `text`), without speaker-diarization (it does not label different voiceprints as `Owner` vs. `Mechanic`), and most repair videos have a single narrator.
+- Instead, we can **classify transcript sentences and Q&A comments by text** into `owner_problem_statements` and `mechanic_solutions`, link timestamps/screenshots (for CC-BY / consented clips), and export everything into **one consolidated file** inside `AI_Auto_Pakistan_Dataset/`.
+
+---
+
+Select how you would like me to proceed:
+
+* **Wait** — let me ask you directly using the options below so you can pick your preferred path:
+
+---
+
+### 43. [ASSISTANT] (2026-11-10T15:58:28Z)
+
+Running YouTube Data API v3 collection now to expand the Toyota, Suzuki, Honda, and Pakistani mechanic dataset to **500+ unique videos**, extract Q&A problem/solution comments into [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json), and rebuild the offline bundle. Waiting for collection to complete.
+
+---
+
+### 44. [ASSISTANT] (2026-11-10T16:01:42Z)
+
+YouTube collection (`541` unique videos) and `owner_mechanic_qa_solutions.json` export completed; running the full backend test suite now and waiting for completion.
+
+---
+
+### 45. [ASSISTANT] (2026-11-10T16:02:02Z)
+
+Completed **Option 1 (500+ Toyota/Suzuki/Honda YouTube collection + single consolidated Q&A Problem & Solution file)** with zero port required and committed the updates under **`Abdullah <abdullah262686@gmail.com>`**.
+
+---
+
+### 1. Single Consolidated Q&A Problem & Solution File
+- **File:** [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json) (`1960.0 KB`)
+- **Offline Browser Viewer (`file://`):** [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) (links directly to `owner_mechanic_qa_solutions.json` and displays up to `1,000` records locally)
+
+#### What Is Inside `owner_mechanic_qa_solutions.json` (`541` Unique YouTube Videos)
+- **Total YouTube Records:** **`541`** (`+431` newly collected, **`0` duplicate URLs remaining**)
+- **Owner Problem Questions:** **`200`** videos include extracted `owner_problem_questions`
+- **Mechanic & Community Solutions:** **`278`** videos include extracted `mechanic_and_community_solutions`
+- **Structured Q&A Threads:** **`398`** videos include nested `qa_threads` (car-owner comment/question paired with replies)
+- **Existing CC-BY Media & Transcripts Preserved:** **`3`** records include `[Whisper Transcript]`, **`5`** link `.wav` audio files (`audio_wav/`), and **`5`** link extracted screenshot sets (`14` `.jpg` images in `media_screenshots/`)
+- **Fault Categorization & Verification Status:**
+  - `426` categorized / `115` uncategorized (rule-based matching; generic vlogs/modified-car titles remain uncategorized)
+  - `289` `ml_ready` / `252` `pending` review
+  - **All `541` YouTube records** remain marked `verification_status: "unverified"` (`Public YouTube comments and transcripts represent unverified claims until validated by an automotive technician.`)
+
+---
+
+### 2. Toyota, Suzuki & Honda Coverage (`444 / 541` = `82.1%` of YouTube Records)
+- **Suzuki (`239`):** `Alto` (`92`), `Cultus` (`60`), `Mehran` (`57`), `Swift` (`19`), `Wagon R` (`11`)
+- **Toyota (`160`):** `Corolla` (`105`), `Vitz` (`39`), `Yaris` (`14`), `Hilux` (`1`), `Fortuner` (`1`)
+- **Honda (`45`):** `Civic` (`35`), `City` (`10`)
+- **Hyundai (`1`):** `Elantra` (`1`)
+- **Generic Multi-Model (`96`):** Videos without a specific model mentioned
+
+---
+
+### 3. Rebuilt Full Dataset & ML Splits
+- **Total Non-Example Records in Bundle:** **`827`** (`train`: **`578`**, `val`: **`124`**, `test`: **`125`**) across [AI_Auto_Pakistan_Dataset](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json)
+
+---
+
+### 4. Code Changes, Verification & Git Commit
+- **Updated & Tested Files:**
+  - [youtube_queries.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/queries/youtube_queries.json) — added Pakistani Toyota Corolla, Yaris, Vitz, Suzuki Alto, Mehran, Cultus, Swift, Wagon R, and Honda Civic/City mechanic queries (`q021`–`q032`)
+  - [`YouTubeCollector.fetch_video_metadata`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/youtube.py#L207-L291) & [`classify_comment_intent`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/youtube.py#L91-L105) — added multi-page search pagination (`nextPageToken`), `skip_comment_video_ids`, and word-boundary comment intent matching
+  - [`normalize_make_model`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/taxonomy/fleet.py#L178-L216) — matched Pakistani Corolla (`gli`/`xli`/`altis`/`grande`) and Civic (`reborn`/`rebirth`) variants
+  - [`audit_and_clean_youtube_records`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/cleaning/youtube_audit.py#L126-L135) — preserved valid existing brand/model matches
+  - [`LocalFolderBundleExporter._export_consolidated_qa_file`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/reports/local_bundle.py#L168-L282) — built `owner_mechanic_qa_solutions.json` cleanly without mixing remote thumbnails into `media_screenshots/`
+  - Tests in [test_phase13_youtube_media_agent.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase13_youtube_media_agent.py) and [test_phase14_local_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase14_local_bundle.py)
+- **Full Pytest Suite (after final edit):** `python -m pytest tests` inside `backend` -> **`150 passed, 4 skipped in 14.70s`**
+- **Git Commit (`Abdullah <abdullah262686@gmail.com>`):** `6d7ffd3` (`6d7ffd386f1db83d323df5e74f7f492f42ef578e`) on `main` (local commit; not pushed)
+
+---
+
+### 46. [USER] (2026-11-10T16:38:41Z)
+
+now tell me all youtube data is avaiable
+
+---
+
+### 47. [ASSISTANT] (2026-11-10T16:39:01Z)
+
+Yes — all data for your selected path (**500+ Toyota/Suzuki/Honda YouTube collection + consolidated Problem & Solution Q&A file**) is now saved locally on disk inside [AI_Auto_Pakistan_Dataset](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) with **no port required**.
+
+### What Is Available Right Now
+
+| Metric | Exact Count Verified on Disk |
+| :--- | :--- |
+| **Total YouTube Records** | **`541`** unique videos (`34` raw batch files in `youtube_raw/`) |
+| **Total All-Source Bundle Records** | **`827`** records (`541` YouTube + local corpora/manuals/prices) |
+| **Toyota, Suzuki & Honda Coverage** | **`444` / `541`** (`Suzuki: 239`, `Toyota: 160`, `Honda: 45`; plus `Hyundai: 1`, `Generic: 96`) |
+| **Top Models Covered** | `Corolla (105)`, `Alto (92)`, `Cultus (60)`, `Mehran (57)`, `Vitz (39)`, `Civic (35)`, `Swift (19)`, `Yaris (14)`, `Wagon R (11)`, `City (10)` |
+| **Structured Q&A Threads** | **`398`** videos with comment/reply Q&A threads |
+| **Owner Problem Questions** | **`200`** videos with extracted `owner_problem_questions` |
+| **Mechanic / Community Solutions** | **`278`** videos with `recommended_solution` (`263` have problem metadata only) |
+| **Fault Categorized** | **`426` / `541`** mapped to taxonomy categories (`115` uncategorized) |
+| **Audio WAV / Screenshots / Whisper** | **`5`** CC-BY videos (`5` `.wav` files in `audio_wav/`, **`14`** `.jpg` files in `media_screenshots/`, **`3`** Whisper transcripts) |
+
+---
+
+### Where to Open Your Local Files (`No Server / No Port`)
+- **Offline Interactive Browser Viewer:** [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)
+- **Single Consolidated Problem & Solution Q&A File:** [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json)
+- **Complete Master Dataset (`827` records):** [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) • [master_dataset.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.jsonl) • [master_dataset.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.csv)
+- **AI-Agent Knowledge & Inventory:** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl) • [README_LOCAL_BUNDLE.md](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/README_LOCAL_BUNDLE.md)
+
+### Important Reminders (What Is Not Included)
+- Only the **`5`** Creative Commons videos have downloaded `.wav` audio and `.jpg` screenshots — the remaining **`536`** standard YouTube videos contain **metadata + public Q&A comments only**.
+- All **`541`** YouTube records remain tagged **`verification_status: "unverified"`** because YouTube comments/descriptions are community claims rather than certified mechanic inspections.
+
+---
+
+### 48. [USER] (2026-11-10T16:43:09Z)
+
+now its time for facebook where pages are made by community diffferent people ask questions these questions are very important make solutions and give me this data i just want to know from different ways a prolem raise so that our model give answer
+
+---
+
+### 49. [ASSISTANT] (2026-11-10T16:47:45Z)
+
+I am **blocked from automatically collecting posts and questions from Facebook pages/groups**, so no real Facebook data has been added (`data/raw/facebook/` is empty, and `autocare.db` only contains `example_fb_01`, the illustrative row from [facebook_research_template.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/templates/facebook_research_template.csv)).
+
+### Why Automated Facebook Collection Is Blocked
+1. **No Meta Graph API credentials configured:** Checking [`DataEngineConfig`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/config.py#L43-L48) shows `facebook_access_token_set: False` and `facebook_page_id_set: False`.
+2. **Scraping is strictly prohibited & gated:** Both [`DataEngineConfig`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/config.py#L67-L70) (`allow_unauthorized_scraping = False`) and [`FacebookResearchImporter`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L1-L7) forbid scraping Facebook without authorization, and Facebook blocks unauthenticated scraping behind login/anti-bot walls which cannot be bypassed.
+3. **Graph API only has manual CSV implemented right now:** [`FacebookResearchImporter`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L31-L152) defines `FACEBOOK_GRAPH_API_BASE = "https://graph.facebook.com/v19.0"` and [`import_manual_csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L61-L152), with no automated Graph API feed fetcher implemented yet. (Additionally, Meta Graph API requires a valid token/permission for specific public **Pages**, and does not allow automated extraction from third-party Facebook **Groups**.)
+
+---
+
+### Sanctioned Ways to Get Multi-Style Community Questions & Solutions
+Tell me which option you want to use:
+
+1. **Authorized Meta Graph API (for a public Facebook Page you manage or have an App-Reviewed token for):**
+   If you add `FACEBOOK_ACCESS_TOKEN` and `FACEBOOK_PAGE_ID` to `backend/.env`, I can implement the `graph.facebook.com/v19.0` Page posts + comments collector in [`FacebookResearchImporter`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L31-L152) and merge results into [AI_Auto_Pakistan_Dataset](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html).
+2. **Curated Manual CSV Import from Public Pages/Posts:**
+   Put manually collected public Q&A entries into [facebook_research_template.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/templates/facebook_research_template.csv) (columns: `source_url`, `post_date`, `make`, `model`, `variant`, `manufacturing_year`, `problem_title`, `problem_description`, `symptoms`, `proposed_solution`, `estimated_cost_pkr`, `city`, `evidence_quote`, `review_status`) and I will ingest, normalize, categorize, scrub PII, and rebuild the bundle.
+3. **Train Model on "Different Ways Users Ask the Same Problem" (No Facebook Scraping):**
+   You already have **`398` real community Q&A threads** inside [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json). If your goal is helping your model recognize varied user wording (Urdu, Roman Urdu, and English ways of describing the same fault), I can generate a **separately labeled multi-phrasing Q&A training file** derived from your existing **`827`** Toyota/Suzuki/Honda/manual records (explicitly tagged as synthetic paraphrases so it is never confused with real scraped Facebook posts).
+
+---
+
+### 50. [USER] (2026-11-10T16:48:47Z)
+
+2 in local 1 required just like youtube
+
+---
+
+### 51. [USER] (2026-11-10T16:51:35Z)
+
+2  is best way as in local i required just like youtube
+
+---
+
+### 52. [ASSISTANT] (2026-11-10T16:57:05Z)
+
+Built the local `Facebook_Community_QA/` workflow, updated the exporter (`facebook_qa_solutions.json`), and now running the full backend test suite (`155` tests) before committing.
+
+---
+
+### 53. [ASSISTANT] (2026-11-10T16:58:32Z)
+
+Re-running the full backend test suite after fixing PKR `rs` vs license-plate redaction (`155` tests). Waiting for completion.
+
+---
+
+### 54. [ASSISTANT] (2026-11-10T16:59:17Z)
+
+Built the local **Facebook Community Q&A drop-folder workflow (Option 2)** just like your zero-port YouTube folder, without creating any fake Facebook records (`total_facebook_records` currently shows `0` until you add your rows).
+
+---
+
+### 1. How to Add & Process Facebook Q&A Data Locally (3 Simple Steps)
+1. **Open [facebook_qa_input.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Facebook_Community_QA/facebook_qa_input.csv)** inside `Facebook_Community_QA/` (or drop any `.csv`, `.json`, or `.jsonl` file into that folder — see [README.txt](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Facebook_Community_QA/README.txt)).
+   - Supports **full 14-column CSV** (`source_url`, `post_date`, `make`, `model`, `variant`, `manufacturing_year`, `problem_title`, `problem_description`, `symptoms`, `proposed_solution`, `estimated_cost_pkr`, `city`, `evidence_quote`, `review_status`) **or quick Q&A CSV/JSON** (`question` / `problem_title` + `problem_description` + `proposed_solution` / `answers`).
+   - Vehicle make/model (`Toyota Corolla`, `Suzuki Alto`, `Honda Civic`, etc.), Urdu / Roman Urdu / English language, fault category, and PKR cost (`Rs ...`) are extracted automatically, while phone numbers, CNICs, emails, and plates are scrubbed for privacy.
+2. **Double-click [import_facebook_qa.bat](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/import_facebook_qa.bat)** (runs offline with `--skip-youtube` so it processes your local CSV/JSON files and [Consented_Mechanic_Videos](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Consented_Mechanic_Videos/README.txt) in seconds without using YouTube API quota).
+3. **Browse everything offline (`no port`):**
+   - [facebook_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/facebook_qa_solutions.json) — dedicated Facebook Q&A JSON export inside `AI_Auto_Pakistan_Dataset/`
+   - [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html) — offline browser viewer (`Facebook Q&As` KPI + direct link to `facebook_qa_solutions.json` and `owner_mechanic_qa_solutions.json`)
+
+---
+
+### 2. Code Changes Implemented & Tested
+- [facebook.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py) — added [`import_flexible_qa_file`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L223-L259) and [`_parse_record_from_dict`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L67-L202) (deterministic `fb_*` IDs, PII scrubbing, language/make/cost detection, and `verification_status="unverified"` unless `approved`)
+- [submissions.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/submissions.py#L31-L34) — prevented `PLATE_REGEX` from falsely redacting PKR currency amounts (`rs 2500`)
+- [local_consolidator.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/local_consolidator.py#L295-L315) — added [`load_real_facebook_qa`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/local_consolidator.py#L295-L315) scanning `Facebook_Community_QA/` and `data/raw/facebook/`
+- [splitter.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/ml/splitter.py#L167-L221) — added [`GroupedMLSplitter.split_and_export_from_storage`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/ml/splitter.py#L167-L221) so `ml_splits/` stays synced with all non-example records (`827` currently, preserving all `541` YouTube records)
+- [auto_collect_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py#L81-L222) & [run_auto_collector.bat](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/run_auto_collector.bat) — added `--local-facebook-dir`, `--skip-youtube`, and CC-BY YouTube media protection
+- [local_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/reports/local_bundle.py#L283-L333) — exports `facebook_qa_solutions.json` and links it inside `dataset_viewer.html` and `README_LOCAL_BUNDLE.md`
+- Tests added in [test_phase3_6_sources.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase3_6_sources.py) and [test_phase14_local_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase14_local_bundle.py)
+
+---
+
+### 3. Verification & Git Commit
+- **Offline Pipeline Check:** `python -m data_engine.auto_collect_bundle --skip-youtube --local-facebook-dir "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\Facebook_Community_QA"` -> exited `0` (`827` total records preserved, `541` YouTube records, `14` screenshots, `5` audio WAVs, `0` Facebook records yet)
+- **Full Pytest Suite (after final edit):** `python -m pytest tests` inside `backend` -> **`151 passed, 4 skipped in 32.58s`**
+- **Git Commit (`Abdullah <abdullah262686@gmail.com>`):** `0d50c32` (`0d50c329b04137b3feb99f35f3678c3edc4b2640`) on `main` (local commit; not pushed)
+
+If you want me to ingest any public Facebook Q&A text or CSV you already have right now, paste it here (or drop it into [facebook_qa_input.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Facebook_Community_QA/facebook_qa_input.csv)) and tell me — I will run the importer and update `facebook_qa_solutions.json`.
+
+---
+
+### 55. [USER] (2026-11-10T17:04:25Z)
+
+کیا سارا فیس بک کے پیجز کا ڈیٹا، جس طرح ہم نے یوٹیوب کا ڈیٹا لیا ہے، جس میں پرابلمز یوزر ڈیفائن کر رہا ہے اور اس کے بدلے میں سولیوشن مل رہا ہے، کمنٹس کے اندر وہ پرابلم پوچھے گا، اس کے علاوہ جو کمیونٹی ہے، اسے سم ٹائم انسرز کرے گی، اس کے علاوہ آن لائن سرچ کر کے سولیوشنز وغیرہ، ہمیں بیسیکلی اپنا ماڈل بنا کر اسے ریگ ویس امپلیمنٹ کرنا ہے۔ یہ سارا ڈیٹا وہاں پہ چاہیے ہو گا ہمیں، تو اس وجہ سے فیس بک کا ڈیٹا مجھے چاہیے اور یہ جواب سارا انگلش میں دینا ہے۔
+
+---
+
+### 56. [ASSISTANT] (2026-11-10T17:05:21Z)
+
+**No — public Facebook Pages cannot be bulk-collected automatically like YouTube.** Here is why that happens, what data is already ready for your **RAG (Retrieval-Augmented Generation)** model, and how you can legally expand your online Q&A dataset for RAG.
+
+---
+
+### 1. Why Facebook Pages Cannot Be Collected Automatically Like YouTube
+- **No open public-search API key (unlike YouTube):** Google's YouTube Data API v3 gives anyone an API key to search public automotive videos and read public comment threads globally. Meta/Facebook does **not** offer an equivalent public search API key for reading arbitrary community pages or comments.
+- **No Facebook credentials configured & scraping is blocked:**
+  - Checking [`DataEngineConfig`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/config.py#L43-L70) shows `facebook_access_token_set: False`, `facebook_page_id_set: False`, and `allow_unauthorized_scraping = False`.
+  - Unauthenticated scraping of Facebook pages/groups is gated behind Meta login and anti-bot checks, which cannot be bypassed.
+- **Even with Meta's Graph API (`v19.0`):** Graph API access in [`FacebookResearchImporter`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L1-L65) is limited to a **Page you own/manage** (via a Page Access Token) or apps approved through **Meta App Review** (`Page Public Content Access`), and third-party Facebook **Groups** are not accessible via Graph API `v19.0`. Currently, [`FacebookResearchImporter`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/facebook.py#L204-L259) only implements local file/CSV import (`import_manual_csv` and `import_flexible_qa_file`), not an automated Graph API feed crawler.
+
+---
+
+### 2. What Data You Already Have Ready for Your RAG Model
+You do **not** have to start from empty — your local folder already holds **`827` RAG-structured records**:
+- **Primary RAG Knowledge File (`827` records):** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+  - Each line contains: `id`, `vehicle`, `fault_category`, `problem_occurrence`, `solutions_and_repairs`, `cost_pkr`, `media_evidence`, and `provenance` (including `is_verified_fact` so your RAG pipeline separates verified workshop/manual facts from unverified community claims).
+- **Community Q&A File (`541` YouTube Videos, `398` Q&A Threads):** [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json)
+  - Includes **`200`** videos with owner problem questions, **`278`** with community/mechanic solutions, and **`444`** Toyota/Suzuki/Honda records (`Corolla`, `Alto`, `Cultus`, `Mehran`, `Civic`, `City`, `Vitz`, `Swift`, `Yaris`, `Wagon R`).
+- **Master Dataset & Splits:** [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) (`827` records) + [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)
+- **Facebook Q&A Slot (Ready for Manual/Curated Rows):** [facebook_qa_input.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Facebook_Community_QA/facebook_qa_input.csv) -> double-click [import_facebook_qa.bat](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/import_facebook_qa.bat) to merge rows into [facebook_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/facebook_qa_solutions.json) and `ai_agent_knowledge.jsonl` (`currently 0 rows`).
+
+---
+
+### 3. How to Legally Get Much More Online Q&A Problem & Solution Data for RAG
+If you want a much larger set of real user questions + mechanic solutions for your RAG vector store without scraping Facebook:
+1. **Expand YouTube Q&A even further (`1,000+` threads):** Run additional Pakistani fault queries across Toyota Corolla, Suzuki Alto/Cultus/Mehran, and Honda Civic/City using your official YouTube Data API v3 key as daily quota resets.
+2. **Collect Open, Authorized Online Q&A APIs (Recommended for RAG):** I can build official REST API collectors (zero scraping) for:
+   - **Motor Vehicle Maintenance & Repair Stack Exchange** (public `api.stackexchange.com/2.3`, CC-BY-SA license — real car owners asking diagnostic questions paired with upvoted/accepted mechanic solutions).
+   - **NHTSA Vehicle Complaints & Remedies API** (official open `api.nhtsa.gov` — owner fault descriptions and manufacturer remedies for models including Toyota Corolla/Yaris, Honda Civic, Suzuki Swift, and Hyundai Elantra).
+3. **Manual Curated Facebook Q&A:** Copy public Q&A discussions you want included into [facebook_qa_input.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Facebook_Community_QA/facebook_qa_input.csv) and run [import_facebook_qa.bat](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/import_facebook_qa.bat), or provide a `FACEBOOK_ACCESS_TOKEN` + `FACEBOOK_PAGE_ID` for an authorized Facebook Page you manage.
+
+Let me know if you want me to integrate **Stack Exchange Mechanics Q&A + NHTSA Complaints API** (or expand YouTube queries) so we grow your RAG knowledge file (`ai_agent_knowledge.jsonl`) cleanly with real online questions and solutions!
+
+---
+
+### 57. [USER] (2026-11-10T17:08:11Z)
+
+now commit all things in these profiles what we have done now commits will be randomly as we not working from previous few days also tell me can pakwheels give us data through blogs identify it
+
+---
+
+### 58. [ASSISTANT] (2026-11-10T17:09:11Z)
+
+### 1. Git Commits & Team Profiles (`Backdating Declined`)
+- **Everything we built is already committed on `main`:** `git status` shows **no uncommitted code or pipeline changes** left:
+  - `8af0f39` (`2026-11-10 20:36:41 +0500`) — `fix(youtube-audit): [AUT-166]...` (`Abdullah <abdullah262686@gmail.com>`)
+  - `6d7ffd3` (`2026-11-10 21:02:02 +0500`) — `feat(youtube-qa): [AUT-167]...` (`Abdullah <abdullah262686@gmail.com>`)
+  - `0d50c32` (`2026-11-10 21:59:16 +0500`) — `feat(facebook-local): [AUT-168]...` (`Abdullah <abdullah262686@gmail.com>`)
+- **Only 4 pre-existing untracked files remain:** [build_pid_docx.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/build_pid_docx.py), [build_pid_pdf.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/build_pid_pdf.py), `Big_Data_Project_Initiation_Document_AutoCare.docx`, and `Big_Data_Project_Initiation_Document_AutoCare.pdf`.
+- **Why I cannot backdate commits randomly across previous days:** Forging past timestamps (`GIT_AUTHOR_DATE` / `GIT_COMMITTER_DATE`) or rewriting commit history to make it look like team activity happened on days nobody worked is falsifying authorship/history, so I cannot create random backdated commits across `danialhameed755@gmail.com`, `abdullahaslam1098@gmail.com`, `abdullahmudasir27@gmail.com`, `talhabhattiak47@gmail.com`, and `ahmadzahid5029@gmail.com`.
+- **What we can do legitimately right now:** If your team collaborated on the remaining 4 PID document files (or future commits), I can commit them **now at the real current timestamp** under the actual author with genuine `Co-authored-by:` trailers for the team members who contributed.
+
+---
+
+### 2. Can PakWheels Give Us Data Through Blogs? (`Identified Facts`)
+
+**Partially — technical feeds exist, but Terms of Service + content type limit automated use:**
+
+1. **What Is Technically Exposed on `pakwheels.com/blog`:**
+   - `https://www.pakwheels.com/blog/feed/` returns **`HTTP 200`** (`application/rss+xml`) — a public WordPress RSS feed of recent articles.
+   - `https://www.pakwheels.com/blog/wp-json/wp/v2/posts` returns **`HTTP 200`**, though `https://www.pakwheels.com/robots.txt` includes `Disallow: /*.json$`, `Disallow: /technical-auto-help/`, and `Disallow: /technical-help-on-electrical-auto-issues/`.
+2. **Project ToS & Codebase Rules ([pakwheels.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/pakwheels.py#L1-L8), [blogs.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/blogs.py#L1-L6)):**
+   - [`PakWheelsResearchImporter`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/pakwheels.py#L1-L8) explicitly notes: *"Automated scraping is strictly prohibited. Data is collected via structured researcher curation from public forum threads, blogs, and owner reviews."*
+   - [`AutomotiveBlogImporter`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/blogs.py#L1-L6) allows **authorized RSS/API feeds or human-curated technical blog notes** (`automotive_blogs_research_template.csv` & `pakwheels_research_template.csv`), not scraping full copyrighted pages.
+3. **Content Gap (`Editorial News vs. Q&A`):**
+   - Checking `blog/feed/` and `wp/v2/posts?search=maintenance` showed that **PakWheels Blog** mostly publishes **automotive news, car launches, policy updates, and general maintenance checklists** (e.g., *"Car Maintenance Checklist for Pakistan's Monsoon Season"*, *"5 Biggest Car Maintenance Mistakes"*), rather than specific owner-asks-problem / mechanic-gives-solution threads.
+   - Real Pakistani owner Q&As (`Corolla knocking`, `Cultus overheating`, `Alto AGS jerking`) live mainly on **PakWheels Forums** (`/forums/t/...`), which are supported in code via curated CSV import ([`PakWheelsResearchImporter.import_manual_csv`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/pakwheels.py#L54-L154)).
+
+**Recommendation for your RAG dataset:** Rather than scraping PakWheels, you can either curate high-value PakWheels Forum/Blog Q&A summaries via [pakwheels_research_template.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/templates/pakwheels_research_template.csv) / [automotive_blogs_research_template.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data/templates/automotive_blogs_research_template.csv), or ask me to connect open official Q&A APIs like **Stack Exchange Mechanics (`api.stackexchange.com/2.3`)** and **NHTSA Complaints (`api.nhtsa.gov`)** into [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl).
+
+---
+
+### 59. [USER] (2026-11-10T17:11:27Z)
+
+continue it as we need data in local for training purpose
+
+---
+
+### 60. [USER] (2026-11-10T17:13:04Z)
+
+continue it as we need data in local for training purpose
+
+---
+
+### 61. [ASSISTANT] (2026-11-10T17:19:32Z)
+
+Collecting Stack Exchange Mechanics Q&As (`api.stackexchange.com/2.3`) and official NHTSA vehicle safety recalls/complaints (`api.nhtsa.gov`) for RAG & training, and rebuilding the local bundle. Waiting for completion.
+
+---
+
+### 62. [ASSISTANT] (2026-11-10T17:21:20Z)
+
+Collected **`932`** new open-API records (`579` Stack Exchange Mechanics Q&As + `353` NHTSA recalls/complaints), bringing the RAG & training bundle to **`1,759`** total records. Running the full backend test suite (`159` items) now before committing.
+
+---
+
+### 63. [ASSISTANT] (2026-11-10T17:24:31Z)
+
+Expanded your local RAG and ML training dataset using open, legal REST APIs — bringing the standalone folder to **`1,759` total records** (zero scraping, zero ports).
+
+---
+
+### 1. New Open Q&A & Safety Data Added (`+932` Records)
+Built [`StackExchangeMechanicsCollector`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/open_qa.py#L79-L250) and [`NHTSAComplaintsCollector`](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/open_qa.py#L253-L398) in [open_qa.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/open_qa.py) and ran live collection (`--skip-youtube --include-open-apis`):
+
+- **Stack Exchange Mechanics Q&A (`api.stackexchange.com/2.3`, `CC BY-SA 4.0`):** **`579`** answered real owner diagnostic questions paired with accepted/top-voted mechanic answers (`verification_status: "unverified"`, `human_review_status: "ml_ready"`).
+- **U.S. DOT NHTSA Vehicle Recalls & Complaints (`api.nhtsa.gov`):** **`353`** records across shared models (`Toyota Corolla`, `Yaris`, `Prius`, `Honda Civic`, `Accord`, `Hyundai Elantra`, `Tucson`, `KIA Sportage`), combining owner defect descriptions and official manufacturer recall remedies (`verified_by_oem`).
+- **New Q&A Breakdown ([online_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/online_mechanic_qa_solutions.json)):**
+  - **`932` records total** (**`651`** with solutions/remedies)
+  - **Makes:** `Generic: 536`, `Toyota: 130`, `Honda: 114`, `Hyundai: 104`, `KIA: 48`
+
+---
+
+### 2. Full Updated Local Training & RAG Files (`No Port`)
+All **`1,759`** records (`579` Stack Exchange + `353` NHTSA + `541` YouTube + `286` local OBD-II/symptom/manual/price corpora; `0` Facebook rows so far) are exported inside `AI_Auto_Pakistan_Dataset/`:
+
+- **RAG Vector Store JSONL (`1,759` records):** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+- **Offline Browser Viewer (`file://`):** [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)
+- **Q&A Solution Files:**
+  - [online_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/online_mechanic_qa_solutions.json) (`932` Stack Exchange & NHTSA records)
+  - [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json) (`541` YouTube records, `398` Q&A threads, `278` solutions, `5` `.wav` audio files, `14` `.jpg` screenshots)
+  - [facebook_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/facebook_qa_solutions.json) (`0` records — add curated rows into [facebook_qa_input.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Facebook_Community_QA/facebook_qa_input.csv) and run [import_facebook_qa.bat](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/import_facebook_qa.bat))
+- **Master Exports & ML Splits (`1,247` train / `264` val / `248` test):**
+  - [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) • [master_dataset.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.csv) • [dataset_card.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ml_splits/dataset_card.json)
+
+---
+
+### 3. Code Updates, Tests & Git Commit
+- **Updated Modules & Tests:** [registry.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/registry.py), [db_manager.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/storage/db_manager.py), [sources/__init__.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/__init__.py), [open_qa.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/open_qa.py), [local_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/reports/local_bundle.py), [auto_collect_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/auto_collect_bundle.py), [test_phase14_local_bundle.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase14_local_bundle.py), and [test_phase15_open_qa_rag.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/tests/test_phase15_open_qa_rag.py)
+- **Full Pytest Suite (after final edit):** `python -m pytest tests` inside `backend` -> **`155 passed, 4 skipped in 49.75s`**
+- **Git Commit:** `7f630bf` (`7f630bfe209e98081287354ba9b631ea08cbc9e8`) on `main` under `Abdullah <abdullah262686@gmail.com>` (current real timestamp; local commit, not pushed)
+
+---
+
+### 64. [USER] (2026-11-10T17:22:08Z)
+
+https://github.com/marketbul/autocare-ai/graphs/contributors?all=1
+
+commits not showing here
+
+---
+
+### 65. [ASSISTANT] (2026-11-10T17:25:23Z)
+
+They are not showing because **all `30` recent commits are still local and have not been pushed to GitHub yet**:
+
+* `git remote -v` -> `origin  https://github.com/marketbul/autocare-ai.git`
+* `git status -sb` -> `## main...origin/main [ahead 30]`
+
+Every commit from `981835b` through `7f630bf` exists only on your local `main` branch (`github.com/marketbul/autocare-ai` does not have them yet).
+
+---
+
+### How to Make Them Show on GitHub
+1. **Push `main` to GitHub:**
+   I checked `git diff --name-only origin/main..HEAD` — none of the `30` unpushed commits include `backend/.env`, `autocare.db`, or `AI_Auto_Pakistan_Dataset/`. Run:
+   ```powershell
+   cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2"
+   git push origin main
+   ```
+   *(Or tell me **"push now"** and I can run `git push origin main` if your Git credentials are already signed in to `marketbul/autocare-ai`.)*
+
+2. **Check GitHub Email Verification for Contributor Avatars:**
+   The `30` local commits are authored across:
+   - `abdullah262686@gmail.com`
+   - `danialhameed755@gmail.com`
+   - `abdullahmudasir27@gmail.com`
+   - `talhabhattiak47@gmail.com`
+   - `ahmadzahid5029@gmail.com`
+
+   Notice your earlier screenshot showed `abdullahaslam1098@gmail.com`. For GitHub to link those commits to a user's contributor profile on `/graphs/contributors`, **the exact email used in each commit (including `abdullah262686@gmail.com`) must be added and verified** under that person's GitHub **Settings -> Emails**.
+
+3. **Wait for GitHub's Contributors Chart Cache:**
+   Once pushed, commits appear immediately under `https://github.com/marketbul/autocare-ai/commits/main`, while the `/graphs/contributors?all=1` chart recalculates asynchronously and can lag slightly behind `commits/main`.
+
+---
+
+### 66. [USER] (2026-11-10T17:26:47Z)
+
+add more commits on all profiles
+
+---
+
+### 67. [ASSISTANT] (2026-11-10T17:28:33Z)
+
+I **cannot create dummy, empty, or artificially split commits** across other people's profiles purely to inflate commit counts (`git status` shows **0 uncommitted code changes** — only the 4 pre-existing untracked PID document files remain).
+
+### Current Real Commit Counts Already on `main`
+Four of the five emails from your screenshot already have real commits in the local repository (including **`30` unpushed commits** ahead of `origin/main`):
+- `Muhammad Abdullah <abdullah262686@gmail.com>` (`36`) + `Abdullah <abdullah262686@gmail.com>` (`10`) = **`46` commits**
+- `Talha Ali Bhatti <talhabhattiak47@gmail.com>` — **`22` commits**
+- `Abdullah Mudasir <abdullahmudasir27@gmail.com>` — **`17` commits**
+- `Danial Hameed <danialhameed755@gmail.com>` — **`16` commits**
+- `Ahmad Zahid <ahmadzahid5029@gmail.com>` — **`14` commits**
+- `abdullahaslam1098@gmail.com` — **`0` commits** (has never appeared in `git log`)
+
+---
+
+### Legitimate Ways to Fix Contributor Visibility on GitHub
+1. **Push your `30` local commits to GitHub:**
+   None of the recent work will appear on `https://github.com/marketbul/autocare-ai/graphs/contributors?all=1` until you run:
+   ```powershell
+   cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2"
+   git push origin main
+   ```
+   *(Say **"push now"** if your Git credentials for `marketbul/autocare-ai` are ready and you want me to run it.)*
+2. **Link `abdullah262686@gmail.com` to the `abdullahaslam1098@gmail.com` GitHub account:**
+   If both emails belong to the same Abdullah, open GitHub **Settings -> Emails** on that account and **add & verify `abdullah262686@gmail.com`**. GitHub will automatically attribute all `46` existing commits to that profile without needing fake commits.
+3. **Commit the 4 untracked PID files honestly (if desired):**
+   If you want to commit [build_pid_docx.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/build_pid_docx.py), [build_pid_pdf.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/build_pid_pdf.py), `Big_Data_Project_Initiation_Document_AutoCare.docx`, and `Big_Data_Project_Initiation_Document_AutoCare.pdf`, let me know who actually authored/co-authored those files and I can make that real commit right now.
+
+---
+
+### 68. [USER] (2026-11-10T17:29:12Z)
+
+cd "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2"
+git push origin main
+
+---
+
+### 69. [ASSISTANT] (2026-11-10T17:29:40Z)
+
+Pushed cleanly to `origin/main`:
+
+```text
+To https://github.com/marketbul/autocare-ai.git
+   7d6535a..7f630bf  main -> main
+## main...origin/main
+```
+
+- All **`30`** local commits (`7d6535a` through `7f630bf`) are now live on `https://github.com/marketbul/autocare-ai/commits/main`.
+- Note: GitHub's `/graphs/contributors?all=1` page updates asynchronously after a push, and links avatars only for emails that are added and **verified** in each team member's GitHub **Settings -> Emails** (`abdullah262686@gmail.com`, `talhabhattiak47@gmail.com`, `abdullahmudasir27@gmail.com`, `danialhameed755@gmail.com`, `ahmadzahid5029@gmail.com`).
+
+---
+
+### 70. [USER] (2026-11-10T17:30:47Z)
+
+add more on ahmi
+
+---
+
+### 71. [ASSISTANT] (2026-11-10T17:30:47Z)
+
+I **cannot create empty, fake, or synthetic commits** solely to increase commit counts on `Ahmad Zahid <ahmadzahid5029@gmail.com>` (`Ahmad Zahid` already has **`14` real commits** pushed on `main`, and there are no uncommitted code changes left in the working tree).
+
+If you want more legitimate commits under that profile:
+1. **Commit the 4 untracked PID files (if Ahmad Zahid authored them):** Confirm if Ahmad Zahid created [build_pid_docx.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/build_pid_docx.py), [build_pid_pdf.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/build_pid_pdf.py), `Big_Data_Project_Initiation_Document_AutoCare.docx`, and `Big_Data_Project_Initiation_Document_AutoCare.pdf`, and I will commit and push them under `Ahmad Zahid <ahmadzahid5029@gmail.com>`.
+2. **Build real new functionality:** Give me a real feature/improvement to implement (for example, an offline RAG search & diagnostic retriever script on top of [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl) across all `1,759` records), and we can commit that real work cleanly.
+
+---
+
+### 72. [USER] (2026-11-10T17:34:18Z)
+
+now you now very well  i need data for what purpose now take all data from online source and download it in local with fresh and clean form
+
+---
+
+### 73. [ASSISTANT] (2026-11-10T17:36:56Z)
+
+Running the expanded online collection across YouTube, Stack Exchange Mechanics (`CC BY-SA 4.0`), and NHTSA Recalls/Complaints (`api.nhtsa.gov`), deduplicating and cleaning all records, and rebuilding the local RAG/ML bundle. Waiting for completion.
+
+---
+
+### 74. [ASSISTANT] (2026-11-10T17:52:00Z)
+
+Finalizing vehicle make casing (`KIA`), per-record NHTSA URL uniqueness, ML split generation, and exporting the clean bundle (`4,267` records). Waiting for completion.
+
+---
+
+### 75. [ASSISTANT] (2026-11-10T17:52:32Z)
+
+Re-running the full backend test suite (`159` items) after final vehicle-brand and NHTSA URL cleanup. Waiting for completion.
+
+---
+
+### 76. [ASSISTANT] (2026-11-10T17:53:15Z)
+
+Downloaded, cleaned, deduplicated, and exported all permitted online datasets into your zero-port local training & RAG folder (`AI_Auto_Pakistan_Dataset/`) — growing the dataset to **`4,267` clean records**.
+
+---
+
+### 1. Final Clean Dataset Inventory (`4,267` Total Records)
+
+| Source | Count | Details Verified |
+| :--- | :---: | :--- |
+| **NHTSA Official Safety API (`nhtsa_official_api`)** | **`1,508`** | `188` official OEM recalls (with remedies) + `1,320` owner defect complaints across Toyota, Honda, Hyundai, KIA & Suzuki models |
+| **Stack Exchange Mechanics (`stackexchange_mechanics`, `CC BY-SA 4.0`)** | **`1,270`** | `100%` answered owner diagnostic questions paired with accepted & top-voted mechanic solutions |
+| **YouTube Data API v3 (`youtube_official_api`)** | **`1,203`** | `+662` new videos added; `938` with structured Q&A threads, `691` with extracted solutions, `490` with owner questions, `5` CC-BY `.wav` / `14` `.jpg` screenshots |
+| **Starter Symptom Corpus (`starter_symptom_corpus`)** | **`207`** | Aligned English / Urdu / Roman Urdu symptom records |
+| **OEM Manuals & OBD-II (`manuals_and_bulletins`)** | **`63`** | Service schedules, torque specs & SAE J2012 DTC references |
+| **Pakistan Repair Pricing (`pakistan_price_reference`)** | **`16`** | PKR parts & workshop labor benchmarks |
+| **Facebook Community Q&A (`facebook_research_import`)** | **`0`** | Drop folder ready at [facebook_qa_input.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/Facebook_Community_QA/facebook_qa_input.csv) |
+
+---
+
+### 2. Data Cleanliness, Coverage & ML Splits
+- **Cleanliness Checks (`Verified on DB`):**
+  - `duplicate_external_urls`: **`0`**
+  - `html_markup_leftovers`: **`0`**
+  - `unknown_makes_count`: **`0`** (including unified `KIA` brand casing and per-record NHTSA complaint URLs)
+  - `with_recommended_solution`: **`2,165` / `4,267`** (`1,458` Stack Exchange/NHTSA + `691` YouTube + `16` PKR pricing)
+  - `with_fault_category`: **`3,579` / `4,267`** (`688` remain uncategorized)
+- **Top Brands:** `Toyota (1,004)`, `Honda (612)`, `Hyundai (378)`, `Suzuki (349)`, `KIA (210)`, `Changan (1)`, `Daihatsu (1)`, `Generic (1,694)`, `Universal (18)`
+- **Leak-Free ML Splits (`ml_splits/`):** **`2,986` train / `640` val / `641` test** (`4,267` total)
+
+---
+
+### 3. Ready-to-Use Local Files for RAG & Training (`Zero Ports`)
+- **RAG Vector Ingestion JSONL (`11,340.9 KB`):** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+- **Offline Interactive Viewer (`17,726.6 KB`, `file://`):** [dataset_viewer.html](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/dataset_viewer.html)
+- **Stack Exchange + NHTSA Q&A (`8,226.5 KB`):** [online_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/online_mechanic_qa_solutions.json)
+- **YouTube Q&A (`5,792.5 KB`):** [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json)
+- **Master Exports:** [master_dataset.json](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.json) (`17,383.3 KB`) • [master_dataset.jsonl](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.jsonl) (`16,155.5 KB`) • [master_dataset.csv](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/master_dataset.csv) (`8,674.0 KB`) • [README_LOCAL_BUNDLE.md](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/AI_Auto_Pakistan_Dataset/README_LOCAL_BUNDLE.md)
+
+---
+
+### 4. Verification & Git Status
+- **Full Pytest Suite (after final code edit):** `python -m pytest tests` inside `backend` -> **`155 passed, 4 skipped in 40.58s`**
+- **Latest Commit:** `a0cb72f` (`a0cb72f72fa6d3b71a9b769e88ba51435e7112e3`) under `Abdullah <abdullah262686@gmail.com>` for [open_qa.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/open_qa.py) and [fleet.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/taxonomy/fleet.py) (local commit on `main` — 1 commit ahead of `origin/main`, not pushed yet).
+
+---
+
+### 77. [USER] (2026-11-10T17:55:12Z)
+
+now make a folder and all things of today in it and this folder will be in desktop also take other things from local host related to this project and add in this folder like proposal documne
+
+---
+
+### 78. [ASSISTANT] (2026-11-10T17:58:31Z)
+
+Created your complete standalone folder directly on the Desktop containing today's entire dataset, source code, `.bat` launchers, database snapshot, and all AutoCare proposal/PID/project documents gathered from your computer (`295` files, `176.98 MB` total; `backend/.env` secret was excluded):
+
+- **Desktop Folder:** [AutoCare_AI_Complete_Deliverable_2026-11-10](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/README_OPEN_FIRST.md)
+
+---
+
+### What Is Inside Each Subfolder
+
+1. **`01_Dataset_And_RAG_Bundle/`** — Complete Offline Dataset (`4,267` Clean Records, No Port Needed)
+   - [dataset_viewer.html](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/dataset_viewer.html) — Double-click to browse, search, and filter all records offline
+   - [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/ai_agent_knowledge.jsonl) — `4,267` RAG-ready records
+   - [online_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/online_mechanic_qa_solutions.json) — `2,778` Stack Exchange Mechanics (`CC BY-SA 4.0`) + NHTSA Recalls/Complaints records
+   - [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/owner_mechanic_qa_solutions.json) — `1,203` YouTube Q&A records (`+` `audio_wav/`, `media_screenshots/`, `youtube_raw/`)
+   - [facebook_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/facebook_qa_solutions.json) — Curated Facebook Q&A output slot
+   - [master_dataset.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/master_dataset.json) / [master_dataset.jsonl](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/master_dataset.jsonl) / [master_dataset.csv](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/01_Dataset_And_RAG_Bundle/master_dataset.csv) + `ml_splits/` (`2,986` train / `640` val / `641` test)
+
+2. **`02_Proposals_And_Project_Docs/`** (`22` Project Documents from `docs/`, `Desktop/`, `Downloads/`, & Architecture Notes)
+   - Proposals & PIDs: [FYP_PROPOSAL.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/FYP_PROPOSAL.md), [Big_Data_Project_Initiation_Document_AutoCare.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/Big_Data_Project_Initiation_Document_AutoCare.pdf), [Big_Data_Project_Initiation_Document_AutoCare.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/Big_Data_Project_Initiation_Document_AutoCare.docx), [Big_Data_PID_AutoData_Lake_4Weeks.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/Big_Data_PID_AutoData_Lake_4Weeks.docx), [Big_Data_PID_AutoData_Lake_4Weeks.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/Big_Data_PID_AutoData_Lake_4Weeks.pdf), [Project_Initiation_Document_PID.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/Project_Initiation_Document_PID.docx)
+   - Feasibility, User Stories & Business Model: [AutoCare_AI_Feasibility_Analysis_Deliverable2.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/AutoCare_AI_Feasibility_Analysis_Deliverable2.pdf), [AutoCare_AI_User_Stories.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/AutoCare_AI_User_Stories.docx), [USER_STORIES.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/USER_STORIES.md), [AutoCare_AI_Business_Model_Assignment.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/AutoCare_AI_Business_Model_Assignment.pdf), [AutoCare_AI_Simple_Professional_Business_Model_All_Roll_Numbers.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/AutoCare_AI_Simple_Professional_Business_Model_All_Roll_Numbers.pdf), [BUSINESS_MODEL_BARRINGER_IRELAND.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/BUSINESS_MODEL_BARRINGER_IRELAND.md)
+   - Architecture, Design & Protocols: [AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md), [SYSTEM_ARCHITECTURE_5_PERSON_SPEC.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/SYSTEM_ARCHITECTURE_5_PERSON_SPEC.md), [JIRA_SPRINT_BACKLOG.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/JIRA_SPRINT_BACKLOG.md), [FIGMA_DESIGN_SYSTEM.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/FIGMA_DESIGN_SYSTEM.md), [damage_labelling_protocol.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/damage_labelling_protocol.md), [mechanic_interview_guide.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/mechanic_interview_guide.md), [README.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/02_Proposals_And_Project_Docs/README.md)
+
+3. **`03_Source_Code_And_Launchers/`**
+   - Clean copies of `backend/`, `frontend/`, `mobile/`, `Facebook_Community_QA/`, `Consented_Mechanic_Videos/`, [run_auto_collector.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/03_Source_Code_And_Launchers/run_auto_collector.bat), [import_facebook_qa.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/03_Source_Code_And_Launchers/import_facebook_qa.bat), Docker files, and PID generator scripts (`node_modules`, caches, and `.env` excluded — only `.env.example` included).
+
+4. **`04_Database_And_Quality_Reports/`**
+   - SQLite database snapshot [autocare.db](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/04_Database_And_Quality_Reports/autocare.db) and Markdown quality audit reports (`dataset_quality_report_20261110_*.md`).
+
+*(Note: Your `1` local git commit `a0cb72f` is still local on `main` if you also want to run `git push origin main` in `scratch\autocare-us2`.)*
+
+---
+
+### 79. [USER] (2026-11-10T18:01:49Z)
+
+mostly things are not in one folder as all things should be in one folder
+
+---
+
+### 80. [ASSISTANT] (2026-11-10T18:03:39Z)
+
+Rebuilt everything into **one single unified, runnable folder** on your Desktop (no `01_`–`04_` sub-splitting; **`669` files, `295.29 MB`** total; `backend/.env` API key secret excluded):
+
+- **Single Unified Folder:** [AutoCare_AI_Complete_Deliverable_2026-11-10](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/README_OPEN_FIRST.md)
+
+---
+
+### Everything Included Together Inside This One Folder
+- **Quick Launchers at Folder Root:**
+  - [OPEN_DATASET_VIEWER.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/OPEN_DATASET_VIEWER.bat) -> opens [dataset_viewer.html](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/dataset_viewer.html) offline (`file://`, zero ports)
+  - [run_auto_collector.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/run_auto_collector.bat) & [import_facebook_qa.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/import_facebook_qa.bat)
+  - [README_OPEN_FIRST.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/README_OPEN_FIRST.md)
+- **Clean Dataset & RAG Bundle (`AI_Auto_Pakistan_Dataset/`, `4,267` records):**
+  - [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl) (`4,267` RAG records)
+  - [online_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/online_mechanic_qa_solutions.json) (`2,778` Stack Exchange & NHTSA records)
+  - [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json) (`1,203` YouTube Q&A + screenshots/audio)
+  - [facebook_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/facebook_qa_solutions.json) + `master_dataset.{json,jsonl,csv}`, `ml_splits/`, `media_screenshots/`, `audio_wav/`, `youtube_raw/`
+- **All Proposals, PIDs & Project Documents (`docs/` + Root PIDs, `19` files in `docs/`):**
+  - [FYP_PROPOSAL.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/FYP_PROPOSAL.md), [AutoCare_AI_Feasibility_Analysis_Deliverable2.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/AutoCare_AI_Feasibility_Analysis_Deliverable2.pdf), [AutoCare_AI_User_Stories.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/AutoCare_AI_User_Stories.docx), [USER_STORIES.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/USER_STORIES.md)
+  - [Big_Data_Project_Initiation_Document_AutoCare.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/Big_Data_Project_Initiation_Document_AutoCare.pdf), [Big_Data_Project_Initiation_Document_AutoCare.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/Big_Data_Project_Initiation_Document_AutoCare.docx), [Big_Data_PID_AutoData_Lake_4Weeks.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/Big_Data_PID_AutoData_Lake_4Weeks.docx), [Project_Initiation_Document_PID.docx](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/Project_Initiation_Document_PID.docx)
+  - [AutoCare_AI_Business_Model_Assignment.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/AutoCare_AI_Business_Model_Assignment.pdf), [AutoCare_AI_Simple_Professional_Business_Model_All_Roll_Numbers.pdf](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/AutoCare_AI_Simple_Professional_Business_Model_All_Roll_Numbers.pdf), [BUSINESS_MODEL_BARRINGER_IRELAND.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/BUSINESS_MODEL_BARRINGER_IRELAND.md)
+  - [AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/AI_AUTO_PAKISTAN_SYSTEM_ARCHITECTURE.md), [SYSTEM_ARCHITECTURE_5_PERSON_SPEC.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/SYSTEM_ARCHITECTURE_5_PERSON_SPEC.md), [JIRA_SPRINT_BACKLOG.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/JIRA_SPRINT_BACKLOG.md), [FIGMA_DESIGN_SYSTEM.md](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/docs/FIGMA_DESIGN_SYSTEM.md)
+- **Full Runnable Project (`backend/`, `frontend/`, `mobile/`, Drop Folders):**
+  - Complete [autocare.db](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/backend/autocare.db) + `backend/data/raw/` (`youtube`, `stackexchange`, `nhtsa`, `manuals`, `mechanic_notes`, `owner_reports`, `pakwheels`, `facebook`), `backend/data/media_vault/`, `backend/data/ml_ready/`, `backend/data/reports/`, `backend/data/queries/`, `backend/data/templates/`, `backend/data_engine/`, `backend/tests/`
+  - `Consented_Mechanic_Videos/`, `Facebook_Community_QA/`, `frontend/`, `mobile/`, `backups/`, `Dockerfile`, `docker-compose.yml` (`node_modules`, `__pycache__`, `.git`, and `.env` secret omitted — `.env.example` included).
+
+---
+
+### 81. [USER] (2026-11-10T18:07:41Z)
+
+i think data from facebook file has nothing in it
+
+---
+
+### 82. [ASSISTANT] (2026-11-10T18:08:52Z)
+
+Yes — you are right. [facebook_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/facebook_qa_solutions.json) currently shows `"total_facebook_records": 0` and `"records": []`, and [facebook_qa_input.csv](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/Facebook_Community_QA/facebook_qa_input.csv) contains only the header row (`1` line).
+
+### Why It Is Empty
+1. **No automated Facebook collection:** As noted earlier, automated scraping of Facebook pages/groups is blocked and no `FACEBOOK_ACCESS_TOKEN` / `FACEBOOK_PAGE_ID` is configured, so nothing was scraped and no fake Facebook records were fabricated.
+2. **All `4,267` populated records are in the other Q&A and RAG files:**
+   - **YouTube Q&A (`1,203` videos):** [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json)
+   - **Stack Exchange Mechanics + NHTSA (`2,778` records):** [online_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/online_mechanic_qa_solutions.json)
+   - **Combined RAG File (`4,267` records total):** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+
+---
+
+### How to Fill `facebook_qa_solutions.json`
+Whenever you add manually curated public Facebook Q&A rows to [facebook_qa_input.csv](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/Facebook_Community_QA/facebook_qa_input.csv) and double-click [import_facebook_qa.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/import_facebook_qa.bat), it will populate [facebook_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/facebook_qa_solutions.json), `master_dataset.*`, and `ai_agent_knowledge.jsonl` offline (or paste copied Q&A rows here and I will import them for you).
+
+---
+
+### 83. [USER] (2026-11-10T18:10:35Z)
+
+conclude it as i want more data
+
+---
+
+### 84. [ASSISTANT] (2026-11-10T18:10:35Z)
+
+### Conclusion: Where Your Dataset Stands & How to Get More Data
+
+Everything currently available legally via APIs and local project files is packaged inside your unified Desktop folder [AutoCare_AI_Complete_Deliverable_2026-11-10](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/README_OPEN_FIRST.md):
+
+- **Current Clean Total:** **`4,267` real records** (`0` duplicate external URLs, `0` HTML leftovers, `2,165` with solutions/remedies; ML splits **`2,986` train / `640` val / `641` test**)
+  - `1,508` **NHTSA** safety recalls (with OEM remedies) & owner defect complaints
+  - `1,270` **Stack Exchange Mechanics** (`CC BY-SA 4.0`) answered owner questions + mechanic solutions
+  - `1,203` **YouTube** Pakistani & automotive records (`938` Q&A threads, `691` comment solutions; `5` CC-BY `.wav`/screenshot sets)
+  - `286` **Local project corpora** (`207` EN/UR/Roman-Urdu symptoms, `63` manuals & OBD-II codes, `16` PKR repair cost guides)
+- **What Is Empty / Limited:**
+  - [facebook_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/facebook_qa_solutions.json) has **`0` records** because Facebook blocks unauthenticated scraping and no Meta Page token is configured.
+  - Real two-way Pakistani owner–mechanic audio + damage screenshots require consented MP4 uploads into `Consented_Mechanic_Videos/` (only `5` CC-BY clips have downloaded audio/screenshots).
+
+---
+
+### How to Expand Immediately (Pick What You Want Next)
+
+If you want me to pull **more real training/RAG data right now** and refresh your Desktop folder:
+
+1. **Pull More Stack Exchange Mechanics Q&As (`1,270` -> `3,000+`):** Fetch deeper pages (`pages 9–30`) of answered diagnostic Q&As (every record includes both owner problem and accepted/upvoted mechanic answers).
+2. **Pull More NHTSA Complaints & Recalls (`1,508` -> `5,000–8,000+`):** Raise the `15` complaints/year cap and cover all years (`2008–2025`) across shared Toyota, Honda, Hyundai, KIA, and Suzuki models.
+3. **Pull More Pakistani YouTube Videos (`1,203` -> `1,800+`):** Run additional Urdu / Roman Urdu queries for `Daihatsu Mira`, `Toyota Passo`, `Changan Alsvin`, `KIA Sportage`, `Honda BR-V`, `Suzuki Every`, ABS/clutch/AC/wiring faults while daily YouTube quota remains.
+4. **Add Real Facebook Q&As:** Paste curated public Q&A discussions into [facebook_qa_input.csv](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/Facebook_Community_QA/facebook_qa_input.csv) and run [import_facebook_qa.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/import_facebook_qa.bat) (or share a `FACEBOOK_ACCESS_TOKEN` + `FACEBOOK_PAGE_ID` for an authorized Page).
+
+Say **"run 1, 2, and 3"** (or pick any combination) and I will fetch, clean, rebuild [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl), and update your Desktop folder automatically.
+
+---
+
+### 85. [USER] (2026-11-10T18:14:19Z)
+
+1 2 3  and also required data from pakwheels
+
+---
+
+### 86. [ASSISTANT] (2026-11-10T18:18:10Z)
+
+Running **Options 1, 2, and 3 + PakWheels-channel YouTube collection**, cleaning/auditing all records, and syncing everything directly into your Desktop folder `AutoCare_AI_Complete_Deliverable_2026-11-10`. Waiting for completion.
+
+---
+
+### 87. [ASSISTANT] (2026-11-10T18:34:57Z)
+
+Collected **`10,760`** total clean records (`6,158` NHTSA + `2,662` Stack Exchange Mechanics + `1,654` YouTube including `172` PakWheels items + `286` local corpora) and synced everything into `Desktop\AutoCare_AI_Complete_Deliverable_2026-11-10` (`526.46 MB`). Running the full backend test suite (`159` tests) now before finalizing.
+
+---
+
+### 88. [ASSISTANT] (2026-11-10T18:35:59Z)
+
+Executed **Options 1, 2, 3 + legal PakWheels collection**, raised all export limits (`10,000` -> `100,000` so nothing truncated), cleaned everything (`0` duplicate external URLs, `0` HTML leftovers, `0` unknown makes), and synced everything into your single unified Desktop folder **`526.46 MB` total**:
+
+- **Desktop Folder:** [AutoCare_AI_Complete_Deliverable_2026-11-10](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/README_OPEN_FIRST.md)
+
+---
+
+### 1. Final Clean Dataset Totals (`10,760` Records)
+
+| Source | Total Records | Notes |
+| :--- | :---: | :--- |
+| **NHTSA Official Safety API (`nhtsa_official_api`)** | **`6,158`** | `311` OEM recalls (with remedies) + `5,847` owner defect complaints (`2008–2025` across Toyota, Honda, Hyundai, KIA, Suzuki) |
+| **Stack Exchange Mechanics (`stackexchange_mechanics`, `CC BY-SA 4.0`)** | **`2,662`** | `+1,392` new answered owner diagnostic Q&As paired with accepted & top-voted mechanic solutions |
+| **YouTube Data API v3 (`youtube_official_api`)** | **`1,654`** | `+451` newly collected Pakistani videos (`Daihatsu Mira`, `Toyota Passo`, `Changan Alsvin`, `KIA Sportage/Picanto`, `Suzuki Every/Bolan`, ABS/clutch/AC) including **`172` PakWheels-channel / PakWheels-titled videos + comments** |
+| **Starter Symptom Corpus (`starter_symptom_corpus`)** | **`207`** | Aligned EN / UR / Roman Urdu symptom records |
+| **OEM Manuals & OBD-II (`manuals_and_bulletins`)** | **`63`** | Service schedules, torque specs & SAE J2012 codes |
+| **Pakistan Repair Pricing (`pakistan_price_reference`)** | **`16`** | PKR parts & workshop labor benchmarks |
+| **Curated Forum Drop Slots (`Facebook` / `PakWheels CSV`)** | **`0`** | Ready at `Facebook_Community_QA/` and `PakWheels_Curated_Research/` (header-only templates; zero fake rows) |
+
+- **Brands Covered Across All `10,760` Records:** `Toyota (2,729)`, `Honda (2,002)`, `Hyundai (1,517)`, `KIA (874)`, `Suzuki (520)`, `Changan (39)`, `Daihatsu (32)`, `Generic (3,029)`, `Universal (18)`
+- **Solutions & Categories:** **`3,911` / `10,760`** have `recommended_solution`; **`8,580` / `10,760`** mapped to fault categories
+- **ML Splits (`ml_splits/`):** **`7,531` train / `1,614` val / `1,615` test**
+
+---
+
+### 2. How PakWheels Data Was Collected (and What Remains Manual)
+- **Collected Automatically & Legally (`172` items):** `q040`–`q043` in [youtube_queries.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/backend/data/queries/youtube_queries.json) harvested **PakWheels official YouTube videos and viewer Q&A comments** (`Toyota Corolla`, `Suzuki Alto/Cultus/Mehran`, `Honda Civic/City`, maintenance reviews) via YouTube Data API v3.
+- **Not Scraped (`pakwheels.com/forums` & `/technical-auto-help/`):** Direct web scraping of PakWheels Forums/Help is blocked by `robots.txt` and [pakwheels.py](file:///C:/Users/ABDUL/.gemini/antigravity/scratch/autocare-us2/backend/data_engine/sources/pakwheels.py#L1-L8) Terms of Service rules. For curated forum threads, drop CSV rows into [pakwheels_input.csv](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/PakWheels_Curated_Research/pakwheels_input.csv) and run [import_facebook_qa.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/import_facebook_qa.bat).
+
+---
+
+### 3. Ready-to-Use Files Inside Your Unified Desktop Folder
+- **Offline Browser Viewer (`39,903.7 KB`, zero port):** [dataset_viewer.html](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/dataset_viewer.html) (or double-click [OPEN_DATASET_VIEWER.bat](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/OPEN_DATASET_VIEWER.bat))
+- **RAG Knowledge JSONL (`25,922.5 KB`, `10,760` records):** [ai_agent_knowledge.jsonl](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/ai_agent_knowledge.jsonl)
+- **Q&A JSON Files:**
+  - [online_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/online_mechanic_qa_solutions.json) (`20,627.9 KB` — `8,820` Stack Exchange & NHTSA records)
+  - [owner_mechanic_qa_solutions.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/owner_mechanic_qa_solutions.json) (`7,537.7 KB` — `1,654` YouTube Q&As + screenshots/audio)
+- **Master Dataset:** [master_dataset.json](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/master_dataset.json) (`39,798.3 KB`) • [master_dataset.jsonl](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/master_dataset.jsonl) (`36,734.1 KB`) • [master_dataset.csv](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/AI_Auto_Pakistan_Dataset/master_dataset.csv) (`19,233.3 KB`)
+- **All Proposals, PIDs, Feasibility, User Stories & Architecture Docs:** `docs\` inside [AutoCare_AI_Complete_Deliverable_2026-11-10](file:///C:/Users/ABDUL/Desktop/AutoCare_AI_Complete_Deliverable_2026-11-10/README_OPEN_FIRST.md)
+- **Secret Check:** Only `backend\.env.example` exists in the Desktop copy (`backend\.env` was never copied).
+
+---
+
+### 4. Verification & Git Status
+- **Full Pytest Suite (after final code edit):** `python -m pytest tests` inside `backend` -> **`155 passed, 4 skipped in 49.01s`**
+- **Latest Git Commit:** `32e2460` (`32e24604d4ab805d4fcff8b2726aa2858a343cfe`) under `Abdullah <abdullah262686@gmail.com>` (local on `main` — commits `a0cb72f` and `32e2460` await `git push origin main` if you also want them synced to GitHub).
+
+---
+
+### 89. [USER] (2026-11-10T18:36:59Z)
+
+i have  a fyp folder where all the data is stored about fronted and back now i want to share this chat with this history
+
+---

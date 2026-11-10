@@ -574,7 +574,7 @@ def run_consolidation_pipeline() -> Dict[str, Any]:
 @router.post("/pipeline/split")
 def run_ml_split() -> Dict[str, Any]:
     storage = StorageManager()
-    items, _ = storage.query_records(include_examples=False, limit=10000)
+    items, _ = storage.query_records(include_examples=False, limit=100000)
     recs: List[AutomotiveRecord] = []
     for it in items:
         recs.append(
@@ -660,7 +660,7 @@ def export_dataset(fmt: str):
             headers={"Content-Disposition": "attachment; filename=ai_auto_pakistan_agent_dataset.jsonl"},
         )
 
-    items, _ = StorageManager().query_records(include_examples=False, limit=10000)
+    items, _ = StorageManager().query_records(include_examples=False, limit=100000)
     if fmt == "json":
         return Response(
             content=json.dumps(items, indent=2, ensure_ascii=False),

@@ -43,7 +43,7 @@ class LocalFolderBundleExporter:
             d.mkdir(parents=True, exist_ok=True)
 
         # 1. Fetch real records & honest stats from DB
-        records, total_real = self.storage.query_records(include_examples=False, limit=10000)
+        records, total_real = self.storage.query_records(include_examples=False, limit=100000)
         stats = self.storage.get_dataset_statistics()
 
         # 2. Save Master JSON, JSONL, CSV
@@ -603,8 +603,8 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
         return true;
       }});
 
-      document.getElementById("row-cnt").textContent = filtered.length + " / " + DATA.records.length;
-      document.getElementById("tbody").innerHTML = filtered.slice(0, 2500).map(r => {{
+      document.getElementById("row-cnt").textContent = filtered.length + " / " + DATA.records.length + (filtered.length > 1000 ? " (showing top 1000)" : "");
+      document.getElementById("tbody").innerHTML = filtered.slice(0, 1000).map(r => {{
         const imgLink = r.image_reference ? (r.image_reference.startsWith("http") ? `<br><a href="${{r.image_reference}}" target="_blank" style="color:#475569;font-size:0.75rem;">[Thumbnail]</a>` : `<br><a href="media_screenshots/${{r.image_reference.split('/').pop()}}" target="_blank" style="color:#0f766e;font-size:0.75rem;">[View Screenshot]</a>`) : "";
         const audLink = r.audio_reference ? ` <a href="audio_wav/${{r.audio_reference.split('/').pop()}}" target="_blank" style="color:#1d4ed8;font-size:0.75rem;">[Audio WAV]</a>` : "";
         const urlLink = r.source_url && r.source_url.startsWith("http") ? `<br><a href="${{r.source_url}}" target="_blank" style="color:#1d4ed8;font-size:0.74rem;">${{r.source_url.slice(0,36)}}...</a>` : "";

@@ -173,7 +173,7 @@ class GroupedMLSplitter:
 
     def split_and_export_from_storage(self, storage: Any) -> Dict[str, Any]:
         """Rebuilds grouped train/val/test splits across all non-example records in SQLite."""
-        items, _ = storage.query_records(include_examples=False, limit=10000)
+        items, _ = storage.query_records(include_examples=False, limit=100000)
         recs: List[AutomotiveRecord] = []
         for it in items:
             recs.append(

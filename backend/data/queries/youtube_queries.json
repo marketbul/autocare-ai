@@ -257,6 +257,94 @@
       "target_model": null,
       "suspected_category": null,
       "language": "roman_ur"
+    },
+    {
+      "id": "q033",
+      "query": "Daihatsu Mira 660cc engine CVT problem Pakistan",
+      "target_make": "Daihatsu",
+      "target_model": "Mira",
+      "suspected_category": "transmission",
+      "language": "en"
+    },
+    {
+      "id": "q034",
+      "query": "Toyota Passo engine vibration overheating Pakistan",
+      "target_make": "Toyota",
+      "target_model": "Passo",
+      "suspected_category": "engine",
+      "language": "en"
+    },
+    {
+      "id": "q035",
+      "query": "Changan Alsvin DCT transmission problem Pakistan",
+      "target_make": "Changan",
+      "target_model": "Alsvin",
+      "suspected_category": "transmission",
+      "language": "en"
+    },
+    {
+      "id": "q036",
+      "query": "KIA Sportage Picanto maintenance problems Pakistan",
+      "target_make": "KIA",
+      "target_model": "Sportage",
+      "suspected_category": null,
+      "language": "en"
+    },
+    {
+      "id": "q037",
+      "query": "Suzuki Every Bolan engine overheat missing Pakistan",
+      "target_make": "Suzuki",
+      "target_model": "Every",
+      "suspected_category": "engine",
+      "language": "roman_ur"
+    },
+    {
+      "id": "q038",
+      "query": "Car ABS brake clutch plate repair Pakistan Urdu",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "brakes",
+      "language": "roman_ur"
+    },
+    {
+      "id": "q039",
+      "query": "Car AC cooling coil compressor fault Pakistan",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": "air_conditioning",
+      "language": "en"
+    },
+    {
+      "id": "q040",
+      "query": "PakWheels Toyota Corolla owner review problems maintenance",
+      "target_make": "Toyota",
+      "target_model": "Corolla",
+      "suspected_category": null,
+      "language": "en"
+    },
+    {
+      "id": "q041",
+      "query": "PakWheels Suzuki Alto Cultus Mehran owner problems review",
+      "target_make": "Suzuki",
+      "target_model": "Alto",
+      "suspected_category": null,
+      "language": "en"
+    },
+    {
+      "id": "q042",
+      "query": "PakWheels Honda Civic City owner review problems",
+      "target_make": "Honda",
+      "target_model": "Civic",
+      "suspected_category": null,
+      "language": "en"
+    },
+    {
+      "id": "q043",
+      "query": "PakWheels car maintenance inspection common faults",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": null,
+      "language": "en"
     }
   ]
 }

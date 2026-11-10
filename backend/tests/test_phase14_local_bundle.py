@@ -10,6 +10,7 @@ from data_engine.media import AuthorizedMediaPipeline, MediaVault
 from data_engine.media.video_processor import detect_damage_moments, get_ffmpeg_binary
 from data_engine.reports import LocalFolderBundleExporter
 from data_engine.storage import StorageManager
+from data_engine.taxonomy import normalize_make_model
 
 
 def test_detect_damage_moments_multilingual():
@@ -74,3 +75,41 @@ def test_local_folder_bundle_exporter(tmp_path: Path):
     html = Path(res["viewer_html"]).read_text(encoding="utf-8")
     assert "AI Auto Pakistan" in html
     assert "Offline Local Dataset Folder Viewer" in html
+
+
+def test_normalize_make_model_word_boundaries():
+    assert normalize_make_model(None, "electricity and battery") != ("Honda", "City")
+    assert normalize_make_model(None, "2018 Hyundai Elantra") == ("Hyundai", "Elantra")
+
+
+def test_video_processor_noise_stt_and_record_id(tmp_path: Path, monkeypatch):
+    ffmpeg = get_ffmpeg_binary()
+    sample_mp4 = tmp_path / "brake_noise.mp4"
+    cmd = [
+        ffmpeg, "-y",
+        "-f", "lavfi", "-i", "color=c=blue:s=320x240:d=2",
+        "-f", "lavfi", "-i", "sine=frequency=440:duration=2",
+        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac",
+        str(sample_mp4),
+    ]
+    if subprocess.run(cmd, capture_output=True).returncode != 0:
+        pytest.skip("ffmpeg synthetic video generation unavailable")
+
+    import data_engine.media.video_processor as vp_mod
+    db_path = tmp_path / "noise_test.db"
+    monkeypatch.setattr(vp_mod, "StorageManager", lambda: StorageManager(db_path=db_path))
+
+    pipeline = AuthorizedMediaPipeline(vault=MediaVault(vault_dir=tmp_path / "vault"))
+    res = pipeline.process_authorized_video(
+        video_path=sample_mp4,
+        rights_basis="creative_common",
+        title="Brakes & Brake Pads Problems? Don't Ignore!",
+        transcript_text=". . . . .",
+        record_id="yt_test_noise_01",
+    )
+    assert res["record_id"] == "yt_test_noise_01"
+    stored, _ = StorageManager(db_path=db_path).query_records(include_examples=True, limit=10)
+    assert len(stored) == 1
+    assert stored[0]["record_id"] == "yt_test_noise_01"
+    assert ". . . . ." not in (stored[0]["problem_description"] or "")
+    assert stored[0]["fault_category_id"] == "FC-04"

@@ -163,6 +163,7 @@ def run_autonomous_bundle(
                         title=item.get("video_title") or "YouTube CC-BY Video",
                         attribution=item.get("channel_name") or "",
                         source_url=item.get("video_url"),
+                        record_id=f"yt_{vid}",
                     )
                     processed_vids.add(vid)
                     summary["cc_videos_processed"] += 1

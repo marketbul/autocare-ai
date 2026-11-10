@@ -177,39 +177,38 @@ PAKISTANI_FLEET: Dict[str, FleetVehicle] = {
 
 def normalize_make_model(make_str: Optional[str], model_str: Optional[str]) -> tuple[Optional[str], Optional[str]]:
     """Normalizes colloquial and misspelled Pakistani vehicle names."""
+    import re
     if not make_str and not model_str:
         return None, None
 
     m = (make_str or "").strip().lower()
     mo = (model_str or "").strip().lower()
+    combined = f"{m} {mo}".strip()
 
-    # Model shortcuts
-    if "mehran" in mo or "mehran" in m:
-        return "Suzuki", "Mehran"
-    if "alto" in mo or "alto" in m:
-        return "Suzuki", "Alto"
-    if "cultus" in mo or "cultus" in m:
-        return "Suzuki", "Cultus"
-    if "wagon r" in mo or "wagonr" in mo:
-        return "Suzuki", "Wagon R"
-    if "swift" in mo:
-        return "Suzuki", "Swift"
-    if "corolla" in mo:
-        return "Toyota", "Corolla"
-    if "yaris" in mo:
-        return "Toyota", "Yaris"
-    if "vitz" in mo:
-        return "Toyota", "Vitz"
-    if "passo" in mo:
-        return "Toyota", "Passo"
-    if "civic" in mo:
-        return "Honda", "Civic"
-    if "city" in mo:
-        return "Honda", "City"
-    if "sportage" in mo:
-        return "KIA", "Sportage"
-    if "alsvin" in mo:
-        return "Changan", "Alsvin"
+    patterns = [
+        (r"\bmehran\b", ("Suzuki", "Mehran")),
+        (r"\balto\b", ("Suzuki", "Alto")),
+        (r"\bcultus\b", ("Suzuki", "Cultus")),
+        (r"\bwagon\s?r\b", ("Suzuki", "Wagon R")),
+        (r"\bswift\b", ("Suzuki", "Swift")),
+        (r"\bcorolla\b", ("Toyota", "Corolla")),
+        (r"\byaris\b", ("Toyota", "Yaris")),
+        (r"\bvitz\b", ("Toyota", "Vitz")),
+        (r"\bpasso\b", ("Toyota", "Passo")),
+        (r"\b(?:hilux|revo)\b", ("Toyota", "Hilux")),
+        (r"\bfortuner\b", ("Toyota", "Fortuner")),
+        (r"\bcivic\b", ("Honda", "Civic")),
+        (r"\bcity\b", ("Honda", "City")),
+        (r"\belantra\b", ("Hyundai", "Elantra")),
+        (r"\btucson\b", ("Hyundai", "Tucson")),
+        (r"\bsportage\b", ("KIA", "Sportage")),
+        (r"\bpicanto\b", ("KIA", "Picanto")),
+        (r"\balsvin\b", ("Changan", "Alsvin")),
+        (r"\bmira\b", ("Daihatsu", "Mira")),
+    ]
+    for pat, res in patterns:
+        if re.search(pat, combined):
+            return res
 
     # Fallback title-casing
     clean_make = make_str.strip().title() if make_str else None

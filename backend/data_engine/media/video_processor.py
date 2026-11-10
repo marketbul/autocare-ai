@@ -232,6 +232,7 @@ class AuthorizedMediaPipeline:
         transcript_segments: Optional[List[Dict[str, Any]]] = None,
         attribution: str = "",
         source_url: Optional[str] = None,
+        record_id: Optional[str] = None,
     ) -> Dict[str, Any]:
         """End-to-end processing of an authorized video: audio + transcript + damage-moment screenshots + DB."""
         self.check_permission(rights_basis)
@@ -275,8 +276,18 @@ class AuthorizedMediaPipeline:
                 sc["matched_cues"] = dm["matched_cues"]
             storage.register_media_asset(sc, "images")
 
-        raw_transcript = stt_result.get("text") or title
-        claims = self.extractor.process_transcript(raw_transcript, stt_result.get("segments"))
+        import re
+        import uuid
+        from ..taxonomy import get_taxonomy_manager
+
+        raw_stt = (stt_result.get("text") or "").strip()
+        alnum_only = re.sub(r"[\W_]+", "", raw_stt)
+        raw_transcript = raw_stt if len(alnum_only) >= 10 else title
+        claims = self.extractor.process_transcript(f"{title}. {raw_transcript}", stt_result.get("segments"))
+
+        # Ensure fault category checks combined title + transcript
+        cat_match = get_taxonomy_manager().match_category_from_text(f"{title} {raw_transcript}")
+        matched_cat_id = claims.matched_fault_category or (cat_match.category_id if cat_match else None)
 
         norm_make, norm_model = normalize_make_model(make, model)
         final_make = claims.vehicle_make or norm_make or make
@@ -286,12 +297,13 @@ class AuthorizedMediaPipeline:
         ts_str = ", ".join(f"{s['video_timestamp_sec']}s" for s in screenshots) if screenshots else None
 
         rec = AutomotiveRecord(
+            record_id=record_id or str(uuid.uuid4()),
             vehicle=VehicleInfo(make=final_make, model=final_model),
             problem=ProblemInfo(
                 problem_title=title,
                 problem_description=claims.cleaned_transcript or title,
                 symptoms=claims.symptoms_mentioned or [title],
-                fault_category=claims.matched_fault_category,
+                fault_category=matched_cat_id,
                 suspected_causes=claims.suspected_causes,
                 diagnosis_stage=DiagnosisStage.OWNER_REPORTED_PROBLEM.value,
             ),

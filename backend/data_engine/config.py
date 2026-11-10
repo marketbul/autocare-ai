@@ -9,9 +9,16 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
+
 
 # Root directory is the backend folder
 BACKEND_ROOT = Path(__file__).resolve().parent.parent
+if load_dotenv is not None and (BACKEND_ROOT / ".env").exists():
+    load_dotenv(BACKEND_ROOT / ".env", override=False)
 
 
 @dataclass

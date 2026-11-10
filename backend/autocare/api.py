@@ -565,6 +565,13 @@ if _DIST.is_dir():
         return RedirectResponse("/app/")
 
 
+try:
+    from data_engine.server import router as dataset_router
+    app.include_router(dataset_router)
+except ImportError:
+    pass
+
+
 __all__ = ["app", "build_service", "ROLES"]
 
 # [2026-05-29] feat(ocr): [AUT-106] camera fa

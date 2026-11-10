@@ -98,11 +98,12 @@ def run_demonstration():
             print(f" &bull; {c['source']} — {c['chapter']} (Page {c['page']})")
 
         pkr = response.pkr_repair_estimate
+        repair_time = pkr.get("repair_time", pkr.get("downtime", "1 - 2 Hours"))
         print(f"\nPakistani Market Pricing Benchmark ({pkr['part']}):")
         print(f" &bull; OEM Dealership Cost: {pkr['oem_pkr']}")
         print(f" &bull; Local Market (Rawalpindi/Lahore/Karachi): {pkr['market_pkr']}")
         print(f" &bull; Workshop Labor Benchmark: {pkr['labor_pkr']}")
-        print(f" &bull; Expected Downtime: {pkr['downtime']}")
+        print(f" &bull; Estimated Workshop Repair Time: {repair_time}")
 
 
 if __name__ == "__main__":

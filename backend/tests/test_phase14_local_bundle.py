@@ -69,6 +69,9 @@ def test_local_folder_bundle_exporter(tmp_path: Path):
     assert Path(res["master_jsonl"]).exists()
     assert Path(res["master_csv"]).exists()
     assert Path(res["ai_agent_knowledge"]).exists()
+    assert Path(res["qa_solutions_file"]).exists()
+    qa_payload = json.loads(Path(res["qa_solutions_file"]).read_text(encoding="utf-8"))
+    assert "summary" in qa_payload and "records" in qa_payload
     assert (bundle_out / "ml_splits" / "dataset_card.json").exists()
     assert res["viewer_file_url"].startswith("file:///")
 
@@ -80,6 +83,8 @@ def test_local_folder_bundle_exporter(tmp_path: Path):
 def test_normalize_make_model_word_boundaries():
     assert normalize_make_model(None, "electricity and battery") != ("Honda", "City")
     assert normalize_make_model(None, "2018 Hyundai Elantra") == ("Hyundai", "Elantra")
+    assert normalize_make_model(None, "Toyota GLi brake noise") == ("Toyota", "Corolla")
+    assert normalize_make_model(None, "Honda Reborn suspension") == ("Honda", "Civic")
 
 
 def test_video_processor_noise_stt_and_record_id(tmp_path: Path, monkeypatch):

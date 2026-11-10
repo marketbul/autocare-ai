@@ -39,14 +39,25 @@ YOUTUBE_VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
 YOUTUBE_COMMENTS_URL = "https://www.googleapis.com/youtube/v3/commentThreads"
 
 SOLUTION_KEYWORDS = (
-    "solution", "fixed", "solve", "hal", "theek", "replace", "change", "badla",
-    "badal", "clean", "saaf", "check", "mechanic", "workshop", "karwaya", "lagwaya",
-    "repair", "wiring", "sensor", "fuse", "relay", "flush", "tuning",
+    "solution", "fixed", "solve", "solved", "hal", "theek", "replace", "replaced",
+    "change", "changed", "badla", "badal", "badalna", "clean", "saaf", "check",
+    "mechanic", "workshop", "karwaya", "lagwaya", "repair", "wiring", "sensor",
+    "fuse", "relay", "flush", "tuning",
 )
 PROBLEM_KEYWORDS = (
-    "problem", "issue", "masla", "kharab", "awaz", "garam", "overheat", "start nahi",
-    "miss", "misfire", "jerk", "jhatka", "smoke", "dhuan", "leak", "vibrat", "light",
-    "kyun", "kaise", "error", "fault", "band ho", "average",
+    "problem", "issue", "masla", "kharab", "awaz", "garam", "overheat", "overheating",
+    "start nahi", "miss", "missing", "misfire", "jerk", "jhatka", "smoke", "dhuan",
+    "leak", "leaking", "tapak", "vibrate", "vibrating", "vibration", "light", "kyun",
+    "kaise", "error", "fault", "band ho", "average",
+)
+
+_SOLUTION_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(k) for k in SOLUTION_KEYWORDS) + r")\b",
+    re.IGNORECASE,
+)
+_PROBLEM_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(k) for k in PROBLEM_KEYWORDS) + r")\b",
+    re.IGNORECASE,
 )
 
 
@@ -81,8 +92,8 @@ def classify_comment_intent(text: str) -> str:
     """Classifies whether a comment describes a problem occurrence, suggested solution, or cost."""
     low = (text or "").lower()
     has_cost = bool(COST_MENTION_REGEX.search(low))
-    has_sol = any(k in low for k in SOLUTION_KEYWORDS)
-    has_prob = any(k in low for k in PROBLEM_KEYWORDS)
+    has_sol = bool(_SOLUTION_RE.search(low))
+    has_prob = bool(_PROBLEM_RE.search(low))
     if has_cost and has_sol:
         return "solution_with_cost"
     if has_sol:
@@ -200,8 +211,9 @@ class YouTubeCollector:
         include_comments: bool = True,
         max_comments_per_video: int = 15,
         video_license: Optional[str] = None,
+        skip_comment_video_ids: Optional[set[str]] = None,
     ) -> List[Dict[str, Any]]:
-        """Queries YouTube API v3 and returns enriched metadata + comments."""
+        """Queries YouTube API v3 (with pagination up to max_results) and returns enriched metadata + comments."""
         if not self.is_configured():
             raise ValueError(
                 "YouTube API key is not configured. Please set YOUTUBE_API_KEY in your .env file."
@@ -215,39 +227,59 @@ class YouTubeCollector:
         )
 
         headers = {"User-Agent": "AIAutoPakistan-DataEngine/1.0"}
-        search_params: Dict[str, Any] = {
-            "key": self.api_key,
-            "q": query,
-            "part": "snippet",
-            "type": "video",
-            "maxResults": min(max_results, 50),
-            "relevanceLanguage": "ur",
-        }
-        if video_license:
-            search_params["videoLicense"] = video_license
+        skip_comments = skip_comment_video_ids or set()
+        video_ids: List[str] = []
+        seen_vids: set[str] = set()
+        next_page_token: Optional[str] = None
 
         with httpx.Client(timeout=self.config.request_timeout_seconds) as client:
-            resp = client.get(YOUTUBE_SEARCH_URL, params=search_params, headers=headers)
-            resp.raise_for_status()
-            search_data = resp.json()
+            while len(video_ids) < max_results:
+                page_size = min(50, max_results - len(video_ids))
+                search_params: Dict[str, Any] = {
+                    "key": self.api_key,
+                    "q": query,
+                    "part": "snippet",
+                    "type": "video",
+                    "maxResults": page_size,
+                    "relevanceLanguage": "ur",
+                }
+                if video_license:
+                    search_params["videoLicense"] = video_license
+                if next_page_token:
+                    search_params["pageToken"] = next_page_token
 
-            items = search_data.get("items", [])
-            video_ids = [it["id"]["videoId"] for it in items if "videoId" in it.get("id", {})]
+                resp = client.get(YOUTUBE_SEARCH_URL, params=search_params, headers=headers)
+                resp.raise_for_status()
+                search_data = resp.json()
+
+                items = search_data.get("items", [])
+                for it in items:
+                    vid = it.get("id", {}).get("videoId")
+                    if vid and vid not in seen_vids:
+                        seen_vids.add(vid)
+                        video_ids.append(vid)
+
+                next_page_token = search_data.get("nextPageToken")
+                if not next_page_token or not items:
+                    break
 
             if not video_ids:
                 return []
 
-            details_params = {
-                "key": self.api_key,
-                "id": ",".join(video_ids),
-                "part": "snippet,contentDetails,statistics,status",
-            }
-            details_resp = client.get(YOUTUBE_VIDEOS_URL, params=details_params, headers=headers)
-            details_resp.raise_for_status()
-            details_data = details_resp.json()
+            detail_items: List[Dict[str, Any]] = []
+            for start in range(0, len(video_ids), 50):
+                chunk = video_ids[start : start + 50]
+                details_params = {
+                    "key": self.api_key,
+                    "id": ",".join(chunk),
+                    "part": "snippet,contentDetails,statistics,status",
+                }
+                details_resp = client.get(YOUTUBE_VIDEOS_URL, params=details_params, headers=headers)
+                details_resp.raise_for_status()
+                detail_items.extend(details_resp.json().get("items", []))
 
             records: List[Dict[str, Any]] = []
-            for item in details_data.get("items", []):
+            for item in detail_items:
                 vid_id = item["id"]
                 snippet = item.get("snippet", {})
                 stats = item.get("statistics", {})
@@ -264,7 +296,7 @@ class YouTubeCollector:
                 )
 
                 comments: List[Dict[str, Any]] = []
-                if include_comments:
+                if include_comments and vid_id not in skip_comments:
                     comments = self.fetch_video_comments(
                         vid_id, max_comments=max_comments_per_video, client=client
                     )

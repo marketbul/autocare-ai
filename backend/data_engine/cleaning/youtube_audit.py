@@ -125,7 +125,12 @@ def audit_and_clean_youtube_records() -> Dict[str, Any]:
 
         new_make, new_model = normalize_make_model(None, combined)
         if not new_make:
-            new_make, new_model = "Generic", "Multi-Model"
+            existing_make = (r.get("make") or "").strip()
+            existing_model = (r.get("model") or "").strip()
+            if existing_make and existing_make not in {"Unknown", "Generic"}:
+                new_make, new_model = existing_make, existing_model or "Multi-Model"
+            else:
+                new_make, new_model = "Generic", "Multi-Model"
         veh_id = f"{new_make.lower()}-{new_model.lower()}-any"
 
         if new_make != r.get("make") or new_model != r.get("model"):

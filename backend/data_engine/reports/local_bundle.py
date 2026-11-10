@@ -13,6 +13,7 @@ import importlib.util
 import json
 import os
 import shutil
+from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -106,11 +107,26 @@ class LocalFolderBundleExporter:
 
         yt_src = self.config.raw_dir / "youtube"
         copied_yt = 0
+        raw_by_vid: Dict[str, Dict[str, Any]] = {}
         if yt_src.exists():
             for f in yt_src.glob("*.json"):
                 if f.is_file():
                     shutil.copy2(f, yt_raw_dir / f.name)
                     copied_yt += 1
+                    try:
+                        payload = json.loads(f.read_text(encoding="utf-8"))
+                        for item in payload.get("items", []):
+                            vid = item.get("video_id")
+                            if not vid:
+                                continue
+                            prev = raw_by_vid.get(vid)
+                            if prev is None or len(item.get("comments") or []) > len(prev.get("comments") or []):
+                                raw_by_vid[vid] = item
+                    except Exception:
+                        continue
+
+        # 5b. Export single consolidated Problem & Solution Q&A file
+        qa_path, qa_summary = self._export_consolidated_qa_file(records, raw_by_vid)
 
         # 6. Check prerequisite tool / API key availability honestly
         env_status = {
@@ -122,7 +138,7 @@ class LocalFolderBundleExporter:
         # 7. Write README_LOCAL_BUNDLE.md
         readme_path = self.bundle_dir / "README_LOCAL_BUNDLE.md"
         readme_path.write_text(
-            self._build_readme(stats, env_status, len(copied_images), len(copied_audio), copied_yt),
+            self._build_readme(stats, env_status, len(copied_images), len(copied_audio), copied_yt, qa_summary),
             encoding="utf-8",
         )
 
@@ -141,12 +157,128 @@ class LocalFolderBundleExporter:
             "master_jsonl": str(master_jsonl),
             "master_csv": str(master_csv),
             "ai_agent_knowledge": str(agent_jsonl),
+            "qa_solutions_file": str(qa_path),
+            "qa_solutions_summary": qa_summary,
             "total_records": total_real,
             "screenshots_copied": len(copied_images),
             "audio_files_copied": len(copied_audio),
             "youtube_raw_files_copied": copied_yt,
             "env_status": env_status,
         }
+
+    def _export_consolidated_qa_file(
+        self,
+        records: List[Dict[str, Any]],
+        raw_by_vid: Dict[str, Dict[str, Any]],
+    ) -> tuple[Path, Dict[str, Any]]:
+        """Writes one consolidated JSON file containing YouTube problem/solution Q&A and transcripts."""
+        yt_records = [r for r in records if r.get("source_id") == "youtube_official_api"]
+        consolidated: List[Dict[str, Any]] = []
+        makes_counter: Counter[str] = Counter()
+        models_counter: Counter[str] = Counter()
+
+        for rec in yt_records:
+            rid = rec.get("record_id", "")
+            vid = rid[3:] if rid.startswith("yt_") else rid
+            raw = raw_by_vid.get(vid, {})
+
+            desc = rec.get("problem_description") or ""
+            whisper_text: Optional[str] = None
+            if "[Whisper Transcript]:" in desc:
+                whisper_text = desc.split("[Whisper Transcript]:", 1)[1].split("\n\n", 1)[0].strip()
+
+            qa_threads: List[Dict[str, Any]] = []
+            owner_questions: List[str] = list(raw.get("extracted_problem_comments") or [])
+            solutions: List[str] = []
+            if rec.get("recommended_solution"):
+                solutions.append(rec["recommended_solution"])
+
+            for c in raw.get("comments") or []:
+                c_text = (c.get("text") or "").strip()
+                c_intent = c.get("intent") or "discussion"
+                replies = [
+                    {"text": (rp.get("text") or "").strip(), "intent": rp.get("intent") or "discussion"}
+                    for rp in (c.get("replies") or [])
+                    if (rp.get("text") or "").strip()
+                ]
+                if c_intent == "problem_occurrence" and c_text and c_text not in owner_questions:
+                    owner_questions.append(c_text)
+                if c_intent in {"suggested_solution", "solution_with_cost"} and c_text and c_text not in solutions:
+                    solutions.append(c_text)
+                for rp in replies:
+                    if rp["intent"] in {"suggested_solution", "solution_with_cost"} and rp["text"] not in solutions:
+                        solutions.append(rp["text"])
+                if c_text and (c_intent != "discussion" or replies):
+                    qa_threads.append({
+                        "comment": c_text,
+                        "intent": c_intent,
+                        "replies": replies,
+                    })
+
+            make = rec.get("make") or "Generic"
+            model = rec.get("model") or "Multi-Model"
+            makes_counter[make] += 1
+            models_counter[f"{make} {model}".strip()] += 1
+
+            img_ref = rec.get("image_reference")
+            aud_ref = rec.get("audio_reference")
+            local_shot = (
+                f"media_screenshots/{Path(img_ref).name}"
+                if img_ref and not str(img_ref).startswith("http")
+                else None
+            )
+            consolidated.append({
+                "record_id": rid,
+                "video_id": vid,
+                "make": make,
+                "model": model,
+                "fault_category_id": rec.get("fault_category_id"),
+                "category_name": rec.get("category_name"),
+                "problem_title": rec.get("problem_title"),
+                "problem_description": desc,
+                "whisper_transcript": whisper_text,
+                "owner_problem_questions": owner_questions,
+                "mechanic_and_community_solutions": solutions,
+                "qa_threads": qa_threads,
+                "estimated_cost_pkr": rec.get("estimated_cost_pkr"),
+                "language": rec.get("language"),
+                "license": raw.get("license") or rec.get("rights_basis"),
+                "verification_status": rec.get("verification_status") or "unverified",
+                "human_review_status": rec.get("human_review_status"),
+                "audio_file": f"audio_wav/{Path(aud_ref).name}" if aud_ref else None,
+                "screenshot_file": local_shot,
+                "source_url": rec.get("source_url"),
+            })
+
+        consolidated.sort(
+            key=lambda x: (
+                1 if x["whisper_transcript"] else 0,
+                1 if x["mechanic_and_community_solutions"] else 0,
+                len(x["qa_threads"]),
+            ),
+            reverse=True,
+        )
+
+        summary = {
+            "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "total_youtube_records": len(consolidated),
+            "with_owner_problem_questions": sum(1 for x in consolidated if x["owner_problem_questions"]),
+            "with_solutions": sum(1 for x in consolidated if x["mechanic_and_community_solutions"]),
+            "with_qa_threads": sum(1 for x in consolidated if x["qa_threads"]),
+            "with_whisper_transcript": sum(1 for x in consolidated if x["whisper_transcript"]),
+            "with_audio_wav": sum(1 for x in consolidated if x["audio_file"]),
+            "with_screenshot": sum(1 for x in consolidated if x["screenshot_file"]),
+            "makes_breakdown": dict(makes_counter.most_common()),
+            "top_models_breakdown": dict(models_counter.most_common(25)),
+            "verification_note": "Public YouTube comments and transcripts represent unverified claims until validated by an automotive technician.",
+        }
+
+        out_path = self.bundle_dir / "owner_mechanic_qa_solutions.json"
+        out_path.write_text(
+            json.dumps({"summary": summary, "records": consolidated}, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        return out_path, summary
 
     @staticmethod
     def _has_whisper() -> bool:
@@ -165,12 +297,14 @@ class LocalFolderBundleExporter:
         img_count: int,
         aud_count: int,
         yt_files: int,
+        qa_summary: Dict[str, Any],
     ) -> str:
         return f"""# AI Auto Pakistan — Local Dataset Bundle (Zero-Port File Edition)
 **Generated At (UTC):** {dt.datetime.now(dt.timezone.utc).isoformat()}
 
 ## Files Inside This Folder
 * `dataset_viewer.html` — Double-click to browse, search, and filter all records directly in your browser (no localhost port needed).
+* `owner_mechanic_qa_solutions.json` — Single consolidated Problem & Solution Q&A + Whisper transcript file ({qa_summary['total_youtube_records']} YouTube records; {qa_summary['with_solutions']} with proposed solutions).
 * `ai_agent_knowledge.jsonl` — Structured AI-Agent RAG & Triage dataset (`is_verified_fact` boundary included).
 * `master_dataset.json`, `master_dataset.jsonl`, `master_dataset.csv` — Complete cleaned records.
 * `ml_splits/` — Leak-free `train.jsonl`, `val.jsonl`, `test.jsonl`, and `dataset_card.json`.
@@ -250,7 +384,7 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
 <body>
   <header>
     <h1>AI Auto Pakistan — Offline Local Dataset Folder Viewer (No Port Required)</h1>
-    <p>Loaded directly from local disk files • Master JSONL, AI-Agent Knowledge, ML Splits, Screenshots &amp; Audio</p>
+    <p>Loaded directly from local disk files • Master JSONL, <a href="owner_mechanic_qa_solutions.json" target="_blank" style="color:#5eead4;">Consolidated Q&amp;A Problem/Solution File</a>, AI-Agent Knowledge, ML Splits, Screenshots &amp; Audio</p>
   </header>
   <main>
     <div class="banner" id="blocker-banner"></div>
@@ -352,8 +486,8 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
       }});
 
       document.getElementById("row-cnt").textContent = filtered.length + " / " + DATA.records.length;
-      document.getElementById("tbody").innerHTML = filtered.slice(0, 300).map(r => {{
-        const imgLink = r.image_reference ? `<br><a href="media_screenshots/${{r.image_reference.split('/').pop()}}" target="_blank" style="color:#0f766e;font-size:0.75rem;">[View Screenshot]</a>` : "";
+      document.getElementById("tbody").innerHTML = filtered.slice(0, 1000).map(r => {{
+        const imgLink = r.image_reference ? (r.image_reference.startsWith("http") ? `<br><a href="${{r.image_reference}}" target="_blank" style="color:#475569;font-size:0.75rem;">[Thumbnail]</a>` : `<br><a href="media_screenshots/${{r.image_reference.split('/').pop()}}" target="_blank" style="color:#0f766e;font-size:0.75rem;">[View Screenshot]</a>`) : "";
         const audLink = r.audio_reference ? ` <a href="audio_wav/${{r.audio_reference.split('/').pop()}}" target="_blank" style="color:#1d4ed8;font-size:0.75rem;">[Audio WAV]</a>` : "";
         const urlLink = r.source_url && r.source_url.startsWith("http") ? `<br><a href="${{r.source_url}}" target="_blank" style="color:#1d4ed8;font-size:0.74rem;">${{r.source_url.slice(0,36)}}...</a>` : "";
         return `

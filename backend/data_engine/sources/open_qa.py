@@ -56,6 +56,15 @@ DEFAULT_SE_QUERIES: Tuple[Dict[str, str], ...] = (
     {"id": "se_oil", "param": "tagged", "value": "oil", "label": "Oil"},
     {"id": "se_cel", "param": "tagged", "value": "check-engine-light", "label": "CEL"},
     {"id": "se_misfire", "param": "tagged", "value": "misfire", "label": "Misfire"},
+    {"id": "se_toyota_tag", "param": "tagged", "value": "toyota", "label": "Toyota Tag"},
+    {"id": "se_honda_tag", "param": "tagged", "value": "honda", "label": "Honda Tag"},
+    {"id": "se_coolant", "param": "tagged", "value": "coolant", "label": "Coolant"},
+    {"id": "se_sensors", "param": "tagged", "value": "sensors", "label": "Sensors"},
+    {"id": "se_spark", "param": "tagged", "value": "spark-plugs", "label": "Spark Plugs"},
+    {"id": "se_abs", "param": "tagged", "value": "abs", "label": "ABS"},
+    {"id": "se_fuel_pump", "param": "tagged", "value": "fuel-pump", "label": "Fuel Pump"},
+    {"id": "se_exhaust", "param": "tagged", "value": "exhaust", "label": "Exhaust"},
+    {"id": "se_dtc", "param": "tagged", "value": "diagnostic-trouble-code", "label": "OBD/DTC"},
 )
 
 DEFAULT_NHTSA_VEHICLES: Tuple[Tuple[str, str], ...] = (
@@ -76,7 +85,9 @@ DEFAULT_NHTSA_VEHICLES: Tuple[Tuple[str, str], ...] = (
     ("suzuki", "swift"),
     ("suzuki", "grand vitara"),
 )
-DEFAULT_NHTSA_YEARS: Tuple[int, ...] = (2012, 2014, 2016, 2018, 2020, 2022, 2024)
+DEFAULT_NHTSA_YEARS: Tuple[int, ...] = (
+    2008, 2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+)
 
 
 def clean_html_text(raw: str) -> str:
@@ -118,11 +129,14 @@ class StackExchangeMechanicsCollector:
     def fetch_answered_qa(
         self,
         topics: Optional[Iterable[Dict[str, str]]] = None,
-        top_vote_pages: int = 8,
+        top_vote_pages: int = 25,
+        start_page: int = 1,
         pagesize: int = 100,
+        skip_question_ids: Optional[set[int]] = None,
     ) -> List[Dict[str, Any]]:
         """Collects answered Stack Exchange questions paired with sorted mechanic answers."""
         seen_questions: Dict[int, Dict[str, Any]] = {}
+        skip_qids = skip_question_ids or set()
         headers = {"User-Agent": "AIAutoPakistan-DataEngine/1.0"}
 
         with httpx.Client(timeout=self.config.request_timeout_seconds, headers=headers) as client:
@@ -140,12 +154,12 @@ class StackExchangeMechanicsCollector:
                     data = self._get_json(client, f"{SE_API_BASE}/search/advanced", params)
                     for q in data.get("items", []):
                         qid = q.get("question_id")
-                        if qid and qid not in seen_questions:
+                        if qid and qid not in seen_questions and qid not in skip_qids:
                             seen_questions[qid] = q
                 except Exception:
                     continue
 
-            for page in range(1, top_vote_pages + 1):
+            for page in range(start_page, top_vote_pages + 1):
                 try:
                     data = self._get_json(
                         client,
@@ -162,7 +176,7 @@ class StackExchangeMechanicsCollector:
                     )
                     for q in data.get("items", []):
                         qid = q.get("question_id")
-                        if qid and qid not in seen_questions:
+                        if qid and qid not in seen_questions and qid not in skip_qids:
                             seen_questions[qid] = q
                     if not data.get("has_more"):
                         break
@@ -312,7 +326,7 @@ class NHTSAComplaintsCollector:
         self,
         vehicles: Optional[Iterable[Tuple[str, str]]] = None,
         years: Optional[Iterable[int]] = None,
-        max_complaints_per_model_year: int = 15,
+        max_complaints_per_model_year: int = 30,
     ) -> Dict[str, List[Dict[str, Any]]]:
         """Fetches deduplicated NHTSA recalls and sampled owner complaints across shared models."""
         seen_recalls: Dict[str, Dict[str, Any]] = {}

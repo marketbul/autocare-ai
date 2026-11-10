@@ -28,7 +28,7 @@ class AIAgentDatasetExporter:
         self.storage = storage or StorageManager()
 
     def build_agent_records(self, include_pending: bool = True) -> List[Dict[str, Any]]:
-        items, _ = self.storage.query_records(include_examples=False, limit=10000)
+        items, _ = self.storage.query_records(include_examples=False, limit=100000)
         out: List[Dict[str, Any]] = []
 
         for it in items:

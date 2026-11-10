@@ -188,16 +188,27 @@ class StorageManager:
         source_key = PLATFORM_TO_SOURCE_ID.get(record.source.source_platform, record.source.source_platform)
         cat_id = record.problem.fault_category if record.problem.fault_category in AUTOMOTIVE_FAULT_CATEGORIES else None
 
+        def _lookup_asset(rel_ref: Optional[str]) -> Optional[str]:
+            if not rel_ref:
+                return None
+            r = conn.execute("SELECT asset_id FROM media_assets WHERE relative_reference = ?", (rel_ref,)).fetchone()
+            return r["asset_id"] if r else None
+
+        audio_aid = _lookup_asset(record.audio.audio_file_reference if record.audio else None)
+        image_aid = _lookup_asset(record.media.image_reference if record.media else None)
+        video_aid = _lookup_asset(record.media.video_reference if record.media else None)
+
         conn.execute(
             """INSERT OR REPLACE INTO diagnostic_records
             (record_id, vehicle_id, fault_category_id, source_id, problem_title, problem_description,
              symptoms_json, suspected_causes_json, confirmed_causes_json, severity, diagnosis_stage,
+             audio_asset_id, image_asset_id, video_asset_id,
              sound_category, sound_description, detected_component, dashboard_warning_light, smoke_color,
              recommended_solution, repair_steps_json, required_parts_json, repair_success, verification_status,
              estimated_cost_pkr, parts_cost_pkr, labor_cost_pkr, city, price_date, price_source,
              source_url, publication_date, collection_date, language, rights_basis, confidence_score,
              human_review_status, reviewer_notes)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 record.record_id,
                 veh_id,
@@ -210,6 +221,9 @@ class StorageManager:
                 json.dumps(record.problem.confirmed_causes, ensure_ascii=False),
                 record.problem.severity,
                 record.problem.diagnosis_stage,
+                audio_aid,
+                image_aid,
+                video_aid,
                 record.audio.sound_category if record.audio else None,
                 record.audio.sound_description if record.audio else None,
                 record.media.detected_component if record.media else None,
@@ -329,6 +343,8 @@ class StorageManager:
             FROM diagnostic_records dr
             LEFT JOIN vehicle_fleet vf ON dr.vehicle_id = vf.vehicle_id
             LEFT JOIN fault_categories fc ON dr.fault_category_id = fc.category_id
+            LEFT JOIN media_assets ma_img ON dr.image_asset_id = ma_img.asset_id
+            LEFT JOIN media_assets ma_aud ON dr.audio_asset_id = ma_aud.asset_id
             {where_sql}
         """
 
@@ -339,7 +355,9 @@ class StorageManager:
             rows = conn.execute(
                 f"""
                 SELECT dr.*, vf.make, vf.model, vf.variant, vf.manufacturing_year,
-                       fc.name AS category_name, fc.name_roman_ur AS category_roman_ur
+                       fc.name AS category_name, fc.name_roman_ur AS category_roman_ur,
+                       ma_img.relative_reference AS image_reference,
+                       ma_aud.relative_reference AS audio_reference
                 {base_from}
                 ORDER BY dr.collection_date DESC, dr.record_id ASC
                 LIMIT ? OFFSET ?
@@ -550,6 +568,11 @@ class StorageManager:
                 "SELECT COUNT(*) AS cnt FROM diagnostic_records WHERE source_id = 'youtube_official_api' AND rights_basis != 'example_template'"
             ).fetchone()
             stats["media_counts"]["video_metadata_records"] = vid_meta["cnt"] if vid_meta else 0
+
+            tr_row = conn.execute(
+                "SELECT COUNT(*) AS cnt FROM diagnostic_records WHERE audio_asset_id IS NOT NULL"
+            ).fetchone()
+            stats["media_counts"]["transcribed"] = tr_row["cnt"] if tr_row else 0
 
             stats["ml_ready_count"] = stats["by_review_status"].get("ml_ready", 0)
             stats["reviewed_count"] = (

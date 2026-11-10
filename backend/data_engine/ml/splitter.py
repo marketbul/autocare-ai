@@ -16,7 +16,14 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from ..config import get_config
 from ..logger import AuditAction, get_audit_logger
-from ..schema import AutomotiveRecord
+from ..schema import (
+    AutomotiveRecord,
+    CostInfo,
+    ProblemInfo,
+    RepairInfo,
+    SourceQualityInfo,
+    VehicleInfo,
+)
 
 
 class GroupedMLSplitter:
@@ -163,3 +170,59 @@ class GroupedMLSplitter:
             cat = r.problem.fault_category or "Uncategorized"
             counts[cat] += 1
         return dict(counts)
+
+    def split_and_export_from_storage(self, storage: Any) -> Dict[str, Any]:
+        """Rebuilds grouped train/val/test splits across all non-example records in SQLite."""
+        items, _ = storage.query_records(include_examples=False, limit=10000)
+        recs: List[AutomotiveRecord] = []
+        for it in items:
+            recs.append(
+                AutomotiveRecord(
+                    record_id=it["record_id"],
+                    vehicle=VehicleInfo(
+                        make=it.get("make") or "Unknown",
+                        model=it.get("model") or "Unknown",
+                        variant=it.get("variant"),
+                        manufacturing_year=it.get("manufacturing_year"),
+                    ),
+                    problem=ProblemInfo(
+                        problem_title=it["problem_title"],
+                        problem_description=it["problem_description"],
+                        symptoms=it.get("symptoms", []),
+                        fault_category=it.get("fault_category_id"),
+                        severity=it.get("severity"),
+                        diagnosis_stage=it.get("diagnosis_stage", "owner_reported_problem"),
+                    ),
+                    repair=RepairInfo(
+                        recommended_solution=it.get("recommended_solution"),
+                        verification_status=it.get("verification_status") or "unverified",
+                    ) if it.get("recommended_solution") else None,
+                    cost=CostInfo(
+                        estimated_cost_pkr=it.get("estimated_cost_pkr"),
+                        parts_cost_pkr=it.get("parts_cost_pkr"),
+                        labor_cost_pkr=it.get("labor_cost_pkr"),
+                        city=it.get("city"),
+                        price_date=it.get("price_date"),
+                        price_source=it.get("price_source"),
+                    ) if it.get("estimated_cost_pkr") is not None else None,
+                    source=SourceQualityInfo(
+                        source_platform=it.get("source_id") or "unknown",
+                        source_url=it.get("source_url"),
+                        source_id=it["record_id"],
+                        language=it.get("language") or "en",
+                        rights_basis=it.get("rights_basis") or "unknown",
+                        permission_status="verified",
+                        human_review_status=it.get("human_review_status") or "pending",
+                        confidence_score=it.get("confidence_score") or 0.5,
+                    ),
+                )
+            )
+        train, val, test = self.split_records(recs)
+        outputs = self.export_splits(train, val, test)
+        return {
+            "total_real_records": len(recs),
+            "train": len(train),
+            "val": len(val),
+            "test": len(test),
+            "outputs": outputs,
+        }

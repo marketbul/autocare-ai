@@ -292,6 +292,29 @@ class LocalDatasetConsolidator:
                 records.append(rec)
         return records
 
+    def load_real_facebook_qa(self, dirs: Optional[List[Path]] = None) -> List[AutomotiveRecord]:
+        """Loads real human-curated Facebook Q&A files (.csv/.json/.jsonl) from drop folders."""
+        fb_importer = FacebookResearchImporter()
+        search_dirs = dirs or [
+            self.config.raw_dir / "facebook",
+            self.config.backend_root.parent / "Facebook_Community_QA",
+        ]
+        loaded: List[AutomotiveRecord] = []
+        seen_ids: set[str] = set()
+        for folder in search_dirs:
+            if not folder or not folder.exists():
+                continue
+            for p in sorted(folder.iterdir()):
+                if not p.is_file() or p.suffix.lower() not in {".csv", ".json", ".jsonl"}:
+                    continue
+                if "template" in p.name.lower():
+                    continue
+                for rec in fb_importer.import_flexible_qa_file(p):
+                    if rec.record_id not in seen_ids:
+                        seen_ids.add(rec.record_id)
+                        loaded.append(rec)
+        return loaded
+
     def load_template_examples(self) -> List[AutomotiveRecord]:
         """Loads the 4 template examples, strictly flagged as example_template."""
         examples: List[AutomotiveRecord] = []
@@ -323,11 +346,13 @@ class LocalDatasetConsolidator:
         symptoms = self.load_symptom_corpus()
         manuals = self.load_manuals()
         prices = self.load_pakistan_prices()
+        fb_qa = self.load_real_facebook_qa()
 
         real_records.extend(obd2)
         real_records.extend(symptoms)
         real_records.extend(manuals)
         real_records.extend(prices)
+        real_records.extend(fb_qa)
 
         # Clean & normalize real records
         pipeline = CleaningPipeline()
@@ -360,6 +385,7 @@ class LocalDatasetConsolidator:
                 "symptom_corpus": len(symptoms),
                 "manuals": len(manuals),
                 "pakistan_prices": len(prices),
+                "facebook_qa_imported": len(fb_qa),
                 "example_templates": len(example_records),
             },
         )
@@ -371,6 +397,7 @@ class LocalDatasetConsolidator:
                 "symptom_corpus": len(symptoms),
                 "manuals": len(manuals),
                 "pakistan_prices": len(prices),
+                "facebook_qa_imported": len(fb_qa),
                 "total_real_records": len(real_records),
                 "example_template_records": len(example_records),
             },

@@ -28,7 +28,10 @@ from ..taxonomy import DiagnosisStage, get_taxonomy_manager, normalize_make_mode
 PHONE_REGEX = re.compile(r"(\+92|0)?3[0-9]{2}[-\s]?[0-9]{7}\b")
 CNIC_REGEX = re.compile(r"\b[0-9]{5}-[0-9]{7}-[0-9]\b")
 EMAIL_REGEX = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")
-PLATE_REGEX = re.compile(r"\b[A-Z]{2,3}[-\s]?[0-9]{1,4}\b", re.IGNORECASE)
+PLATE_REGEX = re.compile(
+    r"\b(?!(?:rs|at|to|in|on|of|by|or|is|no|up|km|cc|hp)\b)[A-Z]{2,3}[-\s]?[0-9]{1,4}\b",
+    re.IGNORECASE,
+)
 
 
 def scrub_pii(text: str) -> str:

@@ -94,3 +94,32 @@ def test_pii_scrubbing():
     assert "[PHONE REDACTED]" in cleaned
     assert "[CNIC REDACTED]" in cleaned
     assert "[EMAIL REDACTED]" in cleaned
+
+
+def test_facebook_flexible_qa_file_import(tmp_path: Path):
+    importer = FacebookResearchImporter()
+
+    quick_csv = tmp_path / "quick_fb_qa.csv"
+    quick_csv.write_text(
+        "question,proposed_solution,city\n"
+        "Meri Corolla GLi garm ho rahi hai call 0300-1234567,Radiator flush karwaya rs 2500 kharcha aya,Lahore\n",
+        encoding="utf-8",
+    )
+    recs = importer.import_flexible_qa_file(quick_csv)
+    assert len(recs) == 1
+    assert recs[0].vehicle.make == "Toyota"
+    assert recs[0].vehicle.model == "Corolla"
+    assert "[PHONE REDACTED]" in recs[0].problem.problem_title
+    assert recs[0].cost is not None and recs[0].cost.estimated_cost_pkr == 2500.0
+    assert recs[0].repair is not None and recs[0].repair.verification_status == "unverified"
+
+    json_path = tmp_path / "fb_qa.json"
+    json_path.write_text(
+        '[{"question": "Suzuki Alto gear jerking issue", "answers": ["AGS calibration resolved it"], "city": "Karachi"}]',
+        encoding="utf-8",
+    )
+    jrecs = importer.import_flexible_qa_file(json_path)
+    assert len(jrecs) == 1
+    assert jrecs[0].vehicle.make == "Suzuki"
+    assert jrecs[0].vehicle.model == "Alto"
+    assert jrecs[0].repair.recommended_solution == "AGS calibration resolved it"

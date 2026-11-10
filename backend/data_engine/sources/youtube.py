@@ -17,7 +17,14 @@ import httpx
 
 from ..config import get_config
 from ..logger import AuditAction, get_audit_logger
-from ..taxonomy import get_taxonomy_manager, normalize_make_model
+from ..schema import (
+    AutomotiveRecord,
+    ImageVideoInfo,
+    ProblemInfo,
+    SourceQualityInfo,
+    VehicleInfo,
+)
+from ..taxonomy import DiagnosisStage, get_taxonomy_manager, normalize_make_model
 
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 YOUTUBE_VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
@@ -194,3 +201,52 @@ class YouTubeCollector:
                 ensure_ascii=False,
             )
         return dest
+
+    def to_automotive_records(self, raw_items: List[Dict[str, Any]]) -> List[AutomotiveRecord]:
+        """Converts raw YouTube metadata dicts into normalized AutomotiveRecord instances."""
+        out: List[AutomotiveRecord] = []
+        for item in raw_items:
+            vid_id = item.get("video_id", "")
+            title = (item.get("video_title") or "Untitled YouTube Automotive Video").strip()
+            desc = (item.get("video_description") or title).strip()
+            make = item.get("vehicle_make") or "Unknown"
+            model = item.get("vehicle_model") or "Unknown"
+            tags = [str(t).strip() for t in item.get("tags", []) if str(t).strip()][:8]
+            lang = item.get("language") or "roman_ur"
+            if lang not in {"en", "ur", "roman_ur", "punjabi"}:
+                lang = "roman_ur" if lang.startswith("ur") else "en"
+
+            import uuid
+            rec = AutomotiveRecord(
+                record_id=f"yt_{vid_id}" if vid_id else str(uuid.uuid4()),
+                vehicle=VehicleInfo(make=make, model=model),
+                problem=ProblemInfo(
+                    problem_title=title,
+                    problem_description=desc[:2000],
+                    symptoms=tags,
+                    fault_category=item.get("suspected_fault_category"),
+                    diagnosis_stage=DiagnosisStage.OWNER_REPORTED_PROBLEM.value,
+                ),
+                media=ImageVideoInfo(
+                    video_reference=vid_id or None,
+                    media_type="video_metadata",
+                    image_description=f"Duration: {item.get('duration', 'unknown')}, Views: {item.get('view_count', 0)}",
+                    annotation_status="unannotated",
+                ),
+                source=SourceQualityInfo(
+                    source_platform="youtube",
+                    source_url=item.get("video_url"),
+                    source_id=vid_id or title[:32],
+                    source_author_or_channel=item.get("channel_name"),
+                    publication_date=item.get("publication_date"),
+                    collection_date=item.get("collection_date") or dt.datetime.now(dt.timezone.utc).isoformat(),
+                    language=lang,
+                    rights_basis="official_api_metadata",
+                    permission_status="public_metadata",
+                    human_review_status="pending",
+                    confidence_score=0.6,
+                ),
+            )
+            out.append(rec)
+        return out
+

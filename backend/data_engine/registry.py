@@ -19,6 +19,8 @@ class SourceType(str, Enum):
     CAR_OWNER_REPORT = "car_owner_report"
     AUTOMOTIVE_BLOG = "automotive_blog"
     RESEARCH_PAPER = "research_paper"
+    STARTER_SYMPTOM_CORPUS = "starter_symptom_corpus"
+    PAKISTAN_PRICE_REFERENCE = "pakistan_price_reference"
 
 
 class RightsBasis(str, Enum):
@@ -29,6 +31,9 @@ class RightsBasis(str, Enum):
     MANUAL_RESEARCH_SYNTHESIS = "manual_research_synthesis"
     OPEN_ACADEMIC_LICENSE = "open_academic_license"
     AUTHORIZED_PARTNER = "authorized_partner"
+    STARTER_SYNTHETIC_CORPUS = "starter_synthetic_corpus"
+    MARKET_SURVEY_BENCHMARK = "market_survey_benchmark"
+    EXAMPLE_TEMPLATE = "example_template"
 
 
 @dataclass
@@ -208,6 +213,46 @@ def create_default_source_registry() -> SourceRegistry:
                 "Distinguishes owner-reported symptoms from confirmed diagnoses.",
             ],
             description="Real-world driver experiences, repair bills in PKR, symptom descriptions, and verified repair outcomes.",
+        )
+    )
+
+    # 7. Multilingual Starter Symptom Corpus
+    registry.register(
+        DataSourceEntry(
+            source_id="starter_symptom_corpus",
+            name="Multilingual Automotive Symptom Corpus (EN / UR / Roman UR)",
+            source_type=SourceType.STARTER_SYMPTOM_CORPUS,
+            rights_basis=RightsBasis.STARTER_SYNTHETIC_CORPUS,
+            is_automated=True,
+            requires_api_key=False,
+            requires_permission=False,
+            attribution_required=False,
+            rate_limit_policy="Local CSV dataset ingestion",
+            limitations=[
+                "Authored baseline dataset (69 symptom groups x 3 languages = 207 records).",
+                "Explicitly marked as baseline starter corpus, distinct from external harvested posts.",
+            ],
+            description="Aligned English, Urdu script, and Roman Urdu symptom descriptions mapped to fault categories.",
+        )
+    )
+
+    # 8. Pakistani Spare Parts & Workshop Labour Reference
+    registry.register(
+        DataSourceEntry(
+            source_id="pakistan_price_reference",
+            name="Pakistan Spare Parts & Workshop Labour Price Reference (PKR)",
+            source_type=SourceType.PAKISTAN_PRICE_REFERENCE,
+            rights_basis=RightsBasis.MARKET_SURVEY_BENCHMARK,
+            is_automated=True,
+            requires_api_key=False,
+            requires_permission=False,
+            attribution_required=True,
+            rate_limit_policy="Local benchmark pricing table",
+            limitations=[
+                "Covers OEM vs Aftermarket parts and estimated workshop labour hours in PKR.",
+                "Subject to market inflation; verify price_date before treating as live retail quote.",
+            ],
+            description="Reference parts and workshop labor cost dataset across Corolla, Civic, and Swift.",
         )
     )
 

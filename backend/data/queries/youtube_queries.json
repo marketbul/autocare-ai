@@ -161,6 +161,102 @@
       "target_model": null,
       "suspected_category": "cooling_system",
       "language": "en"
+    },
+    {
+      "id": "q021",
+      "query": "Toyota Corolla mechanic problem solution Urdu Pakistan",
+      "target_make": "Toyota",
+      "target_model": "Corolla",
+      "suspected_category": null,
+      "language": "roman_ur"
+    },
+    {
+      "id": "q022",
+      "query": "Toyota Corolla Gli Xli brake suspension repair Pakistan",
+      "target_make": "Toyota",
+      "target_model": "Corolla",
+      "suspected_category": "brakes",
+      "language": "en"
+    },
+    {
+      "id": "q023",
+      "query": "Toyota Yaris Vitz engine problem repair Pakistan",
+      "target_make": "Toyota",
+      "target_model": "Yaris",
+      "suspected_category": "engine",
+      "language": "en"
+    },
+    {
+      "id": "q024",
+      "query": "Suzuki Mehran engine missing tuning problem Urdu",
+      "target_make": "Suzuki",
+      "target_model": "Mehran",
+      "suspected_category": "engine",
+      "language": "roman_ur"
+    },
+    {
+      "id": "q025",
+      "query": "Suzuki Alto 660cc AGS gear AC problem Pakistan",
+      "target_make": "Suzuki",
+      "target_model": "Alto",
+      "suspected_category": "transmission",
+      "language": "en"
+    },
+    {
+      "id": "q026",
+      "query": "Suzuki Cultus VXR engine problem solution Pakistan",
+      "target_make": "Suzuki",
+      "target_model": "Cultus",
+      "suspected_category": "engine",
+      "language": "roman_ur"
+    },
+    {
+      "id": "q027",
+      "query": "Suzuki Swift brake clutch suspension repair Pakistan",
+      "target_make": "Suzuki",
+      "target_model": "Swift",
+      "suspected_category": "brakes",
+      "language": "en"
+    },
+    {
+      "id": "q028",
+      "query": "Suzuki Wagon R overheating AC suspension Pakistan",
+      "target_make": "Suzuki",
+      "target_model": "Wagon R",
+      "suspected_category": "cooling_system",
+      "language": "en"
+    },
+    {
+      "id": "q029",
+      "query": "Honda Civic Reborn engine overheating steering rack Pakistan",
+      "target_make": "Honda",
+      "target_model": "Civic",
+      "suspected_category": "steering",
+      "language": "en"
+    },
+    {
+      "id": "q030",
+      "query": "Honda City i-VTEC fuel average missing repair Pakistan",
+      "target_make": "Honda",
+      "target_model": "City",
+      "suspected_category": "fuel_system",
+      "language": "en"
+    },
+    {
+      "id": "q031",
+      "query": "Toyota Corolla Altis Grande transmission overheating Pakistan",
+      "target_make": "Toyota",
+      "target_model": "Corolla",
+      "suspected_category": "transmission",
+      "language": "en"
+    },
+    {
+      "id": "q032",
+      "query": "Pakistani car mechanic diagnostic fault finding Urdu",
+      "target_make": null,
+      "target_model": null,
+      "suspected_category": null,
+      "language": "roman_ur"
     }
   ]
 }

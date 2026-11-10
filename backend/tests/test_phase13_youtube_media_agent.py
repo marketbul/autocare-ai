@@ -19,6 +19,7 @@ def test_comment_intent_classification():
     assert classify_comment_intent("gaari start nahi ho rahi aur engine awaz de raha hai") == "problem_occurrence"
     assert classify_comment_intent("Thermostat valve replace karwaya theek ho gayi") == "suggested_solution"
     assert classify_comment_intent("Mechanic ne radiator cap replace kia rs 1500 kharcha aya") == "solution_with_cost"
+    assert classify_comment_intent("ghareeb admi chalta hn bhai") == "discussion"
 
 
 def test_youtube_to_automotive_records_with_comments():

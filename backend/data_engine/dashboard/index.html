@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Auto Pakistan — Multi-Source Dataset Engineering Console</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #0f766e;
+      --primary-hover: #0d9488;
+      --primary-soft: #ccfbf1;
+      --accent: #1d4ed8;
+      --warn: #b45309;
+      --warn-soft: #fef3c7;
+      --danger: #b91c1c;
+      --danger-soft: #fee2e2;
+      --ok: #15803d;
+      --ok-soft: #dcfce7;
+      --radius: 10px;
+      --shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
+      color: #ffffff;
+      padding: 18px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .brand h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+    .brand p { font-size: 0.85rem; color: #cbd5e1; margin-top: 2px; }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #f8fafc;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .dot.ok { background: #22c55e; }
+    .dot.warn { background: #f59e0b; }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn:hover { background: var(--surface-alt); border-color: #cbd5e1; }
+    .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-sm { padding: 4px 10px; font-size: 0.78rem; }
+    .btn-ok { background: var(--ok-soft); color: var(--ok); border-color: #bbf7d0; }
+    .btn-warn { background: var(--warn-soft); color: var(--warn); border-color: #fde68a; }
+    .btn-danger { background: var(--danger-soft); color: var(--danger); border-color: #fecaca; }
+
+    nav.tabs {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    nav.tabs button {
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 13px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    nav.tabs button.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    main { max-width: 1400px; margin: 22px auto; padding: 0 24px 60px; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .notice {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      font-size: 0.88rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+    .kpi-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+    .kpi-value { font-size: 1.7rem; font-weight: 700; margin-top: 4px; color: var(--text); }
+    .kpi-sub { font-size: 0.76rem; color: var(--muted); margin-top: 3px; }
+    .kpi-card.zero .kpi-value { color: #94a3b8; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .card h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .card p.desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; }
+
+    /* Bar chart */
+    .bar-list { display: flex; flex-direction: column; gap: 9px; }
+    .bar-row { display: grid; grid-template-columns: 165px 1fr 48px; align-items: center; gap: 10px; font-size: 0.83rem; }
+    .bar-label { font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-track { background: #e2e8f0; border-radius: 999px; height: 11px; overflow: hidden; }
+    .bar-fill { background: var(--primary); height: 100%; border-radius: 999px; transition: width 0.3s ease; }
+    .bar-val { text-align: right; font-weight: 700; color: var(--muted); }
+
+    /* Filters & Forms */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+    input, select, textarea {
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      padding: 7px 11px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+    textarea { width: 100%; min-height: 80px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .field label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .field input, .field select { width: 100%; }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--surface-alt); font-weight: 700; color: var(--muted); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:hover td { background: #f8fafc; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-ok { background: var(--ok-soft); color: var(--ok); }
+    .badge-warn { background: var(--warn-soft); color: var(--warn); }
+    .badge-danger { background: var(--danger-soft); color: var(--danger); }
+    .badge-info { background: #e0f2fe; color: #0369a1; }
+    .badge-example { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
+    .badge-muted { background: #f1f5f9; color: #475569; }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      z-index: 100;
+      display: none;
+      max-width: 420px;
+    }
+
+    pre.json-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      max-height: 420px;
+    }
+
+    dialog {
+      margin: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 780px;
+      width: 92%;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25);
+    }
+    dialog::backdrop { background: rgba(15, 23, 42, 0.5); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>AI Auto Pakistan — Dataset Engineering Console</h1>
+      <p>Multi-Source Pakistani Automotive Intelligence • Collection, Cleaning, Quality Audit & ML Preparation</p>
+    </div>
+    <div class="header-actions">
+      <span class="pill" id="yt-key-pill"><span class="dot warn"></span>YouTube API Key: Checking...</span>
+      <button class="btn" onclick="refreshAll()">Refresh Data</button>
+      <button class="btn btn-primary" onclick="runConsolidate()">Re-Consolidate &amp; Split ML</button>
+      <a class="btn" href="/docs" target="_blank">API Docs (/docs)</a>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="active" data-tab="overview">Overview &amp; Charts</button>
+    <button data-tab="explorer">Dataset Explorer &amp; Review</button>
+    <button data-tab="collect">Collect &amp; Import Data</button>
+    <button data-tab="taxonomy">18 Categories &amp; Fleet</button>
+    <button data-tab="costs">PKR Repair Costs</button>
+    <button data-tab="audit">Sources, ML Splits &amp; Audit</button>
+  </nav>
+
+  <main>
+    <div class="notice">
+      <div>
+        <strong>Zero-Fabrication Provenance Policy:</strong> Counts below reflect real records stored in <code>autocare.db</code>.
+        External platforms (YouTube, Facebook, PakWheels) accurately show <strong>0</strong> until you enter an API key or import verified research CSVs.
+        The 4 starter template demonstrations are strictly labeled <span class="badge badge-example">EXAMPLE TEMPLATE</span> and excluded from ML splits.
+      </div>
+      <div style="display:flex; gap:8px;">
+        <a class="btn btn-sm" href="/api/v1/dataset/export/csv">Export CSV</a>
+        <a class="btn btn-sm" href="/api/v1/dataset/export/jsonl">Export JSONL</a>
+        <a class="btn btn-sm" href="/api/v1/dataset/export/json">Export JSON</a>
+      </div>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="tab-overview" class="tab-panel active">
+      <div class="kpi-grid" id="kpi-grid"></div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Records by Source Platform</h2>
+          <div class="bar-list" id="chart-sources"></div>
+        </div>
+        <div class="card">
+          <h2>Language Coverage (EN / UR / Roman UR / Punjabi)</h2>
+          <div class="bar-list" id="chart-languages"></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Records by Automotive Fault Category (FC-01 to FC-18)</h2>
+          <div class="bar-list" id="chart-categories"></div>
+        </div>
+        <div class="card">
+          <h2>Records by Vehicle Make</h2>
+          <div class="bar-list" id="chart-makes"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: EXPLORER & REVIEW -->
+    <section id="tab-explorer" class="tab-panel">
+      <div class="card">
+        <h2>
+          <span>Dataset Explorer &amp; Human Review Queue</span>
+          <span id="explorer-count" style="font-size:0.85rem; color:var(--muted);">Loading...</span>
+        </h2>
+        <div class="filter-bar">
+          <input type="text" id="f-search" placeholder="Search symptoms, titles, descriptions..." style="min-width:240px;" />
+          <select id="f-make">
+            <option value="">All Makes</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Honda">Honda</option>
+            <option value="Suzuki">Suzuki</option>
+            <option value="Universal">Universal (OBD-II)</option>
+          </select>
+          <select id="f-source">
+            <option value="">All Sources</option>
+            <option value="manuals_and_bulletins">Manuals &amp; OBD-II</option>
+            <option value="starter_symptom_corpus">Multilingual Symptom Corpus</option>
+            <option value="pakistan_price_reference">PKR Price Benchmarks</option>
+            <option value="youtube_official_api">YouTube API</option>
+            <option value="facebook_research_import">Facebook Research</option>
+            <option value="pakwheels_research_import">PakWheels Research</option>
+            <option value="mechanic_interviews">Mechanic Interviews</option>
+            <option value="owner_submissions">Owner Reports</option>
+          </select>
+          <select id="f-category"><option value="">All Fault Categories</option></select>
+          <select id="f-lang">
+            <option value="">All Languages</option>
+            <option value="en">English (en)</option>
+            <option value="ur">Urdu (ur)</option>
+            <option value="roman_ur">Roman Urdu (roman_ur)</option>
+            <option value="punjabi">Punjabi (punjabi)</option>
+          </select>
+          <select id="f-status">
+            <option value="">All Review Statuses</option>
+            <option value="ml_ready">ML-Ready</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending Review</option>
+            <option value="needs_review">Needs Review</option>
+            <option value="example_template">Example Template</option>
+          </select>
+          <label style="font-size:0.82rem; display:inline-flex; align-items:center; gap:5px;">
+            <input type="checkbox" id="f-examples" checked /> Show Examples
+          </label>
+          <button class="btn btn-primary" onclick="loadRecords()">Apply Filters</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Problem Title &amp; Symptoms</th>
+                <th>Fault Category</th>
+                <th>Lang</th>
+                <th>Source &amp; Rights</th>
+                <th>Cost (PKR)</th>
+                <th>Status</th>
+                <th>Review Actions</th>
+              </tr>
+            </thead>
+            <tbody id="records-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: COLLECT & IMPORT -->
+    <section id="tab-collect" class="tab-panel">
+      <div class="grid-2">
+        <!-- YouTube API Collector -->
+        <div class="card">
+          <h2>1. YouTube Official Data API v3 Collector</h2>
+          <p class="desc">
+            Collects public automotive video metadata (titles, descriptions, channel, view/like counts, duration).
+            Never downloads copyrighted video/audio automatically.
+          </p>
+          <div class="field" style="margin-bottom:10px;">
+            <label>YouTube Data API v3 Key (optional if already in <code>backend/.env</code>)</label>
+            <input type="password" id="yt-api-key" placeholder="AIzaSy... (never stored in browser)" />
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label>Search Query (from configurable queries file)</label>
+              <select id="yt-query-select"></select>
+            </div>
+            <div class="field">
+              <label>Max Results (1–25)</label>
+              <input type="number" id="yt-max-results" value="5" min="1" max="25" />
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:12px;">
+            <label>Or Enter Custom Query</label>
+            <input type="text" id="yt-custom-query" placeholder="e.g. Suzuki Alto AGS gearbox issue Pakistan" />
+          </div>
+          <button class="btn btn-primary" onclick="runYouTubeCollection()">Run YouTube Collection</button>
+          <div id="yt-result" style="margin-top:12px;"></div>
+        </div>
+
+        <!-- CSV Import -->
+        <div class="card">
+          <h2>2. Import Research CSV (Facebook / PakWheels / Field Interviews)</h2>
+          <p class="desc">
+            Imports structured research sheets cleanly. Mechanic interviews without <code>consent=yes</code> are automatically rejected.
+            Owner reports automatically redact phone numbers, CNICs, and license plates.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <a class="btn btn-sm" href="/api/v1/dataset/templates/facebook_research_template.csv">Facebook Template</a>
+            <a class="btn btn-sm" href="/api/v1/dataset/templates/pakwheels_research_template.csv">PakWheels Template</a>
+            <a class="btn btn-sm" href="/api/v1/dataset/templates/mechanic_interview_template.csv">Mechanic Template</a>
+            <a class="btn btn-sm" href="/api/v1/dataset/templates/owner_problem_report_template.csv">Owner Template</a>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label>Source Type</label>
+              <select id="csv-source-type">
+                <option value="facebook">Facebook Research CSV</option>
+                <option value="pakwheels">PakWheels Research CSV</option>
+                <option value="mechanic_interview">Mechanic Interview CSV (Consent Mandatory)</option>
+                <option value="owner_submission">Car Owner Problem Report CSV</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Choose CSV File</label>
+              <input type="file" id="csv-file-input" accept=".csv" />
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="uploadResearchCsv()">Import &amp; Clean CSV</button>
+          <div id="csv-result" style="margin-top:12px;"></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Manual Record Form -->
+        <div class="card">
+          <h2>3. Submit Single Vehicle Problem / Mechanic Observation</h2>
+          <p class="desc">Validates via Pydantic, detects language, scrubs personal identifiers, and auto-matches the 18-category taxonomy.</p>
+          <div class="form-grid">
+            <div class="field"><label>Make *</label><input id="nr-make" placeholder="Suzuki" /></div>
+            <div class="field"><label>Model *</label><input id="nr-model" placeholder="Alto" /></div>
+            <div class="field"><label>Variant</label><input id="nr-variant" placeholder="VXL AGS" /></div>
+            <div class="field"><label>Year</label><input id="nr-year" type="number" placeholder="2021" /></div>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Problem Title *</label><input id="nr-title" placeholder="Engine overheating in traffic" /></div>
+            <div class="field"><label>Symptoms (comma-separated)</label><input id="nr-symptoms" placeholder="garam ho rahi hai, fan band" /></div>
+            <div class="field"><label>Estimated Cost (PKR)</label><input id="nr-cost" type="number" placeholder="4500" /></div>
+            <div class="field"><label>City</label><input id="nr-city" placeholder="Lahore" /></div>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label>Source Platform</label>
+              <select id="nr-platform">
+                <option value="owner_submission">Car Owner Report</option>
+                <option value="mechanic_interview">Mechanic Observation</option>
+                <option value="pakwheels">PakWheels Research Note</option>
+                <option value="facebook">Facebook Research Note</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Diagnosis Stage</label>
+              <select id="nr-stage">
+                <option value="owner_reported_problem">Owner Reported Problem</option>
+                <option value="mechanic_suggested_cause">Mechanic Suggested Cause</option>
+                <option value="mechanic_confirmed_diagnosis">Mechanic Confirmed Diagnosis</option>
+                <option value="verified_repair_outcome">Verified Repair Outcome</option>
+              </select>
+            </div>
+            <div class="field"><label>Source URL (optional)</label><input id="nr-url" placeholder="https://..." /></div>
+          </div>
+          <div class="field" style="margin-bottom:10px;">
+            <label>Problem Description *</label>
+            <textarea id="nr-desc" placeholder="Describe symptoms in English, Urdu, Roman Urdu, or Punjabi..."></textarea>
+          </div>
+          <div class="field" style="margin-bottom:12px;">
+            <label>Recommended Solution / Repair Notes</label>
+            <input id="nr-solution" style="width:100%;" placeholder="Optional repair steps or solution" />
+          </div>
+          <label style="font-size:0.83rem; display:flex; align-items:center; gap:6px; margin-bottom:12px;">
+            <input type="checkbox" id="nr-consent" checked /> Respondent / owner consent verified &amp; PII anonymized
+          </label>
+          <button class="btn btn-primary" onclick="submitNewRecord()">Save Record to Dataset</button>
+        </div>
+
+        <!-- Authorized Media Upload -->
+        <div class="card">
+          <h2>4. Upload Authorized Media Asset (Audio / Image / Video)</h2>
+          <p class="desc">Stores permitted audio recordings (engine knocking/squealing) or dashboard/component photos in <code>data/media_vault/</code> with SHA-256 checksums.</p>
+          <div class="form-grid">
+            <div class="field">
+              <label>Media Type</label>
+              <select id="mv-type">
+                <option value="audio">Engine / Mechanical Audio</option>
+                <option value="images">Component / Warning Light Image</option>
+                <option value="videos">Permitted Video Clip</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Rights Basis</label>
+              <select id="mv-rights">
+                <option value="explicit_consent">Explicit Owner / Mechanic Consent</option>
+                <option value="user_submission">Direct User Upload</option>
+                <option value="open_academic_license">Open Academic License</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Attribution / Owner Note</label><input id="mv-attr" placeholder="e.g. Recorded with permission at Lahore workshop" /></div>
+            <div class="field"><label>Select File (Max 15MB)</label><input type="file" id="mv-file" /></div>
+          </div>
+          <button class="btn btn-primary" onclick="uploadMediaAsset()">Store in Media Vault</button>
+          <div id="mv-result" style="margin-top:12px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: TAXONOMY & FLEET -->
+    <section id="tab-taxonomy" class="tab-panel">
+      <div class="card">
+        <h2>18 Standardized Automotive Fault Categories (FC-01 to FC-18)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Category (English)</th>
+                <th>Urdu &amp; Roman Urdu</th>
+                <th>Key Subcomponents</th>
+                <th>Live Records</th>
+              </tr>
+            </thead>
+            <tbody id="taxonomy-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Pakistani Vehicle Fleet Registry (<span id="fleet-count">0</span> configurations)</h2>
+        <div class="filter-bar">
+          <select id="fleet-make-filter" onchange="loadFleet()">
+            <option value="">All Manufacturers</option>
+            <option value="Suzuki">Suzuki</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Honda">Honda</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="KIA">KIA</option>
+            <option value="Changan">Changan</option>
+            <option value="Daihatsu">Daihatsu</option>
+          </select>
+        </div>
+        <div class="table-wrap" style="max-height:420px; overflow-y:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Variant</th>
+                <th>Year</th>
+                <th>Engine</th>
+                <th>Transmission</th>
+                <th>Fuel</th>
+              </tr>
+            </thead>
+            <tbody id="fleet-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: PKR COSTS -->
+    <section id="tab-costs" class="tab-panel">
+      <div class="card">
+        <h2>Pakistani Spare Parts &amp; Workshop Repair Cost Dataset (PKR)</h2>
+        <p class="desc">Historical repair cost references include price date, city, and price source so stale quotes are never mistaken for live market rates.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Part / Repair Item</th>
+                <th>Parts Cost (PKR)</th>
+                <th>Labour Cost (PKR)</th>
+                <th>Estimated Total (PKR)</th>
+                <th>City</th>
+                <th>Price Date</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody id="costs-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: SOURCES, ML SPLITS & AUDIT -->
+    <section id="tab-audit" class="tab-panel">
+      <div class="card">
+        <h2>
+          <span>ML-Ready Dataset Splits (Leak-Free Grouped Partitioning)</span>
+          <button class="btn btn-sm btn-primary" onclick="runMlSplit()">Regenerate Splits</button>
+        </h2>
+        <p class="desc">Groups multilingual translations and video items by canonical source ID/URL before splitting (70% Train / 15% Val / 15% Test) to prevent cross-split leakage.</p>
+        <pre class="json-box" id="ml-card-json">Loading dataset_card.json...</pre>
+      </div>
+
+      <div class="card">
+        <h2>Registered Data Sources &amp; Legal/ToS Compliance Matrix</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Source ID</th>
+                <th>Name</th>
+                <th>Rights Basis</th>
+                <th>Automated</th>
+                <th>API Key</th>
+                <th>Real Records</th>
+                <th>Limitations &amp; Rules</th>
+              </tr>
+            </thead>
+            <tbody id="sources-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Audit Trail Ledger (<code>data/audit_log.jsonl</code>)</h2>
+        <div class="table-wrap" style="max-height:360px; overflow-y:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Timestamp (UTC)</th>
+                <th>Action</th>
+                <th>Source</th>
+                <th>Record ID</th>
+                <th>Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="audit-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="record-modal">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h3 style="font-size:1.05rem;">Record JSON &amp; Provenance Inspection</h3>
+      <button class="btn btn-sm" onclick="document.getElementById('record-modal').close()">Close</button>
+    </div>
+    <pre class="json-box" id="modal-json"></pre>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const API = "/api/v1/dataset";
+
+    function toast(msg, isError = false) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.style.background = isError ? "#991b1b" : "#0f172a";
+      el.style.display = "block";
+      setTimeout(() => { el.style.display = "none"; }, 4200);
+    }
+
+    async function apiFetch(path, opts = {}) {
+      const res = await fetch(API + path, opts);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.detail || `HTTP ${res.status}`);
+      }
+      return data;
+    }
+
+    // Tab switching
+    document.querySelectorAll("nav.tabs button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("nav.tabs button").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    function renderBarChart(containerId, obj, labelMap = {}) {
+      const el = document.getElementById(containerId);
+      const entries = Object.entries(obj || {}).sort((a, b) => b[1] - a[1]);
+      if (!entries.length) {
+        el.innerHTML = `<p style="color:var(--muted); font-size:0.85rem;">0 records collected in this dimension yet.</p>`;
+        return;
+      }
+      const maxVal = Math.max(...entries.map(e => e[1]), 1);
+      el.innerHTML = entries.map(([k, v]) => {
+        const pct = Math.round((v / maxVal) * 100);
+        const lbl = labelMap[k] || k;
+        return `
+          <div class="bar-row">
+            <span class="bar-label" title="${lbl}">${lbl}</span>
+            <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+            <span class="bar-val">${v}</span>
+          </div>`;
+      }).join("");
+    }
+
+    async function loadStats() {
+      const data = await apiFetch("/stats");
+      const s = data.summary;
+      const b = data.breakdowns;
+
+      const ytPill = document.getElementById("yt-key-pill");
+      if (data.api_credentials.youtube_configured) {
+        ytPill.innerHTML = `<span class="dot ok"></span>YouTube API Key: Configured`;
+      } else {
+        ytPill.innerHTML = `<span class="dot warn"></span>YouTube API Key: Not Set (0 harvested)`;
+      }
+
+      const kpis = [
+        { label: "Total Real Records", val: s.real_collected_records, sub: `+ ${s.example_template_records} example template(s)` },
+        { label: "YouTube Records", val: s.youtube_records, sub: "Official YouTube Data API v3" },
+        { label: "Facebook Research", val: s.facebook_real_records, sub: "Real imported discussions" },
+        { label: "PakWheels Research", val: s.pakwheels_real_records, sub: "ToS-compliant manual imports" },
+        { label: "Manuals & OBD-II", val: s.manuals_and_obd2_records, sub: "45 OEM manuals + 18 DTCs" },
+        { label: "Symptom Corpus", val: s.symptom_corpus_records, sub: "EN / UR / Roman UR aligned" },
+        { label: "Mechanic & Owner", val: s.mechanic_real_records + s.owner_real_records, sub: "Consent & PII anonymized" },
+        { label: "PKR Price Records", val: s.price_reference_records, sub: "Parts + workshop labour quotes" },
+        { label: "Fleet Vehicles", val: s.total_vehicles_in_fleet, sub: `${s.distinct_vehicle_models_covered} distinct vehicle models` },
+        { label: "Fault Categories", val: `${s.fault_categories_covered} / ${s.total_fault_categories}`, sub: "Standard Pakistani taxonomy" },
+        { label: "Audio / Image / Video", val: `${s.audio_samples} / ${s.image_samples} / ${s.video_samples}`, sub: `${s.video_metadata_records} video metadata, ${s.transcribed_records} transcribed` },
+        { label: "ML-Ready Records", val: s.ml_ready_records, sub: `${s.reviewed_records} reviewed | ${s.audit_events_logged} audit logs` },
+      ];
+
+      document.getElementById("kpi-grid").innerHTML = kpis.map(k => {
+        const isZero = k.val === 0 || k.val === "0 / 0 / 0";
+        return `
+          <div class="kpi-card ${isZero ? "zero" : ""}">
+            <div class="kpi-label">${k.label}</div>
+            <div class="kpi-value">${k.val}</div>
+            <div class="kpi-sub">${k.sub}</div>
+          </div>`;
+      }).join("");
+
+      const sourceNames = {
+        starter_symptom_corpus: "Multilingual Symptoms",
+        manuals_and_bulletins: "Manuals & OBD-II",
+        pakistan_price_reference: "PKR Price Benchmarks",
+        youtube_official_api: "YouTube API",
+        facebook_research_import: "Facebook Research",
+        pakwheels_research_import: "PakWheels Research",
+        mechanic_interviews: "Mechanic Interviews",
+        owner_submissions: "Owner Reports",
+      };
+      renderBarChart("chart-sources", b.real_by_source, sourceNames);
+      renderBarChart("chart-languages", b.by_language, {
+        en: "English (en)",
+        roman_ur: "Roman Urdu",
+        ur: "Urdu Script",
+        punjabi: "Punjabi",
+      });
+      renderBarChart("chart-categories", b.by_category);
+      renderBarChart("chart-makes", b.by_make);
+    }
+
+    async function loadCategories() {
+      const data = await apiFetch("/categories");
+      const sel = document.getElementById("f-category");
+      const current = sel.value;
+      sel.innerHTML = `<option value="">All Fault Categories</option>` +
+        data.categories.map(c => `<option value="${c.category_id}">${c.category_id} — ${c.name}</option>`).join("");
+      sel.value = current;
+
+      document.getElementById("taxonomy-tbody").innerHTML = data.categories.map(c => `
+        <tr>
+          <td><strong>${c.category_id}</strong></td>
+          <td><strong>${c.name}</strong><br><span style="color:var(--muted); font-size:0.78rem;">${c.description}</span></td>
+          <td>${c.name_ur}<br><span style="color:var(--muted); font-size:0.8rem;">${c.name_roman_ur}</span></td>
+          <td style="font-size:0.78rem;">${c.subcomponents.join(", ")}</td>
+          <td><strong>${c.record_count}</strong></td>
+        </tr>`).join("");
+    }
+
+    function statusBadge(status, isExample) {
+      if (isExample) return `<span class="badge badge-example">EXAMPLE TEMPLATE</span>`;
+      if (status === "ml_ready") return `<span class="badge badge-ok">ML-Ready</span>`;
+      if (status === "approved" || status === "reviewed") return `<span class="badge badge-info">${status}</span>`;
+      if (status === "rejected") return `<span class="badge badge-danger">Rejected</span>`;
+      return `<span class="badge badge-warn">${status || "pending"}</span>`;
+    }
+
+    window._recordsCache = {};
+    async function loadRecords() {
+      const p = new URLSearchParams();
+      const q = document.getElementById("f-search").value.trim();
+      const make = document.getElementById("f-make").value;
+      const source = document.getElementById("f-source").value;
+      const category = document.getElementById("f-category").value;
+      const lang = document.getElementById("f-lang").value;
+      const status = document.getElementById("f-status").value;
+      const incEx = document.getElementById("f-examples").checked;
+
+      if (q) p.set("q", q);
+      if (make) p.set("make", make);
+      if (source) p.set("source", source);
+      if (category) p.set("category", category);
+      if (lang) p.set("language", lang);
+      if (status) p.set("status", status);
+      p.set("include_examples", incEx ? "true" : "false");
+      p.set("limit", "100");
+
+      const data = await apiFetch("/records?" + p.toString());
+      document.getElementById("explorer-count").textContent = `Showing ${data.items.length} of ${data.total} matching records`;
+
+      window._recordsCache = {};
+      document.getElementById("records-tbody").innerHTML = data.items.map(r => {
+        window._recordsCache[r.record_id] = r;
+        const veh = `${r.make || ""} ${r.model || ""} ${r.manufacturing_year || ""}`.trim();
+        const cat = r.fault_category_id ? `<span class="badge badge-muted">${r.fault_category_id} ${r.category_name || ""}</span>` : "—";
+        const cost = r.estimated_cost_pkr != null ? `Rs. ${Number(r.estimated_cost_pkr).toLocaleString()}` : "—";
+        const srcUrl = r.source_url ? `<br><a href="${r.source_url}" target="_blank" style="font-size:0.75rem; color:var(--accent);">${r.source_url.slice(0, 42)}...</a>` : "";
+        return `
+          <tr>
+            <td><strong>${veh}</strong><br><span style="font-size:0.76rem; color:var(--muted);">${r.variant || ""}</span></td>
+            <td>
+              <strong>${r.problem_title}</strong>
+              <div style="font-size:0.78rem; color:var(--muted); margin-top:3px;">${(r.problem_description || "").slice(0, 140)}</div>
+            </td>
+            <td>${cat}</td>
+            <td><span class="badge badge-muted">${r.language}</span></td>
+            <td style="font-size:0.78rem;">${r.source_id}<br><span style="color:var(--muted);">${r.rights_basis}</span>${srcUrl}</td>
+            <td>${cost}</td>
+            <td>${statusBadge(r.human_review_status, r.is_example)}</td>
+            <td style="white-space:nowrap;">
+              <button class="btn btn-sm" onclick="inspectRecord('${r.record_id}')">JSON</button>
+              ${!r.is_example ? `
+                <button class="btn btn-sm btn-ok" onclick="reviewRecord('${r.record_id}', 'ml_ready')">Approve</button>
+                <button class="btn btn-sm btn-danger" onclick="reviewRecord('${r.record_id}', 'rejected')">Reject</button>
+              ` : ""}
+            </td>
+          </tr>`;
+      }).join("");
+    }
+
+    function inspectRecord(id) {
+      const rec = window._recordsCache[id];
+      document.getElementById("modal-json").textContent = JSON.stringify(rec, null, 2);
+      document.getElementById("record-modal").showModal();
+    }
+
+    async function reviewRecord(id, status) {
+      try {
+        await apiFetch(`/records/${encodeURIComponent(id)}/review`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status }),
+        });
+        toast(`Record ${id} marked as ${status}`);
+        refreshAll();
+      } catch (e) {
+        toast(e.message, true);
+      }
+    }
+
+    async function loadFleet() {
+      const make = document.getElementById("fleet-make-filter").value;
+      const data = await apiFetch("/vehicles" + (make ? `?make=${encodeURIComponent(make)}` : ""));
+      document.getElementById("fleet-count").textContent = data.total;
+      document.getElementById("fleet-tbody").innerHTML = data.vehicles.map(v => `
+        <tr>
+          <td><code>${v.vehicle_id}</code></td>
+          <td><strong>${v.make}</strong></td>
+          <td>${v.model}</td>
+          <td>${v.variant || "—"}</td>
+          <td>${v.manufacturing_year || "—"}</td>
+          <td>${v.engine_type || (v.engine_cc ? v.engine_cc + "cc" : "—")}</td>
+          <td>${v.transmission || "—"}</td>
+          <td>${v.fuel_type || "—"}</td>
+        </tr>`).join("");
+    }
+
+    async function loadCosts() {
+      const data = await apiFetch("/costs");
+      document.getElementById("costs-tbody").innerHTML = data.items.map(c => `
+        <tr>
+          <td><strong>${c.make} ${c.model}</strong></td>
+          <td>${c.problem_title} ${c.is_example ? '<span class="badge badge-example">EXAMPLE</span>' : ''}</td>
+          <td>${c.parts_cost_pkr != null ? "Rs. " + Number(c.parts_cost_pkr).toLocaleString() : "—"}</td>
+          <td>${c.labor_cost_pkr != null ? "Rs. " + Number(c.labor_cost_pkr).toLocaleString() : "—"}</td>
+          <td><strong>Rs. ${Number(c.estimated_cost_pkr).toLocaleString()}</strong></td>
+          <td>${c.city || "—"}</td>
+          <td>${c.price_date || "—"}</td>
+          <td><span class="badge badge-muted">${c.price_source || "—"}</span></td>
+        </tr>`).join("");
+    }
+
+    async function loadSourcesAndAudit() {
+      const [srcData, mlData, auditData, qData] = await Promise.all([
+        apiFetch("/sources"),
+        apiFetch("/ml-splits"),
+        apiFetch("/audit-logs?limit=50"),
+        apiFetch("/queries"),
+      ]);
+
+      document.getElementById("ml-card-json").textContent = JSON.stringify(mlData.dataset_card, null, 2);
+
+      document.getElementById("sources-tbody").innerHTML = srcData.sources.map(s => `
+        <tr>
+          <td><code>${s.source_id}</code></td>
+          <td><strong>${s.name}</strong><br><span style="font-size:0.78rem; color:var(--muted);">${s.description}</span></td>
+          <td><span class="badge badge-info">${s.rights_basis}</span></td>
+          <td>${s.is_automated ? "Yes" : "Manual CSV"}</td>
+          <td>${s.requires_api_key ? "Required" : "No"}</td>
+          <td><strong>${s.real_records_count}</strong></td>
+          <td style="font-size:0.77rem;">${(s.limitations || []).join(" • ")}</td>
+        </tr>`).join("");
+
+      document.getElementById("audit-tbody").innerHTML = auditData.recent_events.map(e => `
+        <tr>
+          <td style="font-size:0.76rem;">${e.timestamp}</td>
+          <td><code>${e.action}</code></td>
+          <td>${e.source_id}</td>
+          <td style="font-size:0.76rem;">${e.record_id || "—"}</td>
+          <td><span class="badge ${e.status === 'SUCCESS' ? 'badge-ok' : 'badge-warn'}">${e.status}</span></td>
+          <td style="font-size:0.76rem;">${JSON.stringify(e.details)}</td>
+        </tr>`).join("");
+
+      document.getElementById("yt-query-select").innerHTML = qData.queries.map(q =>
+        `<option value="${q.query}">${q.query}</option>`
+      ).join("");
+    }
+
+    async function runYouTubeCollection() {
+      const key = document.getElementById("yt-api-key").value.trim();
+      const custom = document.getElementById("yt-custom-query").value.trim();
+      const selected = document.getElementById("yt-query-select").value;
+      const maxRes = parseInt(document.getElementById("yt-max-results").value || "5", 10);
+      const query = custom || selected;
+      const resBox = document.getElementById("yt-result");
+      resBox.innerHTML = `<span style="color:var(--muted); font-size:0.84rem;">Calling official YouTube Data API v3...</span>`;
+      try {
+        const res = await apiFetch("/collect/youtube", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ api_key: key || null, queries: [query], max_results_per_query: maxRes }),
+        });
+        toast(`Collected ${res.raw_records_fetched} YouTube metadata record(s)!`);
+        resBox.innerHTML = `<pre class="json-box">${JSON.stringify(res, null, 2)}</pre>`;
+        refreshAll();
+      } catch (e) {
+        toast(e.message, true);
+        resBox.innerHTML = `<div class="badge badge-danger" style="white-space:normal; padding:8px;">${e.message}</div>`;
+      }
+    }
+
+    async function uploadResearchCsv() {
+      const fileInput = document.getElementById("csv-file-input");
+      const srcType = document.getElementById("csv-source-type").value;
+      if (!fileInput.files.length) {
+        toast("Please select a .csv file first.", true);
+        return;
+      }
+      const file = fileInput.files[0];
+      const csvText = await file.text();
+      try {
+        const res = await apiFetch("/import/csv", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ source_type: srcType, csv_text: csvText, filename: file.name }),
+        });
+        toast(`Imported ${res.records_imported} record(s) from ${file.name}`);
+        document.getElementById("csv-result").innerHTML = `<pre class="json-box">${JSON.stringify(res, null, 2)}</pre>`;
+        refreshAll();
+      } catch (e) {
+        toast(e.message, true);
+        document.getElementById("csv-result").innerHTML = `<div class="badge badge-danger" style="white-space:normal; padding:8px;">${e.message}</div>`;
+      }
+    }
+
+    async function submitNewRecord() {
+      const payload = {
+        make: document.getElementById("nr-make").value.trim(),
+        model: document.getElementById("nr-model").value.trim(),
+        variant: document.getElementById("nr-variant").value.trim() || null,
+        manufacturing_year: document.getElementById("nr-year").value ? parseInt(document.getElementById("nr-year").value, 10) : null,
+        problem_title: document.getElementById("nr-title").value.trim(),
+        problem_description: document.getElementById("nr-desc").value.trim(),
+        symptoms: document.getElementById("nr-symptoms").value.split(",").map(s => s.trim()).filter(Boolean),
+        estimated_cost_pkr: document.getElementById("nr-cost").value ? parseFloat(document.getElementById("nr-cost").value) : null,
+        city: document.getElementById("nr-city").value.trim() || null,
+        source_platform: document.getElementById("nr-platform").value,
+        diagnosis_stage: document.getElementById("nr-stage").value,
+        source_url: document.getElementById("nr-url").value.trim() || null,
+        recommended_solution: document.getElementById("nr-solution").value.trim() || null,
+        consent_given: document.getElementById("nr-consent").checked,
+      };
+      try {
+        const res = await apiFetch("/records", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        toast(`Saved record ${res.record_id}`);
+        refreshAll();
+      } catch (e) {
+        toast(e.message, true);
+      }
+    }
+
+    async function uploadMediaAsset() {
+      const fileInput = document.getElementById("mv-file");
+      if (!fileInput.files.length) {
+        toast("Please choose an audio, image, or video file.", true);
+        return;
+      }
+      const file = fileInput.files[0];
+      const buf = await file.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+      let bin = "";
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      const b64 = btoa(bin);
+      try {
+        const res = await apiFetch("/media/upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            filename: file.name,
+            asset_type: document.getElementById("mv-type").value,
+            rights_basis: document.getElementById("mv-rights").value,
+            attribution: document.getElementById("mv-attr").value.trim(),
+            content_base64: b64,
+          }),
+        });
+        toast(`Media stored in vault (${res.asset_id})`);
+        document.getElementById("mv-result").innerHTML = `<pre class="json-box">${JSON.stringify(res, null, 2)}</pre>`;
+        refreshAll();
+      } catch (e) {
+        toast(e.message, true);
+      }
+    }
+
+    async function runConsolidate() {
+      try {
+        toast("Running dataset consolidation & ML split...");
+        const res = await apiFetch("/pipeline/consolidate", { method: "POST" });
+        toast(`Consolidated ${res.counts.total_real_records} real records!`);
+        refreshAll();
+      } catch (e) {
+        toast(e.message, true);
+      }
+    }
+
+    async function runMlSplit() {
+      try {
+        const res = await apiFetch("/pipeline/split", { method: "POST" });
+        toast(`ML Splits regenerated: ${res.train} train / ${res.val} val / ${res.test} test`);
+        loadSourcesAndAudit();
+      } catch (e) {
+        toast(e.message, true);
+      }
+    }
+
+    async function refreshAll() {
+      await Promise.all([
+        loadStats(),
+        loadCategories(),
+        loadRecords(),
+        loadFleet(),
+        loadCosts(),
+        loadSourcesAndAudit(),
+      ]);
+    }
+
+    refreshAll();
+  </script>
+</body>
+</html>

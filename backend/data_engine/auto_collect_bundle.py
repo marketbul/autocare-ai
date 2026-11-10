@@ -30,7 +30,12 @@ from .media import AuthorizedMediaPipeline
 from .media.video_processor import get_ffmpeg_binary
 from .ml import AIAgentDatasetExporter, GroupedMLSplitter
 from .reports import LocalFolderBundleExporter
-from .sources import LocalDatasetConsolidator, YouTubeCollector
+from .sources import (
+    LocalDatasetConsolidator,
+    NHTSAComplaintsCollector,
+    StackExchangeMechanicsCollector,
+    YouTubeCollector,
+)
 from .storage import StorageManager
 
 CC_AUTOMOTIVE_QUERIES = [
@@ -87,6 +92,7 @@ def run_autonomous_bundle(
     local_videos_dir: Optional[Path] = None,
     local_facebook_dir: Optional[Path] = None,
     skip_youtube: bool = False,
+    include_open_apis: bool = False,
 ) -> Dict[str, Any]:
     summary: Dict[str, Any] = {
         "youtube_status": "skipped_by_flag" if skip_youtube else "skipped_no_api_key",
@@ -96,6 +102,8 @@ def run_autonomous_bundle(
         "cc_videos_processed": 0,
         "local_videos_processed": 0,
         "facebook_qa_processed": 0,
+        "stackexchange_qa_processed": 0,
+        "nhtsa_records_processed": 0,
     }
 
     # Step 1: Consolidate verified local project datasets (+ any real Facebook_Community_QA / raw/facebook files)
@@ -212,6 +220,29 @@ def run_autonomous_bundle(
             )
             summary["local_videos_processed"] += 1
 
+    # Step 3b: Optional Open Public APIs (Stack Exchange Mechanics CC-BY-SA + U.S. DOT NHTSA)
+    if include_open_apis:
+        storage = StorageManager()
+        cleaner = CleaningPipeline()
+
+        se = StackExchangeMechanicsCollector()
+        se_items = se.fetch_answered_qa()
+        if se_items:
+            se.save_raw_batch(se_items)
+            se_recs = se.to_automotive_records(se_items)
+            cleaner.process_batch(se_recs)
+            storage.insert_records(se_recs)
+            summary["stackexchange_qa_processed"] = len(se_recs)
+
+        nhtsa = NHTSAComplaintsCollector()
+        nhtsa_payload = nhtsa.fetch_vehicle_data()
+        if nhtsa_payload.get("recalls") or nhtsa_payload.get("complaints"):
+            nhtsa.save_raw_batch(nhtsa_payload)
+            nh_recs = nhtsa.to_automotive_records(nhtsa_payload)
+            cleaner.process_batch(nh_recs)
+            storage.insert_records(nh_recs)
+            summary["nhtsa_records_processed"] = len(nh_recs)
+
     # Step 4: Refresh DB-wide ML splits, AI-Agent export & build standalone zero-port local folder bundle
     final_storage = StorageManager()
     GroupedMLSplitter(train_ratio=0.70, val_ratio=0.15, test_ratio=0.15).split_and_export_from_storage(final_storage)
@@ -231,6 +262,7 @@ def main() -> None:
     parser.add_argument("--local-videos-dir", default=None, help="Optional folder of consented MP4 videos")
     parser.add_argument("--local-facebook-dir", default=None, help="Optional folder of curated Facebook Q&A CSV/JSON files")
     parser.add_argument("--skip-youtube", action="store_true", help="Skip YouTube API calls (offline local CSV/video rebuild)")
+    parser.add_argument("--include-open-apis", action="store_true", help="Also collect open CC-BY-SA Stack Exchange Mechanics & NHTSA safety APIs")
     args = parser.parse_args()
 
     res = run_autonomous_bundle(
@@ -242,6 +274,7 @@ def main() -> None:
         local_videos_dir=Path(args.local_videos_dir) if args.local_videos_dir else None,
         local_facebook_dir=Path(args.local_facebook_dir) if args.local_facebook_dir else None,
         skip_youtube=args.skip_youtube,
+        include_open_apis=args.include_open_apis,
     )
     print(json.dumps(res, indent=2, ensure_ascii=False))
 

@@ -105,8 +105,10 @@ class AuthorizedMediaPipeline:
                 f"Must be one of {sorted(PERMITTED_RIGHTS_BASES)}."
             )
 
-    def extract_audio_wav(self, video_path: Path | str, rights_basis: str, attribution: str = "") -> Dict[str, Any]:
-        """Extracts 16kHz mono PCM WAV audio using ffmpeg and stores it in MediaVault."""
+    def extract_audio_wav(self, video_path: Path | str, rights_basis: str, attribution: str = "") -> Optional[Dict[str, Any]]:
+        """Extracts 16kHz mono PCM WAV audio using ffmpeg and stores it in MediaVault.
+        Returns None cleanly if the video file has no audio stream.
+        """
         self.check_permission(rights_basis)
         src = Path(video_path)
         if not src.exists():
@@ -122,6 +124,8 @@ class AuthorizedMediaPipeline:
             ]
             proc = subprocess.run(cmd, capture_output=True, text=True)
             if proc.returncode != 0 or not wav_out.exists():
+                if "does not contain any stream" in (proc.stderr or ""):
+                    return None
                 raise RuntimeError(f"ffmpeg audio extraction failed: {proc.stderr[-300:]}")
 
             return self.vault.store_asset(
@@ -172,9 +176,19 @@ class AuthorizedMediaPipeline:
         """Runs faster-whisper or openai-whisper if installed; returns clean status otherwise."""
         p = Path(audio_path)
         try:
+            import wave
+            import numpy as np
             from faster_whisper import WhisperModel  # type: ignore
-            model = WhisperModel("base", device="cpu", compute_type="int8")
-            segments, info = model.transcribe(str(p))
+
+            if not hasattr(self, "_fw_model") or self._fw_model is None:
+                self._fw_model = WhisperModel("base", device="cpu", compute_type="int8")
+
+            # Load 16kHz PCM WAV via stdlib wave + numpy to avoid PyAV version conflicts
+            with wave.open(str(p), "rb") as wf:
+                raw = wf.readframes(wf.getnframes())
+                audio_arr = np.frombuffer(raw, dtype=np.int16).astype(np.float32) / 32768.0
+
+            segments, info = self._fw_model.transcribe(audio_arr)
             segs = [{"start": s.start, "end": s.end, "text": s.text.strip()} for s in segments]
             return {
                 "engine": "faster-whisper",
@@ -228,15 +242,16 @@ class AuthorizedMediaPipeline:
         storage.register_media_asset(video_asset, "videos")
 
         audio_asset = self.extract_audio_wav(video_path, rights_basis, attribution)
-        storage.register_media_asset(audio_asset, "audio")
+        if audio_asset:
+            storage.register_media_asset(audio_asset, "audio")
 
         # 2. Speech-to-text or provided transcript / timed segments
         stt_result = {
-            "engine": "provided_transcript",
+            "engine": "provided_transcript" if (transcript_text or transcript_segments) else "no_audio_stream",
             "text": transcript_text or "",
             "segments": transcript_segments or [],
         }
-        if not transcript_text and not transcript_segments:
+        if not transcript_text and not transcript_segments and audio_asset:
             stt_result = self.transcribe_if_available(audio_asset["absolute_path"])
         elif transcript_segments and not transcript_text:
             stt_result["text"] = " ".join(s.get("text", "") for s in transcript_segments).strip()
@@ -284,7 +299,7 @@ class AuthorizedMediaPipeline:
                 audio_file_reference=audio_asset["relative_reference"],
                 audio_type="video_extracted_16k_wav",
                 sound_description=f"Extracted from {Path(video_path).name}",
-            ),
+            ) if audio_asset else None,
             media=ImageVideoInfo(
                 image_reference=primary_img,
                 video_reference=video_asset["relative_reference"],

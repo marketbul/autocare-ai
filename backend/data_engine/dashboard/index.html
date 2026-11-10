@@ -360,6 +360,7 @@
             <option value="youtube_official_api">YouTube API</option>
             <option value="facebook_research_import">Facebook Research</option>
             <option value="pakwheels_research_import">PakWheels Research</option>
+            <option value="automotive_blog_research">Automotive Blogs</option>
             <option value="mechanic_interviews">Mechanic Interviews</option>
             <option value="owner_submissions">Owner Reports</option>
           </select>
@@ -407,6 +408,21 @@
 
     <!-- TAB 3: COLLECT & IMPORT -->
     <section id="tab-collect" class="tab-panel">
+      <div class="card">
+        <h2>How to Collect Real Multi-Source Data into Localhost</h2>
+        <div class="form-grid">
+          <div style="font-size:0.84rem;">
+            <strong>A. YouTube (Automated Official API):</strong><br>
+            1. Open Google Cloud Console &rarr; Enable <em>YouTube Data API v3</em> &rarr; Create an API Key.<br>
+            2. Paste the key below (or put <code>YOUTUBE_API_KEY=...</code> in <code>backend/.env</code>) and click <strong>Run YouTube Collection</strong>.
+          </div>
+          <div style="font-size:0.84rem;">
+            <strong>B. Facebook, PakWheels &amp; Blogs (ToS-Compliant):</strong><br>
+            Automated scraping is disabled by project policy. Download a CSV template below, enter public findings (URL + vehicle + symptoms + solution), and upload or paste the CSV to clean &amp; ingest immediately.
+          </div>
+        </div>
+      </div>
+
       <div class="grid-2">
         <!-- YouTube API Collector -->
         <div class="card">
@@ -439,7 +455,7 @@
 
         <!-- CSV Import -->
         <div class="card">
-          <h2>2. Import Research CSV (Facebook / PakWheels / Field Interviews)</h2>
+          <h2>2. Import Research CSV (Facebook / PakWheels / Blogs / Field)</h2>
           <p class="desc">
             Imports structured research sheets cleanly. Mechanic interviews without <code>consent=yes</code> are automatically rejected.
             Owner reports automatically redact phone numbers, CNICs, and license plates.
@@ -447,6 +463,7 @@
           <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
             <a class="btn btn-sm" href="/api/v1/dataset/templates/facebook_research_template.csv">Facebook Template</a>
             <a class="btn btn-sm" href="/api/v1/dataset/templates/pakwheels_research_template.csv">PakWheels Template</a>
+            <a class="btn btn-sm" href="/api/v1/dataset/templates/automotive_blogs_research_template.csv">Blogs Template</a>
             <a class="btn btn-sm" href="/api/v1/dataset/templates/mechanic_interview_template.csv">Mechanic Template</a>
             <a class="btn btn-sm" href="/api/v1/dataset/templates/owner_problem_report_template.csv">Owner Template</a>
           </div>
@@ -456,14 +473,19 @@
               <select id="csv-source-type">
                 <option value="facebook">Facebook Research CSV</option>
                 <option value="pakwheels">PakWheels Research CSV</option>
+                <option value="automotive_blog">Automotive Blogs &amp; Websites CSV</option>
                 <option value="mechanic_interview">Mechanic Interview CSV (Consent Mandatory)</option>
                 <option value="owner_submission">Car Owner Problem Report CSV</option>
               </select>
             </div>
             <div class="field">
-              <label>Choose CSV File</label>
+              <label>Choose CSV File (or paste below)</label>
               <input type="file" id="csv-file-input" accept=".csv" />
             </div>
+          </div>
+          <div class="field" style="margin-bottom:10px;">
+            <label>Or Paste CSV Text Directly (with header row)</label>
+            <textarea id="csv-paste-text" placeholder="Optional: paste CSV lines directly here if not uploading a file..."></textarea>
           </div>
           <button class="btn btn-primary" onclick="uploadResearchCsv()">Import &amp; Clean CSV</button>
           <div id="csv-result" style="margin-top:12px;"></div>
@@ -762,6 +784,7 @@
         { label: "YouTube Records", val: s.youtube_records, sub: "Official YouTube Data API v3" },
         { label: "Facebook Research", val: s.facebook_real_records, sub: "Real imported discussions" },
         { label: "PakWheels Research", val: s.pakwheels_real_records, sub: "ToS-compliant manual imports" },
+        { label: "Auto Blogs & Web", val: s.blogs_real_records || 0, sub: "Authorized blog articles" },
         { label: "Manuals & OBD-II", val: s.manuals_and_obd2_records, sub: "45 OEM manuals + 18 DTCs" },
         { label: "Symptom Corpus", val: s.symptom_corpus_records, sub: "EN / UR / Roman UR aligned" },
         { label: "Mechanic & Owner", val: s.mechanic_real_records + s.owner_real_records, sub: "Consent & PII anonymized" },
@@ -789,6 +812,7 @@
         youtube_official_api: "YouTube API",
         facebook_research_import: "Facebook Research",
         pakwheels_research_import: "PakWheels Research",
+        automotive_blog_research: "Automotive Blogs",
         mechanic_interviews: "Mechanic Interviews",
         owner_submissions: "Owner Reports",
       };
@@ -995,20 +1019,26 @@
 
     async function uploadResearchCsv() {
       const fileInput = document.getElementById("csv-file-input");
+      const pasteText = document.getElementById("csv-paste-text").value.trim();
       const srcType = document.getElementById("csv-source-type").value;
-      if (!fileInput.files.length) {
-        toast("Please select a .csv file first.", true);
+      if (!fileInput.files.length && !pasteText) {
+        toast("Please select a .csv file or paste CSV text.", true);
         return;
       }
-      const file = fileInput.files[0];
-      const csvText = await file.text();
+      let csvText = pasteText;
+      let fname = "pasted_research.csv";
+      if (fileInput.files.length) {
+        const file = fileInput.files[0];
+        csvText = await file.text();
+        fname = file.name;
+      }
       try {
         const res = await apiFetch("/import/csv", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ source_type: srcType, csv_text: csvText, filename: file.name }),
+          body: JSON.stringify({ source_type: srcType, csv_text: csvText, filename: fname }),
         });
-        toast(`Imported ${res.records_imported} record(s) from ${file.name}`);
+        toast(`Imported ${res.records_imported} record(s) from ${fname}`);
         document.getElementById("csv-result").innerHTML = `<pre class="json-box">${JSON.stringify(res, null, 2)}</pre>`;
         refreshAll();
       } catch (e) {

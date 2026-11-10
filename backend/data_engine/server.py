@@ -36,6 +36,7 @@ from .schema import (
     VehicleInfo,
 )
 from .sources import (
+    AutomotiveBlogImporter,
     FacebookResearchImporter,
     LocalDatasetConsolidator,
     MechanicInterviewImporter,
@@ -149,6 +150,7 @@ def dataset_stats() -> Dict[str, Any]:
             "youtube_records": real_src.get("youtube_official_api", 0),
             "facebook_real_records": real_src.get("facebook_research_import", 0),
             "pakwheels_real_records": real_src.get("pakwheels_research_import", 0),
+            "blogs_real_records": real_src.get("automotive_blog_research", 0),
             "mechanic_real_records": real_src.get("mechanic_interviews", 0),
             "owner_real_records": real_src.get("owner_submissions", 0),
             "manuals_and_obd2_records": real_src.get("manuals_and_bulletins", 0),
@@ -429,6 +431,7 @@ def import_research_csv(body: CsvImportIn) -> Dict[str, Any]:
     sub_map = {
         "facebook": ("facebook", FacebookResearchImporter().import_manual_csv),
         "pakwheels": ("pakwheels", PakWheelsResearchImporter().import_manual_csv),
+        "automotive_blog": ("pakwheels", AutomotiveBlogImporter().import_manual_csv),
         "mechanic_interview": ("mechanic_notes", MechanicInterviewImporter().import_csv),
         "owner_submission": ("owner_reports", OwnerProblemReportImporter().import_csv),
     }
@@ -558,6 +561,7 @@ def download_template(template_name: str):
     allowed = {
         "facebook_research_template.csv",
         "pakwheels_research_template.csv",
+        "automotive_blogs_research_template.csv",
         "mechanic_interview_template.csv",
         "owner_problem_report_template.csv",
     }

@@ -35,6 +35,8 @@ PLATFORM_TO_SOURCE_ID = {
     "manuals_and_bulletins": "manuals_and_bulletins",
     "starter_symptom_corpus": "starter_symptom_corpus",
     "pakistan_price_reference": "pakistan_price_reference",
+    "automotive_blog": "automotive_blog_research",
+    "automotive_blog_research": "automotive_blog_research",
 }
 
 

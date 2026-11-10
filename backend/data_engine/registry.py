@@ -256,4 +256,24 @@ def create_default_source_registry() -> SourceRegistry:
         )
     )
 
+    # 9. Authorized Automotive Websites & Blogs
+    registry.register(
+        DataSourceEntry(
+            source_id="automotive_blog_research",
+            name="Authorized Automotive Websites & Technical Blogs",
+            source_type=SourceType.AUTOMOTIVE_BLOG,
+            rights_basis=RightsBasis.MANUAL_RESEARCH_SYNTHESIS,
+            is_automated=False,
+            requires_api_key=False,
+            requires_permission=True,
+            attribution_required=True,
+            rate_limit_policy="Permitted RSS/API or structured manual research CSV",
+            limitations=[
+                "Respects website Terms of Service, robots.txt, and copyright attribution.",
+                "Requires original article URL, publication date, and source attribution.",
+            ],
+            description="Curated diagnostic articles, maintenance guides, and recalls from authorized Pakistani & international automotive blogs.",
+        )
+    )
+
     return registry

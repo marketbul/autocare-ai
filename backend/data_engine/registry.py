@@ -21,6 +21,8 @@ class SourceType(str, Enum):
     RESEARCH_PAPER = "research_paper"
     STARTER_SYMPTOM_CORPUS = "starter_symptom_corpus"
     PAKISTAN_PRICE_REFERENCE = "pakistan_price_reference"
+    STACKEXCHANGE_MECHANICS = "stackexchange_mechanics"
+    NHTSA_OFFICIAL_API = "nhtsa_official_api"
 
 
 class RightsBasis(str, Enum):
@@ -273,6 +275,46 @@ def create_default_source_registry() -> SourceRegistry:
                 "Requires original article URL, publication date, and source attribution.",
             ],
             description="Curated diagnostic articles, maintenance guides, and recalls from authorized Pakistani & international automotive blogs.",
+        )
+    )
+
+    # 10. Stack Exchange Motor Vehicle Maintenance & Repair (Official CC-BY-SA API)
+    registry.register(
+        DataSourceEntry(
+            source_id="stackexchange_mechanics",
+            name="Stack Exchange Mechanics Q&A (Official API v2.3, CC-BY-SA)",
+            source_type=SourceType.STACKEXCHANGE_MECHANICS,
+            rights_basis=RightsBasis.OPEN_ACADEMIC_LICENSE,
+            is_automated=True,
+            requires_api_key=False,
+            requires_permission=False,
+            attribution_required=True,
+            rate_limit_policy="Official Stack Exchange REST API v2.3 (300 requests/day unauthenticated)",
+            limitations=[
+                "Licensed under CC BY-SA 4.0 with original question link preserved.",
+                "Community answers vary in verification; accepted/upvoted answers still marked unverified.",
+            ],
+            description="Real car owner fault questions paired with accepted and upvoted mechanic answers for RAG training.",
+        )
+    )
+
+    # 11. NHTSA Official Vehicle Recalls & Complaints API
+    registry.register(
+        DataSourceEntry(
+            source_id="nhtsa_official_api",
+            name="NHTSA Official Vehicle Complaints & Safety Recalls API",
+            source_type=SourceType.NHTSA_OFFICIAL_API,
+            rights_basis=RightsBasis.PUBLIC_TECHNICAL_DOCUMENTATION,
+            is_automated=True,
+            requires_api_key=False,
+            requires_permission=False,
+            attribution_required=True,
+            rate_limit_policy="Official U.S. DOT/NHTSA open public REST API",
+            limitations=[
+                "Public domain government defect/complaint dataset across shared Toyota/Honda/Hyundai/KIA/Suzuki models.",
+                "Owner complaints represent unverified reports; official recalls carry OEM remedies.",
+            ],
+            description="Official owner defect narratives and manufacturer recall remedies for RAG fault-resolution retrieval.",
         )
     )
 

@@ -37,6 +37,8 @@ PLATFORM_TO_SOURCE_ID = {
     "pakistan_price_reference": "pakistan_price_reference",
     "automotive_blog": "automotive_blog_research",
     "automotive_blog_research": "automotive_blog_research",
+    "stackexchange_mechanics": "stackexchange_mechanics",
+    "nhtsa_official_api": "nhtsa_official_api",
 }
 
 

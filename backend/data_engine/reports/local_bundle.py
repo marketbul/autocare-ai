@@ -125,9 +125,10 @@ class LocalFolderBundleExporter:
                     except Exception:
                         continue
 
-        # 5b. Export consolidated YouTube & Facebook Q&A Problem & Solution JSON files
+        # 5b. Export consolidated YouTube, Facebook, and Open-API Q&A Problem & Solution JSON files
         qa_path, qa_summary = self._export_consolidated_qa_file(records, raw_by_vid)
         fb_qa_path, fb_qa_summary = self._export_facebook_qa_file(records)
+        open_qa_path, open_qa_summary = self._export_online_qa_file(records)
 
         # 6. Check prerequisite tool / API key availability honestly
         env_status = {
@@ -139,7 +140,7 @@ class LocalFolderBundleExporter:
         # 7. Write README_LOCAL_BUNDLE.md
         readme_path = self.bundle_dir / "README_LOCAL_BUNDLE.md"
         readme_path.write_text(
-            self._build_readme(stats, env_status, len(copied_images), len(copied_audio), copied_yt, qa_summary, fb_qa_summary),
+            self._build_readme(stats, env_status, len(copied_images), len(copied_audio), copied_yt, qa_summary, fb_qa_summary, open_qa_summary),
             encoding="utf-8",
         )
 
@@ -162,6 +163,8 @@ class LocalFolderBundleExporter:
             "qa_solutions_summary": qa_summary,
             "facebook_qa_file": str(fb_qa_path),
             "facebook_qa_summary": fb_qa_summary,
+            "online_qa_file": str(open_qa_path),
+            "online_qa_summary": open_qa_summary,
             "total_records": total_real,
             "screenshots_copied": len(copied_images),
             "audio_files_copied": len(copied_audio),
@@ -335,6 +338,57 @@ class LocalFolderBundleExporter:
         )
         return out_path, summary
 
+    def _export_online_qa_file(
+        self,
+        records: List[Dict[str, Any]],
+    ) -> tuple[Path, Dict[str, Any]]:
+        """Writes a consolidated JSON file for Stack Exchange Mechanics Q&A & NHTSA records."""
+        open_sources = {"stackexchange_mechanics", "nhtsa_official_api"}
+        open_records = [r for r in records if r.get("source_id") in open_sources]
+        makes_counter: Counter[str] = Counter()
+        source_counter: Counter[str] = Counter()
+        items: List[Dict[str, Any]] = []
+
+        for rec in open_records:
+            make = rec.get("make") or "Generic"
+            model = rec.get("model") or "Multi-Model"
+            src = rec.get("source_id") or "open_api"
+            makes_counter[make] += 1
+            source_counter[src] += 1
+            items.append({
+                "record_id": rec.get("record_id"),
+                "source_id": src,
+                "make": make,
+                "model": model,
+                "manufacturing_year": rec.get("manufacturing_year"),
+                "fault_category_id": rec.get("fault_category_id"),
+                "category_name": rec.get("category_name"),
+                "problem_title": rec.get("problem_title"),
+                "problem_description": rec.get("problem_description"),
+                "symptoms": rec.get("symptoms") or [],
+                "recommended_solution": rec.get("recommended_solution"),
+                "repair_steps": rec.get("repair_steps") or [],
+                "verification_status": rec.get("verification_status") or "unverified",
+                "rights_basis": rec.get("rights_basis"),
+                "source_url": rec.get("source_url"),
+            })
+
+        items.sort(key=lambda x: (1 if x["recommended_solution"] else 0, x["source_id"]), reverse=True)
+        summary = {
+            "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "total_records": len(items),
+            "by_source": dict(source_counter),
+            "with_solutions": sum(1 for x in items if x["recommended_solution"]),
+            "makes_breakdown": dict(makes_counter.most_common()),
+        }
+
+        out_path = self.bundle_dir / "online_mechanic_qa_solutions.json"
+        out_path.write_text(
+            json.dumps({"summary": summary, "records": items}, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        return out_path, summary
+
     @staticmethod
     def _has_whisper() -> bool:
         for mod in ("faster_whisper", "whisper"):
@@ -354,6 +408,7 @@ class LocalFolderBundleExporter:
         yt_files: int,
         qa_summary: Dict[str, Any],
         fb_qa_summary: Dict[str, Any],
+        open_qa_summary: Dict[str, Any],
     ) -> str:
         return f"""# AI Auto Pakistan — Local Dataset Bundle (Zero-Port File Edition)
 **Generated At (UTC):** {dt.datetime.now(dt.timezone.utc).isoformat()}
@@ -361,6 +416,7 @@ class LocalFolderBundleExporter:
 ## Files Inside This Folder
 * `dataset_viewer.html` — Double-click to browse, search, and filter all records directly in your browser (no localhost port needed).
 * `owner_mechanic_qa_solutions.json` — Single consolidated YouTube Problem & Solution Q&A + Whisper transcript file ({qa_summary['total_youtube_records']} YouTube records; {qa_summary['with_solutions']} with proposed solutions).
+* `online_mechanic_qa_solutions.json` — Stack Exchange Mechanics (CC-BY-SA) + NHTSA Complaints/Recalls Problem & Solution JSON ({open_qa_summary['total_records']} records; {open_qa_summary['with_solutions']} with solutions/remedies).
 * `facebook_qa_solutions.json` — Curated Facebook Community Q&A Problem & Solution file ({fb_qa_summary['total_facebook_records']} Facebook records; add CSV/JSON files into `Facebook_Community_QA/` to populate).
 * `ai_agent_knowledge.jsonl` — Structured AI-Agent RAG & Triage dataset (`is_verified_fact` boundary included).
 * `master_dataset.json`, `master_dataset.jsonl`, `master_dataset.csv` — Complete cleaned records.
@@ -372,6 +428,7 @@ class LocalFolderBundleExporter:
 ## Current Honest Inventory
 * **Total Real Records:** {stats['real_records_count']}
 * **YouTube Videos Harvested:** {stats['real_by_source'].get('youtube_official_api', 0)}
+* **Stack Exchange + NHTSA Records:** {open_qa_summary['total_records']}
 * **Facebook Curated Q&A Imported:** {fb_qa_summary['total_facebook_records']}
 * **YouTube API Key Configured:** {env_status['youtube_api_key_set']}
 * **Whisper Speech-to-Text Installed:** {env_status['whisper_installed']}
@@ -442,7 +499,7 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
 <body>
   <header>
     <h1>AI Auto Pakistan — Offline Local Dataset Folder Viewer (No Port Required)</h1>
-    <p>Loaded directly from local disk files • Master JSONL, <a href="owner_mechanic_qa_solutions.json" target="_blank" style="color:#5eead4;">YouTube Q&amp;A JSON</a>, <a href="facebook_qa_solutions.json" target="_blank" style="color:#5eead4;">Facebook Q&amp;A JSON</a>, AI-Agent Knowledge, ML Splits, Screenshots &amp; Audio</p>
+    <p>Loaded directly from local disk files • Master JSONL, <a href="owner_mechanic_qa_solutions.json" target="_blank" style="color:#5eead4;">YouTube Q&amp;A JSON</a>, <a href="online_mechanic_qa_solutions.json" target="_blank" style="color:#5eead4;">StackExchange/NHTSA Q&amp;A JSON</a>, <a href="facebook_qa_solutions.json" target="_blank" style="color:#5eead4;">Facebook Q&amp;A JSON</a>, AI-Agent RAG JSONL &amp; Media</p>
   </header>
   <main>
     <div class="banner" id="blocker-banner"></div>
@@ -505,6 +562,8 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
     const kpis = [
       ["Real Records", s.real_records_count],
       ["YouTube Videos", s.real_by_source.youtube_official_api || 0],
+      ["StackExchange Q&A", s.real_by_source.stackexchange_mechanics || 0],
+      ["NHTSA Safety", s.real_by_source.nhtsa_official_api || 0],
       ["Facebook Q&As", s.real_by_source.facebook_research_import || 0],
       ["Manuals & OBD-II", s.real_by_source.manuals_and_bulletins || 0],
       ["Symptom Corpus", s.real_by_source.starter_symptom_corpus || 0],
@@ -545,7 +604,7 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
       }});
 
       document.getElementById("row-cnt").textContent = filtered.length + " / " + DATA.records.length;
-      document.getElementById("tbody").innerHTML = filtered.slice(0, 1000).map(r => {{
+      document.getElementById("tbody").innerHTML = filtered.slice(0, 2500).map(r => {{
         const imgLink = r.image_reference ? (r.image_reference.startsWith("http") ? `<br><a href="${{r.image_reference}}" target="_blank" style="color:#475569;font-size:0.75rem;">[Thumbnail]</a>` : `<br><a href="media_screenshots/${{r.image_reference.split('/').pop()}}" target="_blank" style="color:#0f766e;font-size:0.75rem;">[View Screenshot]</a>`) : "";
         const audLink = r.audio_reference ? ` <a href="audio_wav/${{r.audio_reference.split('/').pop()}}" target="_blank" style="color:#1d4ed8;font-size:0.75rem;">[Audio WAV]</a>` : "";
         const urlLink = r.source_url && r.source_url.startsWith("http") ? `<br><a href="${{r.source_url}}" target="_blank" style="color:#1d4ed8;font-size:0.74rem;">${{r.source_url.slice(0,36)}}...</a>` : "";

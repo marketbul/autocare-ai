@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
+import importlib.util
 import json
 import os
 import shutil
@@ -114,7 +115,7 @@ class LocalFolderBundleExporter:
         # 6. Check prerequisite tool / API key availability honestly
         env_status = {
             "youtube_api_key_set": bool(self.config.youtube_api_key or os.getenv("YOUTUBE_API_KEY", "").strip()),
-            "yt_dlp_installed": shutil.which("yt-dlp") is not None,
+            "yt_dlp_installed": importlib.util.find_spec("yt_dlp") is not None or shutil.which("yt-dlp") is not None,
             "whisper_installed": self._has_whisper(),
         }
 
@@ -351,16 +352,21 @@ python -m data_engine.auto_collect_bundle --api-key YOUR_YOUTUBE_API_KEY --all-q
       }});
 
       document.getElementById("row-cnt").textContent = filtered.length + " / " + DATA.records.length;
-      document.getElementById("tbody").innerHTML = filtered.slice(0, 200).map(r => `
+      document.getElementById("tbody").innerHTML = filtered.slice(0, 300).map(r => {{
+        const imgLink = r.image_reference ? `<br><a href="media_screenshots/${{r.image_reference.split('/').pop()}}" target="_blank" style="color:#0f766e;font-size:0.75rem;">[View Screenshot]</a>` : "";
+        const audLink = r.audio_reference ? ` <a href="audio_wav/${{r.audio_reference.split('/').pop()}}" target="_blank" style="color:#1d4ed8;font-size:0.75rem;">[Audio WAV]</a>` : "";
+        const urlLink = r.source_url && r.source_url.startsWith("http") ? `<br><a href="${{r.source_url}}" target="_blank" style="color:#1d4ed8;font-size:0.74rem;">${{r.source_url.slice(0,36)}}...</a>` : "";
+        return `
         <tr>
           <td><strong>${{r.make || ""}} ${{r.model || ""}}</strong><br><span style="color:var(--muted)">${{r.manufacturing_year || ""}}</span></td>
-          <td><strong>${{r.problem_title}}</strong><br><span style="color:var(--muted)">${{(r.problem_description || "").slice(0, 140)}}</span></td>
+          <td><strong>${{r.problem_title}}</strong><br><span style="color:var(--muted)">${{(r.problem_description || "").slice(0, 180)}}</span>${{imgLink}}${{audLink}}</td>
           <td><span class="badge">${{r.fault_category_id || "—"}}</span></td>
           <td><span class="badge">${{r.language}}</span></td>
-          <td style="font-size:0.78rem;">${{r.recommended_solution ? r.recommended_solution.slice(0, 120) : "—"}}</td>
+          <td style="font-size:0.78rem;">${{r.recommended_solution ? r.recommended_solution.slice(0, 160) : "—"}}</td>
           <td>${{r.estimated_cost_pkr != null ? "Rs. " + Number(r.estimated_cost_pkr).toLocaleString() : "—"}}</td>
-          <td style="font-size:0.78rem;">${{r.source_id}}</td>
-        </tr>`).join("");
+          <td style="font-size:0.78rem;">${{r.source_id}}${{urlLink}}</td>
+        </tr>`;
+      }}).join("");
     }}
     renderTable();
   </script>

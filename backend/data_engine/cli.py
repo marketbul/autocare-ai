@@ -4,9 +4,11 @@ Usage:
     python -m data_engine.cli status             # Check system directories, keys, and status
     python -m data_engine.cli sources            # List registered data sources and legal terms
     python -m data_engine.cli inspect            # Detailed audit of existing codebase assets
+    python -m data_engine.cli consolidate        # Consolidate all local data + build ML splits
     python -m data_engine.cli import-templates   # Ingest research templates into DB & pipeline
     python -m data_engine.cli report             # Generate comprehensive quality audit report
     python -m data_engine.cli split              # Create leak-free train/val/test ML datasets
+    python -m data_engine.cli serve              # Launch localhost dashboard on 127.0.0.1:8090
 """
 from __future__ import annotations
 
@@ -23,6 +25,7 @@ from .registry import create_default_source_registry
 from .reports import DatasetReportGenerator
 from .sources import (
     FacebookResearchImporter,
+    LocalDatasetConsolidator,
     MechanicInterviewImporter,
     OwnerProblemReportImporter,
     PakWheelsResearchImporter,
@@ -244,6 +247,21 @@ def cmd_split(args: argparse.Namespace) -> None:
     print("=" * 70)
 
 
+def cmd_consolidate(args: argparse.Namespace) -> None:
+    print("=" * 70)
+    print("AI AUTO PAKISTAN -- CONSOLIDATING LOCAL DATASETS & ML SPLITS")
+    print("=" * 70)
+    res = LocalDatasetConsolidator().consolidate_all(include_examples=True)
+    print(json.dumps(res, indent=2))
+    print("=" * 70)
+
+
+def cmd_serve(args: argparse.Namespace) -> None:
+    import uvicorn
+    print(f"Starting AI Auto Pakistan Dataset Engineering Dashboard on http://{args.host}:{args.port}")
+    uvicorn.run("data_engine.server:app", host=args.host, port=args.port, reload=False)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="python -m data_engine.cli",
@@ -254,9 +272,13 @@ def main() -> None:
     subparsers.add_parser("status", help="Show system directories, keys, and operational status")
     subparsers.add_parser("sources", help="List registered automotive sources and legal policies")
     subparsers.add_parser("inspect", help="Inspect and audit existing codebase assets")
+    subparsers.add_parser("consolidate", help="Consolidate all local datasets into DB and ML splits")
     subparsers.add_parser("import-templates", help="Import research CSV templates into DB & pipeline")
     subparsers.add_parser("report", help="Generate dataset quality and coverage audit report")
     subparsers.add_parser("split", help="Generate leak-free train/val/test ML datasets")
+    serve_p = subparsers.add_parser("serve", help="Start Dataset Engineering Dashboard on localhost")
+    serve_p.add_argument("--host", default="127.0.0.1")
+    serve_p.add_argument("--port", type=int, default=8090)
 
     args = parser.parse_args()
     if not args.command:
@@ -269,12 +291,16 @@ def main() -> None:
         cmd_sources(args)
     elif args.command == "inspect":
         cmd_inspect(args)
+    elif args.command == "consolidate":
+        cmd_consolidate(args)
     elif args.command == "import-templates":
         cmd_import_templates(args)
     elif args.command == "report":
         cmd_report(args)
     elif args.command == "split":
         cmd_split(args)
+    elif args.command == "serve":
+        cmd_serve(args)
 
 
 if __name__ == "__main__":

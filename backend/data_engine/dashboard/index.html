@@ -302,7 +302,8 @@
         External platforms (YouTube, Facebook, PakWheels) accurately show <strong>0</strong> until you enter an API key or import verified research CSVs.
         The 4 starter template demonstrations are strictly labeled <span class="badge badge-example">EXAMPLE TEMPLATE</span> and excluded from ML splits.
       </div>
-      <div style="display:flex; gap:8px;">
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <a class="btn btn-sm btn-primary" href="/api/v1/dataset/export/agent-jsonl">Export AI-Agent JSONL</a>
         <a class="btn btn-sm" href="/api/v1/dataset/export/csv">Export CSV</a>
         <a class="btn btn-sm" href="/api/v1/dataset/export/jsonl">Export JSONL</a>
         <a class="btn btn-sm" href="/api/v1/dataset/export/json">Export JSON</a>
@@ -445,9 +446,17 @@
               <input type="number" id="yt-max-results" value="5" min="1" max="25" />
             </div>
           </div>
-          <div class="field" style="margin-bottom:12px;">
+          <div class="field" style="margin-bottom:10px;">
             <label>Or Enter Custom Query</label>
             <input type="text" id="yt-custom-query" placeholder="e.g. Suzuki Alto AGS gearbox issue Pakistan" />
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:12px; font-size:0.82rem;">
+            <label style="display:inline-flex; align-items:center; gap:5px;">
+              <input type="checkbox" id="yt-include-comments" checked /> Fetch Public Comments &amp; Solutions
+            </label>
+            <label style="display:inline-flex; align-items:center; gap:5px;">
+              <input type="checkbox" id="yt-all-queries" /> Run All Configured Queries (Batch)
+            </label>
           </div>
           <button class="btn btn-primary" onclick="runYouTubeCollection()">Run YouTube Collection</button>
           <div id="yt-result" style="margin-top:12px;"></div>
@@ -573,6 +582,37 @@
           <button class="btn btn-primary" onclick="uploadMediaAsset()">Store in Media Vault</button>
           <div id="mv-result" style="margin-top:12px;"></div>
         </div>
+      </div>
+
+      <div class="card">
+        <h2>5. Process Authorized Video (Extract Audio WAV + Screenshots + Talk Claims)</h2>
+        <p class="desc">
+          Upload an owned, consent-granted mechanic video or Creative Commons clip. Uses <code>ffmpeg</code> to extract 16kHz audio
+          and timestamped JPG screenshots, runs speech/transcript claim extraction (symptoms, causes, PKR costs), and adds it to your AI-Agent dataset.
+        </p>
+        <div class="form-grid">
+          <div class="field"><label>Make</label><input id="vp-make" placeholder="Suzuki" /></div>
+          <div class="field"><label>Model</label><input id="vp-model" placeholder="Alto" /></div>
+          <div class="field"><label>Video Title</label><input id="vp-title" placeholder="Alto 660cc engine knocking workshop check" /></div>
+          <div class="field">
+            <label>Permission / License Basis</label>
+            <select id="vp-rights">
+              <option value="explicit_consent">Explicit Mechanic / Owner Consent</option>
+              <option value="creative_common">Creative Commons (CC-BY)</option>
+              <option value="owned">Self-Recorded / Owned</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label>Screenshot Timestamps (seconds, comma-separated)</label><input id="vp-ts" value="1, 5, 10" /></div>
+          <div class="field"><label>Video File (.mp4/.mov/.webm, max 50MB)</label><input type="file" id="vp-file" accept="video/*" /></div>
+        </div>
+        <div class="field" style="margin-bottom:10px;">
+          <label>Transcript / Spoken Talk Text (optional if Whisper installed)</label>
+          <textarea id="vp-transcript" placeholder="Paste or type spoken Urdu / Roman Urdu / English explanation from the video..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="processAuthorizedVideo()">Extract Audio, Screenshots &amp; Claims</button>
+        <div id="vp-result" style="margin-top:12px;"></div>
       </div>
     </section>
 
@@ -999,16 +1039,62 @@
       const custom = document.getElementById("yt-custom-query").value.trim();
       const selected = document.getElementById("yt-query-select").value;
       const maxRes = parseInt(document.getElementById("yt-max-results").value || "5", 10);
+      const incComments = document.getElementById("yt-include-comments").checked;
+      const allQueries = document.getElementById("yt-all-queries").checked;
       const query = custom || selected;
       const resBox = document.getElementById("yt-result");
-      resBox.innerHTML = `<span style="color:var(--muted); font-size:0.84rem;">Calling official YouTube Data API v3...</span>`;
+      resBox.innerHTML = `<span style="color:var(--muted); font-size:0.84rem;">Calling official YouTube Data API v3 (metadata + comments)...</span>`;
       try {
         const res = await apiFetch("/collect/youtube", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ api_key: key || null, queries: [query], max_results_per_query: maxRes }),
+          body: JSON.stringify({
+            api_key: key || null,
+            queries: allQueries ? null : [query],
+            run_all_queries: allQueries,
+            max_results_per_query: maxRes,
+            include_comments: incComments,
+          }),
         });
-        toast(`Collected ${res.raw_records_fetched} YouTube metadata record(s)!`);
+        toast(`Collected ${res.raw_records_fetched} videos & ${res.total_comments_collected} comments!`);
+        resBox.innerHTML = `<pre class="json-box">${JSON.stringify(res, null, 2)}</pre>`;
+        refreshAll();
+      } catch (e) {
+        toast(e.message, true);
+        resBox.innerHTML = `<div class="badge badge-danger" style="white-space:normal; padding:8px;">${e.message}</div>`;
+      }
+    }
+
+    async function processAuthorizedVideo() {
+      const fileInput = document.getElementById("vp-file");
+      if (!fileInput.files.length) {
+        toast("Please choose an authorized video file.", true);
+        return;
+      }
+      const file = fileInput.files[0];
+      const buf = await file.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+      let bin = "";
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      const tsList = document.getElementById("vp-ts").value.split(",").map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+      const resBox = document.getElementById("vp-result");
+      resBox.innerHTML = `<span style="color:var(--muted); font-size:0.84rem;">Running ffmpeg audio/screenshot extraction &amp; claim parser...</span>`;
+      try {
+        const res = await apiFetch("/media/process-video", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            filename: file.name,
+            content_base64: btoa(bin),
+            rights_basis: document.getElementById("vp-rights").value,
+            make: document.getElementById("vp-make").value.trim() || "Unknown",
+            model: document.getElementById("vp-model").value.trim() || "Unknown",
+            title: document.getElementById("vp-title").value.trim() || file.name,
+            timestamps_sec: tsList.length ? tsList : [1.0, 5.0],
+            transcript_text: document.getElementById("vp-transcript").value.trim() || null,
+          }),
+        });
+        toast(`Processed video: extracted ${res.screenshots.length} screenshots & audio!`);
         resBox.innerHTML = `<pre class="json-box">${JSON.stringify(res, null, 2)}</pre>`;
         refreshAll();
       } catch (e) {

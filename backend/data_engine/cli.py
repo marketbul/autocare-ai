@@ -20,7 +20,7 @@ from pathlib import Path
 from .cleaning import CleaningPipeline
 from .config import get_config
 from .logger import get_audit_logger
-from .ml import GroupedMLSplitter
+from .ml import AIAgentDatasetExporter, GroupedMLSplitter
 from .registry import create_default_source_registry
 from .reports import DatasetReportGenerator
 from .sources import (
@@ -29,6 +29,7 @@ from .sources import (
     MechanicInterviewImporter,
     OwnerProblemReportImporter,
     PakWheelsResearchImporter,
+    YouTubeCollector,
 )
 from .storage import StorageManager
 
@@ -252,8 +253,47 @@ def cmd_consolidate(args: argparse.Namespace) -> None:
     print("AI AUTO PAKISTAN -- CONSOLIDATING LOCAL DATASETS & ML SPLITS")
     print("=" * 70)
     res = LocalDatasetConsolidator().consolidate_all(include_examples=True)
+    agent_path = AIAgentDatasetExporter().export_jsonl(include_pending=True)
+    res["agent_dataset_export"] = str(agent_path)
     print(json.dumps(res, indent=2))
     print("=" * 70)
+
+
+def cmd_collect_youtube(args: argparse.Namespace) -> None:
+    collector = YouTubeCollector(api_key=args.api_key)
+    if not collector.is_configured():
+        print("ERROR: YOUTUBE_API_KEY is not set. Add it to backend/.env or pass --api-key.")
+        sys.exit(1)
+
+    queries = [q["query"] for q in collector.load_search_queries()]
+    if not args.all_queries:
+        queries = queries[:args.num_queries]
+
+    all_raw = []
+    for q in queries:
+        print(f"Fetching YouTube metadata + comments for: {q}")
+        items = collector.fetch_video_metadata(
+            q,
+            max_results=args.max_results,
+            include_comments=not args.no_comments,
+        )
+        if items:
+            collector.save_raw_batch(q, items)
+            all_raw.extend(items)
+
+    records = collector.to_automotive_records(all_raw)
+    clean_res = CleaningPipeline().process_batch(records) if records else {}
+    StorageManager().insert_records(records)
+    agent_path = AIAgentDatasetExporter().export_jsonl(include_pending=True)
+
+    print(f"Collected Videos: {len(all_raw)}")
+    print(f"Cleaning Summary: {clean_res}")
+    print(f"AI-Agent Dataset: {agent_path}")
+
+
+def cmd_export_agent(args: argparse.Namespace) -> None:
+    dest = AIAgentDatasetExporter().export_jsonl(include_pending=not args.reviewed_only)
+    print(f"Exported AI-Agent Ready JSONL dataset to: {dest}")
 
 
 def cmd_serve(args: argparse.Namespace) -> None:
@@ -276,6 +316,17 @@ def main() -> None:
     subparsers.add_parser("import-templates", help="Import research CSV templates into DB & pipeline")
     subparsers.add_parser("report", help="Generate dataset quality and coverage audit report")
     subparsers.add_parser("split", help="Generate leak-free train/val/test ML datasets")
+
+    yt_p = subparsers.add_parser("collect-youtube", help="Run official YouTube API metadata + comments collector")
+    yt_p.add_argument("--api-key", default=None)
+    yt_p.add_argument("--max-results", type=int, default=5)
+    yt_p.add_argument("--num-queries", type=int, default=3)
+    yt_p.add_argument("--all-queries", action="store_true")
+    yt_p.add_argument("--no-comments", action="store_true")
+
+    ag_p = subparsers.add_parser("export-agent", help="Export AI-Agent Ready JSONL dataset")
+    ag_p.add_argument("--reviewed-only", action="store_true")
+
     serve_p = subparsers.add_parser("serve", help="Start Dataset Engineering Dashboard on localhost")
     serve_p.add_argument("--host", default="127.0.0.1")
     serve_p.add_argument("--port", type=int, default=8090)
@@ -299,6 +350,10 @@ def main() -> None:
         cmd_report(args)
     elif args.command == "split":
         cmd_split(args)
+    elif args.command == "collect-youtube":
+        cmd_collect_youtube(args)
+    elif args.command == "export-agent":
+        cmd_export_agent(args)
     elif args.command == "serve":
         cmd_serve(args)
 

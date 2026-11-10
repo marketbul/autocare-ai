@@ -23,8 +23,8 @@ from pydantic import BaseModel, Field
 from .cleaning import CleaningPipeline, detect_language, normalize_automotive_text
 from .config import get_config
 from .logger import AuditAction, get_audit_logger
-from .media import MediaVault
-from .ml import GroupedMLSplitter
+from .media import AuthorizedMediaPipeline, MediaVault
+from .ml import AIAgentDatasetExporter, GroupedMLSplitter
 from .registry import create_default_source_registry
 from .reports import DatasetReportGenerator
 from .schema import (
@@ -91,7 +91,23 @@ class ReviewActionIn(BaseModel):
 class YouTubeCollectIn(BaseModel):
     api_key: Optional[str] = None
     queries: Optional[List[str]] = None
+    run_all_queries: bool = False
     max_results_per_query: int = Field(5, ge=1, le=25)
+    include_comments: bool = True
+    max_comments_per_video: int = Field(15, ge=0, le=50)
+
+
+class AuthorizedVideoProcessIn(BaseModel):
+    filename: str = Field(..., min_length=3, max_length=200)
+    content_base64: str = Field(..., min_length=4)
+    rights_basis: str = Field(..., description="explicit_consent | creative_common | user_submission | owned")
+    make: str = "Unknown"
+    model: str = "Unknown"
+    title: str = "Authorized Automotive Video Diagnostic"
+    timestamps_sec: List[float] = Field(default_factory=lambda: [1.0, 5.0, 15.0])
+    transcript_text: Optional[str] = None
+    attribution: str = ""
+    source_url: Optional[str] = None
 
 
 class CsvImportIn(BaseModel):
@@ -394,7 +410,14 @@ def collect_youtube(body: YouTubeCollectIn) -> Dict[str, Any]:
         )
 
     collector = YouTubeCollector(api_key=key)
-    queries_to_run = body.queries or [q["query"] for q in collector.load_search_queries()[:3]]
+    all_configured = [q["query"] for q in collector.load_search_queries()]
+    if body.run_all_queries:
+        queries_to_run = all_configured
+    elif body.queries:
+        queries_to_run = body.queries
+    else:
+        queries_to_run = all_configured[:3]
+
     if not queries_to_run:
         raise HTTPException(status_code=400, detail="No search queries provided.")
 
@@ -402,7 +425,12 @@ def collect_youtube(body: YouTubeCollectIn) -> Dict[str, Any]:
     raw_files: List[str] = []
     try:
         for q in queries_to_run:
-            items = collector.fetch_video_metadata(q, max_results=body.max_results_per_query)
+            items = collector.fetch_video_metadata(
+                q,
+                max_results=body.max_results_per_query,
+                include_comments=body.include_comments,
+                max_comments_per_video=body.max_comments_per_video,
+            )
             if items:
                 raw_path = collector.save_raw_batch(q, items)
                 raw_files.append(str(raw_path))
@@ -413,13 +441,16 @@ def collect_youtube(body: YouTubeCollectIn) -> Dict[str, Any]:
     records = collector.to_automotive_records(all_raw)
     clean_summary = CleaningPipeline().process_batch(records) if records else {"unique_processed": 0}
     StorageManager().insert_records(records)
+    agent_export_path = AIAgentDatasetExporter().export_jsonl(include_pending=True)
 
     return {
         "status": "completed",
         "queries_executed": queries_to_run,
         "raw_records_fetched": len(all_raw),
+        "total_comments_collected": sum(len(i.get("comments") or []) for i in all_raw),
         "raw_files_saved": raw_files,
         "cleaning_summary": clean_summary,
+        "agent_dataset_export": str(agent_export_path),
         "items": all_raw[:25],
     }
 
@@ -494,9 +525,50 @@ def upload_authorized_media(body: MediaUploadIn) -> Dict[str, Any]:
     return {"status": "stored", "asset_id": asset_id, "asset": asset}
 
 
+@router.post("/media/process-video")
+def process_authorized_video(body: AuthorizedVideoProcessIn) -> Dict[str, Any]:
+    try:
+        raw_bytes = base64.b64decode(body.content_base64)
+    except Exception:
+        raise HTTPException(status_code=422, detail="Invalid base64 video payload.")
+
+    if len(raw_bytes) > 50_000_000:
+        raise HTTPException(status_code=413, detail="Video file exceeds 50 MB upload limit.")
+
+    suffix = Path(body.filename).suffix or ".mp4"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+        tmp.write(raw_bytes)
+        tmp_path = Path(tmp.name)
+
+    try:
+        pipeline = AuthorizedMediaPipeline()
+        res = pipeline.process_authorized_video(
+            video_path=tmp_path,
+            rights_basis=body.rights_basis,
+            make=body.make,
+            model=body.model,
+            title=body.title,
+            timestamps_sec=body.timestamps_sec,
+            transcript_text=body.transcript_text,
+            attribution=body.attribution,
+            source_url=body.source_url,
+        )
+        AIAgentDatasetExporter().export_jsonl(include_pending=True)
+        return res
+    except PermissionError as exc:
+        raise HTTPException(status_code=403, detail=str(exc))
+    except Exception as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    finally:
+        tmp_path.unlink(missing_ok=True)
+
+
 @router.post("/pipeline/consolidate")
 def run_consolidation_pipeline() -> Dict[str, Any]:
-    return LocalDatasetConsolidator().consolidate_all(include_examples=True)
+    res = LocalDatasetConsolidator().consolidate_all(include_examples=True)
+    agent_path = AIAgentDatasetExporter().export_jsonl(include_pending=True)
+    res["agent_dataset_export"] = str(agent_path)
+    return res
 
 
 @router.post("/pipeline/split")
@@ -576,8 +648,17 @@ def download_template(template_name: str):
 @router.get("/export/{fmt}")
 def export_dataset(fmt: str):
     fmt = fmt.lower().strip()
-    if fmt not in {"csv", "json", "jsonl"}:
-        raise HTTPException(status_code=422, detail="Format must be csv, json, or jsonl")
+    if fmt not in {"csv", "json", "jsonl", "agent-jsonl"}:
+        raise HTTPException(status_code=422, detail="Format must be csv, json, jsonl, or agent-jsonl")
+
+    if fmt == "agent-jsonl":
+        agent_records = AIAgentDatasetExporter().build_agent_records(include_pending=True)
+        content = "\n".join(json.dumps(it, ensure_ascii=False) for it in agent_records)
+        return Response(
+            content=content,
+            media_type="application/x-ndjson",
+            headers={"Content-Disposition": "attachment; filename=ai_auto_pakistan_agent_dataset.jsonl"},
+        )
 
     items, _ = StorageManager().query_records(include_examples=False, limit=10000)
     if fmt == "json":

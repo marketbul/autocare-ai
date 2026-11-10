@@ -166,6 +166,13 @@ class AutoCareRAGFromScratch:
             embedding_dim=embed_dim,
             device="cpu"
         )
+        embedder_path = Path(__file__).resolve().parent / "weights" / "autocare_embedder.pt"
+        if embedder_path.exists():
+            try:
+                self.embedder.load(embedder_path)
+                print(f"[RAG-Engine] Successfully loaded trained Embedder weights from {embedder_path.name}")
+            except Exception as e:
+                print(f"[RAG-Engine] Note: Using initialized embedder ({e})")
 
         # Initialize Vector Store & Index Chunks
         print("[RAG-Engine] Step 4: Indexing document chunks into hybrid vector store...")
@@ -180,9 +187,18 @@ class AutoCareRAGFromScratch:
             embed_dim=embed_dim,
             num_heads=4,
             num_layers=4,
-            max_seq_len=512,
+            max_seq_len=128,
             dropout=0.1
         )
+        weights_path = Path(__file__).resolve().parent / "weights" / "autocare_causal_lm.pt"
+        if weights_path.exists():
+            try:
+                import torch
+                lm_model.load_state_dict(torch.load(weights_path, map_location="cpu"))
+                print(f"[RAG-Engine] Successfully loaded TRAINED Causal LM weights from {weights_path.name}")
+            except Exception as e:
+                print(f"[RAG-Engine] Note: Using initialized Causal LM ({e})")
+
         self.token_predictor = GenerativeTokenPredictor(self.tokenizer, lm_model, device="cpu")
         self.is_indexed = True
         print("[RAG-Engine] RAG pipeline successfully initialized and ready for inference!")
@@ -200,12 +216,12 @@ class AutoCareRAGFromScratch:
     def estimate_pkr_cost(self, code: str, component: str) -> dict[str, Any]:
         """Provides verified Pakistani PKR market price benchmarks."""
         pricing_database = {
-            "P0301": {"part": "Ignition Coil & Iridium Spark Plug", "oem_pkr": "PKR 14,500 - 18,000", "market_pkr": "PKR 6,500 - 9,500", "labor_pkr": "PKR 1,500 - 2,500", "downtime": "1 - 2 Hours"},
-            "P0420": {"part": "Catalytic Converter Honeycomb / Exhaust Sensor", "oem_pkr": "PKR 75,000 - 95,000", "market_pkr": "PKR 28,000 - 38,000", "labor_pkr": "PKR 4,000 - 6,000", "downtime": "3 - 5 Hours"},
-            "P0217": {"part": "Thermostat Valve & Coolant Flush", "oem_pkr": "PKR 9,500 - 13,000", "market_pkr": "PKR 4,200 - 6,800", "labor_pkr": "PKR 2,000 - 3,500", "downtime": "2 - 3 Hours"},
-            "P0900": {"part": "AGS Actuator Motor Relay & Calibration", "oem_pkr": "PKR 32,000 - 45,000", "market_pkr": "PKR 12,000 - 18,000", "labor_pkr": "PKR 3,500 - 5,000", "downtime": "3 - 4 Hours"}
+            "P0301": {"part": "Ignition Coil & Iridium Spark Plug", "oem_pkr": "PKR 14,500 - 18,000", "market_pkr": "PKR 6,500 - 9,500", "labor_pkr": "PKR 1,500 - 2,500", "repair_time": "1 - 2 Hours (Estimated Workshop Repair Time)", "downtime": "1 - 2 Hours"},
+            "P0420": {"part": "Catalytic Converter Honeycomb / Exhaust Sensor", "oem_pkr": "PKR 75,000 - 95,000", "market_pkr": "PKR 28,000 - 38,000", "labor_pkr": "PKR 4,000 - 6,000", "repair_time": "3 - 5 Hours (Estimated Workshop Repair Time)", "downtime": "3 - 5 Hours"},
+            "P0217": {"part": "Thermostat Valve & Coolant Flush", "oem_pkr": "PKR 9,500 - 13,000", "market_pkr": "PKR 4,200 - 6,800", "labor_pkr": "PKR 2,000 - 3,500", "repair_time": "2 - 3 Hours (Estimated Workshop Repair Time)", "downtime": "2 - 3 Hours"},
+            "P0900": {"part": "AGS Actuator Motor Relay & Calibration", "oem_pkr": "PKR 32,000 - 45,000", "market_pkr": "PKR 12,000 - 18,000", "labor_pkr": "PKR 3,500 - 5,000", "repair_time": "3 - 4 Hours (Estimated Workshop Repair Time)", "downtime": "3 - 4 Hours"}
         }
-        default_price = {"part": f"{component} Standard Service Component", "oem_pkr": "PKR 12,000 - 16,000", "market_pkr": "PKR 5,500 - 8,500", "labor_pkr": "PKR 2,000 - 3,000", "downtime": "2 - 3 Hours"}
+        default_price = {"part": f"{component} Standard Service Component", "oem_pkr": "PKR 12,000 - 16,000", "market_pkr": "PKR 5,500 - 8,500", "labor_pkr": "PKR 2,000 - 3,000", "repair_time": "2 - 3 Hours (Estimated Workshop Repair Time)", "downtime": "2 - 3 Hours"}
         return pricing_database.get(code, default_price)
 
     def answer_query(self, query: str, top_k: int = 3) -> DiagnosticResponse:

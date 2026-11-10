@@ -39,7 +39,9 @@ class GroupedMLSplitter:
         self.logger = get_audit_logger()
 
     def get_group_key(self, record: AutomotiveRecord) -> str:
-        """Determines grouping boundary: identical URLs or video IDs belong to the same group."""
+        """Determines grouping boundary: semantic groups, identical URLs, or video IDs stay in the same split."""
+        if record.source.evidence_reference and record.source.evidence_reference.startswith("group:"):
+            return record.source.evidence_reference.strip().lower()
         if record.source.source_url:
             return record.source.source_url.strip().lower()
         if record.source.source_id:

@@ -39,6 +39,43 @@ PERMITTED_RIGHTS_BASES = frozenset({
     "owned",
 })
 
+DAMAGE_VISUAL_CUES = (
+    "damage", "damaged", "broken", "crack", "dent", "leak", "leaking", "smoke", "rust",
+    "worn", "brake", "pad", "disc", "rotor", "caliper", "radiator", "engine", "piston",
+    "gasket", "oil", "battery", "tire", "tyre", "shock", "chimta", "kangi", "batti",
+    "light", "warning", "toot", "toota", "kharab", "tapak", "zang", "dhuan", "yahan",
+    "dekhein", "dekhain", "nazar", "یہاں", "دیکھیں", "ٹوٹ", "لیک", "بریک", "ڈیمج",
+    "نقصان", "دھواں", "آئل", "خراب", "زنگ", "لائٹ",
+)
+
+
+def detect_damage_moments(segments: List[Dict[str, Any]], max_moments: int = 12) -> List[Dict[str, Any]]:
+    """Scans timed speech segments for visual damage/component cues and returns capture timestamps."""
+    moments: List[Dict[str, Any]] = []
+    seen_buckets: set[int] = set()
+    for seg in segments:
+        txt = (seg.get("text") or "").strip()
+        if not txt:
+            continue
+        low = txt.lower()
+        matched_cues = [cue for cue in DAMAGE_VISUAL_CUES if cue in low]
+        if matched_cues:
+            start = float(seg.get("start", 0.0))
+            end = float(seg.get("end", start + 2.0))
+            midpoint = round((start + end) / 2.0, 2)
+            bucket = int(midpoint // 3)  # avoid capturing redundant frames within 3 seconds
+            if bucket in seen_buckets:
+                continue
+            seen_buckets.add(bucket)
+            moments.append({
+                "timestamp_sec": midpoint,
+                "spoken_quote": txt,
+                "matched_cues": matched_cues[:5],
+            })
+            if len(moments) >= max_moments:
+                break
+    return moments
+
 
 def get_ffmpeg_binary() -> str:
     """Returns bundled ffmpeg executable via imageio_ffmpeg."""
@@ -178,28 +215,50 @@ class AuthorizedMediaPipeline:
         title: str = "Authorized Video Diagnostic Recording",
         timestamps_sec: Optional[List[float]] = None,
         transcript_text: Optional[str] = None,
+        transcript_segments: Optional[List[Dict[str, Any]]] = None,
         attribution: str = "",
         source_url: Optional[str] = None,
     ) -> Dict[str, Any]:
-        """End-to-end processing of an authorized video: audio + screenshots + claims + DB storage."""
+        """End-to-end processing of an authorized video: audio + transcript + damage-moment screenshots + DB."""
         self.check_permission(rights_basis)
         storage = StorageManager()
 
-        # 1. Store original permitted video + extract audio & screenshots
+        # 1. Store original permitted video + extract 16kHz audio WAV
         video_asset = self.vault.store_asset(video_path, "videos", rights_basis, attribution)
         storage.register_media_asset(video_asset, "videos")
 
         audio_asset = self.extract_audio_wav(video_path, rights_basis, attribution)
         storage.register_media_asset(audio_asset, "audio")
 
-        screenshots = self.extract_screenshots(video_path, rights_basis, timestamps_sec, attribution)
-        for sc in screenshots:
-            storage.register_media_asset(sc, "images")
-
-        # 2. Speech-to-text or provided transcript
-        stt_result = {"engine": "provided_transcript", "text": transcript_text or "", "segments": []}
-        if not transcript_text:
+        # 2. Speech-to-text or provided transcript / timed segments
+        stt_result = {
+            "engine": "provided_transcript",
+            "text": transcript_text or "",
+            "segments": transcript_segments or [],
+        }
+        if not transcript_text and not transcript_segments:
             stt_result = self.transcribe_if_available(audio_asset["absolute_path"])
+        elif transcript_segments and not transcript_text:
+            stt_result["text"] = " ".join(s.get("text", "") for s in transcript_segments).strip()
+
+        # 3. Detect exact spoken damage/component timestamps for targeted screenshot capture
+        segments = stt_result.get("segments") or []
+        damage_moments = detect_damage_moments(segments)
+        target_timestamps = list(timestamps_sec or [])
+        for dm in damage_moments:
+            if dm["timestamp_sec"] not in target_timestamps:
+                target_timestamps.append(dm["timestamp_sec"])
+        if not target_timestamps:
+            target_timestamps = [1.0, 5.0, 15.0]
+
+        screenshots = self.extract_screenshots(video_path, rights_basis, target_timestamps, attribution)
+        moment_by_ts = {dm["timestamp_sec"]: dm for dm in damage_moments}
+        for sc in screenshots:
+            dm = moment_by_ts.get(sc.get("video_timestamp_sec"))
+            if dm:
+                sc["spoken_quote"] = dm["spoken_quote"]
+                sc["matched_cues"] = dm["matched_cues"]
+            storage.register_media_asset(sc, "images")
 
         raw_transcript = stt_result.get("text") or title
         claims = self.extractor.process_transcript(raw_transcript, stt_result.get("segments"))
@@ -263,6 +322,7 @@ class AuthorizedMediaPipeline:
             "audio_asset": audio_asset,
             "video_asset": video_asset,
             "screenshots": screenshots,
+            "damage_moments": damage_moments,
             "stt_status": stt_result.get("engine"),
             "extracted_claims": claims.to_dict(),
             "cleaning_summary": clean_summary,

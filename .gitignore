@@ -36,6 +36,7 @@ backend/data/processed/
 backend/data/ml_ready/
 backend/data/reports/
 backend/data/media_vault/
+AI_Auto_Pakistan_Dataset/
 
 
 .vscode/

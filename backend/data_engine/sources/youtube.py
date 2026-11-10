@@ -66,6 +66,17 @@ def parse_iso8601_duration(duration_str: str) -> str:
     return f"{m:02d}:{s:02d}"
 
 
+def parse_iso8601_seconds(duration_str: str) -> int:
+    """Returns total seconds for ISO 8601 duration."""
+    if not duration_str or not duration_str.startswith("PT"):
+        return 0
+    match = re.match(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", duration_str)
+    if not match:
+        return 0
+    hours, minutes, seconds = match.groups()
+    return (int(hours or 0) * 3600) + (int(minutes or 0) * 60) + int(seconds or 0)
+
+
 def classify_comment_intent(text: str) -> str:
     """Classifies whether a comment describes a problem occurrence, suggested solution, or cost."""
     low = (text or "").lower()
@@ -188,6 +199,7 @@ class YouTubeCollector:
         max_results: int = 10,
         include_comments: bool = True,
         max_comments_per_video: int = 15,
+        video_license: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """Queries YouTube API v3 and returns enriched metadata + comments."""
         if not self.is_configured():
@@ -199,11 +211,11 @@ class YouTubeCollector:
             AuditAction.COLLECTION_STARTED,
             source_id="youtube_official_api",
             status="RUNNING",
-            details={"query": query, "max_results": max_results, "include_comments": include_comments},
+            details={"query": query, "max_results": max_results, "include_comments": include_comments, "video_license": video_license},
         )
 
         headers = {"User-Agent": "AIAutoPakistan-DataEngine/1.0"}
-        search_params = {
+        search_params: Dict[str, Any] = {
             "key": self.api_key,
             "q": query,
             "part": "snippet",
@@ -211,6 +223,8 @@ class YouTubeCollector:
             "maxResults": min(max_results, 50),
             "relevanceLanguage": "ur",
         }
+        if video_license:
+            search_params["videoLicense"] = video_license
 
         with httpx.Client(timeout=self.config.request_timeout_seconds) as client:
             resp = client.get(YOUTUBE_SEARCH_URL, params=search_params, headers=headers)
@@ -286,6 +300,7 @@ class YouTubeCollector:
                     "has_captions": content.get("caption") == "true",
                     "publication_date": snippet.get("publishedAt", ""),
                     "duration": parse_iso8601_duration(content.get("duration", "")),
+                    "duration_seconds": parse_iso8601_seconds(content.get("duration", "")),
                     "view_count": int(stats.get("viewCount", 0)) if "viewCount" in stats else None,
                     "like_count": int(stats.get("likeCount", 0)) if "likeCount" in stats else None,
                     "comment_count": int(stats.get("commentCount", 0)) if "commentCount" in stats else None,

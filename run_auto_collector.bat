@@ -33,7 +33,7 @@ if "%YT_KEY%"=="" (
 
 echo.
 echo Running autonomous collector, cleaner, damage-screenshot extractor, and local bundler...
-python -m data_engine.auto_collect_bundle --all-queries --local-videos-dir "%~dp0Consented_Mechanic_Videos"
+python -m data_engine.auto_collect_bundle --all-queries --include-cc-search --local-videos-dir "%~dp0Consented_Mechanic_Videos"
 
 echo.
 echo Done! Opening offline local viewer...

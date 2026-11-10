@@ -27,424 +27,438 @@ export function UnifiedOwnerDashboard({
   // Automotive mechanic diagnostic quick scenarios
   const diagnosticScenarios = [
     {
-      label: "Check Engine Light Blink + Missing",
-      urdu: "انجن مسنگ اور چیک لائٹ",
+      title: "Engine Misfire & CEL Blinking",
+      subtitle: "Toyota Corolla Altis 1.8L (2ZR-FE)",
+      urdu: "انجن مسنگ اور چیک لائٹ بلنک",
       query: "Toyota Corolla start nahi ho rahi aur check engine light blink kar rahi hai with missing issue",
-      tag: "P0301 / Ignition",
+      code: "P0301",
+      severity: "Critical",
       color: "#ef4444",
-      bg: "rgba(239, 68, 68, 0.12)",
+      icon: "⚡",
     },
     {
-      label: "Gaari Start Nahi Ho Rahi (Long Crank)",
-      urdu: "گاڑی سٹارٹ نہیں ہو رہی",
-      query: "gari start nahi ho rahi self le rahi hai lekin start nahi hoti fuel pump issue",
-      tag: "Fuel / Starter",
-      color: "#f59e0b",
-      bg: "rgba(245, 158, 11, 0.12)",
-    },
-    {
-      label: "Engine Overheating in Traffic",
+      title: "Overheating in City Traffic",
+      subtitle: "Honda Civic 1.8L i-VTEC",
       urdu: "ٹریفک میں انجن گرم ہو رہا ہے",
-      query: "Honda Civic overheating in traffic needle near red line radiator fan",
-      tag: "P0217 / Cooling",
-      color: "#ef4444",
-      bg: "rgba(239, 68, 68, 0.12)",
+      query: "Honda Civic overheating in traffic needle near red line radiator fan not turning on",
+      code: "P0217",
+      severity: "High Urgency",
+      color: "#f59e0b",
+      icon: "🌡️",
     },
     {
-      label: "AC Cooling Trip / Engine Load",
-      urdu: "اے سی کولنگ نہیں کر رہا",
-      query: "AC cooling trip kar raha hai aur engine par load le raha hai compressor awaz",
-      tag: "AC System",
+      title: "Hard Starting & Long Cranking",
+      subtitle: "Universal Multi-Model",
+      urdu: "گاڑی دیر سے سٹارٹ ہو رہی ہے",
+      query: "gari start hone me issue kar rahi hai self le rahi hai lekin start nahi hoti fuel pump",
+      code: "Fuel Pump",
+      severity: "Caution",
       color: "#3b82f6",
-      bg: "rgba(59, 130, 246, 0.12)",
+      icon: "🔑",
     },
     {
-      label: "Brake Grinding Awaz on Press",
-      urdu: "بریک سے رگڑ کی آواز",
-      query: "Brake press karne par grinding awaz aa rahi hai brake pads wear",
-      tag: "Braking / ABS",
+      title: "AC Trip & Poor Cooling on Idle",
+      subtitle: "Suzuki Cultus / Swift / City",
+      urdu: "اے سی کولنگ چھوڑ دیتا ہے",
+      query: "AC cooling trip kar raha hai aur engine par load le raha hai compressor awaz",
+      code: "AC Clutch",
+      severity: "Moderate",
       color: "#10b981",
-      bg: "rgba(16, 185, 129, 0.12)",
+      icon: "❄️",
     },
     {
-      label: "Delayed Gear Shifting / Jerk",
-      urdu: "گیئر شفٹ میں جھٹکا",
-      query: "Suzuki Alto AGS gear shifting me jerk le rahi hai clutch actuator error",
-      tag: "Drivetrain",
+      title: "Brake Grinding & Hard Pedal",
+      subtitle: "Toyota Yaris / Corolla GLi",
+      urdu: "بریک سے رگڑ کی آواز اور سختی",
+      query: "Brake press karne par grinding awaz aa rahi hai brake pads wear and rotor damage",
+      code: "Brake Pads",
+      severity: "Safety Inspection",
       color: "#8b5cf6",
-      bg: "rgba(139, 92, 246, 0.12)",
+      icon: "🛑",
+    },
+    {
+      title: "AGS Gear Shift Delay & Jerking",
+      subtitle: "Suzuki Alto 660cc AGS",
+      urdu: "گیئر شفٹنگ میں جھٹکا اور تاخیر",
+      query: "Suzuki Alto AGS gear shifting me jerk le rahi hai clutch actuator error",
+      code: "P0900",
+      severity: "Drivetrain",
+      color: "#ec4899",
+      icon: "⚙️",
     },
   ];
 
+  const cityMarkets = [
+    { name: "Lahore", market: "Montgomery Road & Badami Bagh" },
+    { name: "Karachi", market: "Plaza, Tariq Road & Shershah Auto Market" },
+    { name: "Rawalpindi", market: "Sultan Ka Khoo & I-9 Islamabad" },
+    { name: "Faisalabad", market: "Samundri Road Auto Market" },
+    { name: "Peshawar", market: "Ring Road Auto Market" },
+  ];
+
   return (
-    <div className="unified-dashboard" style={{ display: "grid", gap: "20px", maxWidth: "1280px", margin: "0 auto" }}>
+    <div className="website-container">
       
       {/* =========================================================================
-          TOP DIAGNOSTIC UTILITY BAR (REGIONAL REPAIR BENCHMARKS)
+          SECTION 1: HERO & BRAND PROPOSITION
           ========================================================================= */}
-      <div style={{
-        background: "linear-gradient(90deg, #0f172a 0%, #1e293b 100%)",
-        color: "#fff",
-        borderRadius: "12px",
-        padding: "10px 18px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: "10px",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.25)"
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <span style={{
-            background: "#2563eb",
-            color: "#fff",
-            fontSize: "11px",
-            fontWeight: "800",
-            padding: "3px 8px",
-            borderRadius: "4px",
-            letterSpacing: "0.05em",
-            textTransform: "uppercase"
-          }}>
-            AI Auto Diagnostics
-          </span>
-          <span style={{ fontSize: "12.5px", fontWeight: "600" }}>
-            AutoCare AI &bull; Multimodal Vehicle Health, Manual-Grounded RAG &amp; Repair Cost Intelligence
+      <section className="website-hero">
+        <div className="website-hero-badge">
+          <span>AI AUTOMOTIVE INTELLIGENCE</span>
+          <span>&bull;</span>
+          <span>ZERO HALLUCINATION RAG</span>
+          <span>&bull;</span>
+          <span>PAKISTANI MARKET BENCHMARKS</span>
+        </div>
+
+        <h1 className="website-hero-title">
+          Intelligent Vehicle Diagnostics &amp; <span>Consumer Repair Protection</span>
+        </h1>
+
+        <p className="website-hero-desc">
+          Describe symptoms naturally in Roman Urdu, Urdu, or English, or upload an OBD-II scanner photo. 
+          Our RAG engine cross-references official OEM service manuals to verify exact chapters and page numbers, 
+          providing transparent repair price bands across Pakistani auto markets to prevent workshop fraud.
+        </p>
+
+        {/* Persistent Active Vehicle Ribbon */}
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "16px",
+          background: "var(--surface-1)",
+          border: "1px solid var(--border)",
+          borderRadius: "16px",
+          padding: "12px 20px",
+          width: "100%",
+          maxWidth: "880px",
+          boxShadow: "var(--shadow-sm)",
+          marginTop: "8px"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "14px", textAlign: "left" }}>
+            <div style={{
+              width: "44px",
+              height: "44px",
+              borderRadius: "10px",
+              background: "var(--primary-dim)",
+              border: "1px solid var(--primary-border)",
+              color: "var(--primary)",
+              display: "grid",
+              placeItems: "center",
+              flexShrink: 0
+            }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12l1.5-4.3A2 2 0 018.4 6.4h7.2a2 2 0 011.9 1.3L19 12M4 12h16v4.5a1 1 0 01-1 1H5a1 1 0 01-1-1V12z"/>
+                <circle cx="7.5" cy="14.8" r="1.1" fill="currentColor"/>
+                <circle cx="16.5" cy="14.8" r="1.1" fill="currentColor"/>
+              </svg>
+            </div>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{
+                  fontSize: "10.5px",
+                  fontWeight: "700",
+                  color: "var(--success)",
+                  background: "var(--success-dim)",
+                  padding: "1px 6px",
+                  borderRadius: "4px"
+                }}>
+                  ACTIVE VEHICLE
+                </span>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
+                  {currentVehicle ? (currentVehicle.has_manual ? "✓ Factory Service Manual Loaded" : "Standard Mode") : ""}
+                </span>
+              </div>
+              <b style={{ fontSize: "15px", color: "var(--text-primary)" }}>
+                {currentVehicle?.label || "Toyota Corolla Altis Grande 1.8L (2022)"}
+              </b>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <div style={{ textAlign: "right" }}>
+              <span style={{ fontSize: "10px", color: "var(--text-muted)", display: "block", fontWeight: "700" }}>ODOMETER</span>
+              <b style={{ fontSize: "13.5px", color: "var(--text-primary)" }}>
+                {currentVehicle?.current_mileage ? `${currentVehicle.current_mileage.toLocaleString()} km` : "48,250 km"}
+              </b>
+            </div>
+
+            <div style={{ textAlign: "right" }}>
+              <span style={{ fontSize: "10px", color: "var(--text-muted)", display: "block", fontWeight: "700" }}>HEALTH INDEX</span>
+              <b style={{ fontSize: "13.5px", color: "var(--success)" }}>94% Optimal</b>
+            </div>
+
+            {vehicles.length > 1 ? (
+              <select
+                value={activeId || ""}
+                onChange={(e) => onPickVehicle(e.target.value)}
+                style={{ padding: "6px 10px", fontSize: "12px", borderRadius: "8px" }}
+              >
+                {vehicles.map((v) => (
+                  <option key={v.user_vehicle_id} value={v.user_vehicle_id}>{v.label}</option>
+                ))}
+              </select>
+            ) : (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => go("#/cars")}
+                style={{ fontSize: "11.5px", padding: "6px 10px" }}
+              >
+                + Add Car
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 2: PRIMARY DIAGNOSTIC CONSOLE (THE CENTERPIECE)
+          ========================================================================= */}
+      <section className="website-section">
+        <div className="website-console-card">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
+            <div>
+              <h2 style={{ fontSize: "18px", fontWeight: "800", color: "var(--text-primary)", margin: 0 }}>
+                Multimodal Diagnostic Terminal
+              </h2>
+              <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>
+                Type your vehicle symptom in plain English, Urdu, or Roman Urdu, or drag &amp; drop an OBD-II scanner photo
+              </span>
+            </div>
+
+            <div style={{ display: "flex", gap: "8px" }}>
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setDemoQuery("Toyota Corolla start nahi ho rahi aur check engine light blink kar rahi hai with missing issue")}
+                style={{ fontSize: "12px", padding: "6px 12px" }}
+              >
+                Corolla Misfire Demo
+              </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setDemoQuery("P0420")}
+                style={{ fontSize: "12px", padding: "6px 12px" }}
+              >
+                DTC P0420 Demo
+              </button>
+            </div>
+          </div>
+
+          <DiagnosticQuery
+            userVehicleId={currentVehicle ? activeId : null}
+            vehicleLabel={currentVehicle?.label}
+            initialQuery={demoQuery}
+            onRegisterVehicle={() => go("#/cars")}
+            onOpenDamage={() => go("#/damage")}
+          />
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 3: HOW IT WORKS — THE 4-STAGE ARCHITECTURE
+          ========================================================================= */}
+      <section className="website-section">
+        <div className="website-section-header">
+          <div>
+            <h2 className="website-section-title">
+              <span>🔬</span> How AutoCare AI Works Under the Hood
+            </h2>
+            <div className="website-section-subtitle">
+              A transparent, 4-stage pipeline that guarantees verifiable answers without AI hallucination
+            </div>
+          </div>
+          <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: "600" }}>
+            PUCIT BS Data Science FYP Architecture
           </span>
         </div>
 
-        {/* City Benchmark Selector & Emergency Rescue Pill */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px" }}>
-            <span style={{ color: "#94a3b8" }}>Repair Market:</span>
+        <div className="website-process-grid">
+          {[
+            {
+              step: "01",
+              title: "Vehicle Context Ingestion",
+              tag: "Taxonomy & Manual Grounding",
+              desc: "The pipeline locks onto your specific vehicle make, year, engine code (e.g. 2ZR-FE), and transmission. All queries are strictly scoped to the vehicle's official factory manual.",
+              color: "#3b82f6"
+            },
+            {
+              step: "02",
+              title: "Multilingual NLP Parsing",
+              tag: "Roman Urdu / Urdu / DTC OCR",
+              desc: "Colloquial Pakistani driver terminology (e.g. 'missing kar rahi hai', 'load le rahi hai') is translated into standard SAE J1979 fault codes through normalized tokenization.",
+              color: "#10b981"
+            },
+            {
+              step: "03",
+              title: "Manual-Grounded RAG Search",
+              tag: "Zero Hallucination Proof",
+              desc: "Dense semantic embeddings and BM25 lexical search query 17,390 vectors from factory manuals and certified mechanics. Every claim cites exact chapter and verified page numbers.",
+              color: "#f59e0b"
+            },
+            {
+              step: "04",
+              title: "Consumer Price Protection",
+              tag: "PKR Market Intelligence",
+              desc: "Compares Genuine OEM Dealership prices against verified local market spare parts and certified mechanic labor in Lahore, Karachi, and Islamabad to eliminate overcharging.",
+              color: "#ec4899"
+            },
+          ].map((item, idx) => (
+            <div key={idx} className="website-process-card">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{
+                  fontSize: "12px",
+                  fontWeight: "900",
+                  color: item.color,
+                  background: `${item.color}15`,
+                  padding: "2px 8px",
+                  borderRadius: "6px"
+                }}>
+                  STAGE {item.step}
+                </span>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: "600" }}>
+                  {item.tag}
+                </span>
+              </div>
+              <h3 style={{ fontSize: "15px", fontWeight: "700", color: "var(--text-primary)", margin: "4px 0 0" }}>
+                {item.title}
+              </h3>
+              <p style={{ fontSize: "12.5px", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 4: COMMON MECHANICAL FAULT SCENARIOS (INTERACTIVE CARDS)
+          ========================================================================= */}
+      <section className="website-section">
+        <div className="website-section-header">
+          <div>
+            <h2 className="website-section-title">
+              <span>🚗</span> Common Mechanical Symptoms &amp; Faults
+            </h2>
+            <div className="website-section-subtitle">
+              Click any scenario to automatically load its diagnostic trace, verified manual chapter, and repair estimate
+            </div>
+          </div>
+          <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
+            Corpus: 10,784 Verified Pakistani Repair Cases
+          </span>
+        </div>
+
+        <div className="website-scenario-grid">
+          {diagnosticScenarios.map((sc, idx) => (
+            <div
+              key={idx}
+              className="website-scenario-card"
+              onClick={() => {
+                setDemoQuery(sc.query);
+                window.scrollTo({ top: 380, behavior: "smooth" });
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <span style={{ fontSize: "20px" }}>{sc.icon}</span>
+                <span style={{
+                  fontSize: "10px",
+                  fontWeight: "700",
+                  color: sc.color,
+                  background: `${sc.color}15`,
+                  border: `1px solid ${sc.color}35`,
+                  padding: "1px 6px",
+                  borderRadius: "4px"
+                }}>
+                  {sc.severity}
+                </span>
+              </div>
+
+              <div>
+                <b style={{ fontSize: "14px", color: "var(--text-primary)", display: "block" }}>{sc.title}</b>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)", display: "block", marginTop: "1px" }}>{sc.subtitle}</span>
+              </div>
+
+              <div style={{
+                background: "var(--surface-2)",
+                padding: "6px 8px",
+                borderRadius: "6px",
+                fontSize: "11.5px",
+                color: "var(--text-secondary)",
+                fontFamily: "inherit"
+              }}>
+                <span style={{ color: sc.color, fontWeight: "700" }}>[{sc.code}]</span> {sc.urdu}
+              </div>
+
+              <span style={{ fontSize: "11px", color: "var(--primary)", fontWeight: "600", marginTop: "auto" }}>
+                Run Diagnostic Trace &rarr;
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 5: REGIONAL FAIR REPAIR PRICE ESTIMATOR & CONSUMER PROTECTION
+          ========================================================================= */}
+      <section className="website-section">
+        <div className="website-section-header">
+          <div>
+            <h2 className="website-section-title">
+              <span>💰</span> Fair Repair Cost Benchmark ({activeCity} Auto Markets)
+            </h2>
+            <div className="website-section-subtitle">
+              Transparent price bands for genuine OEM dealership parts vs. trusted local market spare parts &amp; certified labor
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Select City:</span>
             <select
               value={activeCity}
               onChange={(e) => setActiveCity(e.target.value)}
               style={{
-                background: "#334155",
-                color: "#f8fafc",
-                border: "1px solid rgba(255,255,255,0.2)",
-                padding: "3px 8px",
-                borderRadius: "6px",
-                fontSize: "12px",
-                cursor: "pointer"
+                background: "var(--surface-1)",
+                color: "var(--text-primary)",
+                border: "1px solid var(--border)",
+                padding: "6px 12px",
+                borderRadius: "8px",
+                fontSize: "12.5px"
               }}
             >
-              <option value="Lahore">Lahore (Montgomery Rd / Badami Bagh)</option>
-              <option value="Karachi">Karachi (Plaza / Tariq Rd / Shershah)</option>
-              <option value="Rawalpindi">Rawalpindi/Islamabad (Sultan Ka Khoo / I-9)</option>
-              <option value="Faisalabad">Faisalabad Auto Market</option>
-              <option value="Peshawar">Peshawar Auto Market</option>
-            </select>
-          </div>
-
-          <a
-            href="tel:1122"
-            style={{
-              background: "rgba(239, 68, 68, 0.2)",
-              border: "1px solid #ef4444",
-              color: "#f87171",
-              fontSize: "11.5px",
-              fontWeight: "700",
-              padding: "4px 10px",
-              borderRadius: "6px",
-              textDecoration: "none",
-              display: "flex",
-              alignItems: "center",
-              gap: "4px"
-            }}
-          >
-            <span>🚨</span> Emergency Tow / Rescue (1122)
-          </a>
-        </div>
-      </div>
-
-      {/* =========================================================================
-          STAGE 1: PERSISTENT VEHICLE CONTEXT & HEALTH RADAR
-          ========================================================================= */}
-      <div className="panel" style={{
-        padding: "18px 22px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        gap: "16px",
-        background: "var(--surface-1)",
-        border: "1px solid var(--border)",
-        borderRadius: "14px",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <div style={{
-            width: "52px",
-            height: "52px",
-            borderRadius: "12px",
-            background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
-            color: "#fff",
-            display: "grid",
-            placeItems: "center",
-            boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
-            flexShrink: 0
-          }}>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12l1.5-4.3A2 2 0 018.4 6.4h7.2a2 2 0 011.9 1.3L19 12M4 12h16v4.5a1 1 0 01-1 1H5a1 1 0 01-1-1V12z"/>
-              <circle cx="7.5" cy="14.8" r="1.1" fill="currentColor"/>
-              <circle cx="16.5" cy="14.8" r="1.1" fill="currentColor"/>
-            </svg>
-          </div>
-
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-              <span style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "5px",
-                fontSize: "11px",
-                fontWeight: "700",
-                color: "var(--success)",
-                background: "var(--success-dim)",
-                border: "1px solid var(--success-border)",
-                padding: "2px 8px",
-                borderRadius: "9999px"
-              }}>
-                <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--success)" }} />
-                ACTIVE VEHICLE TELEMETRY
-              </span>
-              <span style={{
-                fontSize: "11px",
-                fontWeight: "700",
-                color: "#3b82f6",
-                background: "rgba(59, 130, 246, 0.12)",
-                padding: "2px 8px",
-                borderRadius: "4px"
-              }}>
-                🛡️ Verified Factory Service Manual Loaded
-              </span>
-            </div>
-
-            <h2 style={{ margin: "4px 0 2px", fontSize: "19px", fontWeight: "800", color: "var(--text-primary)" }}>
-              {currentVehicle?.label || "Toyota Corolla Altis Grande 1.8L (2022)"}
-            </h2>
-            <div style={{ fontSize: "12px", color: "var(--text-muted)", display: "flex", gap: "10px" }}>
-              <span>Powertrain: <b>2ZR-FE Dual VVT-i</b></span>
-              <span>&bull;</span>
-              <span>Transmission: <b>Super CVT-i 7-Speed</b></span>
-            </div>
-          </div>
-        </div>
-
-        {/* Vehicle Health Metrics & Switcher */}
-        <div style={{ display: "flex", alignItems: "center", gap: "18px", flexWrap: "wrap" }}>
-          <div style={{ textAlign: "right", borderRight: "1px solid var(--border)", paddingRight: "18px" }}>
-            <span style={{ fontSize: "10.5px", color: "var(--text-muted)", display: "block", fontWeight: "700" }}>ODOMETER READING</span>
-            <b style={{ fontSize: "15px", color: "var(--text-primary)" }}>
-              {currentVehicle?.current_mileage ? `${currentVehicle.current_mileage.toLocaleString()} km` : "48,250 km"}
-            </b>
-          </div>
-
-          <div style={{ textAlign: "right", borderRight: "1px solid var(--border)", paddingRight: "18px" }}>
-            <span style={{ fontSize: "10.5px", color: "var(--text-muted)", display: "block", fontWeight: "700" }}>HEALTH INTEGRITY</span>
-            <b style={{ fontSize: "15px", color: "var(--success)" }}>94% Optimal</b>
-          </div>
-
-          {vehicles.length > 1 ? (
-            <select
-              value={activeId || ""}
-              onChange={(e) => onPickVehicle(e.target.value)}
-              style={{ padding: "8px 12px", fontSize: "13px", width: "auto", borderRadius: "8px" }}
-            >
-              {vehicles.map((v) => (
-                <option key={v.user_vehicle_id} value={v.user_vehicle_id}>{v.label}</option>
+              {cityMarkets.map((c) => (
+                <option key={c.name} value={c.name}>{c.name} ({c.market})</option>
               ))}
             </select>
-          ) : (
-            <button
-              type="button"
-              className="btn"
-              onClick={() => go("#/cars")}
-              style={{ fontSize: "12.5px", padding: "8px 14px" }}
-            >
-              + Add Vehicle
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* =========================================================================
-          COMMON AUTOMOTIVE FAULT SCENARIOS (ROMAN URDU / URDU QUICK-LOAD)
-          ========================================================================= */}
-      <div style={{
-        background: "var(--surface-1)",
-        border: "1px solid var(--border)",
-        borderRadius: "14px",
-        padding: "16px 20px"
-      }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontSize: "14px" }}>⚡</span>
-            <b style={{ fontSize: "13.5px", color: "var(--text-primary)" }}>
-              Quick Diagnostic Scenarios &amp; Mechanical Symptoms:
-            </b>
-            <span style={{ fontSize: "11.5px", color: "var(--text-muted)" }}>
-              (Click to test RAG manual retrieval &amp; triage)
-            </span>
-          </div>
-          <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
-            Corpus: 10,784 Cases &bull; 17,390 Knowledge Chunks
-          </span>
-        </div>
-
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          {diagnosticScenarios.map((s, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setDemoQuery(s.query)}
-              style={{
-                background: s.bg,
-                border: `1px solid ${s.color}40`,
-                color: "var(--text-primary)",
-                padding: "8px 14px",
-                borderRadius: "8px",
-                fontSize: "12px",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                transition: "all 0.15s ease"
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = s.color}
-              onMouseLeave={(e) => e.currentTarget.style.borderColor = `${s.color}40`}
-            >
-              <span style={{ fontWeight: "600" }}>{s.label}</span>
-              <span style={{
-                background: s.color,
-                color: "#fff",
-                fontSize: "10px",
-                fontWeight: "700",
-                padding: "1px 6px",
-                borderRadius: "4px"
-              }}>
-                {s.tag}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* =========================================================================
-          STAGE 2: THE PRIMARY MULTIMODAL DIAGNOSTIC ENGINE (VOICE / OCR / TEXT)
-          ========================================================================= */}
-      <div className="panel" style={{ padding: "22px 24px", borderRadius: "14px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "14px" }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
-              <span style={{
-                background: "#2563eb",
-                color: "#fff",
-                fontSize: "11px",
-                fontWeight: "800",
-                padding: "2px 8px",
-                borderRadius: "4px"
-              }}>
-                STAGE 2: AI MULTIMODAL INTAKE
-              </span>
-              <h3 style={{ margin: 0, fontSize: "17px", fontWeight: "800", color: "var(--text-primary)" }}>
-                Describe Symptom in Roman Urdu / Urdu or Scan Cluster Photo
-              </h3>
-            </div>
-            <p style={{ margin: 0, fontSize: "13px", color: "var(--text-secondary)" }}>
-              The query is cross-referenced with official factory service manuals (zero hallucination) and certified Pakistani mechanic solutions.
-            </p>
-          </div>
-
-          <div style={{ display: "flex", gap: "6px" }}>
-            <button
-              type="button"
-              className="btn"
-              onClick={() => setDemoQuery("Toyota Corolla start nahi ho rahi aur check engine light blink kar rahi hai with missing issue")}
-              style={{ fontSize: "12px", padding: "6px 10px" }}
-            >
-              Corolla Misfire Demo
-            </button>
-            <button
-              type="button"
-              className="btn"
-              onClick={() => setDemoQuery("P0420")}
-              style={{ fontSize: "12px", padding: "6px 10px" }}
-            >
-              DTC P0420 Demo
-            </button>
           </div>
         </div>
 
-        {/* Embedded Full Diagnostic Query Engine */}
-        <DiagnosticQuery
-          userVehicleId={currentVehicle ? activeId : null}
-          vehicleLabel={currentVehicle?.label}
-          initialQuery={demoQuery}
-          onRegisterVehicle={() => go("#/cars")}
-          onOpenDamage={() => go("#/damage")}
-        />
-      </div>
-
-      {/* =========================================================================
-          STAGE 3 & 4: FAIR REPAIR PRICE BENCHMARKS & COMPONENT HEALTH RADAR
-          ========================================================================= */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "20px" }}>
-        
-        {/* Left: Pakistani Spare Parts & Mechanic Labor Fair Price Benchmark */}
-        <div className="panel" style={{ padding: "22px", borderRadius: "14px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                <span style={{
-                  background: "var(--success-dim)",
-                  color: "var(--success)",
-                  fontSize: "11px",
-                  fontWeight: "800",
-                  padding: "2px 6px",
-                  borderRadius: "4px"
-                }}>
-                  STAGE 4: FRAUD PROTECTION
-                </span>
-                <b style={{ fontSize: "15px", color: "var(--text-primary)" }}>
-                  Fair Repair Cost Guide ({activeCity} Market Benchmark)
-                </b>
-              </div>
-              <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
-                Transparent benchmarks: OEM 3S Dealership vs Verified Local Market
-              </span>
-            </div>
-            <button
-              type="button"
-              className="link"
-              onClick={() => go("#/pricing")}
-              style={{ fontSize: "12px", fontWeight: "700" }}
-            >
-              All Parts &rarr;
-            </button>
-          </div>
-
+        <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "24px" }}>
+          {/* Pricing Table Card */}
           <div style={{
-            borderRadius: "10px",
+            background: "var(--surface-1)",
             border: "1px solid var(--border)",
-            overflow: "hidden",
-            fontSize: "12.5px"
+            borderRadius: "16px",
+            overflow: "hidden"
           }}>
             <div style={{
               display: "grid",
               gridTemplateColumns: "1.4fr 1fr 1fr 0.9fr",
-              padding: "9px 12px",
+              padding: "12px 16px",
               background: "var(--surface-2)",
               borderBottom: "1px solid var(--border)",
               color: "var(--text-secondary)",
-              fontSize: "11px",
-              fontWeight: "700",
-              textTransform: "uppercase"
+              fontSize: "11.5px",
+              fontWeight: "800",
+              textTransform: "uppercase",
+              letterSpacing: "0.04em"
             }}>
-              <span>Replacement Part</span>
-              <span>OEM Dealership</span>
-              <span>Local Market</span>
+              <span>Spare Part / Assembly</span>
+              <span>OEM 3S Dealership</span>
+              <span>Local Auto Market</span>
               <span>Labor Benchmark</span>
             </div>
 
@@ -452,122 +466,188 @@ export function UnifiedOwnerDashboard({
               <div key={idx} style={{
                 display: "grid",
                 gridTemplateColumns: "1.4fr 1fr 1fr 0.9fr",
-                padding: "10px 12px",
+                padding: "12px 16px",
                 borderBottom: idx < quickQuotes.length - 1 ? "1px solid var(--border)" : "none",
-                background: "var(--surface-1)",
-                alignItems: "center"
+                alignItems: "center",
+                fontSize: "13px"
               }}>
                 <div>
-                  <b style={{ color: "var(--text-primary)", fontSize: "12.5px", display: "block" }}>{q.part_name}</b>
-                  <small style={{ color: "var(--text-muted)", fontSize: "10.5px" }}>Est. Workshop Time: 1–2 Hours</small>
+                  <b style={{ color: "var(--text-primary)", display: "block" }}>{q.part_name}</b>
+                  <small style={{ color: "var(--text-muted)", fontSize: "11px" }}>Est. Workshop Time: 1–2 Hours</small>
                 </div>
-                <span style={{ color: "var(--primary)", fontWeight: "700", fontSize: "12px" }}>{q.oem_price_range_pkr}</span>
-                <span style={{ color: "var(--success)", fontWeight: "700", fontSize: "12px" }}>{q.aftermarket_price_range_pkr}</span>
-                <span style={{ color: "var(--text-muted)", fontSize: "12px", fontWeight: "600" }}>{q.labor_estimate_pkr}</span>
+                <span style={{ color: "var(--primary)", fontWeight: "700" }}>{q.oem_price_range_pkr}</span>
+                <span style={{ color: "var(--success)", fontWeight: "700" }}>{q.aftermarket_price_range_pkr}</span>
+                <span style={{ color: "var(--text-muted)", fontWeight: "600" }}>{q.labor_estimate_pkr}</span>
               </div>
             ))}
-          </div>
 
-          <div style={{
-            background: "rgba(37, 99, 235, 0.08)",
-            border: "1px solid rgba(37, 99, 235, 0.25)",
-            borderRadius: "8px",
-            padding: "10px 14px",
-            marginTop: "12px",
-            fontSize: "12px",
-            color: "var(--text-secondary)",
-            display: "flex",
-            gap: "8px",
-            alignItems: "flex-start"
-          }}>
-            <span style={{ fontSize: "16px" }}>🛡️</span>
-            <div>
-              <b style={{ color: "var(--text-primary)" }}>Consumer Protection Note:</b> In local auto markets (Montgomery Road Lahore, Plaza Karachi, Sultan Ka Khoo Rawalpindi), technicians may misquote imported parts as genuine OEM. Cross-check part numbers and price bands shown here before approving any job.
+            <div style={{
+              background: "rgba(37, 99, 235, 0.06)",
+              borderTop: "1px solid var(--border)",
+              padding: "14px 18px",
+              fontSize: "12.5px",
+              color: "var(--text-secondary)",
+              display: "flex",
+              gap: "10px",
+              alignItems: "flex-start"
+            }}>
+              <span style={{ fontSize: "18px" }}>🛡️</span>
+              <div>
+                <b style={{ color: "var(--text-primary)" }}>Consumer Protection Notice for {activeCity}:</b>
+                {" "}In markets like Montgomery Road (Lahore) or Plaza (Karachi), unscrupulous workshops frequently misquote Chinese aftermarket parts as genuine Japanese Kabli. Always cross-check the verified part numbers and price bands shown here before approving any job.
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Right: Subsystem Health Radar & Workshop Directory */}
-        <div className="panel" style={{ padding: "22px", borderRadius: "14px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-              <div>
-                <b style={{ fontSize: "15px", color: "var(--text-primary)" }}>Subsystem Health Radar</b>
-                <span style={{ fontSize: "12px", color: "var(--text-muted)", display: "block" }}>
-                  Real-time component health status for {currentVehicle?.label?.split(" ")[1] || "Corolla"}
+          {/* Subsystem Health Card */}
+          <div style={{
+            background: "var(--surface-1)",
+            border: "1px solid var(--border)",
+            borderRadius: "16px",
+            padding: "22px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between"
+          }}>
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                <div>
+                  <h3 style={{ fontSize: "16px", fontWeight: "800", color: "var(--text-primary)", margin: 0 }}>
+                    Vehicle Health Radar
+                  </h3>
+                  <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
+                    Real-time status for {currentVehicle?.label?.split(" ")[1] || "Corolla"}
+                  </span>
+                </div>
+                <span style={{
+                  background: "var(--success-dim)",
+                  color: "var(--success)",
+                  fontSize: "12px",
+                  fontWeight: "800",
+                  padding: "3px 10px",
+                  borderRadius: "9999px"
+                }}>
+                  94% Overall Health
                 </span>
               </div>
-              <span style={{
-                background: "var(--success-dim)",
-                color: "var(--success)",
-                fontSize: "11px",
-                fontWeight: "700",
-                padding: "2px 8px",
-                borderRadius: "9999px"
-              }}>
-                94% Optimal
-              </span>
+
+              <div style={{ display: "grid", gap: "10px" }}>
+                {[
+                  { name: "Engine & Ignition Circuit", score: "96%", status: "Optimal", color: "var(--success)" },
+                  { name: "Transmission & Drivetrain", score: "92%", status: "Fluid Normal", color: "var(--success)" },
+                  { name: "Cooling Circuit & Thermostat", score: "78%", status: "Flush in 1,500 km", color: "var(--warning)" },
+                  { name: "Brake Hydraulics & ABS", score: "88%", status: "4.5mm remaining", color: "var(--success)" },
+                  { name: "AC Compressor & Climate", score: "94%", status: "Operating Optimal", color: "var(--success)" },
+                ].map((sub, i) => (
+                  <div key={i} style={{
+                    padding: "10px 14px",
+                    borderRadius: "10px",
+                    background: "var(--surface-2)",
+                    border: "1px solid var(--border)",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                  }}>
+                    <div>
+                      <b style={{ fontSize: "13px", color: "var(--text-primary)", display: "block" }}>{sub.name}</b>
+                      <small style={{ color: "var(--text-muted)", fontSize: "11px" }}>{sub.status}</small>
+                    </div>
+                    <b style={{ fontSize: "14px", color: sub.color }}>{sub.score}</b>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div style={{ display: "grid", gap: "10px" }}>
-              {[
-                { name: "Engine & Ignition Circuit", score: "96%", status: "Optimal", color: "var(--success)" },
-                { name: "Transmission & Drivetrain", score: "92%", status: "Fluid Normal", color: "var(--success)" },
-                { name: "Cooling Circuit & Thermostat", score: "78%", status: "Flush in 1,500 km", color: "var(--warning)" },
-                { name: "Brake Hydraulics & ABS", score: "88%", status: "4.5mm pad remaining", color: "var(--success)" },
-                { name: "AC Compressor & Condenser", score: "94%", status: "Operating Optimal", color: "var(--success)" },
-              ].map((sub, i) => (
-                <div key={i} style={{
-                  padding: "9px 12px",
-                  borderRadius: "8px",
-                  background: "var(--surface-2)",
-                  border: "1px solid var(--border)",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center"
-                }}>
-                  <div>
-                    <b style={{ fontSize: "12.5px", color: "var(--text-primary)", display: "block" }}>{sub.name}</b>
-                    <small style={{ color: "var(--text-muted)", fontSize: "11px" }}>{sub.status}</small>
-                  </div>
-                  <div style={{ textAlign: "right" }}>
-                    <b style={{ fontSize: "13px", color: sub.color }}>{sub.score}</b>
-                  </div>
-                </div>
-              ))}
+            <div style={{
+              borderTop: "1px solid var(--border)",
+              paddingTop: "16px",
+              marginTop: "16px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}>
+              <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
+                Need full physical workshop inspection?
+              </span>
+              <button
+                type="button"
+                className="btn primary"
+                onClick={() => go("#/pricing")}
+                style={{ fontSize: "12px", padding: "6px 14px" }}
+              >
+                Find Partner Workshops
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 6: WEBSITE FOOTER & ACADEMIC SHOWCASE
+          ========================================================================= */}
+      <footer style={{
+        borderTop: "1px solid var(--border)",
+        paddingTop: "32px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px"
+      }}>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          flexWrap: "wrap",
+          gap: "24px"
+        }}>
+          <div style={{ maxWidth: "420px" }}>
+            <b style={{ fontSize: "16px", color: "var(--text-primary)", display: "block" }}>AutoCare AI</b>
+            <p style={{ fontSize: "12.5px", color: "var(--text-muted)", lineHeight: 1.6, margin: "6px 0 0" }}>
+              A Final Year Project developed at the Department of Data Science, Punjab University College of Information Technology (PUCIT). 
+              Engineered to eliminate hallucination in consumer automotive repair through factory manual grounding and localized market price benchmarking.
+            </p>
+          </div>
+
+          <div>
+            <b style={{ fontSize: "13px", color: "var(--text-primary)", display: "block", marginBottom: "8px" }}>Project Engineering Team:</b>
+            <div style={{ fontSize: "12px", color: "var(--text-secondary)", display: "grid", gap: "4px" }}>
+              <span>&bull; <b>Talha Ali Bhatti</b> (Roll No: bsdsf23a016) — Distributed Storage &amp; Streaming</span>
+              <span>&bull; <b>Muhammad Abdullah</b> (Roll No: bsdsf23a032) — Data Engineering &amp; Analytics</span>
+              <span>&bull; <b>Abdullah</b> (Roll No: bsdsf23a035) — Distributed Algorithms &amp; RAG Systems</span>
             </div>
           </div>
 
-          {/* Regional Verified Workshop Directory */}
-          <div style={{
-            borderTop: "1px solid var(--border)",
-            paddingTop: "14px",
-            marginTop: "14px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: "12px"
-          }}>
-            <div>
-              <span style={{ color: "var(--text-primary)", fontWeight: "600", display: "block" }}>
-                Need physical inspection in {activeCity}?
-              </span>
-              <span style={{ color: "var(--text-muted)", fontSize: "11px" }}>
-                14 AutoCare-verified partner workshops available
-              </span>
+          <div>
+            <b style={{ fontSize: "13px", color: "var(--text-primary)", display: "block", marginBottom: "8px" }}>Emergency Assistance:</b>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", display: "grid", gap: "6px" }}>
+              <a href="tel:1122" style={{ color: "#ef4444", textDecoration: "none", fontWeight: "700" }}>
+                🚨 Highway &amp; Motorway Rescue: 1122
+              </a>
+              <span>Toyota 3S Emergency: 0800-TOYOTA</span>
+              <span>Honda Customer Assistance: 0800-HONDA</span>
             </div>
-            <button
-              type="button"
-              className="btn primary"
-              onClick={() => go("#/pricing")}
-              style={{ fontSize: "12px", padding: "8px 14px", borderRadius: "8px" }}
-            >
-              View Verified Workshops
-            </button>
           </div>
         </div>
 
-      </div>
+        <div style={{
+          borderTop: "1px solid var(--border)",
+          paddingTop: "16px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "12px",
+          fontSize: "12px",
+          color: "var(--text-muted)"
+        }}>
+          <span>&copy; 2026 AutoCare AI. All rights reserved. BSDS Final Year Project.</span>
+          <div style={{ display: "flex", gap: "16px" }}>
+            <a href="#/dashboard" style={{ color: "var(--text-muted)", textDecoration: "none" }}>Diagnostic Console</a>
+            <a href="#/pricing" style={{ color: "var(--text-muted)", textDecoration: "none" }}>PKR Price Guide</a>
+            <a href="#/cars" style={{ color: "var(--text-muted)", textDecoration: "none" }}>My Garage</a>
+            <a href="#/settings" style={{ color: "var(--text-muted)", textDecoration: "none" }}>System Settings</a>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );

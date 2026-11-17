@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import DiagnosticQuery from "../components/DiagnosticQuery";
+import LiveMechanicDispatch from "../components/LiveMechanicDispatch";
 import { get, post } from "../api/client";
 import { owner } from "../api/diagnose";
 
@@ -583,7 +584,19 @@ export function UnifiedOwnerDashboard({
       </section>
 
       {/* =========================================================================
-          SECTION 6: WEBSITE FOOTER & ACADEMIC SHOWCASE
+          SECTION 6: LIVE FAULT-TO-SPECIALIST DISPATCH & ROUTING
+          ========================================================================= */}
+      <section className="website-section">
+        <LiveMechanicDispatch
+          dtcCode="P0217"
+          symptomQuery="engine overheating radiator cooling problem"
+          initialCity={activeCity}
+          vehicleMake={currentVehicle?.make || "Toyota"}
+        />
+      </section>
+
+      {/* =========================================================================
+          SECTION 7: WEBSITE FOOTER & ACADEMIC SHOWCASE
           ========================================================================= */}
       <footer style={{
         borderTop: "1px solid var(--border)",

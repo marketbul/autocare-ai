@@ -142,8 +142,10 @@ def _session(user: dict) -> dict:
 
 
 @app.get("/api/v1/health")
+@app.get("/api/status")
+@app.get("/api/health")
 async def health() -> dict:
-    return {"status": "ok"}
+    return {"status": "ok", "app": "AutoCare AI", "dispatch_engine": "active"}
 
 
 @app.post("/api/v1/auth/register")

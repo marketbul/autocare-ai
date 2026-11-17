@@ -6,6 +6,7 @@
 //   userVehicleId = null  -> the API answers 428 and we show the "choose your car" prompt (AC0)
 import { useEffect, useRef, useState } from "react";
 import { askDiagnosticQuestion, DiagnoseApiError, downloadReportPdf, readCodeFromPhoto } from "../api/diagnose";
+import LiveMechanicDispatch from "./LiveMechanicDispatch";
 import "./DiagnosticQuery.css";
 
 const LANG_LABEL = { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" };
@@ -289,6 +290,14 @@ function Readout({ result, vehicleLabel }) {
       )}
 
       <Trace result={result} />
+
+      {/* Live Fault-to-Specialist Mechanic Dispatch & Routing */}
+      <LiveMechanicDispatch
+        dtcCode={result.signals?.dtc_code || (result.triage?.category_label)}
+        symptomQuery={result.signals?.retrieval_query || ""}
+        initialCity="Lahore"
+        vehicleMake={result.vehicle?.make || "Toyota"}
+      />
 
       <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
         <button

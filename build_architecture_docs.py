@@ -60,13 +60,13 @@ def build_docx_architecture(output_path):
     # Document Title
     p_title = doc.add_paragraph()
     p_title.paragraph_format.space_before = Pt(4); p_title.paragraph_format.space_after = Pt(2)
-    r = p_title.add_run("COMPLETE SYSTEM ARCHITECTURE DOCUMENT\nAutoCare AI / AutoData Lake")
+    r = p_title.add_run("SYSTEM ARCHITECTURE & SCHEMA WORKFLOW SPECIFICATION\nAutoCare AI / AutoData Lake")
     r.font.name = 'Arial'; r.font.size = Pt(18); r.font.bold = True; r.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
 
     # Subtitle
     p_sub = doc.add_paragraph()
     p_sub.paragraph_format.space_after = Pt(12)
-    r = p_sub.add_run("9-Layer Distributed Big Data Lakehouse, Causal Transformer AI & Fault-to-Mechanic Dispatch System\n[Written in Simple, Clear English for Student Presentations and Technical Defense]")
+    r = p_sub.add_run("Complete End-to-End Visual Schema, Arrow Workflows, Database Tables & Pipeline Transitions\n[Written in Clear, Student-Friendly English for Technical Presentations & FYP Defense]")
     r.font.size = Pt(10); r.font.italic = True; r.font.color.rgb = RGBColor(0x64, 0x74, 0x8B)
 
     # Metadata Table
@@ -76,7 +76,7 @@ def build_docx_architecture(output_path):
         ("Institution", "Punjab University College of Information Technology (PUCIT), Lahore"),
         ("Project Supervisor", "Dr. Khurram Shehzad (Associate Professor, Department of Data Science)"),
         ("Project Team (5 Members)", "1. Abdullah (035) — Lead AI & System Architect\n2. Talha Ali Bhatti (016) — Distributed Storage & Ingestion Lead\n3. Danial Hameed (014) — Data Engineering & Multilingual Lead\n4. Ahmad Zahid (033) — ML Triage & Safety Verification Lead\n5. Muhammad Abdullah (032) — Web Portal UI & Market Pricing Lead"),
-        ("Architecture Pattern", "Decentralized 9-Layer Big Data Streaming Lakehouse + Hybrid RAG + Causal Transformer LM"),
+        ("Workflow Structure", "End-to-End Pipeline with Complete Data Schemas (Bronze -> Silver -> Gold -> Analytics -> AI -> Dispatch)"),
         ("Target Vehicle Fleet", "Toyota Corolla (2014-2025), Honda Civic (2015-2025), Suzuki Swift (2015-2025)")
     ]
     for i, (k, v) in enumerate(meta_info):
@@ -89,144 +89,176 @@ def build_docx_architecture(output_path):
         set_cell_margins(c0, 40, 40, 60, 60); set_cell_margins(c1, 40, 40, 60, 60)
     set_table_borders(t_meta)
 
-    # SECTION 1: ARCHITECTURE OVERVIEW (SIMPLE ENGLISH)
+    # SECTION 1: MASTER ARROW WORKFLOW (VISUAL PIPELINE)
     doc.add_paragraph().paragraph_format.space_before = Pt(12)
     h = doc.add_paragraph()
-    r = h.add_run("1. HIGH-LEVEL ARCHITECTURE OVERVIEW (PLAIN ENGLISH)")
+    r = h.add_run("1. MASTER SYSTEM ARROW WORKFLOW (STEP-BY-STEP DATA FLOW)")
     r.font.name = 'Arial'; r.font.size = Pt(13); r.font.bold = True; r.font.color.rgb = RGBColor(0x02, 0x84, 0xC7)
 
-    p_intro = doc.add_paragraph()
-    p_intro.add_run(
-        "AutoCare AI is built as a modular 9-layer software system. Each layer has one specific job, and they all work together "
-        "like a team of specialists. When a driver has a car problem, they write it in simple words (English, Urdu, or Roman Urdu). "
-        "The system checks 45 official car handbooks to find the exact verified solution, calculates fair repair costs in PKR, and shows "
-        "the best certified local mechanic on a map. At the same time, it can receive 10,000 live car sensor signals per second without freezing."
-    )
+    workflow_boxes = [
+        ("STAGE 1: DATA INGESTION & USER INPUT",
+         "🚗 [Car CAN-bus Sensors] (10,000 msgs/s)  ──► [Async Telemetry Streamer] (Talha)\n"
+         "📖 [45 Official OEM Manuals] (PDFs)       ──► [PDF Text Chunker & Parser] (Danial)\n"
+         "👤 [Car Driver Input] (Roman Urdu Query)   ──► [React 18 Web Terminal] (M. Abdullah)"),
+        
+        ("STAGE 2: STREAMING MESSAGE QUEUE & ROUTING",
+         "──► [Apache Kafka Cluster (KRaft)] ──► Partitioned by VIN Hash\n"
+         "──► [Consistent Hash Ring] (160 Virtual Nodes) (Abdullah) ──► Distributes load evenly"),
 
-    # 9 LAYERS EXPLAINED
-    layers_data = [
-        ("Layer 1: Multi-Modal Data Sources", "Inputs to the System", "Live OBD-II car sensors (RPM, speed, temperature), 45 official service handbooks (Corolla, Civic, Swift), mechanic videos, and PakWheels discussion posts.", "Danial Hameed & Talha Ali Bhatti"),
-        ("Layer 2: Data Ingestion & Parsers", "Getting Data In", "High-speed Python scripts that parse PDF manuals into clean text chunks and read live sensor streams without packet loss.", "Talha Ali Bhatti & Danial Hameed"),
-        ("Layer 3: Message Queue (Apache Kafka)", "The Digital Highway", "A fast messaging system running in KRaft mode that streams 10,000 sensor messages per second and spreads them across topics.", "Talha Ali Bhatti"),
-        ("Layer 4: Distributed Storage (MinIO & Parquet)", "Safe & Compressed Storage", "MinIO S3 stores raw files. PyArrow compresses sensor streams into Snappy Parquet files, saving over 75% hard drive space.", "Talha Ali Bhatti"),
-        ("Layer 5: In-Memory Analytics (DuckDB)", "Super-Fast Search", "DuckDB runs directly in computer memory (RAM) to search through 500,000 car sensor records in under 80 milliseconds.", "Muhammad Abdullah & Talha"),
-        ("Layer 6: Safety Triage & Anomaly Detection", "Catching Dangers", "Cost-sensitive classifier penalizes missed brake or overheating faults at 10x penalty. Spots strange sensor behavior before a breakdown.", "Ahmad Zahid"),
-        ("Layer 7: AI & Reasoning (Causal Transformer)", "The Smart AI Brain", "Our custom 1.32M parameter PyTorch Transformer AI and RAG engine that reads manuals and provides answers with exact page numbers.", "Abdullah (Leader)"),
-        ("Layer 8: Backend Server (FastAPI)", "The Traffic Controller", "Asynchronous Python server with JWT security that coordinates requests between the website, the database, and the AI.", "Abdullah (Leader)"),
-        ("Layer 9: User Interface & Map Dispatch", "What the User Sees", "A responsive React 18 single-page website with an interactive diagnostic terminal, fair PKR price estimator, and live Leaflet mechanic map.", "Muhammad Abdullah")
+        ("STAGE 3: 4-TIER STORAGE & COMPRESSION LAKEHOUSE",
+         "──► [Bronze Tier: MinIO S3] ──► SHA-256 CAS Deduplication deletes duplicate files (>30% disk saved)\n"
+         "──► [Silver Tier: Snappy Parquet] ──► Columnar storage sorted by make/model/year (>75% space saved)\n"
+         "──► [Gold Tier: Relational DB] ──► SQLite/PostgreSQL (Users, Vehicles, Diagnosis, Dispatch)\n"
+         "──► [RAM Cache: Bloom Filter] ──► 65,536-bit Counting Bloom Filter checks fault code in 1 ms"),
+
+        ("STAGE 4: IN-MEMORY ANALYTICS & MACHINE LEARNING TRIAGE",
+         "──► [DuckDB In-Memory OLAP] ──► Scans 500k rows in <80ms for fleet moving averages\n"
+         "──► [Cost-Sensitive Safety Triage ML] ──► 10x safety penalty matrix for brakes & overheating (Ahmad)\n"
+         "──► [Platt Scaling Calibration] ──► Aligns confidence probabilities to real-world accuracy (ECE < 0.05)"),
+
+        ("STAGE 5: GROUNDED AI & RAG CITATION ENGINE",
+         "──► [Subword BPE Tokenizer] (4,000 Vocab) ──► Converts English/Urdu/Roman Urdu slang (Abdullah)\n"
+         "──► [Hybrid BM25 + Dense RAG] ──► Retrieves exact 3 manual passages from 45 handbooks (Danial)\n"
+         "──► [PyTorch Causal Transformer LM] (1.32M Params) ──► Generates answer with exact page citations\n"
+         "──► [Selective Abstention Gate] ──► If confidence < 0.35, politely refuses to guess"),
+
+        ("STAGE 6: PRICING, FRAUD CHECK & MECHANIC DISPATCH",
+         "──► [NLI Repair Bill Verifier] ──► Cross-checks mechanic estimates against OEM manuals (Ahmad)\n"
+         "──► [Pakistani PKR Pricing Engine] ──► Low/Median/High parts cost in Lahore & Karachi (M. Abdullah)\n"
+         "──► [Fault-to-Specialist Dispatch Engine] ──► Composite Score = (40% Skill) + (30% Dist) + (20% Rating) + (10% Queue)\n"
+         "──► [OpenStreetMap Live Map] ──► Shows closest certified specialist workshop with directions to Driver")
     ]
 
-    t_layers = doc.add_table(rows=len(layers_data)+1, cols=4)
-    t_layers.alignment = WD_TABLE_ALIGNMENT.CENTER
-    l_headers = ["Layer Name", "What It Does (Simple)", "Key Technologies & Components", "Responsible Lead"]
-    for j, h_text in enumerate(l_headers):
-        c = t_layers.rows[0].cells[j]
-        c.paragraphs[0].text = h_text; c.paragraphs[0].runs[0].font.bold = True; c.paragraphs[0].runs[0].font.size = Pt(8.5)
-        set_cell_background(c, "0F172A"); c.paragraphs[0].runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
-        set_cell_margins(c, 40, 40, 50, 50)
+    for stage_title, stage_content in workflow_boxes:
+        p_st = doc.add_paragraph()
+        p_st.paragraph_format.space_before = Pt(4); p_st.paragraph_format.space_after = Pt(2)
+        r_title = p_st.add_run(f"📌 {stage_title}")
+        r_title.font.bold = True; r_title.font.size = Pt(10); r_title.font.color.rgb = RGBColor(0x02, 0x84, 0xC7)
+        
+        p_box = doc.add_paragraph()
+        p_box.paragraph_format.space_after = Pt(6)
+        r_code = p_box.add_run(stage_content)
+        r_code.font.name = 'Consolas'; r_code.font.size = Pt(8.5); r_code.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
 
-    for r_idx, (p_name, p_role, p_tech, p_lead) in enumerate(layers_data):
-        row = t_layers.rows[r_idx+1]
-        for col_idx, val in enumerate([p_name, p_role, p_tech, p_lead]):
-            c = row.cells[col_idx]
-            c.paragraphs[0].text = val; c.paragraphs[0].runs[0].font.size = Pt(8)
-            if col_idx == 0:
-                c.paragraphs[0].runs[0].font.bold = True
-            bg = "F8FAFC" if r_idx % 2 == 1 else "FFFFFF"
-            set_cell_background(c, bg)
-            set_cell_margins(c, 35, 35, 50, 50)
-    set_table_borders(t_layers)
-
-    # SECTION 2: END-TO-END DATA FLOW
+    # SECTION 2: COMPLETE DATABASE SCHEMAS (ALL 4 TIERS)
     doc.add_paragraph().paragraph_format.space_before = Pt(12)
     h2 = doc.add_paragraph()
-    r = h2.add_run("2. HOW DATA MOVES THROUGH THE SYSTEM (STEP-BY-STEP)")
+    r = h2.add_run("2. COMPLETE DATA SCHEMAS ACROSS ALL TIERS")
     r.font.name = 'Arial'; r.font.size = Pt(13); r.font.bold = True; r.font.color.rgb = RGBColor(0x02, 0x84, 0xC7)
 
-    flow_steps = [
-        ("Step 1: Driver Asks a Question", "The driver visits the website and writes their issue: 'Mera radiator pani boil kar raha hai aur car garam ho rahi hai' (My radiator is boiling water and the car is overheating)."),
-        ("Step 2: Language & Word Tokenization", "Our custom Subword BPE Tokenizer breaks down the words into tokens from our 4,000-word dictionary covering English and Roman Urdu slang terms."),
-        ("Step 3: Safety Triage Check", "Ahmad's triage classifier checks the urgency. Overheating is flagged as 'CRITICAL DANGER' with a 10x safety priority penalty, warning the driver to turn off the engine immediately."),
-        ("Step 4: Manual Search (RAG Engine)", "Danial's search engine scans 45 official service manuals and retrieves the exact 3 passages explaining radiator boiling and cooling system pressure caps."),
-        ("Step 5: Verified AI Generation", "Abdullah's 1.32M parameter PyTorch Transformer writes a clear explanation in simple words, citing: 'Corolla Manual, Section 14-2, Page 384'."),
-        ("Step 6: Price & Fraud Verification", "Muhammad Abdullah's pricing engine shows the driver the fair market price in PKR: radiator cap (Rs. 1,200 - 1,800), coolant replacement (Rs. 2,500 - 3,500). If a mechanic asks for Rs. 50,000 for an engine overhaul, it flags it as suspicious."),
-        ("Step 7: Smart Mechanic Dispatch", "The system calculates the Haversine distance and routes the car to the closest certified 'Engine & Cooling Specialist' workshop on a live map.")
+    # SCHEMA 1: BRONZE TIER (JSON STREAM)
+    doc.add_paragraph().paragraph_format.space_before = Pt(4)
+    h_s1 = doc.add_paragraph()
+    r = h_s1.add_run("Schema A: Bronze Tier — Raw CAN-Bus Telemetry JSON (MinIO S3)")
+    r.font.bold = True; r.font.size = Pt(10.5); r.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
+
+    bronze_fields = [
+        ("timestamp", "TIMESTAMP (ISO 8601)", "Exact sensor reading time (e.g. '2026-11-17T08:30:00.125Z')"),
+        ("vin", "STRING (17 chars)", "Vehicle Identification Number (e.g. 'NZE140-5021984')"),
+        ("make", "STRING", "Manufacturer (e.g. 'Toyota')"),
+        ("model", "STRING", "Car model (e.g. 'Corolla Altis')"),
+        ("year", "INTEGER", "Model year (e.g. 2021)"),
+        ("engine_rpm", "INTEGER", "Engine revolutions per minute (e.g. 2450 RPM)"),
+        ("speed_kmh", "FLOAT", "Vehicle road speed (e.g. 68.5 km/h)"),
+        ("coolant_temp_c", "FLOAT", "Engine coolant temperature (e.g. 104.2 °C - Overheating!)"),
+        ("fuel_trim_pct", "FLOAT", "Short-term fuel trim percentage (e.g. +14.2%)"),
+        ("maf_rate_gs", "FLOAT", "Mass Air Flow sensor rate in grams/sec (e.g. 18.4 g/s)"),
+        ("active_dtc_codes", "ARRAY<STRING>", "Active Diagnostic Trouble Codes (e.g. ['P0217', 'P0300'])"),
+        ("sha256_cas_hash", "STRING (64 hex)", "Cryptographic payload fingerprint for duplicate rejection")
     ]
-
-    for title, desc in flow_steps:
-        p_st = doc.add_paragraph()
-        r_st = p_st.add_run(f"👉 {title}: ")
-        r_st.font.bold = True; r_st.font.size = Pt(9.5); r_st.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
-        p_st.add_run(desc).font.size = Pt(9)
-        p_st.paragraph_format.space_after = Pt(3)
-
-    # SECTION 3: STORAGE TIERS & BIG DATA ARCHITECTURE
-    doc.add_paragraph().paragraph_format.space_before = Pt(12)
-    h3 = doc.add_paragraph()
-    r = h3.add_run("3. DATABASE & STORAGE ARCHITECTURE (4-TIER DESIGN)")
-    r.font.name = 'Arial'; r.font.size = Pt(13); r.font.bold = True; r.font.color.rgb = RGBColor(0x02, 0x84, 0xC7)
-
-    storage_tiers = [
-        ("Bronze Tier (Raw Landing)", "MinIO S3 Buckets", "Stores raw incoming JSON telemetry logs and raw PDF files exactly as they arrive. Uses SHA-256 Content-Addressable Storage (CAS) to delete duplicate files automatically (saves 30%+ storage)."),
-        ("Silver Tier (Clean Lakehouse)", "Snappy Parquet Files", "Stores clean, structured telemetry files organized into neat folders: /telemetry/make=Toyota/model=Corolla/year=2020/. Uses Snappy columnar compression to save over 75% hard drive space."),
-        ("Gold Tier (Relational DB)", "SQLite / PostgreSQL", "Stores business entities: registered users, car profiles, diagnostic session history, verified workshops list, and dispatch tickets."),
-        ("Fast Cache Tier", "In-Memory Bloom Filter & Redis", "Uses a 65,536-bit Counting Bloom Filter with 4 hash functions to verify whether an OBD-II diagnostic code is valid in 1 millisecond.")
-    ]
-
-    t_store = doc.add_table(rows=len(storage_tiers)+1, cols=3)
-    t_store.alignment = WD_TABLE_ALIGNMENT.CENTER
-    s_headers = ["Storage Tier", "Technology Used", "How It Works & Benefit"]
-    for j, h_text in enumerate(s_headers):
-        c = t_store.rows[0].cells[j]
+    t_b = doc.add_table(rows=len(bronze_fields)+1, cols=3)
+    t_b.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for j, h_text in enumerate(["Field Name", "Data Type", "Description & Practical Example"]):
+        c = t_b.rows[0].cells[j]
         c.paragraphs[0].text = h_text; c.paragraphs[0].runs[0].font.bold = True; c.paragraphs[0].runs[0].font.size = Pt(8.5)
         set_cell_background(c, "0F172A"); c.paragraphs[0].runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
-        set_cell_margins(c, 40, 40, 50, 50)
-
-    for r_idx, (t_name, t_tech, t_desc) in enumerate(storage_tiers):
-        row = t_store.rows[r_idx+1]
-        for col_idx, val in enumerate([t_name, t_tech, t_desc]):
+        set_cell_margins(c, 30, 30, 40, 40)
+    for r_idx, (fn, dt, desc) in enumerate(bronze_fields):
+        row = t_b.rows[r_idx+1]
+        for col_idx, val in enumerate([fn, dt, desc]):
             c = row.cells[col_idx]
             c.paragraphs[0].text = val; c.paragraphs[0].runs[0].font.size = Pt(8)
             if col_idx == 0:
                 c.paragraphs[0].runs[0].font.bold = True
             bg = "F8FAFC" if r_idx % 2 == 1 else "FFFFFF"
-            set_cell_background(c, bg)
-            set_cell_margins(c, 35, 35, 50, 50)
-    set_table_borders(t_store)
+            set_cell_background(c, bg); set_cell_margins(c, 25, 25, 40, 40)
+    set_table_borders(t_b)
 
-    # SECTION 4: FAULT-TO-MECHANIC DISPATCH ARCHITECTURE
+    # SCHEMA 2: SILVER TIER (PARQUET PARTITIONED LAKEHOUSE)
+    doc.add_paragraph().paragraph_format.space_before = Pt(8)
+    h_s2 = doc.add_paragraph()
+    r = h_s2.add_run("Schema B: Silver Tier — Snappy Parquet Columnar Lakehouse Schema")
+    r.font.bold = True; r.font.size = Pt(10.5); r.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
+
+    parquet_desc = doc.add_paragraph()
+    parquet_desc.add_run(
+        "Partition Path on Disk: /lakehouse/telemetry/make={make}/model={model}/year={year}/region={region}/\n"
+        "Storage Engine: PyArrow with Snappy Compression (75%+ disk savings). Scanned directly by DuckDB in RAM."
+    )
+    parquet_desc.runs[0].font.size = Pt(8.5); parquet_desc.runs[0].font.italic = True
+
+    # SCHEMA 3: GOLD TIER (RELATIONAL APPLICATION DATABASE)
+    doc.add_paragraph().paragraph_format.space_before = Pt(8)
+    h_s3 = doc.add_paragraph()
+    r = h_s3.add_run("Schema C: Gold Tier — Relational Tables (SQLite / PostgreSQL)")
+    r.font.bold = True; r.font.size = Pt(10.5); r.font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
+
+    relational_tables = [
+        ("vehicles", "id (PK), vin (Unique), make, model, year, engine_type, odometer_km, owner_id (FK)", "Stores registered car profiles"),
+        ("diagnostic_sessions", "id (PK), vehicle_id (FK), user_query, detected_dtc, safety_tier, ai_citation, confidence, created_at", "Stores driver diagnosis records & manual proof"),
+        ("manual_chunks", "id (PK), manual_id (FK), vehicle_model, chapter, section, page_number, content_text, embedding_vector", "Stores 326 parsed manual excerpts with page citations"),
+        ("mechanic_workshops", "id (PK), workshop_name, specialty_code, city, latitude, longitude, rating_stars, active_queue_slots", "Stores certified workshop profiles and GPS coordinates"),
+        ("dispatch_tickets", "id (PK), session_id (FK), workshop_id (FK), fault_subsystem, estimated_pkr_low, estimated_pkr_high, dispatch_status", "Stores live referral tickets with fair PKR pricing")
+    ]
+    t_g = doc.add_table(rows=len(relational_tables)+1, cols=3)
+    t_g.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for j, h_text in enumerate(["Table Name", "Columns & Foreign Keys", "Business Purpose"]):
+        c = t_g.rows[0].cells[j]
+        c.paragraphs[0].text = h_text; c.paragraphs[0].runs[0].font.bold = True; c.paragraphs[0].runs[0].font.size = Pt(8.5)
+        set_cell_background(c, "0F172A"); c.paragraphs[0].runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+        set_cell_margins(c, 30, 30, 40, 40)
+    for r_idx, (tname, cols, purp) in enumerate(relational_tables):
+        row = t_g.rows[r_idx+1]
+        for col_idx, val in enumerate([tname, cols, purp]):
+            c = row.cells[col_idx]
+            c.paragraphs[0].text = val; c.paragraphs[0].runs[0].font.size = Pt(8)
+            if col_idx == 0:
+                c.paragraphs[0].runs[0].font.bold = True
+            bg = "F8FAFC" if r_idx % 2 == 1 else "FFFFFF"
+            set_cell_background(c, bg); set_cell_margins(c, 25, 25, 40, 40)
+    set_table_borders(t_g)
+
+    # SECTION 3: FAULT-TO-MECHANIC DISPATCH WORKFLOW WITH ARROWS
     doc.add_paragraph().paragraph_format.space_before = Pt(12)
-    h4 = doc.add_paragraph()
-    r = h4.add_run("4. FAULT-TO-MECHANIC DISPATCH ARCHITECTURE")
+    h3 = doc.add_paragraph()
+    r = h3.add_run("3. FAULT-TO-MECHANIC DISPATCH ARROW WORKFLOW")
     r.font.name = 'Arial'; r.font.size = Pt(13); r.font.bold = True; r.font.color.rgb = RGBColor(0x02, 0x84, 0xC7)
 
-    p_disp = doc.add_paragraph()
-    p_disp.add_run(
-        "A key innovation in AutoCare AI is the Fault-to-Specialist Dispatch Engine. Instead of showing random general mechanics, "
-        "the engine matches the diagnosed problem to verified specialist workshops using a 4-part mathematical formula:\n\n"
-        "• Specialty Match (40% Weight): Does this workshop specialize in this exact subsystem? (e.g., Radiator & Cooling vs Brake Hydraulics).\n"
-        "• Proximity Distance (30% Weight): How close is the workshop? Calculated using the Haversine GPS formula based on vehicle location.\n"
-        "• Customer Rating (20% Weight): Verified past repair rating from 1 to 5 stars.\n"
-        "• Queue Availability (10% Weight): Does the workshop have an open bay right now to take the car immediately?\n\n"
-        "The winning workshop is displayed on an interactive Leaflet OpenStreetMap view with turn-by-turn directions and estimated fair repair costs in PKR."
+    dispatch_flow = doc.add_paragraph()
+    dispatch_flow.add_run(
+        "[Driver Reports Overheating Issue: P0217]\n"
+        "             │\n"
+        "             ▼  (Step 1: Match Specialty)\n"
+        "[Target Specialty: 'Engine & Cooling Specialist']\n"
+        "             │\n"
+        "             ▼  (Step 2: Haversine GPS Distance Calculation)\n"
+        "[Compute Road Distance to Nearby Workshops in Lahore / Karachi]\n"
+        "             │\n"
+        "             ▼  (Step 3: Multi-Criteria Composite Scoring Formula)\n"
+        "Score = (40% * Skill Match) + (30% * Proximity) + (20% * Customer Rating) + (10% * Open Queue Slot)\n"
+        "             │\n"
+        "             ▼  (Step 4: Dispatch Decision)\n"
+        "[Winning Workshop Selected] (e.g. 'Bilal Auto Cooling Care', 2.4 km away, Rating 4.8/5)\n"
+        "             │\n"
+        "             ▼  (Step 5: Deliverable to Driver)\n"
+        "• Displays on OpenStreetMap (Leaflet.js) with turn-by-turn driving directions\n"
+        "• Attaches Fair Market Price Range in PKR: Rs. 1,200 - 1,800 (Prevents mechanic fraud)\n"
+        "• Creates digital dispatch ticket in Gold database"
     )
-
-    # SECTION 5: SECURITY, BACKEND & DOCKER DEPLOYMENT
-    doc.add_paragraph().paragraph_format.space_before = Pt(12)
-    h5 = doc.add_paragraph()
-    r = h5.add_run("5. SECURITY, BACKEND & DEPLOYMENT ARCHITECTURE")
-    r.font.name = 'Arial'; r.font.size = Pt(13); r.font.bold = True; r.font.color.rgb = RGBColor(0x02, 0x84, 0xC7)
-
-    p_sec = doc.add_paragraph()
-    p_sec.add_run(
-        "• Password Security: Passwords are encrypted using Argon2id, the most secure hashing algorithm that protects against brute-force attacks.\n"
-        "• API Protection: Every API call is guarded by JSON Web Tokens (JWT) with user session expiration.\n"
-        "• Consistent Hash Ring: The backend uses a 160-virtual-node Consistent Hash Ring (MurmurHash3) so that adding or removing storage nodes does not reshuffle all data.\n"
-        "• 100% Free Local Execution (Docker): The entire system runs locally via Docker Compose on standard university laptops (16 GB RAM) without requiring expensive AWS or OpenAI cloud subscriptions."
-    )
+    dispatch_flow.runs[0].font.name = 'Consolas'; dispatch_flow.runs[0].font.size = Pt(8.5); dispatch_flow.runs[0].font.color.rgb = RGBColor(0x0F, 0x17, 0x2A)
 
     doc.save(output_path)
-    print(f"[OK] Generated Word Architecture: {output_path}")
+    print(f"[OK] Generated Word Architecture with Complete Schemas: {output_path}")
 
 def build_pdf_architecture(output_path):
     doc = SimpleDocTemplate(
@@ -241,6 +273,7 @@ def build_pdf_architecture(output_path):
     style_sub = ParagraphStyle('SubTitle', fontName='Helvetica-Oblique', fontSize=9, leading=12, textColor=colors.HexColor('#64748B'), spaceAfter=10)
     style_h1 = ParagraphStyle('SectionH1', fontName='Helvetica-Bold', fontSize=11, leading=14, textColor=colors.HexColor('#0284C7'), spaceBefore=8, spaceAfter=4)
     style_body = ParagraphStyle('Body', fontName='Helvetica', fontSize=8, leading=11, textColor=colors.HexColor('#334155'), spaceAfter=4)
+    style_mono = ParagraphStyle('Mono', fontName='Courier', fontSize=7, leading=9, textColor=colors.HexColor('#0F172A'), spaceAfter=4)
     style_th = ParagraphStyle('TableHeader', fontName='Helvetica-Bold', fontSize=7.5, leading=9.5, textColor=colors.white)
     style_td = ParagraphStyle('TableCell', fontName='Helvetica', fontSize=7, leading=9, textColor=colors.HexColor('#1E293B'))
     style_td_bold = ParagraphStyle('TableCellBold', fontName='Helvetica-Bold', fontSize=7, leading=9, textColor=colors.HexColor('#0F172A'))
@@ -248,16 +281,16 @@ def build_pdf_architecture(output_path):
     elements = []
 
     # Title
-    elements.append(Paragraph("PUCIT BS DATA SCIENCE • TECHNICAL ARCHITECTURE DOCUMENT", style_badge))
-    elements.append(Paragraph("AutoCare AI: Complete System Architecture Specification", style_title))
-    elements.append(Paragraph("9-Layer Big Data Streaming Lakehouse, Causal Transformer AI & Fault-to-Mechanic Dispatch | Simple English", style_sub))
+    elements.append(Paragraph("PUCIT BS DATA SCIENCE • TECHNICAL ARCHITECTURE & SCHEMAS", style_badge))
+    elements.append(Paragraph("AutoCare AI: Visual Architecture & Complete Workflow", style_title))
+    elements.append(Paragraph("Arrow Workflow Pipelines, Database Tables, Storage Tiers & Fault Dispatch | Simple English", style_sub))
 
     # Meta Table
     meta_info = [
         [Paragraph("<b>Supervisor:</b>", style_td_bold), Paragraph("Dr. Khurram Shehzad (Associate Professor, Department of Data Science, PUCIT)", style_td)],
         [Paragraph("<b>Team Leads:</b>", style_td_bold), Paragraph("Abdullah (035), Talha Ali Bhatti (016), Danial Hameed (014), Ahmad Zahid (033), Muhammad Abdullah (032)", style_td)],
         [Paragraph("<b>Core Stack:</b>", style_td_bold), Paragraph("PyTorch 1.32M Transformer, Apache Kafka, MinIO S3, PyArrow Parquet, DuckDB, FastAPI, React 18", style_td)],
-        [Paragraph("<b>Architecture Pattern:</b>", style_td_bold), Paragraph("9-Layer Distributed Big Data Streaming Lakehouse + Consistent Hash Ring + Leaflet Dispatch Map", style_td)]
+        [Paragraph("<b>Data Tiers:</b>", style_td_bold), Paragraph("Bronze (MinIO S3 Raw) -> Silver (Parquet Lakehouse) -> Gold (SQLite/Postgres) -> RAM Bloom Filter", style_td)]
     ]
     t_meta = Table(meta_info, colWidths=[110, 412])
     t_meta.setStyle(TableStyle([
@@ -270,22 +303,43 @@ def build_pdf_architecture(output_path):
     elements.append(t_meta)
     elements.append(Spacer(1, 8))
 
-    # 9 Layers Table
-    elements.append(Paragraph("1. The 9-Layer Distributed System Architecture", style_h1))
-    layers_table_data = [
-        [Paragraph("Layer", style_th), Paragraph("Role & Plain English Meaning", style_th), Paragraph("Key Tools Used", style_th), Paragraph("Lead", style_th)],
-        [Paragraph("<b>L1: Data Sources</b>", style_td_bold), Paragraph("Raw car sensors (10k msgs/s), 45 official service manuals, PakWheels discussions", style_td), Paragraph("CAN-bus, PDF manuals, Q&A", style_td), Paragraph("Danial / Talha", style_td)],
-        [Paragraph("<b>L2: Ingestion</b>", style_td_bold), Paragraph("Reads PDFs into clean text passages; streaming generator emits telemetry without drops", style_td), Paragraph("PDF chunker, async streaming", style_td), Paragraph("Danial / Talha", style_td)],
-        [Paragraph("<b>L3: Kafka Queue</b>", style_td_bold), Paragraph("Digital highway moving 10,000 sensor messages per second with zero loss", style_td), Paragraph("Apache Kafka (KRaft mode)", style_td), Paragraph("Talha Ali Bhatti", style_td)],
-        [Paragraph("<b>L4: Lakehouse</b>", style_td_bold), Paragraph("MinIO S3 raw buckets + Snappy Parquet files saving >75% hard drive space", style_td), Paragraph("MinIO S3, PyArrow Parquet", style_td), Paragraph("Talha Ali Bhatti", style_td)],
-        [Paragraph("<b>L5: DuckDB OLAP</b>", style_td_bold), Paragraph("Searches 500,000 car records in computer RAM in less than 80 milliseconds", style_td), Paragraph("DuckDB in-memory engine", style_td), Paragraph("M. Abdullah", style_td)],
-        [Paragraph("<b>L6: Safety Triage</b>", style_td_bold), Paragraph("Classifies faults into Danger, Major, Minor; applies 10x penalty on danger errors", style_td), Paragraph("Cost-sensitive ML, Platt ECE", style_td), Paragraph("Ahmad Zahid", style_td)],
-        [Paragraph("<b>L7: Transformer AI</b>", style_td_bold), Paragraph("1.32M PyTorch Transformer answering questions with exact manual page numbers", style_td), Paragraph("Custom PyTorch LM, BPE 4k", style_td), Paragraph("Abdullah (Lead)", style_td)],
-        [Paragraph("<b>L8: Backend Server</b>", style_td_bold), Paragraph("FastAPI asynchronous server with JWT security and Consistent Hash routing", style_td), Paragraph("FastAPI, JWT, MurmurHash3", style_td), Paragraph("Abdullah (Lead)", style_td)],
-        [Paragraph("<b>L9: Web Portal</b>", style_td_bold), Paragraph("React 18 website, PKR price estimator, and Leaflet OpenStreetMap live mechanic dispatch", style_td), Paragraph("React 18, Leaflet, ReportLab", style_td), Paragraph("M. Abdullah", style_td)],
+    # Master Arrow Workflow
+    elements.append(Paragraph("1. Complete System Workflow with Directional Arrows", style_h1))
+    flow_text = (
+        "<b>[1. Data Sources]</b> Car CAN-bus (10k msgs/s) + 45 Service Manuals + Driver Roman Urdu Query<br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>│</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>▼</b><br/>"
+        "<b>[2. Streaming & Ingestion]</b> Apache Kafka (KRaft mode) + Consistent Hash Ring (160 vNodes)<br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>│</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>▼</b><br/>"
+        "<b>[3. Storage Tiers]</b> Bronze MinIO S3 (CAS Deduplication) ──► Silver Snappy Parquet (75% savings)<br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>│</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>▼</b><br/>"
+        "<b>[4. Fast Analytics]</b> DuckDB In-Memory OLAP scans 500k rows in computer RAM in &lt; 80 ms<br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>│</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>▼</b><br/>"
+        "<b>[5. AI & Safety Triage]</b> 10x Safety Penalty Triage + 4k Subword BPE + 1.32M PyTorch Transformer<br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>│</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>▼</b><br/>"
+        "<b>[6. RAG Grounding]</b> Retrieves exact 3 manual passages with chapter/page citations (Zero Hallucination)<br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>│</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b>▼</b><br/>"
+        "<b>[7. Pricing & Dispatch]</b> Fair PKR Pricing + Haversine GPS routing ──► OpenStreetMap Specialist Dispatch"
+    )
+    elements.append(Paragraph(flow_text, style_body))
+    elements.append(Spacer(1, 6))
+
+    # Database Schemas Table
+    elements.append(Paragraph("2. Multi-Tier Database Schemas (Data Structure)", style_h1))
+    schema_table_data = [
+        [Paragraph("Tier & Format", style_th), Paragraph("Key Columns & Data Fields", style_th), Paragraph("Purpose & Compression", style_th)],
+        [Paragraph("<b>Bronze Tier</b><br/>(MinIO S3 JSON)", style_td_bold), Paragraph("timestamp, vin, make, model, year, engine_rpm, coolant_temp, speed, active_dtc, sha256_hash", style_td), Paragraph("Raw streaming data; SHA-256 CAS deduplication deletes duplicates (>30% disk saved)", style_td)],
+        [Paragraph("<b>Silver Tier</b><br/>(Snappy Parquet)", style_td_bold), Paragraph("/telemetry/make=Toyota/model=Corolla/year=2021/region=Punjab/<br/>Snappy compressed columnar blocks", style_td), Paragraph("Analytics lakehouse; Snappy compression saves >75% storage; scanned by DuckDB in RAM", style_td)],
+        [Paragraph("<b>Gold Tier</b><br/>(SQLite/Postgres)", style_td_bold), Paragraph("• vehicles (id, vin, make, model)<br/>• diagnostic_sessions (id, dtc, citation, urgency)<br/>• mechanic_workshops (id, specialty, lat, lon, rating)", style_td), Paragraph("Application database powering user accounts, diagnosis history, and workshop dispatch tickets", style_td)],
+        [Paragraph("<b>Fast Cache Tier</b><br/>(RAM Bloom Filter)", style_td_bold), Paragraph("65,536-bit array with k=4 hash functions", style_td), Paragraph("Checks whether a Diagnostic Trouble Code is valid in 1 ms with &lt; 1% false positive rate", style_td)]
     ]
-    t_layers_pdf = Table(layers_table_data, colWidths=[80, 195, 160, 87])
-    t_layers_pdf.setStyle(TableStyle([
+    t_schemas = Table(schema_table_data, colWidths=[95, 230, 197])
+    t_schemas.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#0F172A')),
         ('BOX', (0,0), (-1,-1), 0.5, colors.HexColor('#CBD5E1')),
         ('INNERGRID', (0,0), (-1,-1), 0.5, colors.HexColor('#E2E8F0')),
@@ -293,22 +347,20 @@ def build_pdf_architecture(output_path):
         ('TOPPADDING', (0,0), (-1,-1), 3),
         ('BOTTOMPADDING', (0,0), (-1,-1), 3),
     ]))
-    elements.append(t_layers_pdf)
-    elements.append(Spacer(1, 8))
+    elements.append(t_schemas)
+    elements.append(Spacer(1, 6))
 
-    # Data Flow & Dispatch
-    elements.append(Paragraph("2. End-to-End Data Flow & Fault-to-Mechanic Dispatch", style_h1))
+    # Dispatch Formula
+    elements.append(Paragraph("3. Fault-to-Specialist Dispatch Logic", style_h1))
     elements.append(Paragraph(
-        "<b>1. Driver Query:</b> The car owner types their issue in Roman Urdu (e.g. 'car missing kar rahi hai aur radiator boil ho raha hai').<br/>"
-        "<b>2. Tokenization & Safety Triage:</b> Custom BPE tokenizer (4,000 vocab) splits words. The 10x safety triage flags overheating as Danger.<br/>"
-        "<b>3. RAG Retrieval & AI Generation:</b> Searches 45 official service manuals. The 1.32M PyTorch Transformer writes a clear explanation citing exact page coordinates.<br/>"
-        "<b>4. Pricing & Dispatch:</b> Shows fair PKR price range. The Fault-to-Specialist Engine calculates: "
-        "<i>Score = (40% * Skill) + (30% * Proximity) + (20% * Rating) + (10% * Open Queue)</i> and displays the best certified workshop on a live map.",
+        "When an issue like Engine Overheating is diagnosed, the system computes:<br/>"
+        "<b>Dispatch Score = (0.40 × Skill Match) + (0.30 × Haversine Distance) + (0.20 × Rating) + (0.10 × Open Queue)</b><br/>"
+        "The winning workshop is sent directly to the driver's phone with turn-by-turn map directions and fair PKR parts prices.",
         style_body
     ))
 
     doc.build(elements)
-    print(f"[OK] Generated PDF Architecture: {output_path}")
+    print(f"[OK] Generated PDF Architecture with Schemas: {output_path}")
 
 def sync_architecture_files(docx_path, pdf_path):
     targets = [
@@ -330,4 +382,4 @@ if __name__ == "__main__":
     build_docx_architecture(docx_file)
     build_pdf_architecture(pdf_file)
     sync_architecture_files(docx_file, pdf_file)
-    print("\nAll System Architecture deliverables successfully generated and synchronized!")
+    print("\nAll System Architecture Schema & Arrow Workflow deliverables successfully generated and synchronized!")

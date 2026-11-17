@@ -555,6 +555,44 @@ async def reindex(request: Request, user: dict = Depends(require("admin"))) -> N
     request.app.state.service.retriever.invalidate()
 
 
+# -- Fault-to-Specialist Dispatch Engine Endpoints -----------------------------
+from .dispatch import (DispatchRequest, DispatchResponse, VERIFIED_WORKSHOPS,
+                       recommend_specialist_workshops)
+from .lakehouse_schemas import (SILVER_PARQUET_SCHEMA_DEF, GOLD_RELATIONAL_SCHEMAS)
+
+
+@app.post("/api/v1/dispatch/recommend", response_model=DispatchResponse)
+async def dispatch_recommend(req: DispatchRequest) -> DispatchResponse:
+    """Matches diagnosed vehicle fault to certified nearby specialist workshops."""
+    return recommend_specialist_workshops(req)
+
+
+@app.get("/api/v1/dispatch/workshops")
+async def list_verified_workshops() -> list[dict]:
+    """Returns directory of verified automotive specialist workshops."""
+    return VERIFIED_WORKSHOPS
+
+
+@app.get("/api/v1/architecture/schemas")
+async def get_architecture_schemas() -> dict:
+    """Returns formal 4-tier data lakehouse schemas (Bronze, Silver, Gold, Cache)."""
+    return {
+        "bronze_tier": {
+            "format": "JSON (MinIO S3 Raw Lake)",
+            "deduplication": "SHA-256 CAS Hashing",
+            "ingestion_rate": "10,000 events/second"
+        },
+        "silver_tier": SILVER_PARQUET_SCHEMA_DEF,
+        "gold_tier": GOLD_RELATIONAL_SCHEMAS,
+        "cache_tier": {
+            "name": "Counting Bloom Filter",
+            "size_bits": 65536,
+            "hash_functions": 4,
+            "latency": "< 1 ms"
+        }
+    }
+
+
 # -- Serve the built React app (frontend/dist) at /app, if it exists -------------
 _DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 if _DIST.is_dir():

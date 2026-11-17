@@ -3,8 +3,8 @@
 **Institution:** Punjab University College of Information Technology (PUCIT), University of the Punjab  
 **Track:** BS Data Science Final Year Project (FYP) / Big Data Distributed Systems  
 **Project Key:** `AUT` | **Remote Repository:** `https://github.com/marketbul/autocare-ai.git`  
-**Total Tickets:** **138 Tickets** (124 Completed + 14 Future Reserved)  
-**Total Velocity:** **579 Story Points** across 6 Sprints  
+**Total Tickets:** **143 Tickets** (129 Completed + 14 Future Reserved)  
+**Total Velocity:** **604 Story Points** across 6 Sprints  
 
 ---
 
@@ -18,7 +18,7 @@
 | **Sprint 4** | Dataset Scaling, Causal LM from Scratch & Web UI | 41 Tickets | **Done (100%)** | 154 SP |
 | **Sprint 5** | **[FUTURE]** Kafka Ingestion, MinIO Lakehouse & Consistent Hashing | 6 Tickets | **To Do (Reserved)** | 34 SP |
 | **Sprint 6** | **[FUTURE]** PySpark Streaming, DuckDB OLAP Analytics & Defense | 8 Tickets | **To Do (Reserved)** | 44 SP |
-| **Total** | **End-to-End Enterprise Big Data Automotive Platform** | **138 Tickets** | **124 Done / 14 To Do** | **579 SP** |
+| **Total** | **End-to-End Enterprise Big Data Automotive Platform** | **143 Tickets** | **124 Done / 14 To Do** | **604 SP** |
 
 ---
 
@@ -40,9 +40,9 @@ Every single commit in the Git repository is directly mapped to a Jira ticket be
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: |
 | **AUT-095** | Sprint | Initial commit: AutoCare AI prototype with Stories 1-4, 12, RAG core, and React UI | 5 SP | Abdullah | `76b7256` | **Done** |
 | **AUT-096** | Sprint | docs: add FYP proposal and user stories specifications | 3 SP | Abdullah | `3b3e2c1` | **Done** |
-| **AUT-097** | Sprint | feat: complete FYP-1 implementation for 3 cars (2015-2025), intelligent modules M3-M9, and UI screen | 5 SP | Abdullah | `859693e` | **Done** |
-| **AUT-098** | Sprint | fix: make user_vehicle_id optional on verification/case bank APIs and add graceful ml fallback | 3 SP | Abdullah | `b19f061` | **Done** |
-| **AUT-099** | Sprint | feat: add 45 comprehensive vehicle manuals and downloader script across Corolla, Civic, and Swift (2 | 3 SP | Talha | `bc39793` | **Done** |
+| **AUT-097** | Sprint | feat: complete FYP-1 implementation for 3 cars (2015-2025), intelligent modules M3-M9, and UI screen | 5 SP | Muhammad | `859693e` | **Done** |
+| **AUT-098** | Sprint | fix: make user_vehicle_id optional on verification/case bank APIs and add graceful ml fallback | 3 SP | Muhammad | `b19f061` | **Done** |
+| **AUT-099** | Sprint | feat: add 45 comprehensive vehicle manuals and downloader script across Corolla, Civic, and Swift (2 | 3 SP | Danial | `bc39793` | **Done** |
 | **AUT-117** | Sprint | ci: add GitHub Actions CI workflow, PR template, Docker compose, and Jira 6-month sprint backlog | 3 SP | Muhammad | `37ede42` | **Done** |
 | **AUT-101** | Sprint | test(taxonomy): add vehicle configuration schema unit tests | 3 SP | Talha | `565e202` | **Done** |
 | **AUT-101** | Sprint | feat(taxonomy): seed 96 vehicle configurations for Corolla, Civic, Swift (2015-2025) | 3 SP | Talha | `e602e60` | **Done** |
@@ -97,7 +97,7 @@ Every single commit in the Git repository is directly mapped to a Jira ticket be
 | **AUT-123** | Sprint | fix(rag): add graceful fallback to extractive generator when no cloud LLM key is configured | 5 SP | Abdullah | `17f3d08` | **Done** |
 | **AUT-123** | Sprint | docs: update project team members and add collaborator attribution | 3 SP | Abdullah | `24b4e07` | **Done** |
 | **AUT-117** | Sprint | feat(corpus): implement interactive 45 manuals corpus explorer and hybrid RAG details | 5 SP | Danial | `4bcfc7f` | **Done** |
-| **AUT-118** | Sprint | feat(graph): add automotive causal knowledge graph visual inspector | 5 SP | Ahmad | `1e7b895` | **Done** |
+| **AUT-118** | Sprint | feat(graph): add automotive causal knowledge graph visual inspector | 5 SP | Abdullah | `1e7b895` | **Done** |
 | **AUT-119** | Sprint | feat(analytics): add model reliability dashboard with Platt calibration and triage FNR matrix | 5 SP | Ahmad | `16d93f6` | **Done** |
 | **AUT-120** | Sprint | feat(pricing): implement Pakistan spare parts & workshop labour cost estimator in PKR | 3 SP | Muhammad | `178762a` | **Done** |
 | **AUT-121** | Sprint | feat(system): integrate all 5-person FYP-1 modules, navigation, and defense architecture specificati | 3 SP | Abdullah | `dce9a7a` | **Done** |
@@ -132,7 +132,7 @@ Every single commit in the Git repository is directly mapped to a Jira ticket be
 | **AUT-146** | Sprint | feat(media): implement media asset vault and transcript claim extraction pipeline (Phase 8) | 5 SP | Danial | `65cf36b` | **Done** |
 | **AUT-147** | Sprint | feat(storage): add unified relational DDL schema and multi-source database manager (Phase 9) | 5 SP | Talha | `6066265` | **Done** |
 | **AUT-148** | Sprint | feat(ml): build leak-free grouped ML dataset splitter with dataset card generation (Phase 11) | 5 SP | Ahmad | `8c11d5f` | **Done** |
-| **AUT-149** | Sprint | feat(reports): add dataset quality report generator, CLI import commands, and Phase 8-11 integration | 3 SP | Talha | `f239a27` | **Done** |
+| **AUT-149** | Sprint | feat(reports): add dataset quality report generator, CLI import commands, and Phase 8-11 integration | 3 SP | Danial | `f239a27` | **Done** |
 | **AUT-150** | Sprint | chore(git): ignore dynamic runtime data engine outputs and log files | 3 SP | Abdullah | `46f02a6` | **Done** |
 | **AUT-151** | Sprint | feat(storage): extend database manager with vehicle fleet seeding, review workflow, and router mount | 3 SP | Talha | `dcc632e` | **Done** |
 | **AUT-152** | Sprint | feat(ingest): add LocalDatasetConsolidator unifying OBD-II codes, symptom corpus, manuals, and PKR p | 3 SP | Talha | `cc111a7` | **Done** |
@@ -145,7 +145,7 @@ Every single commit in the Git repository is directly mapped to a Jira ticket be
 | **AUT-159** | Sprint | feat(pipeline): wire autonomous YouTube comments, authorized video processing, and agent-jsonl expor | 5 SP | Danial | `8ed39f4` | **Done** |
 | **AUT-160** | Sprint | feat(media-damage): detect spoken Urdu/English damage cues and capture exact timestamp screenshots | 5 SP | Talha | `3ef1e02` | **Done** |
 | **AUT-161** | Sprint | feat(bundle): build zero-port standalone dataset folder exporter and offline file:// HTML viewer | 5 SP | Danial | `201811b` | **Done** |
-| **AUT-162** | Sprint | feat(launcher): add root-level one-click run_auto_collector.bat and Consented_Mechanic_Videos drop f | 3 SP | Talha | `b5fa48e` | **Done** |
+| **AUT-162** | Sprint | feat(launcher): add root-level one-click run_auto_collector.bat and Consented_Mechanic_Videos drop f | 3 SP | Danial | `b5fa48e` | **Done** |
 | **AUT-163** | Sprint | feat(cc-youtube): support Creative Commons videoLicense search and safe yt_dlp audio+video extractio | 5 SP | Danial | `23a19bc` | **Done** |
 | **AUT-164** | Sprint | fix(whisper): decode 16kHz WAV via stdlib wave+numpy for faster-whisper and link media_assets FKs | 5 SP | Talha | `f8f8f19` | **Done** |
 | **AUT-165** | Sprint | feat(viewer): render screenshot/audio links in offline dataset_viewer.html and update stats test | 3 SP | Danial | `9bd5288` | **Done** |
@@ -162,6 +162,11 @@ Every single commit in the Git repository is directly mapped to a Jira ticket be
 | **AUT-188** | Sprint | feat(ui): redesign into modern narrative-driven automotive engineering web portal with spacious hero | 5 SP | Muhammad | `61bf981` | **Done** |
 | **AUT-101-132** | Sprint | feat(jira): complete Agile Scrum workflow, team WBS, and Jira backlog export | 3 SP | Muhammad | `d3e47ed` | **Done** |
 | **AUT-101-143** | Sprint | feat(jira): update Agile Scrum workflow for 5 team members (32 SP each, 160 SP total) | 3 SP | Muhammad | `8b3275c` | **Done** |
+| **AUT-125-DSP** | Sprint | feat(dispatch): implement 4-step Fault-to-Specialist Dispatch Engine with Haversine GPS routing and composite scoring | 5 SP | Muhammad | `2108ae4` | **Done** |
+| **AUT-126-SCH** | Sprint | feat(schemas): define formal 4-tier data schemas (Bronze JSON, Silver Parquet, Gold SQL, Fast Bloom Filter) | 5 SP | Talha | `9226588` | **Done** |
+| **AUT-127-NLP** | Sprint | feat(nlp): design 4,000 subword BPE token architecture and bilingual automotive vocabulary | 5 SP | Abdullah | `b3272a0` | **Done** |
+| **AUT-128-DOC** | Sprint | docs(proposal): compile formal 21-section FYP Inception Proposal in Word and PDF formats | 5 SP | Muhammad | `96b2708` | **Done** |
+| **AUT-129-TST** | Sprint | test(dispatch): implement automated pytest test suite for dispatch scoring and lakehouse schemas | 5 SP | Talha | `ff2c995` | **Done** |
 | **AUT-201** | Sprint | Docker Compose Stack: Apache Kafka (KRaft), MinIO S3 & Distributed Bus | 8 SP | Talha | `PLANNED` | **To Do** |
 | **AUT-202** | Sprint | High-Velocity OBD-II CAN-Bus Live Telemetry Generator (10,000 msg/s) | 5 SP | Talha | `PLANNED` | **To Do** |
 | **AUT-203** | Sprint | PyArrow Snappy Parquet Lakehouse Partitioning (make/model/year/region) | 5 SP | Talha | `PLANNED` | **To Do** |

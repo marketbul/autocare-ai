@@ -61,130 +61,107 @@ SPECIALTIES = {
         "dtc_prefixes": ["B1421", "B1424", "P0531", "P0532", "P0533"],
         "keywords": ["ac", "cooling", "gas leak", "compressor", "chilled", "heater", "blower", "condenser"],
         "price_range_pkr": {"low": 2000, "median": 5500, "high": 16000}
+    },
+    "bodywork_denting": {
+        "title": "Bodywork, Denting & Painting Specialist",
+        "description": "Accident collision repair, paintless dry denting (PDR), computerized oven paint baking, panel alignment.",
+        "dtc_prefixes": ["B0001", "B0010", "B1000"],
+        "keywords": ["dent", "denting", "paint", "painting", "scratch", "accident", "body", "bumper", "fender", "collision"],
+        "price_range_pkr": {"low": 3000, "median": 8500, "high": 35000}
     }
 }
 
 # ---------------------------------------------------------------------------
-# 2. VERIFIED WORKSHOP DIRECTORY (PAKISTAN URBAN HUBS)
+# 2. VERIFIED SPECIALIST WORKSHOP DIRECTORY (5 DUMMY WORKSHOPS)
 # ---------------------------------------------------------------------------
+# Pre-configured 5 dedicated automotive specialist workshops mapped to core
+# vehicle subsystems. Dummy phone numbers are placeholders awaiting user custom input.
 
 VERIFIED_WORKSHOPS = [
-    # LAHORE WORKSHOPS
     {
-        "id": "w_lhr_01",
-        "name": "Bilal Auto Cooling & Radiator Works",
+        "id": "w_dummy_01",
+        "name": "AutoCare Certified Engine & Powertrain Workshop",
+        "category": "Engine, Transmission & Cooling",
         "city": "Lahore",
-        "area": "Bilal Gunj / Ravi Road",
-        "lat": 31.5912,
-        "lon": 74.3085,
-        "specialties": ["engine_cooling", "hvac_air_conditioning"],
+        "area": "Auto Care Zone 1 (Engine Hub)",
+        "lat_offset": 0.012,
+        "lon_offset": 0.015,
+        "lat": 31.5324,
+        "lon": 74.3737,
+        "specialties": ["engine_cooling", "transmission_gearbox"],
+        "rating": 4.9,
+        "review_count": 184,
+        "active_queue_slots": 3,
+        "verified_oem": ["Toyota", "Honda", "Suzuki"],
+        "contact": "+92 300 0000001 (Placeholder)"
+    },
+    {
+        "id": "w_dummy_02",
+        "name": "Precision Brake, Steering & Suspension Center",
+        "category": "Suspension, Steering & Braking",
+        "city": "Lahore",
+        "area": "Auto Care Zone 2 (Chassis Hub)",
+        "lat_offset": -0.018,
+        "lon_offset": -0.012,
+        "lat": 31.5024,
+        "lon": 74.3467,
+        "specialties": ["brakes_hydraulics", "suspension_steering"],
         "rating": 4.8,
         "review_count": 142,
         "active_queue_slots": 2,
-        "verified_oem": ["Toyota", "Suzuki"],
-        "contact": "+92 300 4581290"
+        "verified_oem": ["Toyota", "Honda", "Suzuki"],
+        "contact": "+92 300 0000002 (Placeholder)"
     },
     {
-        "id": "w_lhr_02",
-        "name": "Master EFI Auto Electrician & Scanner Center",
+        "id": "w_dummy_03",
+        "name": "CoolTech Automotive AC & Climate Specialist",
+        "category": "AC & Climate Control",
         "city": "Lahore",
-        "area": "Montgomery Road Auto Market",
-        "lat": 31.5621,
-        "lon": 74.3218,
-        "specialties": ["efi_electrical", "brakes_hydraulics"],
-        "rating": 4.9,
-        "review_count": 218,
-        "active_queue_slots": 1,
-        "verified_oem": ["Honda", "Toyota"],
-        "contact": "+92 321 8421004"
-    },
-    {
-        "id": "w_lhr_03",
-        "name": "Lahore Transmission & CVT Care",
-        "city": "Lahore",
-        "area": "Township / College Road",
-        "lat": 31.4589,
-        "lon": 74.3120,
-        "specialties": ["transmission_gearbox", "engine_cooling"],
-        "rating": 4.7,
-        "review_count": 98,
-        "active_queue_slots": 3,
-        "verified_oem": ["Toyota", "Honda"],
-        "contact": "+92 333 4901823"
-    },
-    {
-        "id": "w_lhr_04",
-        "name": "Precision Brake & Suspension Works",
-        "city": "Lahore",
-        "area": "Gulberg III / Main Market",
-        "lat": 31.5180,
-        "lon": 74.3510,
-        "specialties": ["brakes_hydraulics", "suspension_steering"],
-        "rating": 4.6,
-        "review_count": 84,
+        "area": "Auto Care Zone 3 (Thermal Hub)",
+        "lat_offset": 0.022,
+        "lon_offset": -0.019,
+        "lat": 31.5424,
+        "lon": 74.3397,
+        "specialties": ["hvac_air_conditioning"],
+        "rating": 4.8,
+        "review_count": 126,
         "active_queue_slots": 2,
-        "verified_oem": ["Suzuki", "Toyota"],
-        "contact": "+92 301 8493012"
+        "verified_oem": ["Toyota", "Suzuki", "Daihatsu"],
+        "contact": "+92 300 0000003 (Placeholder)"
     },
-
-    # KARACHI WORKSHOPS
     {
-        "id": "w_khi_01",
-        "name": "Shershah EFI & Precision Diagnostics",
-        "city": "Karachi",
-        "area": "Shershah Kabli Market",
-        "lat": 24.8905,
-        "lon": 66.9854,
+        "id": "w_dummy_04",
+        "name": "MasterCraft Denting, Painting & Bodywork Lab",
+        "category": "Bodywork, Denting & Painting",
+        "city": "Lahore",
+        "area": "Auto Care Zone 4 (Collision Hub)",
+        "lat_offset": -0.025,
+        "lon_offset": 0.021,
+        "lat": 31.4954,
+        "lon": 74.3797,
+        "specialties": ["bodywork_denting"],
+        "rating": 4.9,
+        "review_count": 210,
+        "active_queue_slots": 4,
+        "verified_oem": ["Toyota", "Honda", "Kia", "Hyundai"],
+        "contact": "+92 300 0000004 (Placeholder)"
+    },
+    {
+        "id": "w_dummy_05",
+        "name": "Apex General Auto Care & EFI Electrical Center",
+        "category": "General Auto Care & EFI Diagnostics",
+        "city": "Lahore",
+        "area": "Auto Care Zone 5 (Diagnostics Hub)",
+        "lat_offset": 0.005,
+        "lon_offset": -0.008,
+        "lat": 31.5254,
+        "lon": 74.3507,
         "specialties": ["efi_electrical", "engine_cooling"],
-        "rating": 4.8,
-        "review_count": 185,
-        "active_queue_slots": 2,
-        "verified_oem": ["Toyota", "Suzuki"],
-        "contact": "+92 300 2419082"
-    },
-    {
-        "id": "w_khi_02",
-        "name": "Plaza Auto Brakes & Hydraulics",
-        "city": "Karachi",
-        "area": "M.A. Jinnah Road / Plaza",
-        "lat": 24.8640,
-        "lon": 67.0210,
-        "specialties": ["brakes_hydraulics", "suspension_steering"],
-        "rating": 4.7,
-        "review_count": 120,
-        "active_queue_slots": 1,
-        "verified_oem": ["Honda", "Toyota"],
-        "contact": "+92 321 2108745"
-    },
-
-    # ISLAMABAD / RAWALPINDI WORKSHOPS
-    {
-        "id": "w_isb_01",
-        "name": "Capital Motor Cooling & Mechanical Hub",
-        "city": "Islamabad",
-        "area": "Sector I-9/2 Industrial Area",
-        "lat": 33.6620,
-        "lon": 73.0480,
-        "specialties": ["engine_cooling", "transmission_gearbox"],
         "rating": 4.9,
-        "review_count": 165,
+        "review_count": 275,
         "active_queue_slots": 3,
-        "verified_oem": ["Honda", "Toyota"],
-        "contact": "+92 333 5184920"
-    },
-    {
-        "id": "w_rwp_01",
-        "name": "Sultan Auto Suspension & EFI Care",
-        "city": "Rawalpindi",
-        "area": "Sultan ka Khoo Auto Market",
-        "lat": 33.6080,
-        "lon": 73.0650,
-        "specialties": ["suspension_steering", "efi_electrical"],
-        "rating": 4.8,
-        "review_count": 140,
-        "active_queue_slots": 2,
-        "verified_oem": ["Suzuki", "Toyota"],
-        "contact": "+92 300 5928174"
+        "verified_oem": ["Toyota", "Honda", "Suzuki", "Nissan"],
+        "contact": "+92 300 0000005 (Placeholder)"
     }
 ]
 
@@ -290,22 +267,25 @@ def recommend_specialist_workshops(req: DispatchRequest) -> DispatchResponse:
 
     results: List[WorkshopRecommendation] = []
     for w in VERIFIED_WORKSHOPS:
-        # Filter by city (or nearby)
-        if req.city.lower() not in w["city"].lower() and req.city.lower() not in w["area"].lower():
-            # Still compute distance, but penalize if outside city
-            pass
+        # Compute realistic nearby coordinates offset from user location
+        if "lat_offset" in w and "lon_offset" in w:
+            w_lat = round(req.user_lat + w["lat_offset"], 5)
+            w_lon = round(req.user_lon + w["lon_offset"], 5)
+        else:
+            w_lat = w["lat"]
+            w_lon = w["lon"]
 
-        dist = haversine_distance_km(req.user_lat, req.user_lon, w["lat"], w["lon"])
+        dist = haversine_distance_km(req.user_lat, req.user_lon, w_lat, w_lon)
         skill = 1.0 if specialty_key in w["specialties"] else 0.4
         score = evaluate_composite_score(skill, dist, w["rating"], w["active_queue_slots"])
 
         results.append(WorkshopRecommendation(
             workshop_id=w["id"],
             name=w["name"],
-            city=w["city"],
+            city=req.city or w["city"],
             area=w["area"],
-            lat=w["lat"],
-            lon=w["lon"],
+            lat=w_lat,
+            lon=w_lon,
             distance_km=dist,
             rating=w["rating"],
             review_count=w["review_count"],

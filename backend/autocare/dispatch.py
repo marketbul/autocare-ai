@@ -93,7 +93,7 @@ VERIFIED_WORKSHOPS = [
         "review_count": 184,
         "active_queue_slots": 3,
         "verified_oem": ["Toyota", "Honda", "Suzuki"],
-        "contact": "+92 300 0000001 (Placeholder)"
+        "contact": "+92 344 7564460"
     },
     {
         "id": "w_dummy_02",
@@ -110,7 +110,7 @@ VERIFIED_WORKSHOPS = [
         "review_count": 142,
         "active_queue_slots": 2,
         "verified_oem": ["Toyota", "Honda", "Suzuki"],
-        "contact": "+92 300 0000002 (Placeholder)"
+        "contact": "+92 344 7564461"
     },
     {
         "id": "w_dummy_03",
@@ -127,7 +127,7 @@ VERIFIED_WORKSHOPS = [
         "review_count": 126,
         "active_queue_slots": 2,
         "verified_oem": ["Toyota", "Suzuki", "Daihatsu"],
-        "contact": "+92 300 0000003 (Placeholder)"
+        "contact": "+92 344 7564462"
     },
     {
         "id": "w_dummy_04",
@@ -144,7 +144,7 @@ VERIFIED_WORKSHOPS = [
         "review_count": 210,
         "active_queue_slots": 4,
         "verified_oem": ["Toyota", "Honda", "Kia", "Hyundai"],
-        "contact": "+92 300 0000004 (Placeholder)"
+        "contact": "+92 344 7564463"
     },
     {
         "id": "w_dummy_05",
@@ -161,7 +161,7 @@ VERIFIED_WORKSHOPS = [
         "review_count": 275,
         "active_queue_slots": 3,
         "verified_oem": ["Toyota", "Honda", "Suzuki", "Nissan"],
-        "contact": "+92 300 0000005 (Placeholder)"
+        "contact": "+92 344 7564464"
     }
 ]
 

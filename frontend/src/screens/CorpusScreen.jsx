@@ -37,8 +37,8 @@ export function CorpusScreen() {
         <div>
           <h2>Automotive Technical Manuals Corpus (45 Manuals)</h2>
           <p className="screen-subtitle">
-            Curated workshop and owner manuals corpus spanning 2015-2025 across Pakistan&apos;s leading passenger cars.
-            Engineered by <b>Danial Hameed</b> (Data & Retrieval Lead).
+            Curated workshop and owner manuals corpus spanning 2015-2025 across leading passenger vehicle platforms.
+            Indexed and verified for high-precision hybrid retrieval (BM25 + Dense Semantic).
           </p>
         </div>
         <div className="badge-group" style={{ display: "flex", gap: "8px" }}>

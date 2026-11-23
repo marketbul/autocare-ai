@@ -153,7 +153,7 @@ export function AdminUsers({ me }) {
     try { await admin.setRole(u.user_id, role); users.reload(); } catch (err) { setError(err.message); }
   }
   return (
-    <Page title="Users & roles" intro="Owners sign up themselves. Promote trusted mechanics here so they can share advice; give admin only to the project team.">
+    <Page title="Users & roles" intro="Owners sign up themselves. Promote trusted mechanics here so they can share advice; grant admin privilege only to authorized administrators.">
       <Alert>{error || users.error?.message}</Alert>
       {users.data && (
         <div className="panel flush">

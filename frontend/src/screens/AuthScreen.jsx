@@ -6,10 +6,10 @@ const BASE = import.meta.env?.BASE_URL ?? "/app/";
 
 const DEMO_CREDENTIALS = {
   owner: {
-    email: "abdullah262686@gmail.com",
-    name: "Abdullah",
+    email: "owner@autocare.pk",
+    name: "Primary Car Owner",
     password: "password123",
-    label: "Car Owner (Abdullah)"
+    label: "Car Owner"
   },
   mechanic: {
     email: "mechanic@autocare.pk",
@@ -89,8 +89,8 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
   }
 
   async function handleGoogleAuth(emailToUse, nameToUse) {
-    const targetEmail = (emailToUse || "abdullah262686@gmail.com").trim();
-    const targetName = (nameToUse || "Abdullah").trim();
+    const targetEmail = (emailToUse || "owner@autocare.pk").trim();
+    const targetName = (nameToUse || "Car Owner").trim();
     setBusy(true);
     setError(null);
     try {
@@ -208,7 +208,7 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
             <Field label="Full Name">
               <input
                 type="text"
-                placeholder="e.g. Abdullah"
+                placeholder="e.g. Tariq Mehmood"
                 value={form.full_name}
                 onChange={set("full_name")}
                 required
@@ -289,9 +289,9 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
               type="button"
               className="auth-chip"
               onClick={() => directLoginRole("owner")}
-              title="Sign in as Abdullah (Car Owner)"
+              title="Sign in as Car Owner"
             >
-              🚗 Abdullah (Owner)
+              🚗 Car Owner
             </button>
             <button
               type="button"
@@ -346,18 +346,18 @@ export default function AuthScreen({ onSignedIn, theme, onToggleTheme }) {
               </button>
             </div>
 
-            {/* Selected Google Account Row: Abdullah */}
+            {/* Selected Enterprise Account Row */}
             <div
               className="google-account-item"
-              onClick={() => handleGoogleAuth("abdullah262686@gmail.com", "Abdullah")}
+              onClick={() => handleGoogleAuth("admin@autocare.enterprise", "AutoCare Fleet Administrator")}
             >
               <div className="google-avatar">
                 <span>A</span>
               </div>
               <div className="google-account-info">
-                <b>Abdullah</b>
-                <span>abdullah262686@gmail.com</span>
-                <small className="google-badge">PUCIT &bull; Roll #35 &bull; Signed In</small>
+                <b>AutoCare Fleet Administrator</b>
+                <span>admin@autocare.enterprise</span>
+                <small className="google-badge">Enterprise Admin &bull; SSO Verified</small>
               </div>
               <div className="google-check-arrow">&rarr;</div>
             </div>

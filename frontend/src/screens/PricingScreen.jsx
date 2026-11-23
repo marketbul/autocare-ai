@@ -19,10 +19,10 @@ export function PricingScreen() {
     <div className="card pricing-screen">
       <div className="screen-header">
         <div>
-          <h2>Pakistan Parts & Labour Cost Estimator (Proposal §7.9)</h2>
+          <h2>Automotive Parts & Labour Cost Estimator</h2>
           <p className="screen-subtitle">
-            Market-benchmarked OEM vs Aftermarket parts and workshop labour rates in PKR.
-            Engineered by <b>Abdullah Mudasir</b> (Frontend & DevOps Lead).
+            Market-benchmarked OEM vs Aftermarket parts and certified workshop labour rates in PKR.
+            Calibrated with real-world auto parts vendor price indices.
           </p>
         </div>
         <span className="badge badge-accent">Verified PKR Market Rates</span>

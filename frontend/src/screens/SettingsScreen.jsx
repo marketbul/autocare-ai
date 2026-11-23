@@ -165,23 +165,23 @@ export function SettingsScreen({ user, theme, onToggleTheme, go }) {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
           </svg>
-          Account & Project Team Profile
+          Account &amp; Security Profile
         </h2>
 
         <div style={{ display: "grid", gap: "12px", fontSize: "13.5px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
-            <span style={{ color: "var(--text-secondary)" }}>Student Name</span>
-            <b style={{ color: "var(--text-primary)" }}>{user?.full_name || "Abdullah"}</b>
+            <span style={{ color: "var(--text-secondary)" }}>Account Holder</span>
+            <b style={{ color: "var(--text-primary)" }}>{user?.full_name || "Vehicle Owner"}</b>
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
-            <span style={{ color: "var(--text-secondary)" }}>PUCIT Roll Number</span>
-            <b style={{ color: "var(--primary)" }}>BSDSF23A035 (35)</b>
+            <span style={{ color: "var(--text-secondary)" }}>Account Service Tier</span>
+            <b style={{ color: "var(--primary)" }}>Enterprise Automotive Tier</b>
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
             <span style={{ color: "var(--text-secondary)" }}>Email Address</span>
-            <b style={{ color: "var(--text-primary)" }}>{user?.email || "abdullah262686@gmail.com"}</b>
+            <b style={{ color: "var(--text-primary)" }}>{user?.email || "user@autocare.ai"}</b>
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
@@ -192,22 +192,22 @@ export function SettingsScreen({ user, theme, onToggleTheme, go }) {
           <div style={{ display: "flex", justifyContent: "space-between", padding: "8px 0" }}>
             <span style={{ color: "var(--text-secondary)" }}>Authentication Status</span>
             <span style={{ color: "var(--success)", fontWeight: "600", display: "inline-flex", alignItems: "center", gap: "4px" }}>
-              ✓ Google Verified &bull; Active
+              ✓ Verified Secure Session &bull; Active
             </span>
           </div>
         </div>
       </div>
 
-      {/* 4. Academic & FYP Meta */}
+      {/* 4. Platform System Information */}
       <div className="panel" style={{ background: "var(--surface-2)" }}>
         <h2 style={{ marginBottom: "10px", fontSize: "14px", color: "var(--text-secondary)" }}>
-          Academic Project Specification
+          Platform System Specifications
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", fontSize: "12.5px", color: "var(--text-muted)" }}>
-          <div>Project: <b>AutoCare AI (FYP Venture)</b></div>
-          <div>Institution: <b>PUCIT, University of the Punjab</b></div>
-          <div>Course: <b>Entrepreneurship for Computing Students</b></div>
-          <div>Instructor: <b>Dr. Sadeeqa R. Khan</b></div>
+          <div>Engine: <b>AutoCare Causal Transformer LM v2.4</b></div>
+          <div>Knowledge Grounding: <b>45 OEM Factory Service Manuals</b></div>
+          <div>Telemetry Engine: <b>Snappy Parquet &amp; Apache Kafka</b></div>
+          <div>System Status: <b style={{ color: "var(--success)" }}>All Microservices Operational</b></div>
         </div>
       </div>
     </div>

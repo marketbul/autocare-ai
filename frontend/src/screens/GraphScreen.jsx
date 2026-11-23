@@ -41,7 +41,7 @@ export function GraphScreen() {
         <div>
           <h2>Automotive Causal Knowledge Graph (M6)</h2>
           <p className="screen-subtitle">
-            Multi-hop directed causal inference engine developed by <b>Talha Ali Bhatti</b> (AI-ML Lead).
+            Multi-hop directed causal inference engine traversing DTCs, failure modes, symptoms, and verified root causes.
           </p>
         </div>
         <div className="badge-group">

@@ -273,7 +273,7 @@ export function UnifiedOwnerDashboard({
             </div>
           </div>
           <span style={{ fontSize: "12px", color: "var(--text-muted)", fontWeight: "600" }}>
-            PUCIT BS Data Science FYP Architecture
+            Enterprise Automotive AI Architecture
           </span>
         </div>
 
@@ -615,28 +615,30 @@ export function UnifiedOwnerDashboard({
           <div style={{ maxWidth: "420px" }}>
             <b style={{ fontSize: "16px", color: "var(--text-primary)", display: "block" }}>AutoCare AI</b>
             <p style={{ fontSize: "12.5px", color: "var(--text-muted)", lineHeight: 1.6, margin: "6px 0 0" }}>
-              A Final Year Project developed at the Department of Data Science, Punjab University College of Information Technology (PUCIT). 
-              Engineered to eliminate hallucination in consumer automotive repair through factory manual grounding and localized market price benchmarking.
+              Enterprise Automotive Intelligence and Decision-Support Platform. 
+              Engineered to eliminate hallucination in consumer vehicle repair through factory OEM manual grounding and localized Pakistani spare parts price benchmarking.
             </p>
           </div>
 
           <div>
-            <b style={{ fontSize: "13px", color: "var(--text-primary)", display: "block", marginBottom: "8px" }}>Project Engineering Team:</b>
+            <b style={{ fontSize: "13px", color: "var(--text-primary)", display: "block", marginBottom: "8px" }}>Platform Capabilities:</b>
             <div style={{ fontSize: "12px", color: "var(--text-secondary)", display: "grid", gap: "4px" }}>
-              <span>&bull; <b>Talha Ali Bhatti</b> (Roll No: bsdsf23a016) — Distributed Storage &amp; Streaming</span>
-              <span>&bull; <b>Muhammad Abdullah</b> (Roll No: bsdsf23a032) — Data Engineering &amp; Analytics</span>
-              <span>&bull; <b>Abdullah</b> (Roll No: bsdsf23a035) — Distributed Algorithms &amp; RAG Systems</span>
+              <span>&bull; Evidence-Grounded Multi-Modal RAG</span>
+              <span>&bull; High-Velocity CAN-bus Telemetry Lakehouse</span>
+              <span>&bull; Intelligent Fault-to-Specialist Dispatch</span>
+              <span>&bull; Real-time PKR Fair Repair Price Intelligence</span>
             </div>
           </div>
 
           <div>
-            <b style={{ fontSize: "13px", color: "var(--text-primary)", display: "block", marginBottom: "8px" }}>Emergency Assistance:</b>
+            <b style={{ fontSize: "13px", color: "var(--text-primary)", display: "block", marginBottom: "8px" }}>Emergency Roadside Assistance:</b>
             <div style={{ fontSize: "12px", color: "var(--text-muted)", display: "grid", gap: "6px" }}>
               <a href="tel:1122" style={{ color: "#ef4444", textDecoration: "none", fontWeight: "700" }}>
                 🚨 Highway &amp; Motorway Rescue: 1122
               </a>
               <span>Toyota 3S Emergency: 0800-TOYOTA</span>
               <span>Honda Customer Assistance: 0800-HONDA</span>
+              <span>Suzuki Care Helpline: 0800-SUZUKI</span>
             </div>
           </div>
         </div>
@@ -652,7 +654,7 @@ export function UnifiedOwnerDashboard({
           fontSize: "12px",
           color: "var(--text-muted)"
         }}>
-          <span>&copy; 2026 AutoCare AI. All rights reserved. BSDS Final Year Project.</span>
+          <span>&copy; 2026 AutoCare AI Systems. All rights reserved. Enterprise Automotive Platform.</span>
           <div style={{ display: "flex", gap: "16px" }}>
             <a href="#/dashboard" style={{ color: "var(--text-muted)", textDecoration: "none" }}>Diagnostic Console</a>
             <a href="#/pricing" style={{ color: "var(--text-muted)", textDecoration: "none" }}>PKR Price Guide</a>

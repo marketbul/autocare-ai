@@ -31,7 +31,13 @@ frontend/src/
   components/DiagnosticQuery.jsx + .css
 ```
 
-## Acceptance criteria → code → test
+## System Status & Verification
+
+- **Lakehouse Engine:** 4-Tier streaming telemetry (Bronze JSON, Silver Parquet, Gold Relational).
+- **Dispatch Engine:** Haversine great-circle routing to 5 certified automotive specialists.
+- **Model Context Protocol (MCP):** JSON-RPC 2.0 interface for AI orchestration and cloud tool integration.
+- **Diagnostics:** Multi-hop causal knowledge graph across 45 workshop manuals.
+
 
 | AC | Requirement | Where | Test class |
 |---|---|---|---|

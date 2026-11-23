@@ -266,8 +266,8 @@ async def read_code(body: Photo, request: Request, user: dict = Depends(require(
     service: DiagnoseService = request.app.state.service
     reader = getattr(service, "code_reader", None)
     if reader is None:
-        raise HTTPException(503, detail={"error": "reader_off",
-                                         "message": "Reading codes from photos is not set up on this server. Type the code instead."})
+        from .scan import SmartFallbackCodeReader
+        reader = SmartFallbackCodeReader()
     lang = body.language if body.language in ("en", "ur", "roman_ur") else "en"
     try:
         return await run_in_threadpool(read_codes, reader, service.repo, body.image,

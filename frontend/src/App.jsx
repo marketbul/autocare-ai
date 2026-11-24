@@ -39,6 +39,8 @@ const I = {
   out: <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h4a1 1 0 011 1v12a1 1 0 01-1 1h-4M10 16l-4-4 4-4M6 12h10" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>,
   sun: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
   moon: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
+  menu: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
+  close: <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
 };
 
 // Streamlined & clean navigation per role
@@ -94,6 +96,7 @@ export default function App() {
   const [activeId, setActiveId] = useState("");
   const [askAgain, setAskAgain] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Theme State
   const [theme, setTheme] = useState(() => {
@@ -279,7 +282,7 @@ export default function App() {
         {/* Workspace Mode Badge */}
         <div className="workspace-badge">
           <span className="live-dot" />
-          <span>PUCIT FYP Node</span>
+          <span>AutoCare AI Cloud Node</span>
         </div>
 
         <nav className="rail-nav" aria-label="Main Navigation">
@@ -316,7 +319,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <div className="content-shell">
-        {/* Sleek Top Navigation Header Bar */}
+        {/* Sleek Top Navigation Header Bar (Desktop Only) */}
         <header className="desktop-topbar">
           <div className="topbar-left">
             <div className="breadcrumb">
@@ -371,9 +374,130 @@ export default function App() {
           </div>
         </header>
 
+        {/* Mobile Top App Bar (Smartphones & Tablets <= 860px) */}
+        <header className="mobile-topbar">
+          <div className="mobile-topbar-left">
+            <button
+              type="button"
+              className="mobile-menu-trigger"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open navigation menu"
+            >
+              {I.menu}
+            </button>
+            <a className="mobile-brand" href={nav[0].href}>
+              <img src={`${BASE}emblem-256.jpg`} alt="AutoCare AI" width="26" height="26" />
+              <span>AutoCare AI</span>
+            </a>
+          </div>
+
+          <div className="mobile-topbar-right">
+            {activeVehicle && (
+              <div className="mobile-active-car" onClick={() => go("#/cars")} title={activeVehicle.label}>
+                <span className="car-pulse-dot" />
+                <span>{activeVehicle.label.split(" ").slice(0, 2).join(" ")}</span>
+              </div>
+            )}
+            <button
+              type="button"
+              className="mobile-theme-btn"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {theme === "dark" ? I.sun : I.moon}
+            </button>
+          </div>
+        </header>
+
         {/* Screen Content */}
         <main className="main" key={route}>{screen}</main>
       </div>
+
+      {/* Mobile Bottom Navigation Bar (Fixed for Mobile Screens) */}
+      <nav className="mobile-bottom-bar" aria-label="Mobile Navigation">
+        {nav.filter((n) => n.href && !n.section).slice(0, 5).map((n) => (
+          <a
+            key={n.href}
+            href={n.href}
+            className={`mobile-tab-item ${route === n.href ? "is-active" : ""}`}
+            aria-current={route === n.href ? "page" : undefined}
+          >
+            <span className="mobile-tab-icon">{n.icon}</span>
+            <span className="mobile-tab-label">{n.label.split(" ")[0]}</span>
+            {route === n.href && <span className="mobile-tab-indicator" />}
+          </a>
+        ))}
+      </nav>
+
+      {/* Mobile Slide-out Drawer */}
+      {mobileMenuOpen && (
+        <div className="mobile-drawer-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <div className="mobile-drawer-sheet" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-drawer-header">
+              <div className="mobile-drawer-brand">
+                <img src={`${BASE}emblem-256.jpg`} alt="AutoCare AI" width="28" height="28" />
+                <div>
+                  <b>AutoCare AI</b>
+                  <small>Diagnostics Co-Pilot</small>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="mobile-drawer-close"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                {I.close}
+              </button>
+            </div>
+
+            {/* Mobile User Profile Card */}
+            <div className="mobile-drawer-user">
+              <span className="avatar">{user.full_name.slice(0, 1).toUpperCase()}</span>
+              <div className="user-details">
+                <b>{user.full_name}</b>
+                <small>{ROLE_LABEL[user.role] || user.role}</small>
+              </div>
+            </div>
+
+            {/* Full Navigation Links */}
+            <nav className="mobile-drawer-nav">
+              {nav.map((n, i) => n.section
+                ? <p key={i} className="nav-heading">{n.section}</p>
+                : (
+                  <a
+                    key={n.href}
+                    href={n.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`mobile-drawer-item ${route === n.href ? "is-active" : ""}`}
+                  >
+                    <span className="drawer-icon">{n.icon}</span>
+                    <span className="drawer-label">{n.label}</span>
+                    {n.badge && <span className="nav-badge">{n.badge}</span>}
+                  </a>
+                ))}
+            </nav>
+
+            {/* Local Network Info */}
+            <div className="mobile-drawer-share">
+              <small>📱 Connected via Wi-Fi</small>
+              <p>AutoCare AI responsive mobile edition</p>
+            </div>
+
+            {/* Drawer Footer Actions */}
+            <div className="mobile-drawer-footer">
+              <button type="button" className="drawer-theme-toggle" onClick={toggleTheme}>
+                {theme === "dark" ? I.sun : I.moon}
+                <span>{theme === "dark" ? "Light" : "Dark"}</span>
+              </button>
+              <button type="button" className="drawer-logout-btn" onClick={signOut}>
+                {I.out}
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

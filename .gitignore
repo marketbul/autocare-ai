@@ -12,6 +12,7 @@ ENV/
 .secret_key
 backend/.secret_key
 backend/models/
+models/
 backend/*.db
 
 # Environment variables

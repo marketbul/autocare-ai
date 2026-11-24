@@ -123,32 +123,9 @@ export function UnifiedOwnerDashboard({
         </p>
 
         {/* Persistent Active Vehicle Ribbon */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "16px",
-          background: "var(--surface-1)",
-          border: "1px solid var(--border)",
-          borderRadius: "16px",
-          padding: "12px 20px",
-          width: "100%",
-          maxWidth: "880px",
-          boxShadow: "var(--shadow-sm)",
-          marginTop: "8px"
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "14px", textAlign: "left" }}>
-            <div style={{
-              width: "44px",
-              height: "44px",
-              borderRadius: "10px",
-              background: "var(--primary-dim)",
-              border: "1px solid var(--primary-border)",
-              color: "var(--primary)",
-              display: "grid",
-              placeItems: "center",
-              flexShrink: 0
-            }}>
+        <div className="active-vehicle-ribbon">
+          <div className="active-vehicle-info">
+            <div className="active-vehicle-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12l1.5-4.3A2 2 0 018.4 6.4h7.2a2 2 0 011.9 1.3L19 12M4 12h16v4.5a1 1 0 01-1 1H5a1 1 0 01-1-1V12z"/>
                 <circle cx="7.5" cy="14.8" r="1.1" fill="currentColor"/>
@@ -156,45 +133,36 @@ export function UnifiedOwnerDashboard({
               </svg>
             </div>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{
-                  fontSize: "10.5px",
-                  fontWeight: "700",
-                  color: "var(--success)",
-                  background: "var(--success-dim)",
-                  padding: "1px 6px",
-                  borderRadius: "4px"
-                }}>
-                  ACTIVE VEHICLE
-                </span>
-                <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                <span className="badge-active-car">ACTIVE VEHICLE</span>
+                <span className="badge-manual-status">
                   {currentVehicle ? (currentVehicle.has_manual ? "✓ Factory Service Manual Loaded" : "Standard Mode") : ""}
                 </span>
               </div>
-              <b style={{ fontSize: "15px", color: "var(--text-primary)" }}>
+              <b className="active-vehicle-title">
                 {currentVehicle?.label || "Toyota Corolla Altis Grande 1.8L (2022)"}
               </b>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ textAlign: "right" }}>
-              <span style={{ fontSize: "10px", color: "var(--text-muted)", display: "block", fontWeight: "700" }}>ODOMETER</span>
-              <b style={{ fontSize: "13.5px", color: "var(--text-primary)" }}>
+          <div className="active-vehicle-meta">
+            <div className="meta-stat">
+              <span className="meta-stat-label">ODOMETER</span>
+              <b className="meta-stat-value">
                 {currentVehicle?.current_mileage ? `${currentVehicle.current_mileage.toLocaleString()} km` : "48,250 km"}
               </b>
             </div>
 
-            <div style={{ textAlign: "right" }}>
-              <span style={{ fontSize: "10px", color: "var(--text-muted)", display: "block", fontWeight: "700" }}>HEALTH INDEX</span>
-              <b style={{ fontSize: "13.5px", color: "var(--success)" }}>94% Optimal</b>
+            <div className="meta-stat">
+              <span className="meta-stat-label">HEALTH INDEX</span>
+              <b className="meta-stat-value text-success">94% Optimal</b>
             </div>
 
             {vehicles.length > 1 ? (
               <select
                 value={activeId || ""}
                 onChange={(e) => onPickVehicle(e.target.value)}
-                style={{ padding: "6px 10px", fontSize: "12px", borderRadius: "8px" }}
+                className="active-vehicle-select"
               >
                 {vehicles.map((v) => (
                   <option key={v.user_vehicle_id} value={v.user_vehicle_id}>{v.label}</option>
@@ -203,9 +171,8 @@ export function UnifiedOwnerDashboard({
             ) : (
               <button
                 type="button"
-                className="btn"
+                className="btn active-vehicle-btn"
                 onClick={() => go("#/cars")}
-                style={{ fontSize: "11.5px", padding: "6px 10px" }}
               >
                 + Add Car
               </button>

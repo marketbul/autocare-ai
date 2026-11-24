@@ -69,8 +69,8 @@ async def lifespan(app: FastAPI):
 
 settings = load_settings()
 app = FastAPI(title="AutoCare AI", version="0.2.0", lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=list(settings.cors_origins),
-                   allow_methods=["GET", "POST", "PATCH", "DELETE"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=False,
+                   allow_methods=["*"], allow_headers=["*"])
 
 
 # ---------------------------------------------------------------- errors

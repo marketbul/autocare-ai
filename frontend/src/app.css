@@ -688,52 +688,77 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* ==========================================================================
-   Modern Authentication Screen (.auth-wrapper & .auth-card)
+   Enterprise Dual-Column Authentication Experience (.auth-split-wrapper)
+   Inspired by Linear, Tesla, Stripe, and Rivian Design Systems
    ========================================================================== */
 
-.auth-wrapper {
+.auth-split-wrapper {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 16px;
+  width: 100%;
   background: var(--canvas);
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Ambient Radial Glow */
-.auth-bg-glow {
+/* Ambient Radial Glow Lighting */
+.auth-glow {
   position: absolute;
-  top: -150px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.03) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
   pointer-events: none;
-  filter: blur(40px);
+  z-index: 1;
+}
+.auth-glow-1 {
+  top: -120px;
+  left: 10%;
+  width: 550px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, rgba(59, 130, 246, 0.02) 65%, transparent 80%);
+}
+.auth-glow-2 {
+  bottom: -100px;
+  right: 5%;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.01) 70%, transparent 80%);
 }
 
-.auth-top-bar {
-  position: absolute;
-  top: 20px;
-  left: 24px;
-  right: 24px;
+/* Floating Global Header Bar */
+.auth-global-header {
+  position: relative;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
-.auth-top-brand {
+.auth-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.auth-brand-badge img {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.auth-brand-text {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
-  color: var(--text-primary);
 }
-.auth-version-badge {
-  padding: 2px 7px;
+.auth-brand-text b {
+  font-size: 16px;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.auth-env-tag {
+  padding: 2px 8px;
   border-radius: 9999px;
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -741,298 +766,773 @@ input:focus, select:focus, textarea:focus {
   color: var(--text-muted);
   font-weight: 600;
 }
-
-.auth-card {
-  width: 100%;
-  max-width: 440px;
-  background: var(--surface-1);
+.theme-switch-btn {
+  background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: var(--shadow-lg);
-  padding: 32px 28px;
+  border-radius: 9px;
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
   display: grid;
-  gap: 18px;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.theme-switch-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+}
+
+/* Main Split Grid (Desktop 2-Col, Mobile 1-Col) */
+.auth-split-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
   position: relative;
   z-index: 10;
 }
 
-.auth-header {
-  text-align: center;
-  display: grid;
-  gap: 6px;
-  justify-items: center;
+/* --------------------------------------------------------------------------
+   LEFT HERO PANEL (Automotive Brand & Live HUD Showcase)
+   -------------------------------------------------------------------------- */
+.auth-hero-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 48px 48px 64px;
+  border-right: 1px solid var(--border);
+  background: linear-gradient(170deg, var(--surface-1) 0%, var(--canvas) 100%);
+  position: relative;
 }
-.auth-logo-frame {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+.hero-panel-content {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-dim);
+  border: 1px solid var(--primary-border);
+  color: var(--primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  width: fit-content;
+}
+.live-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseGreen 1.8s ease-in-out infinite;
+}
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hero-panel-title {
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.hero-panel-title span {
+  background: linear-gradient(135deg, #38bdf8 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-panel-description {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Glass HUD Telemetry Card */
+.auth-hud-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 3px solid var(--primary);
+}
+.hud-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hud-car-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+}
+.hud-status-tag {
+  font-size: 11px;
+  color: #10b981;
+  font-weight: 600;
+}
+.hud-car-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.hud-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.hud-metric small {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.hud-metric b {
+  font-size: 13.5px;
+  color: var(--text-primary);
+}
+.text-emerald { color: #10b981 !important; }
+.text-cyan { color: #38bdf8 !important; }
+
+.hud-grounding-proof {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.hud-grounding-proof svg {
+  color: #10b981;
+}
+
+/* Feature Checkmarks List */
+.hero-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+.hero-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.feature-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   background: var(--surface-2);
   border: 1px solid var(--border);
   display: grid;
   place-items: center;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 4px;
+  font-size: 15px;
+  flex-shrink: 0;
 }
-.auth-logo-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.auth-header h1 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
+.hero-feature-item b {
+  display: block;
+  font-size: 13.5px;
   color: var(--text-primary);
 }
-.auth-header p {
-  margin: 0;
-  font-size: 13px;
+.hero-feature-item p {
+  margin: 1px 0 0;
+  font-size: 12.5px;
   color: var(--text-secondary);
 }
 
-/* Google OAuth Button */
-.google-auth-btn {
+.hero-panel-trust {
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT FORM PANEL (Enterprise Auth Terminal)
+   -------------------------------------------------------------------------- */
+.auth-form-panel {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 11px 16px;
+  padding: 40px 32px;
+}
+.auth-terminal-card {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-mobile-header {
+  display: none;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.auth-mobile-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.auth-mobile-header p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Segmented Mode Switcher (Sign In / Sign Up) */
+.auth-mode-segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  gap: 4px;
+}
+.segmented-tab {
+  border: none;
+  background: transparent;
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+.segmented-tab.is-active {
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-form-title-block h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+.auth-form-title-block p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Google Single Sign-On Button */
+.google-sso-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 16px;
+  background: var(--surface-1);
   color: var(--text-primary);
   border: 1px solid var(--border);
-  border-radius: 9px;
-  font-weight: 600;
+  border-radius: 10px;
   font-size: 13.5px;
+  font-weight: 600;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: all 0.15s ease;
+  transition: all 0.18s ease;
 }
-.google-auth-btn:hover:not(:disabled) {
+.google-sso-button:hover:not(:disabled) {
   background: var(--surface-hover);
   border-color: var(--border-hover);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
-.auth-divider {
+/* Elegant Divider */
+.auth-divider-rule {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin: 2px 0;
 }
-.auth-divider-line {
+.rule-line {
   flex: 1;
   height: 1px;
   background: var(--border);
 }
-.auth-divider span {
-  font-size: 11.5px;
+.rule-text {
+  font-size: 11px;
+  font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
-.auth-label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
+/* Role Scope Selector */
+.role-selector-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-
-.auth-role-tabs {
+.role-pill-group {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
   background: var(--surface-2);
   padding: 4px;
-  border-radius: 9px;
+  border-radius: 10px;
   border: 1px solid var(--border);
 }
-.auth-role-tab {
-  padding: 6px 0;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.15s ease;
+.role-pill {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+  padding: 7px 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
-.auth-role-tab.is-selected {
+.role-pill.is-selected {
   background: var(--surface-1);
   color: var(--primary);
   font-weight: 700;
   box-shadow: var(--shadow-sm);
 }
 
-/* Quick Demo Chips */
-.auth-quick-demo {
-  padding-top: 4px;
-  border-top: 1px solid var(--border);
-  display: grid;
-  gap: 6px;
-}
-.auth-quick-label {
-  font-size: 11.5px;
-  color: var(--text-muted);
-  text-align: center;
-}
-.auth-quick-chips {
+/* Input Fields with Inline Icons */
+.auth-input-form {
   display: flex;
-  gap: 6px;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 14px;
 }
-.auth-chip {
-  padding: 4px 10px;
-  border-radius: 9999px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
   color: var(--text-secondary);
+}
+.label-with-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-link {
+  background: none;
+  border: none;
+  color: var(--primary);
   font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
+  padding: 0;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.input-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.input-field-wrapper input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text-primary);
+  font-size: 13.5px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input-field-wrapper input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-dim);
+}
+.password-toggle-eye {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+.password-toggle-eye:hover {
+  color: var(--text-primary);
+}
+
+/* Remember Me Checkbox */
+.remember-row {
+  display: flex;
+  align-items: center;
+  margin: -2px 0 2px;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-container input {
+  accent-color: var(--primary);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* Primary Auth Submit Button */
+.auth-submit-btn {
+  width: 100%;
+  padding: 12px 18px;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px -2px rgba(59, 130, 246, 0.45);
+  transition: all 0.18s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-submit-btn:hover:not(:disabled) {
+  opacity: 0.94;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px -2px rgba(59, 130, 246, 0.55);
+}
+.auth-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-spinner-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mini-spin {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Fast 1-Click Profiles Card */
+.auth-demo-section {
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.demo-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.demo-pill-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.demo-pill-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.demo-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.demo-btn-card {
+  padding: 8px 6px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+  cursor: pointer;
   transition: all 0.15s ease;
 }
-.auth-chip:hover {
+.demo-btn-card:hover {
+  border-color: var(--primary);
   background: var(--surface-hover);
+  transform: translateY(-1px);
+}
+.demo-btn-card.is-selected {
+  border-color: var(--primary);
+  background: var(--primary-dim);
+}
+.demo-role-badge {
+  font-size: 10.5px;
+  font-weight: 700;
   color: var(--text-primary);
-  border-color: var(--border-hover);
 }
-
-.auth-footer-switch {
-  text-align: center;
-  font-size: 12.5px;
+.demo-role-name {
+  font-size: 11px;
   color: var(--text-secondary);
-  border-top: 1px solid var(--border);
-  padding-top: 12px;
+  font-weight: 500;
+}
+.demo-btn-card small {
+  font-size: 9.5px;
+  color: var(--text-muted);
 }
 
-/* ---------- Google Account Picker Popover Modal ---------- */
-.google-modal-backdrop {
+/* Compliance Security Footer */
+.auth-security-footer {
+  text-align: center;
+}
+.security-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   OFFICIAL GOOGLE IDENTITY SERVICES (GIS) MODAL POPUP
+   -------------------------------------------------------------------------- */
+.gis-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  z-index: 100;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 200;
   display: grid;
   place-items: center;
   padding: 16px;
   animation: fadeIn 0.15s ease;
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.google-modal-card {
+.gis-modal-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   background: var(--surface-1);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: var(--shadow-lg);
+  border-radius: 16px;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.6);
   padding: 24px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  animation: scaleUp 0.15s ease;
+  animation: scaleUp 0.16s ease;
 }
-@keyframes scaleUp {
-  from { transform: scale(0.96); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.google-modal-head {
+.gis-modal-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  position: relative;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
 }
-.google-modal-head h3 {
-  margin: 0;
+.gis-brand-title {
+  display: flex;
+  align-items: center;
+}
+.gis-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
   font-size: 16px;
-  font-weight: 600;
+  cursor: pointer;
+  padding: 4px;
+}
+.gis-close-btn:hover {
   color: var(--text-primary);
 }
-.google-modal-head p {
-  margin: 0;
-  font-size: 12.5px;
-  color: var(--text-muted);
-}
-.google-close-btn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: none;
-  border: 0;
-  color: var(--text-muted);
-  cursor: pointer;
-  font-size: 16px;
-}
 
-.google-account-item {
+.gis-accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gis-account-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  padding: 12px 14px;
+  border-radius: 12px;
   background: var(--surface-2);
+  border: 1px solid var(--border);
   cursor: pointer;
   transition: all 0.15s ease;
 }
-.google-account-item:hover {
-  background: var(--surface-hover);
+.gis-account-row:hover {
   border-color: var(--primary);
-  box-shadow: var(--shadow-sm);
+  background: var(--surface-hover);
+  transform: translateY(-1px);
 }
-.google-avatar {
-  width: 36px;
-  height: 36px;
+.gis-avatar {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: var(--primary);
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
   display: grid;
   place-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
-.google-account-info {
+.gis-avatar-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: #ffffff;
+}
+.gis-avatar-admin {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  color: #ffffff;
+}
+.gis-account-details {
   flex: 1;
-  display: grid;
-  gap: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
-.google-account-info b {
+.gis-account-details b {
   font-size: 13.5px;
   color: var(--text-primary);
 }
-.google-account-info span {
+.gis-account-details span {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
-.google-badge {
-  font-size: 10.5px;
-  color: var(--success);
-  font-weight: 600;
-}
-.google-check-arrow {
-  font-size: 16px;
+.gis-pill {
+  font-size: 10px;
   color: var(--primary);
   font-weight: 700;
 }
-.google-privacy-footer {
+.gis-arrow {
+  color: var(--primary);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.gis-custom-input {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gis-custom-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.gis-input-row {
+  display: flex;
+  gap: 8px;
+}
+.gis-input-row input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 13px;
+  outline: none;
+}
+.gis-input-row input:focus {
+  border-color: var(--primary);
+}
+.gis-continue-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gis-privacy-notice {
   font-size: 11px;
   color: var(--text-muted);
-  line-height: 1.4;
-  text-align: center;
+  line-height: 1.5;
   border-top: 1px solid var(--border);
   padding-top: 10px;
+}
+.gis-privacy-notice a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* Responsive Rules for Auth Screen */
+@media (max-width: 960px) {
+  .auth-split-grid {
+    grid-template-columns: 1fr;
+  }
+  .auth-hero-panel {
+    display: none;
+  }
+  .auth-mobile-header {
+    display: flex;
+  }
+  .auth-form-panel {
+    padding: 24px 16px;
+  }
 }
 
 /* ==========================================================================

@@ -4,8 +4,10 @@ import { get } from "../api/client";
 export function PricingScreen() {
   const [model, setModel] = useState("corolla");
   const [category, setCategory] = useState("all");
+  const [search, setSearch] = useState("");
   const [quotes, setQuotes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [activeCity, setActiveCity] = useState("Lahore");
 
   useEffect(() => {
     setLoading(true);
@@ -15,29 +17,101 @@ export function PricingScreen() {
       .finally(() => setLoading(false));
   }, [model, category]);
 
+  const filteredQuotes = quotes.filter((q) => {
+    if (!search.trim()) return true;
+    const term = search.toLowerCase();
+    return (
+      q.part_name?.toLowerCase().includes(term) ||
+      q.category?.toLowerCase().includes(term) ||
+      q.quality_notes?.toLowerCase().includes(term)
+    );
+  });
+
   return (
-    <div className="card pricing-screen">
-      <div className="screen-header">
+    <div className="website-container" style={{ gap: "28px" }}>
+      {/* Header Banner */}
+      <div className="website-section-header">
         <div>
-          <h2>Automotive Parts & Labour Cost Estimator</h2>
-          <p className="screen-subtitle">
-            Market-benchmarked OEM vs Aftermarket parts and certified workshop labour rates in PKR.
-            Calibrated with real-world auto parts vendor price indices.
-          </p>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span style={{ fontSize: "24px" }}>🏷️</span>
+            <h2 className="website-section-title" style={{ margin: 0 }}>
+              PKR Parts &amp; Labour Price Intelligence
+            </h2>
+          </div>
+          <div className="website-section-subtitle">
+            Verified OEM Dealership prices vs Bilal Gunj / Montgomery Road aftermarket rates with certified labor bounds.
+          </div>
         </div>
-        <span className="badge badge-accent">Verified PKR Market Rates</span>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          {["Lahore (Bilal Gunj)", "Karachi (Plaza)", "Islamabad / RWP"].map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setActiveCity(c.split(" ")[0])}
+              style={{
+                padding: "4px 10px",
+                fontSize: "11px",
+                fontWeight: "700",
+                borderRadius: "20px",
+                border: activeCity === c.split(" ")[0] ? "1px solid var(--primary)" : "1px solid var(--border)",
+                background: activeCity === c.split(" ")[0] ? "var(--primary-dim)" : "var(--surface-2)",
+                color: activeCity === c.split(" ")[0] ? "var(--primary)" : "var(--text-muted)",
+                cursor: "pointer"
+              }}
+            >
+              ● {c}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Control Filters */}
-      <div style={{ display: "flex", gap: "14px", margin: "20px 0", flexWrap: "wrap" }}>
+      <div style={{
+        display: "flex",
+        gap: "14px",
+        flexWrap: "wrap",
+        alignItems: "center",
+        background: "var(--surface-1)",
+        padding: "16px 20px",
+        borderRadius: "14px",
+        border: "1px solid var(--border)"
+      }}>
+        <div style={{ flex: "1 1 200px" }}>
+          <label style={{ fontSize: "11.5px", fontWeight: "700", color: "var(--text-muted)", display: "block", marginBottom: "4px" }}>
+            SEARCH SPARE PART OR COMPONENT:
+          </label>
+          <input
+            type="text"
+            placeholder="Search e.g. Brake Pads, Radiator, Spark Plugs..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "9px 12px",
+              borderRadius: "8px",
+              background: "var(--surface-2)",
+              color: "var(--text-primary)",
+              border: "1px solid var(--border)",
+              fontSize: "13px"
+            }}
+          />
+        </div>
+
         <div>
-          <label style={{ fontSize: "0.8rem", color: "var(--muted)", display: "block", marginBottom: "4px" }}>
-            Select Vehicle:
+          <label style={{ fontSize: "11.5px", fontWeight: "700", color: "var(--text-muted)", display: "block", marginBottom: "4px" }}>
+            SELECT VEHICLE MODEL:
           </label>
           <select
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            style={{ padding: "8px 12px", borderRadius: "6px", background: "var(--card-bg)", color: "#fff", border: "1px solid var(--border)" }}
+            style={{
+              padding: "9px 12px",
+              borderRadius: "8px",
+              background: "var(--surface-2)",
+              color: "var(--text-primary)",
+              border: "1px solid var(--border)",
+              fontSize: "13px"
+            }}
           >
             <option value="corolla">Toyota Corolla (2015-2025)</option>
             <option value="civic">Honda Civic (2015-2025)</option>
@@ -46,73 +120,111 @@ export function PricingScreen() {
         </div>
 
         <div>
-          <label style={{ fontSize: "0.8rem", color: "var(--muted)", display: "block", marginBottom: "4px" }}>
-            Component Subsystem:
+          <label style={{ fontSize: "11.5px", fontWeight: "700", color: "var(--text-muted)", display: "block", marginBottom: "4px" }}>
+            SUBSYSTEM CATEGORY:
           </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            style={{ padding: "8px 12px", borderRadius: "6px", background: "var(--card-bg)", color: "#fff", border: "1px solid var(--border)" }}
+            style={{
+              padding: "9px 12px",
+              borderRadius: "8px",
+              background: "var(--surface-2)",
+              color: "var(--text-primary)",
+              border: "1px solid var(--border)",
+              fontSize: "13px"
+            }}
           >
             <option value="all">All Subsystems</option>
-            <option value="braking">Braking System</option>
+            <option value="braking">Braking &amp; Hydraulics</option>
             <option value="cooling">Engine Cooling</option>
-            <option value="engine">Engine & Lubrication</option>
-            <option value="transmission">Transmission & Gearbox</option>
-            <option value="electrical">Electrical & Ignition</option>
+            <option value="engine">Engine &amp; Lubrication</option>
+            <option value="transmission">Transmission &amp; Gearbox</option>
+            <option value="electrical">Electrical &amp; Ignition</option>
           </select>
         </div>
       </div>
 
       {/* Pricing Cards Grid */}
       {loading ? (
-        <div className="loading-state">Fetching verified market quotes...</div>
+        <div style={{ padding: "40px 0", textAlign: "center", color: "var(--text-muted)", fontSize: "14px" }}>
+          Fetching verified Pakistani market price index...
+        </div>
+      ) : filteredQuotes.length === 0 ? (
+        <div style={{ padding: "40px 0", textAlign: "center", color: "var(--text-muted)" }}>
+          No spare parts found matching &ldquo;{search}&rdquo;. Try another term.
+        </div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "16px" }}>
-          {quotes.map((q, idx) => (
+          {filteredQuotes.map((q, idx) => (
             <div
               key={idx}
               style={{
-                background: "rgba(255, 255, 255, 0.02)",
+                background: "var(--surface-1)",
                 border: "1px solid var(--border)",
-                borderRadius: "10px",
-                padding: "16px",
+                borderRadius: "14px",
+                padding: "20px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                gap: "14px",
+                transition: "all 0.18s ease"
               }}
             >
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                  <h3 style={{ margin: "0 0 6px 0", fontSize: "1.05rem", color: "#f8fafc" }}>{q.part_name}</h3>
-                  <span className="badge" style={{ textTransform: "capitalize", fontSize: "0.75rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "8px" }}>
+                  <h3 style={{ margin: 0, fontSize: "15px", fontWeight: "700", color: "var(--text-primary)" }}>
+                    {q.part_name}
+                  </h3>
+                  <span style={{
+                    fontSize: "11px",
+                    fontWeight: "600",
+                    textTransform: "uppercase",
+                    padding: "2px 8px",
+                    borderRadius: "6px",
+                    background: "var(--surface-2)",
+                    border: "1px solid var(--border)",
+                    color: "var(--text-muted)",
+                    flexShrink: 0
+                  }}>
                     {q.category}
                   </span>
                 </div>
 
-                <div style={{ margin: "14px 0", fontSize: "0.88rem" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-                    <span style={{ color: "var(--muted)" }}>Genuine OEM Price:</span>
+                <div style={{ margin: "14px 0", fontSize: "13px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ color: "var(--text-muted)" }}>Genuine OEM Price:</span>
                     <b style={{ color: "#38bdf8" }}>{q.oem_price_range_pkr}</b>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-                    <span style={{ color: "var(--muted)" }}>Quality Aftermarket:</span>
-                    <b style={{ color: "#34d399" }}>{q.aftermarket_price_range_pkr}</b>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ color: "var(--text-muted)" }}>Quality Aftermarket:</span>
+                    <b style={{ color: "#10b981" }}>{q.aftermarket_price_range_pkr}</b>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-                    <span style={{ color: "var(--muted)" }}>Est. Workshop Labour:</span>
-                    <span>{q.estimated_labour_pkr} ({q.recommended_replacement_hours} hrs)</span>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ color: "var(--text-muted)" }}>Est. Workshop Labour:</span>
+                    <span style={{ color: "var(--text-secondary)" }}>
+                      {q.estimated_labour_pkr} ({q.recommended_replacement_hours} hrs)
+                    </span>
                   </div>
-                  <hr style={{ borderColor: "rgba(255,255,255,0.06)", margin: "10px 0" }} />
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontWeight: "600", color: "#f1f5f9" }}>Total Repair Estimate:</span>
-                    <b style={{ color: "#fbbf24" }}>{q.total_estimated_repair_pkr}</b>
+
+                  <div style={{ height: "1px", background: "var(--border)", margin: "4px 0" }} />
+
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontWeight: "700", color: "var(--text-primary)" }}>Total Fair Estimate:</span>
+                    <b style={{ color: "#f59e0b", fontSize: "14px" }}>{q.total_estimated_repair_pkr}</b>
                   </div>
                 </div>
               </div>
 
-              <div style={{ background: "rgba(0,0,0,0.25)", padding: "8px 10px", borderRadius: "6px", fontSize: "0.78rem", color: "#94a3b8" }}>
-                <b>Workshop Tip:</b> {q.quality_notes}
+              <div style={{
+                background: "var(--surface-2)",
+                padding: "8px 12px",
+                borderRadius: "8px",
+                fontSize: "12px",
+                color: "var(--text-secondary)",
+                border: "1px solid var(--border)"
+              }}>
+                <b style={{ color: "var(--primary)" }}>Workshop Tip:</b> {q.quality_notes}
               </div>
             </div>
           ))}

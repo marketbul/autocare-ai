@@ -374,13 +374,61 @@ async def download_report_pdf(body: ReportPdfRequest, request: Request,
     )
 
 
+class PriceEstimateRequest(BaseModel):
+    query: str
+    vehicle_model: str = "Toyota Corolla"
+    quality_tier: str = "genuine_oem"
+    city: str = "Lahore"
+
+
 # ---------------------------------------------------------------- Scale-Up Endpoints (M5-M10 & Analytics)
 @app.get("/api/v1/pricing/quotes")
 async def pricing_quotes(model: str = "corolla", category: str = "all",
-                         user: dict = Depends(require("owner", "admin"))) -> list[dict]:
+                         user: dict = Depends(require("owner", "mechanic", "admin"))) -> list[dict]:
     """Pakistani spare parts and workshop labour price estimation (Proposal §7.9)."""
+    try:
+        from .price_estimator import PriceEstimator
+        parts = PriceEstimator().get_all_parts(model=model, category=category)
+        if parts:
+            return [
+                {
+                    "part_name": p["part_name"],
+                    "category": p["subsystem"],
+                    "oem_price_range_pkr": f"Rs. {p['oem_price_min_pkr']:,.0f} - {p['oem_price_max_pkr']:,.0f}",
+                    "aftermarket_price_range_pkr": f"Rs. {p['aftermarket_price_min_pkr']:,.0f} - {p['aftermarket_price_max_pkr']:,.0f}",
+                    "estimated_labour_pkr": f"Rs. {p['base_labor_rate_pkr']:,.0f}",
+                    "total_estimated_repair_pkr": f"Rs. {p['oem_price_exact_pkr'] + p['base_labor_rate_pkr']:,.0f}",
+                    "recommended_replacement_hours": p["standard_labor_hours"],
+                    "quality_notes": p["counterfeit_warning"],
+                }
+                for p in parts
+            ]
+    except Exception:
+        pass
     from .pricing import PricingService
     return PricingService().get_quotes_for_model(model, category)
+
+
+@app.post("/api/v1/pricing/estimate")
+async def pricing_estimate(payload: PriceEstimateRequest,
+                           user: dict = Depends(require("owner", "mechanic", "admin"))) -> dict:
+    """Computes exact itemized price quotation with complete explanation across Pakistani cities."""
+    from .price_estimator import PriceEstimator
+    return PriceEstimator().estimate_exact_price(
+        query_or_part=payload.query,
+        vehicle_model=payload.vehicle_model,
+        quality_tier=payload.quality_tier,
+        city=payload.city
+    )
+
+
+@app.get("/api/v1/pricing/catalog")
+async def pricing_catalog(model: Optional[str] = None, category: Optional[str] = None,
+                          search: Optional[str] = None,
+                          user: dict = Depends(require("owner", "mechanic", "admin"))) -> list[dict]:
+    """Returns verified local Pakistani parts dataset catalog."""
+    from .price_estimator import PriceEstimator
+    return PriceEstimator().get_all_parts(model=model, category=category, search=search)
 
 
 @app.get("/api/v1/diagnose/graph/export")

@@ -8,7 +8,7 @@ echo.
 netstat -ano | findstr :8000 | findstr LISTENING >nul 2>&1
 if %errorlevel% neq 0 (
     echo [INFO] AutoCare server is starting on port 8000...
-    start /b python -m uvicorn autocare.api:app --host 127.0.0.1 --port 8000 --app-dir "C:\Users\ABDUL\.gemini\antigravity\scratch\autocare-us2\backend"
+    start /b python -m uvicorn autocare.api:app --host 127.0.0.1 --port 8000 --app-dir "%~dp0backend"
     timeout /t 3 /nobreak >nul
 ) else (
     echo [OK] AutoCare server is already active on port 8000.
